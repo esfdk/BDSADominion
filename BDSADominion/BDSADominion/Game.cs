@@ -1,25 +1,33 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-
 namespace BDSADominion
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class Game : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        /// <summary>
+        /// The Graphicsmanager for the game
+        /// </summary>
+        private readonly GraphicsDeviceManager graphics;
 
-        public Game1()
+        /// <summary>
+        /// The spritebatch used
+        /// </summary>
+        private SpriteBatch spriteBatch;
+
+        /// <summary>
+        /// The Decksprite
+        /// </summary>
+        private Deck deckSprite;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Game"/> class.
+        /// </summary>
+        public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -33,7 +41,7 @@ namespace BDSADominion
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            deckSprite = new Deck();
 
             base.Initialize();
         }
@@ -47,7 +55,10 @@ namespace BDSADominion
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            View.Initialize(this, graphics);
+            View.InitScreenSize(780, 1024, false);
+
+            deckSprite.LoadContent(this.Content);
         }
 
         /// <summary>
@@ -68,9 +79,9 @@ namespace BDSADominion
         {
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            {
                 this.Exit();
-
-            // TODO: Add your update logic here
+            }
 
             base.Update(gameTime);
         }
@@ -81,9 +92,11 @@ namespace BDSADominion
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            graphics.GraphicsDevice.Clear(Color.White);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            deckSprite.Draw(this.spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
