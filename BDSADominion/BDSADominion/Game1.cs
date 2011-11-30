@@ -1,25 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+
 namespace BDSADominion
 {
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
-
     /// <summary>
     /// This is the main type for your game
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        /// <summary>
-        /// </summary>
-        private GraphicsDeviceManager graphics;
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
 
-        /// <summary>
-        /// </summary>
-        private SpriteBatch spriteBatch;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Game1"/> class.
-        /// </summary>
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -35,6 +34,7 @@ namespace BDSADominion
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
             base.Initialize();
         }
 
@@ -68,11 +68,10 @@ namespace BDSADominion
         {
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-            {
                 this.Exit();
-            }
 
             // TODO: Add your update logic here
+
             base.Update(gameTime);
         }
 
@@ -85,6 +84,7 @@ namespace BDSADominion
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
             base.Draw(gameTime);
         }
     }
