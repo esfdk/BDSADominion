@@ -17,7 +17,6 @@ Thumbs.db
 *.cache
 *.ilk
 *.log
-*.pdf
 *.toc
 *.synctex.gz
 *.aux
