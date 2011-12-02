@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDSADominion", "BDSADominion\BDSADominion\BDSADominion.csproj", "{9C20DE95-1EA8-47A1-9F52-349DB88C0034}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDSADominion", "BDSADominion\BDSADominion\BDSADominion.csproj", "{BF10C04E-6BB6-4A88-A645-357BD83A6155}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "BDSADominionContent", "BDSADominion\BDSADominionContent\BDSADominionContent.contentproj", "{6CC33DE6-056F-4F79-A99D-B0CC5CFDEE0C}"
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "BDSADominionContent", "BDSADominion\BDSADominionContent\BDSADominionContent.contentproj", "{B97FC7AF-06F7-44C4-BBFD-9E60A7B94FB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,12 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9C20DE95-1EA8-47A1-9F52-349DB88C0034}.Debug|x86.ActiveCfg = Debug|x86
-		{9C20DE95-1EA8-47A1-9F52-349DB88C0034}.Debug|x86.Build.0 = Debug|x86
-		{9C20DE95-1EA8-47A1-9F52-349DB88C0034}.Release|x86.ActiveCfg = Release|x86
-		{9C20DE95-1EA8-47A1-9F52-349DB88C0034}.Release|x86.Build.0 = Release|x86
-		{6CC33DE6-056F-4F79-A99D-B0CC5CFDEE0C}.Debug|x86.ActiveCfg = Debug|x86
-		{6CC33DE6-056F-4F79-A99D-B0CC5CFDEE0C}.Release|x86.ActiveCfg = Release|x86
+		{BF10C04E-6BB6-4A88-A645-357BD83A6155}.Debug|x86.ActiveCfg = Debug|x86
+		{BF10C04E-6BB6-4A88-A645-357BD83A6155}.Debug|x86.Build.0 = Debug|x86
+		{BF10C04E-6BB6-4A88-A645-357BD83A6155}.Release|x86.ActiveCfg = Release|x86
+		{BF10C04E-6BB6-4A88-A645-357BD83A6155}.Release|x86.Build.0 = Release|x86
+		{B97FC7AF-06F7-44C4-BBFD-9E60A7B94FB4}.Debug|x86.ActiveCfg = Debug|x86
+		{B97FC7AF-06F7-44C4-BBFD-9E60A7B94FB4}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
