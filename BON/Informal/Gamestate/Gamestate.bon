@@ -1,0 +1,35 @@
+cluster_chart GAMESTATE_CLUSTER
+	indexing
+		author: "Jakob Melnyk";
+	explanation ""
+	class GAMESTATE
+		description ""
+	class PLAYER
+		description ""
+	cluster CARDS_CLUSTER
+		description ""
+end
+
+class_chart GAMESTATE
+	indexing
+		author: "Jakob Melnyk";
+	explanation ""
+	query
+		
+	command
+		
+	constraint
+		
+end
+
+class_chart PLAYER
+	indexing
+		author: "Jakob Melnyk";
+	explanation ""
+	query
+		
+	command
+		
+	constraint
+		
+end 

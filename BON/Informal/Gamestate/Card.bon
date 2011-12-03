@@ -1,0 +1,19 @@
+cluster_chart CARDS_CLUSTER
+	indexing
+		author: "Jakob Melnyk";
+	explanation ""
+	class
+		description ""
+end 
+
+class_chart
+	indexing
+		author: "Jakob Melnyk";
+	explanation ""
+	query
+		
+	command
+		
+	constraint
+		
+end
