@@ -1,0 +1,59 @@
+system_chart BDSADominion
+ explanation "solution for the third semester end project at the/
+ software development line of IT University of Copenhagen"
+ cluster GUI description""
+end
+
+cluster_chart GUI
+ explanation " The graphical representation part of the project"
+ class Game description " The game class"
+ class Deck description " The deck class"
+ class Card description " The card class"
+ class View description " The view class"
+ class Sprite description " The sprite class"
+ class Program description " The program class"
+ened
+
+class_chart DECK
+ explanation " responsible for representing the deck"
+ command
+	"Load the content!"
+end
+
+class_chart SPRITE
+ explanation " the basic class which all graphical objects should inherit from"
+ command
+	"Load the content!"
+	"Draw the content!"
+end
+
+class_chart CARD
+ explanation " responsible for representing the cards"
+ command
+	"Load the content!"
+	"Draw the content!"
+end
+
+class_chart PROGRAM
+ explanation " responsible for executing the game"
+ command
+	" Run the game!"
+end
+
+class_chart GAME
+ explanation " responsible for creating the initial GUI with the components from the other classes"
+ command
+	" Initialize the content!"
+	" Load the content!"
+	" Unload the content!"
+	" Update the game!"
+	" Draw the content!"
+end
+
+class_chart VIEW
+ explanation " responsible for the viewport and ho big screen will be at launch"
+ command
+	" Initialize the content!"
+	" Set a default viewport area!"
+	" Initialize the scrrensize!"
+end
