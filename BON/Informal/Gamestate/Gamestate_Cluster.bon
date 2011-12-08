@@ -1,6 +1,6 @@
 cluster_chart GAMESTATE_CLUSTER
 	indexing
-		author: "Jakob Melnyk";
+		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "The classes making up the 'dynamic' state of the game. This includes decks, hands, discard piles, etc."
 	class GAMESTATE
 		description "The overall 'state' of the current game."
@@ -8,13 +8,13 @@ cluster_chart GAMESTATE_CLUSTER
 		description "Represents a player and everything a player owns."
 	class ZONES
 		description "List of zones that can be targets of events."
-	cluster CARD_CLUSTER
+	cluster CARD_TYPE_CLUSTER
 		description "The different kinds of cards."
 end
 
 class_chart GAMESTATE
 	indexing
-		author: "Jakob Melnyk";
+		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "Keeps track of the players and everything the players share, such as the trash pile and the supply."
 	query
 		"May I have a new gamestate with this set-up?",
@@ -22,6 +22,7 @@ class_chart GAMESTATE
 		"Which phase is the active player in?",
 		"What cards are in the trash pile?",
 		"What players are in the game?",
+		"What does the supply look like?",
 	command
 		"Make this player the active player!",
 		"Start Action Phase",
@@ -42,7 +43,7 @@ end
 
 class_chart PLAYER
 	indexing
-		author: "Jakob Melnyk";
+		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "Each player is represented by a player object that keeps track of their decks, hands, discard piles, etc."
 	query
 		"Can I see all your cards?",
@@ -63,7 +64,7 @@ end
 
 class_chart ZONES
 	indexing
-		author: "Jakob Melnyk";
+		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "Represents the values used to refer to the zones in the player class and gamestate class."
 	query
 		"May I have the value 'v'?",
