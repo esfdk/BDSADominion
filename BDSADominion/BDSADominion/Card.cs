@@ -1,5 +1,7 @@
 ﻿namespace BDSADominion
 {
+    using System.Collections.Generic;
+
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
@@ -7,12 +9,17 @@
     /// <summary>
     /// This class holds the information for the representation of cards.
     /// </summary>
-    public class Card
+    public class Card : HandZone
     {
+        /// <summary>
+        /// A collection of cards and corresponding images.
+        /// </summary>
+        private static IDictionary<int, Texture2D> cardimage = new Dictionary<int, Texture2D>();
+
         /// <summary>
         /// the position of the card
         /// </summary>
-        private readonly Vector2 position;
+        private Vector2 position;
 
         /// <summary>
         /// The contentmanager
@@ -49,6 +56,7 @@
         /// </summary>
         private bool clicked;
 
+
         /// <summary>
         /// bool to check if the card rectangle is selected
         /// </summary>
@@ -57,7 +65,11 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Card"/> class.
         /// </summary>
-        public Card()
+        /// <param name="graphicsDevice">
+        /// The graphics Device.
+        /// </param>
+        public Card(GraphicsDevice graphicsDevice)
+            : base(graphicsDevice)
         {
             faceUp = false;
             clicked = false;
@@ -67,18 +79,106 @@
         }
 
         /// <summary>
-        /// Gets CardFront.
+        /// Gets or sets ImageHeight.
+        /// </summary>
+        public static int ImageHeight { get; set; }
+
+        /// <summary>
+        /// Gets or sets ImageWidth.
+        /// </summary>
+        public static int ImageWidth { get; set; }
+
+        /// <summary>
+        /// Gets or sets Content.
+        /// </summary>
+        public static ContentManager Content { get; set; }
+
+
+        /// <summary>
+        /// The front of the card.
         /// </summary>
         public Texture2D CardFront
         {
-            get { return this.cardFront; }
+            get { return this.cardimage; }
+            set { cardimage = value; }
+        }
+
+        /// <summary>
+        /// The back of the card.
+        /// </summary>
+        public Texture2D CardBack
+        {
+            get { return this.cardBack; }
+            set { cardBack = value; }
+        }
+
+        /// <summary>
+        /// Position of the card on the screen
+        /// </summary>
+        public Vector2 Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+
+        /// <summary>
+        /// Rectangle size which holds the image of the card
+        /// </summary>
+        public Rectangle Rectangle
+        {
+            get { return rectangle; }
+            set { rectangle = value; }
+        }
+
+        /// <summary>
+        /// The size of the clicked rectangle
+        /// </summary>
+        public Rectangle ClickRectangle
+        {
+            get { return clickRectangle; }
+            set { clickRectangle = value; }
+
+        }
+
+        /// <summary>
+        /// Card is clicked
+        /// </summary>
+        public bool Clicked
+        {
+            get { return clicked; }
+            set { clicked = value; }
+        }
+
+        /// <summary>
+        /// Card is selected
+        /// </summary>
+        public bool Selected
+        {
+            get { return selected; }
+            set { selected = value; }
+        }
+
+        /// <summary>
+        /// Card is Faceuped
+        /// </summary>
+        public bool Faceup
+        {
+            get { return faceUp; }
+            set { faceUp = value; }
         }
 
         /// <summary>
         /// the draw method of card
         /// </summary>
-        public void Draw()
+        /// <param name="spriteBatch">
+        /// The sprite Batch.
+        /// </param>
+        /// <param name="enumm">
+        /// The enumm.
+        /// </param>
+        public void Draw(SpriteBatch spriteBatch/*, int enumm*/)
         {
+            // så længe i ikke er det samme som enumm så lig en til indtil i er lige enumm.
         }
     }
 }

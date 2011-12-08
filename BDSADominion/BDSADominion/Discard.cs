@@ -8,18 +8,17 @@
     /// <summary>
     /// The deck class contains information of the representation of the deck
     /// </summary>
-    public class Deck : SpriteBatch
+    public class Discard : SpriteBatch
     {
-
         /// <summary>
         /// The discardpile.
         /// </summary>
-        private Texture2D deck;
+        private Texture2D discardpile;
 
         /// <summary>
-        /// The asset name
+        /// The asset name for the Sprite's Texture
         /// </summary>
-        private string assetname = "Backside";
+        private string assetName = "emptyspace";
 
         /// <summary>
         /// The Size of the Sprite (with scale applied)
@@ -29,37 +28,43 @@
         /// <summary>
         /// The current position of the Sprite.
         /// </summary>
-        private Vector2 position = new Vector2(200, 330);
+        private Vector2 position = new Vector2(10, 330);
 
         /// <summary>
         /// The amount to increase/decrease the size of the original sprite. 
         /// </summary>
         private float scale = 0.67f;
 
-        public Deck(GraphicsDevice graphicsDevice)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Discard"/> class.
+        /// </summary>
+        /// <param name="graphicsDevice">
+        /// The graphics device.
+        /// </param>
+        public Discard(GraphicsDevice graphicsDevice)
             : base(graphicsDevice)
         {
         }
 
         /// <summary>
-        /// Loads the content for the Deck class.
+        /// Load content of the Discard spritbatch.
         /// </summary>
         /// <param name="theContentManager">
-        /// The the content manager.
+        /// The the Content Manager.
         /// </param>
         /// <param name="theAssetName">
         /// The the Asset Name.
         /// </param>
         public void LoadContent(ContentManager theContentManager, string theAssetName)
         {
-            this.deck = theContentManager.Load<Texture2D>("Backside");
-            assetname = theAssetName;
+            this.discardpile = theContentManager.Load<Texture2D>("emptyspace");
+            this.assetName = theAssetName;
             this.size = new Rectangle(
-                0, 0, (int)(this.deck.Width * this.scale), (int)(this.deck.Height * this.scale));
+                0, 0, (int)(this.discardpile.Width * this.scale), (int)(this.discardpile.Height * this.scale));
         }
 
         /// <summary>
-        /// Draw the deck spritbatch 
+        /// Draw the discard spritBatch.
         /// </summary>
         /// <param name="spriteBatch">
         /// The sprite Batch.
@@ -67,9 +72,9 @@
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
-            this.deck,
+            this.discardpile,
             this.position,
-            new Rectangle(0, 0, this.deck.Width, this.deck.Height),
+            new Rectangle(0, 0, this.discardpile.Width, this.discardpile.Height),
             Color.White,
             0.0f,
             Vector2.Zero,

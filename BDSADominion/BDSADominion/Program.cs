@@ -8,9 +8,9 @@ namespace BDSADominion
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game game = new Game())
+            using (GameClass gameClass = new GameClass())
             {
-                game.Run();
+                gameClass.Run();
             }
         }
     }
