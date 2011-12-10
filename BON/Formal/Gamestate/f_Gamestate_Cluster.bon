@@ -1,0 +1,107 @@
+static_diagram GAMESTATE_CLUSTER
+component
+	class GAMESTATE
+		indexing
+			author: "Jakob Melnyk (jmel@itu.dk)";
+		feature
+		--Queries
+		ActivePlayer : PLAYER
+		InActionPhase : BOOLEAN
+		InBuyPhase : BOOLEAN
+		GetPlayers : SEQUENCE[PLAYER]
+		GetSupply : TABLE[CARD_NAME, INTEGER]
+		GetTrash : SEQUENCE[CARD]
+		NumberOfPlayers : NATURAL
+			ensure Result >= 2 and Result <= 4
+		end
+		NumberOfActionsLeft : NATURAL
+		NumberOfBuysLeft : NATURAL
+		NumberOfCoinsLeft : NATURAL
+		NewGamestate : GAMESTATE 
+			-> numberOfPlayers : NATURAL 
+			-> startSupply : TABLE[CARD_NAME, INTEGER]
+			require numberOfPlayers >= 2 and numberOfPlayers <= 4
+		end
+		
+		--Ccmmands
+		SetActivePlayer -> playerNumber : NATURAL
+			require playerNumber >= 1 and playerNumber <= NumberOfPlayers and playerNumber 
+		end
+		StartActionPhase
+			require InActionPhase = false and InBuyPhase = false
+			ensure InActionPhase = true and InBuyPhase = false
+		end
+		EndActionPhase
+			require InActionPhase = true and InBuyPhase = false
+			ensure InActionPhase = false and InBuyPhase = false
+		end
+		StartBuyPhase
+			require InActionPhase = false and InBuyPhase = false
+			ensure InActionPhase = false and InBuyPhase = true
+		end
+		EndBuyPhase
+			require InActionPhase = false and InBuyPhase = true
+			ensure InActionPhase = false and InBuyPhase = false
+		end
+		DoCleanUp
+			require InActionPhase = false and InBuyPhase = false
+		end
+		IncreaseActions 
+			-> amount : INTEGER
+			require amount + NumberOfActionsLeft >= 0
+		end
+		IncreaseBuys
+			-> amount : INTEGER
+			require amount + NumberOfBuysLeft >= 0
+		end
+		IncreaseCoins
+			-> amount : INTEGER
+			require amount + NumberOfCoinsLeft >= 0
+		end
+		PlayerGainsCard
+			-> player : PLAYER
+			-> card : CARD_NAME
+			require player member_of GetPlayers
+		end
+	end
+	class PLAYER
+		indexing
+			author: "Jakob Melnyk (jmel@itu.dk)";
+		feature
+		--Queries
+		GetAllCards : SEQUENCE
+		GetDeckSize : NATURAL
+		GetDiscardSize : NATURAL
+		GetHand : SEQUENCE
+		GetPlayerNumber : NATURAL
+		GetTopOfDiscard : CARD
+		
+		--Commands
+		MoveToTemporary
+			-> card : CARD
+			-> zone : ZONE
+		MoveFromTemporary
+			-> card : CARD
+			-> zone : ZONE
+		AddCardToZone
+			-> card : CARD
+			-> zone : ZONE
+		RemoveCard
+			-> card : CARD
+			-> zone : ZONE
+		DrawCard
+		
+		--Invariant: A card cannot be in the DECK, DISCARD, HAND or PLAYED zones of a player 
+		--           if it is not in the 'ALL CARDS'.
+	end
+	class ZONE
+		indexing
+			author: "Jakob Melnyk (jmel@itu.dk)";
+		feature
+		--Queries
+		value : STRING 
+			ensure Result = "DECK" or Result = "DISCARD" or Result = "HAND" or Result = "SUPPLY" or Result = "TRASH" or Result = "PLAYED"
+		end
+		--Commands
+	end
+end 

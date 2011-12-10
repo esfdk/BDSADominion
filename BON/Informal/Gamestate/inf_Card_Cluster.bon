@@ -1,9 +1,13 @@
-cluster_chart CARD_TYPE_CLUSTER
+cluster_chart CARD_CLUSTER
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "A cluster detailing the "
+	explanation "Cluster showing how card system works."
 	class CARD
 		description "A card."
+	class CARD_NAME
+		description "The names of all the cards."
+	class CARD_FACTORY
+		description "Produces cards."
 	cluster CARD_TYPES
 		description "The different meta-types of cards."
 	cluster CARDS
@@ -62,19 +66,42 @@ class_chart ACTION_ATTACK
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "A card that is used to 'attack' other players."
-	inherit CARD
+	inherit ACTION
 end
 
 class_chart ACTION_REACTION
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "A card used to react to opponent attacks."
-	inherit CARD
+	inherit ACTION
 end
 
 class_chart KINGDOM_VICTORY
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "A special kind of victory card."
-	inherit CARD
+	inherit VICTORY
+end
+
+class_chart CARD_NAME
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Represents the values used to refer to the card names.";
+	query
+		"May I have the value 'v'?"
+	constraint
+		"The values allowed for this class are exactly one of \
+		\'COPPER', 'SILVER', 'GOLD', 'CURSE', 'ESTATE', 'DUCHY', 'PROVINCE', \
+		\'CELLAR', 'CHAPEL', 'MOAT', 'CHANCELLOR', 'VILLAGE', 'WOODCUTTER', \
+		\'WORKSHOP', 'BUREAUCRAT', 'FEAST', 'GARDENS', 'MILITIA', 'MONEYLENDER', \
+		\'REMODEL', 'SMITHY', 'SPY', 'THIEF', 'THRONE_ROOM', 'COUNCIL_ROOM', 'FESTIVAL', \
+		\'LABORATORY', 'LIBRARY', 'MARKET', 'MINE', 'WITCH', 'ADVENTURER'."
+end
+
+class_chart CARD_FACTORY
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Factory for producing cards with the correct values."
+	query
+		"May I have a card with this name?",
 end 
