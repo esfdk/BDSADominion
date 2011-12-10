@@ -28,6 +28,7 @@ class_chart GAMESTATE
 		"Number of actions left?",
 		"Number of buys left?",
 		"Number of coins left?",
+		"Number of empty supply piles?",
 	command
 		"Make this player the active player!",
 		"Begin Action Phase",
