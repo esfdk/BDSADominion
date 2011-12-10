@@ -1,0 +1,74 @@
+cluster_chart CARD_CLUSTER
+	indexing
+		author: "Jakob Melnyk";
+	explanation "A cluster detailing the "
+	class CARD
+		description "A card."
+	cluster CARD_TYPES
+		description "The different meta-types of cards."
+	cluster CARDS
+		description ""
+end 
+
+class_chart CARD
+	indexing
+		author: "Jakob Melnyk";
+	explanation "A card is the representation of the cards within the game."
+	query
+		"What is your card name?",
+		"What is your card number?"
+end
+
+cluster_chart CARD_TYPES
+	indexing
+		author: "Jakob Melnyk";
+	explanation "The different types of cards that exist."
+	class TREASURE
+		description "A card used to buy new cards."
+	class VICTORY
+		description "A card that grants the points used to win the game."
+	class ACTION
+		description "A card used to help the player buy more cards, get rid of unwanted cards, etc."
+	class ACTION_ATTACK
+		description "A card that is used to 'attack' other players."
+	class ACTION_REACTION
+		description "A card used to react to opponent attacks."
+	class KINGDOM_VICTORY
+		description "A special kind of victory card."	
+end
+
+class_chart TREASURE
+	indexing
+		author: "Jakob Melnyk"
+	inherit CARD
+end
+
+class_chart VICTORY
+	indexing
+		author: "Jakob Melnyk"
+	inherit CARD
+end
+
+class_chart ACTION
+	indexing
+		author: "Jakob Melnyk"
+	inherit CARD
+end
+
+class_chart ACTION_ATTACK
+	indexing
+		author: "Jakob Melnyk"
+	inherit CARD
+end
+
+class_chart ACTION_REACTION
+	indexing
+		author: "Jakob Melnyk"
+	inherit CARD
+end
+
+class_chart KINGDOM_VICTORY
+	indexing
+		author: "Jakob Melnyk"
+	inherit CARD
+end

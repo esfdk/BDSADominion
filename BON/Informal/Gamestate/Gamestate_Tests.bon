@@ -1,0 +1,5 @@
+cluster_chart GAMESTATE_TEST_CLUSTER
+	indexing
+		author: "Jakob Melnyk";
+	explanation ""
+end
