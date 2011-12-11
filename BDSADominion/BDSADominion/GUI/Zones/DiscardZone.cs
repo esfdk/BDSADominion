@@ -2,85 +2,70 @@
 {
 
     using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
     /// <summary>
-    /// The deck class contains information of the representation of the deck
+    /// The class for the Handzone.
     /// </summary>
-    public class DiscardZone : SpriteBatch
+    public class DiscardZone
     {
         /// <summary>
-        /// The discardpile.
+        /// The list of cards in the hand
         /// </summary>
-        private Texture2D discardpile;
+        private CardSprite discardzone;
 
         /// <summary>
-        /// The asset name for the Sprite's Texture
+        /// The starting position of the hand
         /// </summary>
-        private string assetName = "emptyspace";
+        private Vector2 startPosition = new Vector2(10, 375);
 
         /// <summary>
-        /// The Size of the Sprite (with scale applied)
+        /// Initializes a new instance of the <see cref="HandZone"/> class.
         /// </summary>
-        private Rectangle size;
-
-        /// <summary>
-        /// The current position of the Sprite.
-        /// </summary>
-        private Vector2 position = new Vector2(10, 330);
-
-        /// <summary>
-        /// The amount to increase/decrease the size of the original sprite. 
-        /// </summary>
-        private float scale = 0.67f;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DiscardZone"/> class.
-        /// </summary>
-        /// <param name="graphicsDevice">
-        /// The graphics device.
+        /// <param name="topmostleftlocation">
+        /// The topmostleftlocation.
         /// </param>
-        public DiscardZone(GraphicsDevice graphicsDevice)
-            : base(graphicsDevice)
+        public DiscardZone()
         {
+
         }
 
         /// <summary>
-        /// Load content of the Discard spritbatch.
+        /// Gets or sets TouchRect.
         /// </summary>
-        /// <param name="theContentManager">
-        /// The the Content Manager.
+        public Rectangle TouchRect { get; private set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether Clicked.
+        /// </summary>
+        ////public bool Clicked { get; set; }
+
+        /// <summary>
+        /// Add one card to the hand.
+        /// </summary>
+        /// <param name="newCardSprite">
+        /// The new Card.
         /// </param>
-        /// <param name="theAssetName">
-        /// The the Asset Name.
-        /// </param>
-        public void LoadContent(ContentManager theContentManager, string theAssetName)
+        public void AddCard(CardSprite newCardSprite)
         {
-            this.discardpile = theContentManager.Load<Texture2D>("emptyspace");
-            this.assetName = theAssetName;
-            this.size = new Rectangle(
-                0, 0, (int)(this.discardpile.Width * this.scale), (int)(this.discardpile.Height * this.scale));
+            discardzone = (newCardSprite);
         }
 
         /// <summary>
-        /// Draw the discard spritBatch.
+        /// Draw the handzone spritbatch
         /// </summary>
         /// <param name="spriteBatch">
         /// The sprite Batch.
         /// </param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(
-            this.discardpile,
-            this.position,
-            new Rectangle(0, 0, this.discardpile.Width, this.discardpile.Height),
-            Color.White,
-            0.0f,
-            Vector2.Zero,
-            this.scale,
-            SpriteEffects.None,
-            0);
+            Vector2 currentPosition = startPosition;
+
+            if (discardzone != null)
+            {
+                discardzone.Draw(spriteBatch, currentPosition);
+            }
         }
     }
 }
+
