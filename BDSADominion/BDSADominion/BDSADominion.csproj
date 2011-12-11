@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{BF10C04E-6BB6-4A88-A645-357BD83A6155}</ProjectGuid>
@@ -110,7 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gamestate\CardFactory.cs" />
-    <Compile Include="Gamestate\Cardmember.cs" />
     <Compile Include="Gamestate\Card_Types\Action.cs" />
     <Compile Include="Gamestate\Card_Types\ActionAttack.cs" />
     <Compile Include="Gamestate\Card_Types\ActionReaction.cs" />
@@ -150,10 +149,7 @@
     <Compile Include="Gamestate\Card_Types\KingdomVictory.cs" />
     <Compile Include="Gamestate\Card_Types\Treasure.cs" />
     <Compile Include="Gamestate\Card_Types\Victory.cs" />
-    <Compile Include="Gamestate\GameClass.cs" />
     <Compile Include="Gamestate\Gamestate.cs" />
-    <Compile Include="Gamestate\GUIConstants.cs" />
-    <Compile Include="Gamestate\InputState.cs" />
     <Compile Include="Gamestate\Player.cs" />
     <Compile Include="GUI\Cardmember.cs" />
     <Compile Include="GUI\GameClass.cs" />
@@ -165,6 +161,11 @@
     <Compile Include="GUI\Zones\DiscardZone.cs" />
     <Compile Include="GUI\Zones\HandZone.cs" />
     <Compile Include="GUI\Zones\SupplyZone.cs" />
+    <Compile Include="Networking\Client.cs" />
+    <Compile Include="Networking\Connection.cs" />
+    <Compile Include="Networking\NetworkConst.cs" />
+    <Compile Include="Networking\NetworkingInterface.cs" />
+    <Compile Include="Networking\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
