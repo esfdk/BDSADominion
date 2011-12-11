@@ -1,0 +1,42 @@
+static_diagram CARD_CLUSTER
+component
+	class CARD
+		indexing
+			author: "Jakob Melnyk (jmel@itu.dk)";
+		feature
+		--Queries
+		GetName : CARD_NAME
+		GetNumber : NATURAL
+		--Commands
+	end
+	
+	class CARD_FACTORY
+		indexing
+			author: "Jakob Melnyk (jmel@itu.dk)";
+		feature
+		--Queries
+		CreateCard : CARD
+			-> CARD_NAME
+			ensure Result.GetName = CARD_NAME
+		end
+		--Commands
+	end
+	
+	class CARD_NAME
+		indexing
+			author: "Jakob Melnyk (jmel@itu.dk)";
+		feature
+		--Queries
+		value : STRING --This looks very akward, but we felt it best described what we wanted to express.
+			ensure Result = "COPPER" or Result = "GOLD" or Result = "SILVER" or 
+			Result = "CURSE" or Result = "ESTATE" or Result = "DUCHY" or Result = "PROVINCE" or 
+			Result = "CELLAR" or Result = "CHAPEL" or Result = "MOAT" or Result = "CHANCELLOR" or
+			Result = "VILLAGE" or Result = "WOODCUTTER" or Result = "WORKSHOP" or 
+			Result = "BUREAUCRAT" or Result = "FEAST" or Result = "GARDENS" or Result = "MILITIA" or 
+			Result = "MONEYLENDER" or Result = "REMODEL" or Result = "SMITHY" or Result = "SPY" or
+			Result = "THIEF" or Result = "THRONE_ROOM" or Result = "COUNCIL_ROOM" or Result = "FESTIVAL" or 
+			Result = "LABORATORY" or Result = "LIBRARY" or Result = "MARKET" or Result = "MINE" or Result = "WITCH"
+		end
+		--Commands
+	end
+end 

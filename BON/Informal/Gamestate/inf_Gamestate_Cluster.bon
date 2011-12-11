@@ -1,6 +1,6 @@
 cluster_chart GAMESTATE_CLUSTER
 	indexing
-		author: "Jakob Melnyk";
+		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "The classes making up the 'dynamic' state of the game. This includes decks, hands, discard piles, etc."
 	class GAMESTATE
 		description "The overall 'state' of the current game."
@@ -14,19 +14,26 @@ end
 
 class_chart GAMESTATE
 	indexing
-		author: "Jakob Melnyk";
+		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "Keeps track of the players and everything the players share, such as the trash pile and the supply."
 	query
 		"May I have a new gamestate with this set-up?",
 		"Who is the active player?",
-		"Which phase is the active player in?",
+		"How many players are in the game?",
+		"Is the active player in the Action Phase?",
+		"Is the active player in the Buy Phase?",
 		"What cards are in the trash pile?",
 		"What players are in the game?",
+		"What does the supply look like?",
+		"Number of actions left?",
+		"Number of buys left?",
+		"Number of coins left?",
+		"Number of empty supply piles?",
 	command
 		"Make this player the active player!",
-		"Start Action Phase",
+		"Begin Action Phase",
 		"End Action Phase",
-		"Start Buy Phase",
+		"Begin Buy Phase",
 		"End Buy Phase",
 		"Do Clean-up phase",
 		"Increase the amount of actions the active player has by this much!",
@@ -35,35 +42,38 @@ class_chart GAMESTATE
 		"That player gains this card type in this zone from the supply.",
 	constraint
 		"Can have 2, 3 OR 4 players.",
+		"Cannot begin Action Phase while in Action Phase or Buy Phase.",
 		"Cannot end Action Phase while not in Action Phase.",
+		"Cannot begin Buy Phase while in Action Phase or Buy Phase.",
 		"Cannot end Buy Phase while not in Buy Phase.",
 		"The active player cannot be made the active player."
 end
 
 class_chart PLAYER
 	indexing
-		author: "Jakob Melnyk";
+		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "Each player is represented by a player object that keeps track of their decks, hands, discard piles, etc."
 	query
-		"Can I see all your cards?",
+		"May I have a new Player?",
+		"What cards do you have?",
 		"How many cards do you have in your deck?",
 		"How many cards do you have in your discard pile?",
-		"How many cards do you have in your hand?",
 		"What card is on top of your discard pile?",
 		"What cards do you have in your hand?",
+		"What number are you?",
 	command
 		"Move this card from that zone to the temporary zone!",
 		"Move this card from the temporary zone to that zone!",
 		"Add this card to that zone!",
-		"Remove this card!",
+		"Remove this card from that zone!",
 		"Draw a card."
 	constraint
 		"A player cannot have a card in his deck, discard pile, hand, or 'played field' that is not in his total set of cards."
 end 
 
-class_chart ZONES
+class_chart ZONE
 	indexing
-		author: "Jakob Melnyk";
+		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "Represents the values used to refer to the zones in the player class and gamestate class."
 	query
 		"May I have the value 'v'?",
