@@ -11,7 +11,7 @@
     /// </summary>
     internal class Server
     {
-        private byte[] messageBuffer = new byte[NetworkConst.BUFFERSIZE];
+        ////private byte[] messageBuffer = new byte[NetworkConst.BUFFERSIZE];
 
         private Socket socket;
 
