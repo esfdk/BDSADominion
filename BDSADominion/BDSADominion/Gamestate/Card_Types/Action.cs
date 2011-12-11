@@ -1,9 +1,12 @@
 ﻿namespace BDSADominion.Gamestate.Card_Types
 {
     /// <summary>
-    /// TODO: Update summary.
+    /// An Action card in the game Dominion.
     /// </summary>
-    public abstract class Action
+    /// <author>
+    /// Jakob Melnyk (jmel@itu.dk)
+    /// </author>
+    public abstract class Action : Card
     {
     }
 }

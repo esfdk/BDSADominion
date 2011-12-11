@@ -1,8 +1,11 @@
 ﻿namespace BDSADominion.Gamestate.Card_Types
 {
     /// <summary>
-    /// TODO: Update summary.
+    /// A special kind of victory card.
     /// </summary>
+    /// <author>
+    /// Jakob Melnyk (jmel@itu.dk)
+    /// </author>
     public abstract class KingdomVictory : Action
     {
     }

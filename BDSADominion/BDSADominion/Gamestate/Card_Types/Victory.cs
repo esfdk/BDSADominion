@@ -1,9 +1,12 @@
 ﻿namespace BDSADominion.Gamestate.Card_Types
 {
     /// <summary>
-    /// TODO: Update summary.
+    /// A victory card in the game Dominion.
     /// </summary>
-    public abstract class Victory
+    /// <author>
+    /// Jakob Melnyk (jmel@itu.dk)
+    /// </author>
+    public abstract class Victory : Card
     {
     }
 }
