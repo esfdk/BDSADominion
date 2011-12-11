@@ -20,9 +20,9 @@
 
         public int Id { get; private set; }
 
-        public event ServerMessageHandler ReceivedMessageEvent;
+        internal event ServerMessageHandler ReceivedMessageEvent;
 
-        public event ClosedConnectionHandler ClosedConnectionEvent;
+        internal event ClosedConnectionHandler ClosedConnectionEvent;
 
         public Connection(Socket clientSocket, int id)
         {
