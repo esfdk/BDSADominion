@@ -12,6 +12,12 @@ namespace BDSADominion
 
     public static class GUIConstants
     {
+        public static CardSprite Empty;
+
+        public static CardSprite Back;
+
         public static Dictionary<Cardmember, Texture2D> cardimage = new Dictionary<Cardmember, Texture2D>();
+
+        public static Dictionary<Buttonmember, Texture2D> buttonimage = new Dictionary<Buttonmember, Texture2D>();
     }
 }

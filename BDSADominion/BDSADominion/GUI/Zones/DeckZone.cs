@@ -2,80 +2,69 @@
 {
 
     using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
     /// <summary>
-    /// The deck class contains information of the representation of the deck
+    /// The class for the Handzone.
     /// </summary>
-    public class DeckZone : SpriteBatch
+    public class DeckZone
     {
+        /// <summary>
+        /// The list of cards in the hand
+        /// </summary>
+        private CardSprite deckzone;
 
         /// <summary>
-        /// The discardpile.
+        /// The starting position of the hand
         /// </summary>
-        private Texture2D deck;
+        private Vector2 startPosition = new Vector2(145, 375);
 
         /// <summary>
-        /// The asset name
+        /// Initializes a new instance of the <see cref="HandZone"/> class.
         /// </summary>
-        private string assetname = "Backside";
-
-        /// <summary>
-        /// The Size of the Sprite (with scale applied)
-        /// </summary>
-        private Rectangle size;
-
-        /// <summary>
-        /// The current position of the Sprite.
-        /// </summary>
-        private Vector2 position = new Vector2(200, 330);
-
-        /// <summary>
-        /// The amount to increase/decrease the size of the original sprite. 
-        /// </summary>
-        private float scale = 0.67f;
-
-        public DeckZone(GraphicsDevice graphicsDevice)
-            : base(graphicsDevice)
+        /// <param name="topmostleftlocation">
+        /// The topmostleftlocation.
+        /// </param>
+        public DeckZone()
         {
+
         }
 
         /// <summary>
-        /// Loads the content for the Deck class.
+        /// Gets or sets TouchRect.
         /// </summary>
-        /// <param name="theContentManager">
-        /// The the content manager.
+        public Rectangle TouchRect { get; private set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether Clicked.
+        /// </summary>
+        ////public bool Clicked { get; set; }
+
+        /// <summary>
+        /// Add one card to the hand.
+        /// </summary>
+        /// <param name="newCardSprite">
+        /// The new Card.
         /// </param>
-        /// <param name="theAssetName">
-        /// The the Asset Name.
-        /// </param>
-        public void LoadContent(ContentManager theContentManager, string theAssetName)
+        public void AddCard(CardSprite newCardSprite)
         {
-            this.deck = theContentManager.Load<Texture2D>("Backside");
-            assetname = theAssetName;
-            this.size = new Rectangle(
-                0, 0, (int)(this.deck.Width * this.scale), (int)(this.deck.Height * this.scale));
+            deckzone = (newCardSprite);
         }
 
         /// <summary>
-        /// Draw the deck spritbatch 
+        /// Draw the handzone spritbatch
         /// </summary>
         /// <param name="spriteBatch">
         /// The sprite Batch.
         /// </param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(
-            this.deck,
-            this.position,
-            new Rectangle(0, 0, this.deck.Width, this.deck.Height),
-            Color.White,
-            0.0f,
-            Vector2.Zero,
-            this.scale,
-            SpriteEffects.None,
-            0);
+            Vector2 currentPosition = startPosition;
+
+            if (deckzone != null)
+            {
+                deckzone.Draw(spriteBatch, currentPosition);
+            }
         }
     }
 }

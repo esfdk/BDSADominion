@@ -1,5 +1,6 @@
 ﻿namespace BDSADominion
 {
+    using System;
     using System.Collections.Generic;
 
     using Microsoft.Xna.Framework;
@@ -18,7 +19,7 @@
         /// <summary>
         /// next card x-coor
         /// </summary>
-        private Vector2 offset = new Vector2(135, 0); //TODO: must be equal to card.Width + constant
+        private Vector2 offset = new Vector2(135, 0);
 
         /// <summary>
         /// touchrectangle.
@@ -28,7 +29,7 @@
         /// <summary>
         /// The starting position of the hand
         /// </summary>
-        private Vector2 startPosition = new Vector2(10, 50); //TODO: starting position of the hand
+        private Vector2 startPosition = new Vector2(10, 50);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BDSADominion.ActionZone"/> class.
@@ -39,7 +40,7 @@
         public ActionZone()
         {
             TouchRect = new Rectangle(
-                (int)this.startPosition.X, (int)this.startPosition.Y, (int)(this.offset.X * 10), 50); //TODO Card.Height should be some kind of constant
+                (int)this.startPosition.X, (int)this.startPosition.Y, (int)(this.offset.X * 10), 218);
         }
 
         /// <summary>
@@ -52,7 +53,7 @@
         /// </summary>
         ////public bool Clicked { get; set; }
 
-        public CardSprite RemoveCard(int id, Cardmember cardmember)
+        public CardSprite RemoveCard(Cardmember cardmember, int id)
         {
             foreach (CardSprite card in action)
             {
@@ -139,7 +140,7 @@
                 float clickedValue = mouseCardX / this.offset.X;
                 float clickedInto = (mouseCardX % this.offset.X) / offset.X;
 
-                int clickedIndex = (int)(clickedValue - clickedInto);
+                int clickedIndex = (int)Math.Round(clickedValue - clickedInto);
                 int count = 0;
                 foreach (CardSprite card in action)
                 {

@@ -26,9 +26,22 @@
         private static readonly Dictionary<CardName, uint> CardsMade = new Dictionary<CardName, uint>();
 
         /// <summary>
+        /// All the cards created by the factory.
+        /// </summary>
+        private static List<Card> createdCards = new List<Card>();
+
+        /// <summary>
         /// Gets a value indicating whether set-up has already been performed.
         /// </summary>
         public static bool SetUp { get; private set; }
+
+        /// <summary>
+        /// Gets CreatedCards.
+        /// </summary>
+        public static List<Card> CreatedCards
+        {
+            get { return createdCards; }
+        }
 
         /// <summary>
         /// Set up the factory for a game of Dominion.
@@ -60,172 +73,115 @@
         public static Card CreateCard(CardName card)
         {
             Contract.Ensures(Contract.Result<Card>().Name == card);
+            Contract.Ensures(Contract.OldValue(!CreatedCards.Contains(Contract.Result<Card>())));
+            Contract.Ensures(CreatedCards.Contains(Contract.Result<Card>()));
             Card c;
             switch (card)
             {
                 case CardName.Copper:
                     c = new Copper();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Silver:
                     c = new Silver();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Gold:
                     c = new Gold();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Curse:
                     c = new Curse();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Estate:
                     c = new Estate();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Duchy:
                     c = new Duchy();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Province:
                     c = new Province();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Gardens:
                     c = new Gardens();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Cellar:
                     c = new Cellar();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Chapel:
                     c = new Chapel();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Chancellor:
                     c = new Chancellor();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Village:
                     c = new Village();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Woodcutter:
                     c = new Woodcutter();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Workshop:
                     c = new Workshop();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Feast:
                     c = new Feast();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Moneylender:
                     c = new Moneylender();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Remodel:
                     c = new Remodel();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Smithy:
                     c = new Smithy();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.ThroneRoom:
                     c = new ThroneRoom();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.CouncilRoom:
                     c = new CouncilRoom();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Festival:
                     c = new Festival();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Laboratory:
                     c = new Laboratory();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Library:
                     c = new Library();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Market:
                     c = new Market();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Mine:
                     c = new Mine();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Adventurer:
                     c = new Adventurer();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Bureaucrat:
                     c = new Bureaucrat();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Militia:
                     c = new Militia();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Spy:
                     c = new Spy();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Thief:
                     c = new Thief();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Witch:
                     c = new Witch();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 case CardName.Moat:
                     c = new Moat();
-                    c.Initialize(card, CardsMade[card]);
-                    CardsMade[card] += 1;
-                    return c;
+                    break;
                 default:
                     throw new NotImplementedException();
             }
+
+            c.Initialize(card, CardsMade[card]);
+            CardsMade[card] += 1;
+            createdCards.Add(c);
+            return c;
         }
     }
 }
