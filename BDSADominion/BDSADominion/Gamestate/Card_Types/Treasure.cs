@@ -1,9 +1,12 @@
 ﻿namespace BDSADominion.Gamestate.Card_Types
 {
     /// <summary>
-    /// TODO: Update summary.
+    /// A treasure card in Dominion.
     /// </summary>
-    public abstract class Treasure
+    /// <author>
+    /// Jakob Melnyk (jmel@itu.dk)
+    /// </author>
+    public abstract class Treasure : Card
     {
     }
 }

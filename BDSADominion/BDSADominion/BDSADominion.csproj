@@ -110,7 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gamestate\CardFactory.cs" />
-    <Compile Include="Gamestate\Cardmember.cs" />
     <Compile Include="Gamestate\Card_Types\Action.cs" />
     <Compile Include="Gamestate\Card_Types\ActionAttack.cs" />
     <Compile Include="Gamestate\Card_Types\ActionReaction.cs" />
@@ -151,11 +150,9 @@
     <Compile Include="Gamestate\Card_Types\KingdomVictory.cs" />
     <Compile Include="Gamestate\Card_Types\Treasure.cs" />
     <Compile Include="Gamestate\Card_Types\Victory.cs" />
-    <Compile Include="Gamestate\GameClass.cs" />
     <Compile Include="Gamestate\Gamestate.cs" />
-    <Compile Include="Gamestate\GUIConstants.cs" />
-    <Compile Include="Gamestate\InputState.cs" />
     <Compile Include="Gamestate\Player.cs" />
+    <Compile Include="Gamestate\Zones.cs" />
     <Compile Include="GUI\Cardmember.cs" />
     <Compile Include="GUI\GameClass.cs" />
     <Compile Include="GUI\GUIConstants.cs" />

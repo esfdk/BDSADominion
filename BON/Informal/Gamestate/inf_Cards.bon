@@ -187,7 +187,7 @@ class_chart REMODEL
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "Player trashes a card from his/her hand. Player gains a card costing up to two coins more \
-				\ than the trashed card. Costs 4 coins."
+				\than the trashed card. Costs 4 coins."
 	inherit ACTION
 end
 
