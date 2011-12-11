@@ -6,6 +6,9 @@
     using System.Net;
     using System.Net.Sockets;
 
+    /// <summary>
+    /// This is the server that handles all communication over the network
+    /// </summary>
     internal class Server
     {
         private byte[] messageBuffer = new byte[NetworkConst.BUFFERSIZE];
@@ -90,7 +93,7 @@
 
             server.BeginAccept(AcceptCallback, server);
 
-            if (ClientConnectedEvent != null & !ClientConnectedEvent(conn))
+            if (ClientConnectedEvent != null /*& !ClientConnectedEvent(conn)*/)
             {
                 client.Close();
                 return;
@@ -114,13 +117,10 @@
             ForwardMessage(message, conn.Id);
         }
 
-        public bool ClientConnected(Connection conn)
+        public void ClientConnected(Connection conn)
         {
             Console.WriteLine("Client {0} connected", conn.Id);
             conn.ReceivedMessageEvent += ServerRecievedMessage;
-            ////conn.BeginReceive();
-
-            return true; //TODO
         }
 
         public List<Connection> GetClientList()

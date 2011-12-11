@@ -3,12 +3,23 @@
     using System.Text;
 
     /// <summary>
+    /// This is the delegate that should be used to receive messages from the server
+    /// </summary>
+    /// <param name="message">
+    /// The message being received
+    /// </param>
+    /// <param name="sender">
+    /// The id of the sender of the message, with 0 being the Server
+    /// </param>
+    public delegate void InterfaceMessageHandler(string message, int sender);
+
+    /// <summary>
     /// This is the delegate used when a client connects to the server
     /// </summary>
     /// <param name="connection">
     /// The Connection through which the client is connected to the server
     /// </param>
-    public delegate void ConnectedClientHandler(Connection connection);
+    internal delegate void ConnectedClientHandler(Connection connection);
 
     /// <summary>
     /// This is the delegate used when a Connection is closed.
@@ -16,7 +27,7 @@
     /// <param name="connection">
     /// The Connection through which the client was connected to the server
     /// </param>
-    public delegate void ClosedConnectionHandler(Connection connection);
+    internal delegate void ClosedConnectionHandler(Connection connection);
 
     /// <summary>
     /// This is the delegate used when the server receives a message
@@ -27,7 +38,7 @@
     /// <param name="message">
     /// The message that has been received
     /// </param>
-    public delegate void ServerMessageHandler(Connection connection, string message);
+    internal delegate void ServerMessageHandler(Connection connection, string message);
 
     /// <summary>
     /// This is the delegate used when a client recieves a message
@@ -36,17 +47,6 @@
     /// The message that has been recieved
     /// </param>
     internal delegate void ClientMessageHandler(string message);
-
-    /// <summary>
-    /// This is the delegate that should
-    /// </summary>
-    /// <param name="message">
-    /// The message.
-    /// </param>
-    /// <param name="sender">
-    /// The sender.
-    /// </param>
-    public delegate void InterfaceMessageHandler(string message, int sender);
 
     /// <summary>
     /// This describes the types of communication that can happen over the network
@@ -77,5 +77,4 @@
         /// </summary>
         public const int BUFFERSIZE = 1024;
     }
-
 }
