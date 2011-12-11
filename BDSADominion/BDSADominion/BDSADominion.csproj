@@ -113,6 +113,7 @@
     <Compile Include="Gamestate\Card_Types\Action.cs" />
     <Compile Include="Gamestate\Card_Types\ActionAttack.cs" />
     <Compile Include="Gamestate\Card_Types\ActionReaction.cs" />
+    <Compile Include="Gamestate\Card_Types\Card.cs" />
     <Compile Include="Gamestate\Card_Types\Cards\Action_Cards\Reaction_Cards\Moat.cs" />
     <Compile Include="Gamestate\Card_Types\Cards\Action_Cards\Attack_Cards\Witch.cs" />
     <Compile Include="Gamestate\Card_Types\Cards\Action_Cards\Attack_Cards\Spy.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Gamestate\Card_Types\Victory.cs" />
     <Compile Include="Gamestate\Gamestate.cs" />
     <Compile Include="Gamestate\Player.cs" />
+    <Compile Include="Gamestate\Zone.cs" />
     <Compile Include="GUI\Cardmember.cs" />
     <Compile Include="GUI\GameClass.cs" />
     <Compile Include="GUI\GUIConstants.cs" />
@@ -162,6 +164,11 @@
     <Compile Include="GUI\Zones\DiscardZone.cs" />
     <Compile Include="GUI\Zones\HandZone.cs" />
     <Compile Include="GUI\Zones\SupplyZone.cs" />
+    <Compile Include="Networking\Client.cs" />
+    <Compile Include="Networking\Connection.cs" />
+    <Compile Include="Networking\NetworkConst.cs" />
+    <Compile Include="Networking\NetworkingInterface.cs" />
+    <Compile Include="Networking\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

@@ -1,9 +1,9 @@
 namespace BDSADominion.Gamestate.Card_Types.Cards.Victory_Cards
 {
     /// <summary>
-    /// TODO: Update summary.
+    /// Worth one victory point for every ten cards in your deck (rounded down) at the end of the game. Costs four coins.
     /// </summary>
-    public class Gardens : KingdomVictory
+    public class Gardens : Victory
     {
     }
 }

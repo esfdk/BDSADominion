@@ -75,11 +75,13 @@ component
 		GetHand : SEQUENCE
 		GetPlayerNumber : NATURAL
 		GetTopOfDiscard : CARD
+		GetPlayed : STACK 
 		
 		--Commands
-		MoveToTemporary
-			-> card : CARD
+		MoveFromZoneToTemporary
 			-> zone : ZONE
+		MoveFromHandToTemporary
+			->
 		MoveFromTemporary
 			-> card : CARD
 			-> zone : ZONE
