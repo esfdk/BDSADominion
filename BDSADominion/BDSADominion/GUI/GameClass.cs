@@ -96,7 +96,7 @@ namespace BDSADominion
         /// <summary>
         /// Input of mouse (keys).
         /// </summary>
-        ////private InputState input;
+        private InputState input;
 
         private MouseState mouseState;
 
@@ -123,8 +123,8 @@ namespace BDSADominion
         /// </summary>
         protected override void Initialize()
         {
-            this.deckZone = new DeckZone(GraphicsDevice);
-            this.discardZone = new DiscardZone(GraphicsDevice);
+            this.deckZone = new DeckZone(/*GraphicsDevice*/);
+            this.discardZone = new DiscardZone(/*GraphicsDevice*/);
 
             ////this.InitializeCards();
 
@@ -141,7 +141,7 @@ namespace BDSADominion
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            ////input = new InputState();
+            input = new InputState();
             font = Content.Load<SpriteFont>("Fonts//Arial");
             ////table = Content.Load<Texture2D>("Dominiontable");
             cursor = Content.Load<Texture2D>("Pics//Cursor");
@@ -190,16 +190,16 @@ namespace BDSADominion
                 this.Exit();
             }
 
-            /*if (input.CurrentMouseState.LeftButton == ButtonState.Pressed && input.LastMouseState.LeftButton == ButtonState.Released)
+            if (input.CurrentMouseState.LeftButton == ButtonState.Pressed && input.LastMouseState.LeftButton == ButtonState.Released)
             {
                 for (int x = 0; x <= 10; x++)
                 {
-                    handzone.FindCardByMouseClick((int)input.CurrentMouseState.X, (int)input.CurrentMouseState.Y);
+                    handZone.FindCardByMouseClick((int)input.CurrentMouseState.X, (int)input.CurrentMouseState.Y);
 
 
                 }
 
-            }*/
+            }
             base.Update(gameTime);
         }
 
