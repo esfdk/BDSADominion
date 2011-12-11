@@ -5,7 +5,7 @@
     using System.Net.Sockets;
     using System.Text;
 
-    internal class Connection
+    public class Connection
     {
         private readonly Socket connSocket;
 

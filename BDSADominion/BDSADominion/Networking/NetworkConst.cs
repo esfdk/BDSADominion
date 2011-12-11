@@ -8,10 +8,7 @@
     /// <param name="connection">
     /// The Connection through which the client is connected to the server
     /// </param>
-    /// <returns>
-    /// Whether a client connected correctly //TODO
-    /// </returns>
-    public delegate bool ConnectedClientHandler(Connection connection);
+    public delegate void ConnectedClientHandler(Connection connection);
 
     /// <summary>
     /// This is the delegate used when a Connection is closed.
@@ -38,9 +35,26 @@
     /// <param name="message">
     /// The message that has been recieved
     /// </param>
-    public delegate void ClientMessageHandler(string message);
+    internal delegate void ClientMessageHandler(string message);
 
+    /// <summary>
+    /// This is the delegate that should
+    /// </summary>
+    /// <param name="message">
+    /// The message.
+    /// </param>
+    /// <param name="sender">
+    /// The sender.
+    /// </param>
     public delegate void InterfaceMessageHandler(string message, int sender);
+
+    /// <summary>
+    /// This describes the types of communication that can happen over the network
+    /// </summary>
+    internal enum MessageType
+    {
+        System = 0, Action = 1, Response = 2, WaitResponse = 3
+    }
 
     /// <summary>
     /// Contains various System Constants.
@@ -62,11 +76,6 @@
         /// The standard buffer size for this network system.
         /// </summary>
         public const int BUFFERSIZE = 1024;
-    }
-
-    internal enum MessageType
-    {
-        System = 0, Action = 1, Response = 2, WaitResponse = 3
     }
 
 }
