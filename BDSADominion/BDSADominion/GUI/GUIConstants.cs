@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Class1.cs" company="Hewlett-Packard">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace BDSADominion
+﻿namespace BDSADominion
 {
     using System.Collections.Generic;
 
@@ -21,3 +15,4 @@ namespace BDSADominion
         public static Dictionary<Buttonmember, Texture2D> buttonimage = new Dictionary<Buttonmember, Texture2D>();
     }
 }
+

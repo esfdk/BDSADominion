@@ -13,6 +13,7 @@ namespace BDSADominion
     public class GameClass : Game
     {
         #region // Fields\\
+
         /// <summary>
         /// The Graphicsmanager for the game.
         /// </summary>
@@ -74,6 +75,11 @@ namespace BDSADominion
         private HandZone handZone;
 
         /// <summary>
+        /// The supplyzone.
+        /// </summary>
+        private SupplyZone supplyZone;
+
+        /// <summary>
         /// The playing table.
         /// </summary>
         ////private Texture2D table;
@@ -96,9 +102,11 @@ namespace BDSADominion
         /// <summary>
         /// Input of mouse (keys).
         /// </summary>
-        ////private InputState input;
+        private InputState input;
 
-        private MouseState mouseState;
+        private MouseState currentMouseState;
+
+        private MouseState lastMouseState;
 
         #endregion
 
@@ -109,6 +117,9 @@ namespace BDSADominion
         {
             handZone = new HandZone();
             actionZone = new ActionZone();
+            discardZone = new DiscardZone();
+            deckZone = new DeckZone();
+            supplyZone = new SupplyZone();
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 600;
@@ -123,9 +134,6 @@ namespace BDSADominion
         /// </summary>
         protected override void Initialize()
         {
-            this.deckZone = new DeckZone(GraphicsDevice);
-            this.discardZone = new DiscardZone(GraphicsDevice);
-
             ////this.InitializeCards();
 
             base.Initialize();
@@ -141,17 +149,22 @@ namespace BDSADominion
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            ////input = new InputState();
-            font = Content.Load<SpriteFont>("Fonts//Arial");
+            input = new InputState();
+            font = Content.Load<SpriteFont>("Fonts\\Arial");
             ////table = Content.Load<Texture2D>("Dominiontable");
-            cursor = Content.Load<Texture2D>("Pics//Cursor");
-            ////supbutton = Content.Load<Texture2D>("Buttonsupply");
-            ////supover = Content.Load<Texture2D>("Buttonover");
+            cursor = Content.Load<Texture2D>("Pics\\Cursor");
+            //supbutton = Content.Load<Texture2D>("Pics\\Buttonsupply");
+            //supover = Content.Load<Texture2D>("Pics\\Buttonover");
             actions = 0;
             buys = 0;
             coins = 0;
-            ////deck.LoadContent(Content, assetName);
-            ////discard.LoadContent(Content, assetName);
+
+            foreach (Buttonmember buttonmem in Enum.GetValues(typeof(Buttonmember)))
+            {
+                string contentLocation = string.Format("Supply\\{0}", buttonmem);
+                Texture2D buttonTexture = Content.Load<Texture2D>(contentLocation);
+                GUIConstants.buttonimage.Add(buttonmem, buttonTexture);
+            }
 
             foreach (Cardmember cardmem in Enum.GetValues(typeof(Cardmember)))
             {
@@ -160,7 +173,13 @@ namespace BDSADominion
                 GUIConstants.cardimage.Add(cardmem, cardTexture);
             }
 
-            handZone.AddCards(new List<CardSprite>() { new CardSprite(Cardmember.MARKET, 1), new CardSprite(Cardmember.MARKET, 2) });
+            discardZone.AddCard(new CardSprite(Cardmember.EMPTY, 1));
+            deckZone.AddCard(new CardSprite(Cardmember.BACKSIDE, 1));
+
+            handZone.AddCards(
+                new List<CardSprite>() { new CardSprite(Cardmember.MARKET, 1), new CardSprite(Cardmember.GARDENS, 1) });
+            supplyZone.AddCards(
+                new List<ButtonSprite>() { new ButtonSprite(Buttonmember.Market, 1), new ButtonSprite(Buttonmember.Gardens, 1) });
         }
 
         /// <summary>
@@ -179,27 +198,17 @@ namespace BDSADominion
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            lastMouseState = currentMouseState;
+            currentMouseState = Mouse.GetState();
 
-            mouseState = Mouse.GetState();
-
-            mouseX = mouseState.X;
-            mouseY = mouseState.Y;
+            mouseX = this.currentMouseState.X;
+            mouseY = this.currentMouseState.Y;
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
             {
                 this.Exit();
             }
 
-            /*if (input.CurrentMouseState.LeftButton == ButtonState.Pressed && input.LastMouseState.LeftButton == ButtonState.Released)
-            {
-                for (int x = 0; x <= 10; x++)
-                {
-                    handzone.FindCardByMouseClick((int)input.CurrentMouseState.X, (int)input.CurrentMouseState.Y);
-
-
-                }
-
-            }*/
             base.Update(gameTime);
         }
 
@@ -212,42 +221,72 @@ namespace BDSADominion
             graphics.GraphicsDevice.Clear(Color.BlanchedAlmond);
             spriteBatch.Begin();
             //spriteBatch.Draw(table, Vector2.Zero, Color.White);
-            ////spriteBatch.Draw(supbutton, new Vector2(1150, 300), Color.White);
-            //this.discard.Draw(this.spriteBatch);
-            //this.deck.Draw(this.spriteBatch);
-
-
-            if ((mouseX < 1350 && mouseX > 1050) && (mouseY > 280 && mouseY < 320))
+            //spriteBatch.Draw(supbutton, new Vector2(1150, 300), Color.White);
             {
-                //spriteBatch.Draw(supover, new Vector2(1150, 300), Color.White);
-                if (ButtonState.Pressed == mouseState.LeftButton)
+                if (ButtonState.Pressed == currentMouseState.LeftButton
+                    && lastMouseState.LeftButton == ButtonState.Released)
                 {
-                    spriteBatch.DrawString(font, "You click OK", new Vector2(100.0f, 50.0f), Color.YellowGreen);
+                    CardSprite cardx = handZone.FindCardByMouseClick(mouseX, mouseY);
+                    if (cardx != null)
+                    {
+                        actionZone.AddCard(cardx);
+                    }
+                    if (cardx != null)
+                    {
+                        handZone.RemoveCard(cardx.CardMember, cardx.Id);
+                    }
 
-                    actionZone.AddCard(handZone.RemoveCard(Cardmember.MARKET, 1));
+
                 }
+
+                if (ButtonState.Pressed == currentMouseState.LeftButton
+                    && lastMouseState.LeftButton == ButtonState.Released)
+                {
+                    CardSprite cardx = actionZone.FindCardByMouseClick(mouseX, mouseY);
+                    if (cardx != null)
+                    {
+                        discardZone.AddCard(cardx);
+                    }
+                    if (cardx != null)
+                    {
+                        actionZone.RemoveCard(cardx.CardMember, cardx.Id);
+                    }
+
+                }
+
+                if (ButtonState.Pressed == currentMouseState.LeftButton
+                    && lastMouseState.LeftButton == ButtonState.Released)
+                {
+                    ButtonSprite buttonx = supplyZone.FindCardByMouseClick(mouseX, mouseY);
+                    if (buttonx != null)
+                    {
+                        spriteBatch.DrawString(font, "You click OK", new Vector2(100.0f, 50.0f), Color.YellowGreen);
+                    }
+                }
+
+                if ((mouseX < 1350 && mouseX > 1050) && (mouseY > 280 && mouseY < 320))
+                {
+                    if (ButtonState.Pressed == currentMouseState.LeftButton)
+                    {
+                        spriteBatch.Draw(supover, new Vector2(1150, 300), Color.White);
+                        spriteBatch.DrawString(font, "You click OK", new Vector2(100.0f, 50.0f), Color.YellowGreen);
+                    }
+                }
+
+                handZone.Draw(spriteBatch);
+                actionZone.Draw(spriteBatch);
+                discardZone.Draw(spriteBatch);
+                deckZone.Draw(spriteBatch);
+                supplyZone.Draw(spriteBatch);
+
+                spriteBatch.DrawString(font, "Actions: " + actions.ToString(), new Vector2(400, 15), Color.RoyalBlue);
+                spriteBatch.DrawString(font, "Buys: " + buys.ToString(), new Vector2(600, 15), Color.RoyalBlue);
+                spriteBatch.DrawString(font, "Coins: " + coins.ToString(), new Vector2(800, 15), Color.RoyalBlue);
+                spriteBatch.Draw(cursor, new Vector2(mouseX, mouseY), Color.White);
+
+                spriteBatch.End();
+                base.Draw(gameTime);
             }
-
-            handZone.Draw(spriteBatch);
-            actionZone.Draw(spriteBatch);
-
-            /*foreach (Card card in handcards)
-            {
-                card.Draw();
-            }
-
-            foreach (Card card in actioncards)
-            {
-                card.Draw();
-            }*/
-
-            spriteBatch.DrawString(font, "Actions: " + actions.ToString(), new Vector2(400, 15), Color.RoyalBlue);
-            spriteBatch.DrawString(font, "Buys: " + buys.ToString(), new Vector2(600, 15), Color.RoyalBlue);
-            spriteBatch.DrawString(font, "Coins: " + coins.ToString(), new Vector2(800, 15), Color.RoyalBlue);
-            spriteBatch.Draw(cursor, new Vector2(mouseX, mouseY), Color.White);
-
-            spriteBatch.End();
-            base.Draw(gameTime);
         }
     }
 }
