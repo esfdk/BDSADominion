@@ -142,11 +142,11 @@ namespace BDSADominion
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             ////input = new InputState();
-            font = Content.Load<SpriteFont>("Arial");
+            font = Content.Load<SpriteFont>("Fonts//Arial");
             ////table = Content.Load<Texture2D>("Dominiontable");
-            cursor = Content.Load<Texture2D>("Cursor");
-            supbutton = Content.Load<Texture2D>("Buttonsupply");
-            supover = Content.Load<Texture2D>("Buttonover");
+            cursor = Content.Load<Texture2D>("Pics//Cursor");
+            ////supbutton = Content.Load<Texture2D>("Buttonsupply");
+            ////supover = Content.Load<Texture2D>("Buttonover");
             actions = 0;
             buys = 0;
             coins = 0;
@@ -212,14 +212,14 @@ namespace BDSADominion
             graphics.GraphicsDevice.Clear(Color.BlanchedAlmond);
             spriteBatch.Begin();
             //spriteBatch.Draw(table, Vector2.Zero, Color.White);
-            spriteBatch.Draw(supbutton, new Vector2(1150, 300), Color.White);
+            ////spriteBatch.Draw(supbutton, new Vector2(1150, 300), Color.White);
             //this.discard.Draw(this.spriteBatch);
             //this.deck.Draw(this.spriteBatch);
 
 
             if ((mouseX < 1350 && mouseX > 1050) && (mouseY > 280 && mouseY < 320))
             {
-                spriteBatch.Draw(supover, new Vector2(1150, 300), Color.White);
+                //spriteBatch.Draw(supover, new Vector2(1150, 300), Color.White);
                 if (ButtonState.Pressed == mouseState.LeftButton)
                 {
                     spriteBatch.DrawString(font, "You click OK", new Vector2(100.0f, 50.0f), Color.YellowGreen);

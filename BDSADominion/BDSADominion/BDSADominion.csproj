@@ -163,6 +163,11 @@
     <Compile Include="GUI\Zones\DiscardZone.cs" />
     <Compile Include="GUI\Zones\HandZone.cs" />
     <Compile Include="GUI\Zones\SupplyZone.cs" />
+    <Compile Include="Networking\Client.cs" />
+    <Compile Include="Networking\Connection.cs" />
+    <Compile Include="Networking\NetworkConst.cs" />
+    <Compile Include="Networking\NetworkingInterface.cs" />
+    <Compile Include="Networking\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
