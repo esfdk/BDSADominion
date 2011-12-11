@@ -152,7 +152,7 @@
     <Compile Include="Gamestate\Card_Types\Victory.cs" />
     <Compile Include="Gamestate\Gamestate.cs" />
     <Compile Include="Gamestate\Player.cs" />
-    <Compile Include="Gamestate\Zones.cs" />
+    <Compile Include="Gamestate\Zone.cs" />
     <Compile Include="GUI\Cardmember.cs" />
     <Compile Include="GUI\GameClass.cs" />
     <Compile Include="GUI\GUIConstants.cs" />
