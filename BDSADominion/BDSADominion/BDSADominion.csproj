@@ -110,18 +110,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionZone.cs" />
-    <Compile Include="Card.cs" />
+    <Compile Include="Zones\ActionZone.cs" />
+    <Compile Include="CardSprite.cs" />
     <Compile Include="Cardmember.cs" />
-    <Compile Include="Deck.cs" />
-    <Compile Include="Discard.cs" />
-    <Compile Include="HandZone.cs" />
+    <Compile Include="GUIConstants.cs" />
+    <Compile Include="Zones\DeckZone.cs" />
+    <Compile Include="Zones\DiscardZone.cs" />
+    <Compile Include="Zones\HandZone.cs" />
     <Compile Include="InputState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="GameClass.cs" />
-    <Compile Include="prøveshuffler.cs" />
-    <Compile Include="Supply.cs" />
+    <Compile Include="Zones\SupplyZone.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

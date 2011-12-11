@@ -8,7 +8,7 @@
     /// <summary>
     /// The deck class contains information of the representation of the deck
     /// </summary>
-    public class Discard : SpriteBatch
+    public class DiscardZone : SpriteBatch
     {
         /// <summary>
         /// The discardpile.
@@ -36,12 +36,12 @@
         private float scale = 0.67f;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Discard"/> class.
+        /// Initializes a new instance of the <see cref="DiscardZone"/> class.
         /// </summary>
         /// <param name="graphicsDevice">
         /// The graphics device.
         /// </param>
-        public Discard(GraphicsDevice graphicsDevice)
+        public DiscardZone(GraphicsDevice graphicsDevice)
             : base(graphicsDevice)
         {
         }

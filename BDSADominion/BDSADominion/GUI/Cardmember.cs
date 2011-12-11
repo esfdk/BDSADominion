@@ -3,7 +3,6 @@
 
     public enum Cardmember
     {
-        VILLAGE,
         MARKET,
     }
 }

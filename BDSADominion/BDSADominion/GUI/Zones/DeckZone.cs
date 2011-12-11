@@ -8,7 +8,7 @@
     /// <summary>
     /// The deck class contains information of the representation of the deck
     /// </summary>
-    public class Deck : SpriteBatch
+    public class DeckZone : SpriteBatch
     {
 
         /// <summary>
@@ -36,7 +36,7 @@
         /// </summary>
         private float scale = 0.67f;
 
-        public Deck(GraphicsDevice graphicsDevice)
+        public DeckZone(GraphicsDevice graphicsDevice)
             : base(graphicsDevice)
         {
         }

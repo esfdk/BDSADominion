@@ -1,5 +1,6 @@
 namespace BDSADominion
 {
+    using System;
     using System.Collections.Generic;
 
     using Microsoft.Xna.Framework;
@@ -9,23 +10,13 @@ namespace BDSADominion
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class GameClass : Microsoft.Xna.Framework.Game
+    public class GameClass : Game
     {
         #region // Fields\\
         /// <summary>
         /// The Graphicsmanager for the game.
         /// </summary>
         private readonly GraphicsDeviceManager graphics;
-
-        /// <summary>
-        /// The cards in the handzone.
-        /// </summary>
-        private readonly List<Card> handcards = new List<Card>();
-
-        /// <summary>
-        /// The cards in the actionzone.
-        /// </summary>
-        private readonly List<Card> actioncards = new List<Card>();
 
         /// <summary>
         /// Number of actions left.
@@ -58,44 +49,34 @@ namespace BDSADominion
         private SpriteFont font;
 
         /// <summary>
-        /// The index.
-        /// </summary>
-        private int cardIndex;
-
-        /// <summary>
         /// The spritebatch used.
         /// </summary>
         private SpriteBatch spriteBatch;
 
         /// <summary>
-        /// The asset name for the Sprite's Texture.
-        /// </summary>
-        private string assetName;
-
-        /// <summary>
-        /// The ActionZone sprite.
-        /// </summary>
-        private ActionZone actionZone;
-
-        /// <summary>
         /// The discardsprite.
         /// </summary>
-        private Discard discard;
+        private DiscardZone discardZone;
 
         /// <summary>
         /// The Decksprite.
         /// </summary>
-        private Deck deck;
+        private DeckZone deckZone;
+
+        /// <summary>
+        /// The ActionZone.
+        /// </summary>
+        private ActionZone actionZone;
 
         /// <summary>
         /// The handzone.
         /// </summary>
-        private HandZone handzone;
+        private HandZone handZone;
 
         /// <summary>
         /// The playing table.
         /// </summary>
-        private Texture2D table;
+        ////private Texture2D table;
 
         /// <summary>
         /// The cursor.
@@ -115,22 +96,9 @@ namespace BDSADominion
         /// <summary>
         /// Input of mouse (keys).
         /// </summary>
-        private InputState input;
+        ////private InputState input;
 
-        /// <summary>
-        /// The mousestate.
-        /// </summary>
         private MouseState mouseState;
-
-        /// <summary>
-        /// location of the next card.
-        /// </summary>
-        private const int Cardoffset = 80;
-
-        /// <summary>
-        /// initial location
-        /// </summary>
-        private int LocationX;
 
         #endregion
 
@@ -139,6 +107,8 @@ namespace BDSADominion
         /// </summary>
         public GameClass()
         {
+            handZone = new HandZone();
+            actionZone = new ActionZone();
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 600;
@@ -153,9 +123,10 @@ namespace BDSADominion
         /// </summary>
         protected override void Initialize()
         {
-            deck = new Deck(GraphicsDevice);
-            discard = new Discard(GraphicsDevice);
-            this.InitializeCards();
+            this.deckZone = new DeckZone(GraphicsDevice);
+            this.discardZone = new DiscardZone(GraphicsDevice);
+
+            ////this.InitializeCards();
 
             base.Initialize();
         }
@@ -166,62 +137,30 @@ namespace BDSADominion
         /// </summary>
         protected override void LoadContent()
         {
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            input = new InputState();
+            ////input = new InputState();
             font = Content.Load<SpriteFont>("Arial");
-            table = Content.Load<Texture2D>("Dominiontable");
+            ////table = Content.Load<Texture2D>("Dominiontable");
             cursor = Content.Load<Texture2D>("Cursor");
             supbutton = Content.Load<Texture2D>("Buttonsupply");
             supover = Content.Load<Texture2D>("Buttonover");
             actions = 0;
             buys = 0;
             coins = 0;
-            deck.LoadContent(Content, assetName);
-            discard.LoadContent(Content, assetName);
+            ////deck.LoadContent(Content, assetName);
+            ////discard.LoadContent(Content, assetName);
 
-            Card.LoadCardTextures();
-        }
-
-        /// <summary>
-        /// Initialize all cards.
-        /// </summary>
-        protected void InitializeCards()
-        {
-            // the hand zone.
-            LocationX = 400;
-            cardIndex = 0;
-            for (int x = 0; x <= 10; x++)
+            foreach (Cardmember cardmem in Enum.GetValues(typeof(Cardmember)))
             {
-                handcards.Add(new Card(new Vector2(LocationX, 500)));
-                handcards[cardIndex].CardHeight = Card.ImageHeight;
-                handcards[cardIndex].CardWidth = Card.ImageWidth;
-                handcards[cardIndex].OffsetHeight = 0;
-                handcards[cardIndex].OffsetWidth = 20;
-                handcards[cardIndex].Index = x;
-
-                for (int i = 0; i <= x; i++)
-                {
-                    handcards.Add();
-                }
-
-                LocationX += Cardoffset;
-                cardIndex += 1;
+                string contentLocation = string.Format("Kingdom\\{0}", cardmem);
+                Texture2D cardTexture = Content.Load<Texture2D>(contentLocation);
+                GUIConstants.cardimage.Add(cardmem, cardTexture);
             }
 
-            LocationX = 50;
-            for (int x = 10; x <= 20; x++)
-            {
-                actioncards.Add(new ActionZone(new Vector2(LocationX, 50)));
-                actioncards[cardIndex].CardHeight = Card.ImageHeight;
-                actioncards[cardIndex].CardWidth = Card.ImageWidth;
-                actioncards[cardIndex].OffsetHeight = 0;
-                actioncards[cardIndex].OffsetWidth = 20;
-                actioncards[cardIndex].Index = x;
-
-                LocationX += Cardoffset;
-            }
+            handZone.AddCards(new List<CardSprite>() { new CardSprite(Cardmember.MARKET, 1), new CardSprite(Cardmember.MARKET, 2) });
         }
 
         /// <summary>
@@ -251,7 +190,7 @@ namespace BDSADominion
                 this.Exit();
             }
 
-            if (input.CurrentMouseState.LeftButton == ButtonState.Pressed && input.LastMouseState.LeftButton == ButtonState.Released)
+            /*if (input.CurrentMouseState.LeftButton == ButtonState.Pressed && input.LastMouseState.LeftButton == ButtonState.Released)
             {
                 for (int x = 0; x <= 10; x++)
                 {
@@ -260,7 +199,7 @@ namespace BDSADominion
 
                 }
 
-            }
+            }*/
             base.Update(gameTime);
         }
 
@@ -274,8 +213,9 @@ namespace BDSADominion
             spriteBatch.Begin();
             //spriteBatch.Draw(table, Vector2.Zero, Color.White);
             spriteBatch.Draw(supbutton, new Vector2(1150, 300), Color.White);
-            this.discard.Draw(this.spriteBatch);
-            this.deck.Draw(this.spriteBatch);
+            //this.discard.Draw(this.spriteBatch);
+            //this.deck.Draw(this.spriteBatch);
+
 
             if ((mouseX < 1350 && mouseX > 1050) && (mouseY > 280 && mouseY < 320))
             {
@@ -283,10 +223,12 @@ namespace BDSADominion
                 if (ButtonState.Pressed == mouseState.LeftButton)
                 {
                     spriteBatch.DrawString(font, "You click OK", new Vector2(100.0f, 50.0f), Color.YellowGreen);
+
+                    actionZone.AddCard(handZone.RemoveCard(Cardmember.MARKET, 1));
                 }
             }
 
-            handzone.Draw(spriteBatch);
+            handZone.Draw(spriteBatch);
             actionZone.Draw(spriteBatch);
 
             /*foreach (Card card in handcards)
