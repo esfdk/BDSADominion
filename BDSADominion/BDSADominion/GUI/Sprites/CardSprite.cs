@@ -1,4 +1,5 @@
-﻿using BDSADominion.Gamestate.Card_Types;
+﻿using BDSADominion.Gamestate;
+using BDSADominion.Gamestate.Card_Types;
 
 namespace BDSADominion.GUI
 {
@@ -9,11 +10,18 @@ namespace BDSADominion.GUI
     /// <summary>
     /// This class holds the information for the representation of cards.
     /// </summary>
-    public class CardSprite
+    internal class CardSprite
     {
-        public Cardmember CardMember { get; private set; }
+        ////public CardName Card { get; private set; }
 
-        public Card cardRef { get; private set; }
+        internal CardName CardRef { get; private set; }
+
+        internal int Index { get; private set; }
+
+        /// <summary>
+        /// Gets or sets isclicked
+        /// </summary>
+        internal bool Clicked { get; set; }
 
         /// <summary>
         /// The texture for the front of the card
@@ -21,35 +29,24 @@ namespace BDSADominion.GUI
         private Texture2D cardFront;
 
         /// <summary>
-        /// the texture for the back of the card
-        /// </summary>
-        ////private Texture2D cardBack;
-
-        /// <summary>
-        /// bool to check if card has picture side faceup
-        /// </summary>
-        ////private bool faceUp;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CardSprite"/> class.
         /// </summary>
-        /// <param name="cardenum">
-        /// The cardenum.
-        /// </param>
-        public CardSprite(Cardmember cardenum, int id)
+        internal CardSprite(CardName card, int index)
         {
+            Index = index;
+            CardRef = card;
             Clicked = false;
             ////position = Vector2.Zero;
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
-            CardMember = cardenum;
-            Id = id;
-            this.cardFront = GUIConstants.cardImages[cardenum];
+            ////CardName = cardenum;
+            ////Id = id;
+            this.cardFront = GUIConstants.cardImages[CardRef];
         }
 
         /// <summary>
         /// Gets ImageHeight.
         /// </summary>
-        public int ImageHeight
+        /*public int ImageHeight
         {
             get
             {
@@ -66,12 +63,7 @@ namespace BDSADominion.GUI
             {
                 return this.cardFront.Width;
             }
-        }
-
-        /// <summary>
-        /// Gets or sets position of the card on the screen.
-        /// </summary>
-        ////public Vector2 Position { get; set; }
+        }*/
 
         /// <summary>
         /// Gets or sets rectangle size which holds the image of the card.
@@ -79,12 +71,7 @@ namespace BDSADominion.GUI
         ////public Rectangle Rectangle { get; set; }
 
         /// <summary>
-        /// Gets or sets isclicked
-        /// </summary>
-        public bool Clicked { get; set; }
-
-        /// <summary>
-        /// Gets or sets card is Faceuped
+        /// the draw method of card
         /// </summary>
         /// <param name="spriteBatch">
         /// The sprite Batch.
@@ -92,10 +79,7 @@ namespace BDSADominion.GUI
         /// <param name="position">
         /// The position.
         /// </param>
-        /// <summary>
-        /// the draw method of card
-        /// </summary>
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        internal void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             /*
             spriteBatch.Draw(
@@ -109,6 +93,29 @@ namespace BDSADominion.GUI
                 SpriteEffects.None,
                 0);*/
             spriteBatch.Draw(cardFront, position, Color.White);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof (CardSprite)) return false;
+            return Equals((CardSprite) obj);
+        }
+
+        internal bool Equals(CardSprite other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(other.CardRef, CardRef) && other.Index == Index;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (CardRef.GetHashCode()*397) ^ Index;
+            }
         }
     }
 }

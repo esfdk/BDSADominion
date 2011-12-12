@@ -1,4 +1,6 @@
-﻿using BDSADominion.Gamestate.Card_Types;
+﻿using BDSADominion.Gamestate;
+using BDSADominion.Gamestate.Card_Types;
+using BDSADominion.Networking;
 
 namespace BDSADominion.GUI
 {
@@ -14,10 +16,29 @@ namespace BDSADominion.GUI
     {
         private GameClass game;
 
+        /// <summary>
+        /// trolol to
+        /// </summary>
+        ////private Server server = new Server();
+
         public GUIInterface()
         {
+
+
             game = new GameClass();
             game.Run();
+
+            game.discardZone.SetEmpty();
+            game.deckZone.SetFilled();
+
+            game.HandCardClicked += HandCardToControl;
+        }
+
+        public event PressedHandIndex CardInHandPressed;
+
+        void HandCardToControl(CardSprite card)
+        {
+            CardInHandPressed(card.Index);
         }
 
         //public DrawHand(List<Card> ) TODO
