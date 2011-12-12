@@ -75,6 +75,16 @@ namespace BDSADominion.GUI
             }
 
             network = new NetworkingInterface(ipAddress);
+            network.MessageReceived += MessageRecieved;
+
+
+            while(true);
+            
+        }
+
+        static void MessageRecieved(string message, int playerId)
+        {
+            Console.WriteLine("<Interface> Client recieved {0} from {1}", message, playerId);
         }
     }
 #endif

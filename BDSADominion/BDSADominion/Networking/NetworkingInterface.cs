@@ -18,18 +18,19 @@
         public NetworkingInterface() //If host
         {
             server = new Server();
+            server.Start();
             AlwaysDo(server.Ip);
         }
 
         public NetworkingInterface(IPAddress ip) //If joining a game
         {
-            client = new Client(ip);
             AlwaysDo(ip);
-            client.NewMessageEvent += ReceivedNewMessage;
         }
 
         private void AlwaysDo(IPAddress ip)
         {
+            client = new Client(ip);
+            client.NewMessageEvent += ReceivedNewMessage;
             SetNumberOfClients(2); //TODO hardcoded number of total clients
         }
 
