@@ -1,3 +1,6 @@
+using BDSADominion.Gamestate;
+using BDSADominion.Gamestate.Card_Types;
+
 namespace BDSADominion.GUI
 {
     using System;
@@ -153,28 +156,28 @@ namespace BDSADominion.GUI
             phase = false;
 
 
-            foreach (Cardmember cardmem in Enum.GetValues(typeof(Cardmember)))
+            foreach (CardName card in Enum.GetValues(typeof(CardName)))
             {
-                string contentLocation = string.Format("Kingdom\\{0}", cardmem);
+                string contentLocation = string.Format("Kingdom\\{0}", card);
                 Texture2D cardTexture = Content.Load<Texture2D>(contentLocation);
-                GUIConstants.cardImages.Add(cardmem, cardTexture);
+                GUIConstants.cardImages.Add(card, cardTexture);
             }
 
-            foreach (Cardmember cardmem in Enum.GetValues(typeof(Cardmember)))
+            foreach (CardName card in Enum.GetValues(typeof(CardName)))
             {
-                if (cardmem != Cardmember.EMPTY & cardmem != Cardmember.BACKSIDE)
+                if (card != CardName.Empty & card != CardName.Backside)
                 {
-                    string contentLocation = string.Format("Supply\\{0}", cardmem);
+                    string contentLocation = string.Format("Supply\\{0}", card);
                     Texture2D cardTexture = Content.Load<Texture2D>(contentLocation);
-                    GUIConstants.buttonImages.Add(cardmem, cardTexture);
+                    GUIConstants.buttonImages.Add(card, cardTexture);
                 }
             }
 
-            discardZone.AddCard(new CardSprite(Cardmember.EMPTY, 1));
-            deckZone.AddCard(new CardSprite(Cardmember.BACKSIDE, 1));
+            discardZone.AddCard(new CardSprite(CardName.Empty, 1));
+            deckZone.AddCard(new CardSprite(CardName.Backside, 1));
 
-            handZone.AddCards(
-                new List<CardSprite>() { new CardSprite(Cardmember.MARKET, 1), new CardSprite(Cardmember.GARDENS, 1) });
+            /*handZone.AddCards(
+                new List<CardSprite>() { new CardSprite(new Card()), new CardSprite(CardName.Gardens) });*/
             supplyZone.AddCards(
                 new List<CardSprite>() { new CardSprite(Cardmember.MARKET, 1), new CardSprite(Cardmember.GARDENS, 1) });
         }
