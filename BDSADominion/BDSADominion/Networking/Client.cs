@@ -16,19 +16,7 @@
         /// </summary>
         public Client(IPAddress ipAddress)
         {
-            ////IPAddress ipAddress = null;
-            ////bool parseSuccess = false;
-
-            ////Console.WriteLine("Please input IP for server:");
-
-            /*while (!parseSuccess)
-            {
-                parseSuccess = IPAddress.TryParse(ip, out ipAddress);
-                if (!parseSuccess)
-                {
-                    Console.WriteLine("ip not valid, try again:");
-                }
-            }*/
+            
 
             IPEndPoint ipEnd = new IPEndPoint(ipAddress, NetworkConst.PORT);
 

@@ -39,12 +39,12 @@ namespace BDSADominion.GUI
         /// <summary>
         /// Indicate player turn.
         /// </summary>
-        private bool turn;
+        internal bool turn;
 
         /// <summary>
         /// Indicate phase.
         /// </summary>
-        private bool phase;
+        internal int phase;
 
         /// <summary>
         /// indicate the players number.
@@ -74,12 +74,12 @@ namespace BDSADominion.GUI
         /// <summary>
         /// Indicates if games is over.
         /// </summary>
-        private bool endofgame;
+        internal bool endOfGame;
 
         /// <summary>
         /// indicate the winer
         /// </summary>
-        private int winernum;
+        internal int winnerNum;
 
         /// <summary>
         /// The spritefont for WIN.
@@ -127,12 +127,17 @@ namespace BDSADominion.GUI
         private Texture2D cursor;
 
         private MouseState currentMouseState;
-
         private MouseState lastMouseState;
 
-        public static Dictionary<CardName, Texture2D> cardImages = new Dictionary<CardName, Texture2D>();
+        public static CardSprite Empty;
+        public static CardSprite Back;
 
+        public static Dictionary<CardName, Texture2D> cardImages = new Dictionary<CardName, Texture2D>();
         public static Dictionary<CardName, Texture2D> buttonImages = new Dictionary<CardName, Texture2D>();
+
+        internal event CardSpriteHandler HandCardClicked;
+        internal event CardNameHandler SupplyCardClicked;
+        internal event ClickHandler EndPhaseClicked;
 
         #endregion
 
@@ -168,7 +173,6 @@ namespace BDSADominion.GUI
         /// </summary>
         protected override void LoadContent()
         {
-
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -181,9 +185,10 @@ namespace BDSADominion.GUI
             buys = 0;
             coins = 0;
             playernum = 0;
+            winnerNum = 0;
             turn = false;
-            phase = false;
-
+            phase = 0;
+            endOfGame = false;
 
             foreach (CardName card in Enum.GetValues(typeof(CardName)))
             {
@@ -197,17 +202,20 @@ namespace BDSADominion.GUI
             {
                 if (card != CardName.Empty & card != CardName.Backside)
                 {
-                    // string content = card.ToString().ToUpper();
                     string contentLocation = string.Format("Supply\\{0}", card);
                     Texture2D cardTexture = Content.Load<Texture2D>(contentLocation);
                     buttonImages.Add(card, cardTexture);
                 }
             }
+
+            Empty = new CardSprite(CardName.Empty, -1);
+            Back = new CardSprite(CardName.Backside, -1);
+
             ////TEST ZONE:
-            handZone.AddCards(
-                new List<CardSprite>() { new CardSprite(CardName.Market, 1), new CardSprite(CardName.Gardens, 1) });
-            supplyZone.AddCards(
-                new List<CardName>() { CardName.Market, CardName.Gardens });
+            handZone.NewCards(
+                new List<CardSprite> { new CardSprite(CardName.Market, 1), new CardSprite(CardName.Gardens, 1) });
+            supplyZone.NewCards(
+                new List<CardName> { CardName.Market, CardName.Gardens });
         }
 
         /// <summary>
@@ -218,8 +226,6 @@ namespace BDSADominion.GUI
         {
             // TODO: Unload any non ContentManager content here
         }
-
-        internal event PressedHandCard HandCardClicked;
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -236,9 +242,22 @@ namespace BDSADominion.GUI
 
             if (currentMouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
             {
-                if (handZone.isClickWithinHand(mouseX, mouseY))
+                if (handZone.isClickWithin(mouseX, mouseY))
                 {
                     HandCardClicked(handZone.FindCardByMouseClick(mouseX));
+                }
+
+                if (supplyZone.IsClickWithin(mouseX, mouseY))
+                {
+                    SupplyCardClicked(supplyZone.FindCardByMouseClick(mouseY));
+                }
+
+                if ((mouseX < 285 && mouseX > 185) && (mouseY < 370 && mouseY > 340))
+                {
+                    if (currentMouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
+                    {
+                        EndPhaseClicked();
+                    }
                 }
             }
 
@@ -289,29 +308,30 @@ namespace BDSADominion.GUI
             discardZone.Draw(spriteBatch);
             deckZone.Draw(spriteBatch);
             supplyZone.Draw(spriteBatch);
-            spriteBatch.Draw(endphasebutton, new Vector2(300, 300), Color.White);
+            spriteBatch.Draw(endphasebutton, new Vector2(185, 340), Color.White);
             spriteBatch.Draw(cursor, new Vector2(mouseX, mouseY), Color.White);
             spriteBatch.DrawString(font, "Actions: " + actions.ToString(), new Vector2(400, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Buys: " + buys.ToString(), new Vector2(600, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Coins: " + coins.ToString(), new Vector2(800, 15), Color.RoyalBlue);
-            spriteBatch.DrawString(font, "Player" + playernum.ToString(), new Vector2(500, 500), Color.RoyalBlue);
-            spriteBatch.DrawString(font, turn == true ? "Your turn   -" : "Not your turn", new Vector2(10, 10), Color.RoyalBlue);
-            if (turn == true && phase == false)
+            spriteBatch.DrawString(font, "Player" + playernum.ToString(), new Vector2(10, 32), Color.RoyalBlue);
+            spriteBatch.DrawString(font, turn ? "Your turn   -" : "Not your turn", new Vector2(10, 10), Color.RoyalBlue);
+            if (turn && phase == 0)
             {
                 spriteBatch.DrawString(font, "Action phase", new Vector2(163, 10), Color.RoyalBlue);
             }
-            if (turn == true && phase == true)
+            if (turn && phase == 1)
             {
                 spriteBatch.DrawString(font, "Buy phase", new Vector2(163, 10), Color.RoyalBlue);
             }
 
-            if (endofgame == true && playernum == winernum)
+            if (endOfGame && playernum == winnerNum)
             {
-                spriteBatch.DrawString(fontWin, "YOU ARE THE WINER CONGRATULATIONS", new Vector2(450, 330), Color.Indigo);
+                spriteBatch.DrawString(fontWin, "YOU ARE THE WINNER \n CONGRATULATIONS", new Vector2(200, 220), Color.Indigo);
             }
-            if (endofgame == true && playernum != winernum)
+
+            if (endOfGame && playernum != winnerNum)
             {
-                spriteBatch.DrawString(fontWin, "YOU LOOSE, NOW TAKE YOUR CRUSED SOUL AND GO AWAY", new Vector2(450, 330), Color.Indigo);
+                spriteBatch.DrawString(fontWin, "YOU LOSE, NOW TAKE YOUR CURSED SOUL AND GO AWAY", new Vector2(200, 220), Color.Indigo);
             }
 
             spriteBatch.End();

@@ -29,7 +29,6 @@ namespace BDSADominion.GUI
          /// </param>
          internal DeckZone()
          {
-
          }
 
          /// <summary>
@@ -50,12 +49,12 @@ namespace BDSADominion.GUI
          /// </param>
          internal void SetFilled()
          {
-             deckzone = GUIConstants.Back;
+             deckzone = GameClass.Back;
          }
 
          internal void SetEmpty()
          {
-             deckzone = GUIConstants.Empty;
+             deckzone = GameClass.Empty;
          }
 
          /// <summary>

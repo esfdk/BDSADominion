@@ -1,15 +1,13 @@
-﻿using BDSADominion.Gamestate;
-
-namespace BDSADominion.GUI
+﻿namespace BDSADominion.GUI
 {
-
+    using Gamestate;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
     /// <summary>
     /// This class holds the information for the representation of cards.
     /// </summary>
-    internal class CardSprite
+    public class CardSprite
     {
         ////public CardName Card { get; private set; }
 
@@ -39,7 +37,7 @@ namespace BDSADominion.GUI
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
             ////CardName = cardenum;
             ////Id = id;
-            this.cardFront = GameClass.cardImages[CardRef];
+            cardFront = GameClass.cardImages[CardRef];
         }
 
         /// <summary>
