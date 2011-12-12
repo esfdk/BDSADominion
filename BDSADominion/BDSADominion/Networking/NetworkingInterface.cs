@@ -82,19 +82,19 @@
             MessageType type;
             bool playerParse = int.TryParse(messageParts[0], out fromPlayer);
             bool messageParse = MessageType.TryParse(messageParts[1], out type);
-            if(playerParse & messageParse)
+            if (playerParse & messageParse)
             {
-                switch(type)
+                switch (type)
                 {
                     case MessageType.System:
                         MessageReceived(messageParts[2], fromPlayer);
                         break;
                     case MessageType.Action:
-                        MessageReceived(messageParts[2], fromPlayer); //TODO ResponseWait, how to know?
+                        MessageReceived(messageParts[2], fromPlayer); // TODO ResponseWait, how to know?
                         client.Comm.Send(NetworkConst.ENCODER.GetBytes(ResponseMessage()));
                         break;
                     case MessageType.Response:
-                        responseMessages[(int.Parse(messageParts[0])) - 1] = messageParts[2];
+                        responseMessages[int.Parse(messageParts[0]) - 1] = messageParts[2];
                         break;
                     case MessageType.WaitResponse:
                         //TODO ResponseWait Message

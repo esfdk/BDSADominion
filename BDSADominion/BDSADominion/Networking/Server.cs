@@ -35,6 +35,14 @@
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             ClientConnectedEvent += ClientConnected;
+            ClientConnectedEvent += ServerPreGameMessage;
+        }
+
+        private bool ServerPreGameMessage(Connection connection)
+        {
+            int currentNumberOfPlayers = GetClientList().Count;
+            SystemMessage(string.Format("<YPN{0}>", connection.Id), connection);
+            SystemMessage(string.Format("<CP{0}>", currentNumberOfPlayers));
         }
 
         public event ConnectedClientHandler ClientConnectedEvent;
@@ -57,11 +65,16 @@
             socket.BeginAccept(AcceptCallback, socket);
         }
 
-        public void SystemMessage(string message)
+        public void SystemMessage(string message, Connection client)
         {
             string compoundMessage = string.Format("{0}|{1}<EOF>", 0, message);
 
-            GetClientList().ForEach(cli => cli.Send(compoundMessage));
+            client.Send(compoundMessage);
+        }
+
+        public void SystemMessage(string message)
+        {
+            GetClientList().ForEach(cli => SystemMessage(message, cli));
         }
 
         /// <summary>
@@ -93,7 +106,7 @@
 
             server.BeginAccept(AcceptCallback, server);
 
-            if (ClientConnectedEvent != null /*& !ClientConnectedEvent(conn)*/)
+            if (ClientConnectedEvent != null & !ClientConnectedEvent(conn))
             {
                 client.Close();
                 return;
@@ -117,7 +130,7 @@
             ForwardMessage(message, conn.Id);
         }
 
-        public void ClientConnected(Connection conn)
+        public bool ClientConnected(Connection conn)
         {
             Console.WriteLine("Client {0} connected", conn.Id);
             conn.ReceivedMessageEvent += ServerRecievedMessage;
