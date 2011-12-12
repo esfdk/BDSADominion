@@ -45,6 +45,16 @@ namespace BDSADominion
         private bool phase;
 
         /// <summary>
+        /// indicate the players number.
+        /// </summary>
+        private int playernum;
+
+        /// <summary>
+        /// Texture for the end phase button.
+        /// </summary>
+        private Texture2D endphasebutton;
+
+        /// <summary>
         /// mouse x coordinat.
         /// </summary>
         private int mouseX;
@@ -58,6 +68,21 @@ namespace BDSADominion
         /// The spritefont.
         /// </summary>
         private SpriteFont font;
+
+        /// <summary>
+        /// Indicates if games is over.
+        /// </summary>
+        private bool endofgame;
+
+        /// <summary>
+        /// indicate the winer
+        /// </summary>
+        private int winernum;
+
+        /// <summary>
+        /// The spritefont for WIN.
+        /// </summary>
+        private SpriteFont fontWin;
 
         /// <summary>
         /// The spritebatch used.
@@ -115,8 +140,7 @@ namespace BDSADominion
             discardZone = new DiscardZone();
             deckZone = new DeckZone();
             supplyZone = new SupplyZone();
-            graphics = new GraphicsDeviceManager(this)
-                           {PreferredBackBufferWidth = 1280, PreferredBackBufferHeight = 600};
+            graphics = new GraphicsDeviceManager(this) { PreferredBackBufferWidth = 1280, PreferredBackBufferHeight = 600 };
             Content.RootDirectory = "Content";
         }
 
@@ -144,11 +168,14 @@ namespace BDSADominion
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             font = Content.Load<SpriteFont>("Fonts\\Arial");
+            fontWin = Content.Load<SpriteFont>("Fonts\\Winfont");
             ////table = Content.Load<Texture2D>("Dominiontable");
             cursor = Content.Load<Texture2D>("Pics\\Cursor");
+            endphasebutton = Content.Load<Texture2D>("Pics\\EndButton");
             actions = 0;
             buys = 0;
             coins = 0;
+            playernum = 0;
             turn = false;
             phase = false;
 
@@ -263,10 +290,13 @@ namespace BDSADominion
                 deckZone.Draw(spriteBatch);
                 supplyZone.Draw(spriteBatch);
                 spriteBatch.Draw(cursor, new Vector2(mouseX, mouseY), Color.White);
+                spriteBatch.Draw(endphasebutton, new Vector2(300, 300), Color.White);
                 spriteBatch.DrawString(font, "Actions: " + actions.ToString(), new Vector2(400, 15), Color.RoyalBlue);
                 spriteBatch.DrawString(font, "Buys: " + buys.ToString(), new Vector2(600, 15), Color.RoyalBlue);
                 spriteBatch.DrawString(font, "Coins: " + coins.ToString(), new Vector2(800, 15), Color.RoyalBlue);
+                spriteBatch.DrawString(font, "Player" + playernum.ToString(), new Vector2(500, 500), Color.RoyalBlue);
                 spriteBatch.DrawString(font, turn == true ? "Your turn   -" : "Not your turn", new Vector2(10, 10), Color.RoyalBlue);
+
                 if (turn == true && phase == false)
                 {
                     spriteBatch.DrawString(font, "Action phase", new Vector2(163, 10), Color.RoyalBlue);
@@ -276,6 +306,14 @@ namespace BDSADominion
                     spriteBatch.DrawString(font, "Buy phase", new Vector2(163, 10), Color.RoyalBlue);
                 }
 
+                if (endofgame == true && playernum == winernum)
+                {
+                    spriteBatch.DrawString(fontWin, "YOU ARE THE WINER CONGRATULATIONS", new Vector2(450, 330), Color.Indigo);
+                }
+                if (endofgame == true && playernum != winernum)
+                {
+                    spriteBatch.DrawString(fontWin, "YOU LOOSE, NOW TAKE YOUR CRUSED SOUL AND GO AWAY", new Vector2(450, 330), Color.Indigo);
+                }
 
                 spriteBatch.End();
                 base.Draw(gameTime);
