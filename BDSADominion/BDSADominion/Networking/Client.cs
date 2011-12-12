@@ -16,8 +16,6 @@
         /// </summary>
         public Client(IPAddress ipAddress)
         {
-            
-
             IPEndPoint ipEnd = new IPEndPoint(ipAddress, NetworkConst.PORT);
 
             Comm = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
