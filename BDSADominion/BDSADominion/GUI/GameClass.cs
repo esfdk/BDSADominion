@@ -127,8 +127,8 @@ namespace BDSADominion.GUI
         private Texture2D cursor;
 
         private MouseState currentMouseState;
-        private MouseState lastMouseState; 
-        
+        private MouseState lastMouseState;
+
         public static CardSprite Empty;
         public static CardSprite Back;
 
@@ -252,9 +252,13 @@ namespace BDSADominion.GUI
                     SupplyCardClicked(supplyZone.FindCardByMouseClick(mouseY));
                 }
 
-                //EndPhaseClicked();
-
-                //TODO EndPhaseButton
+                if ((mouseX < 285 && mouseX > 185) && (mouseY < 370 && mouseY > 340))
+                {
+                    if (currentMouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
+                    {
+                        EndPhaseClicked();
+                    }
+                }
             }
 
             // Allows the game to exit
