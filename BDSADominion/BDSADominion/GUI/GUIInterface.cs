@@ -2,8 +2,9 @@
 using BDSADominion.Gamestate.Card_Types;
 using BDSADominion.Networking;
 
-namespace BDSADominion.GUI
+namespace BDSADominion
 {
+    using Microsoft.Xna.Framework.Graphics;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -23,8 +24,6 @@ namespace BDSADominion.GUI
 
         public GUIInterface()
         {
-
-
             game = new GameClass();
             game.Run();
 

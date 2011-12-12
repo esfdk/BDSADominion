@@ -1,6 +1,6 @@
 ﻿﻿using BDSADominion.Gamestate;
 
-namespace BDSADominion.GUI
+namespace BDSADominion
  {
 
      using Microsoft.Xna.Framework;
@@ -50,12 +50,12 @@ namespace BDSADominion.GUI
          /// </param>
          internal void SetFilled()
          {
-             deckzone = GUIConstants.Back;
+             deckzone = GameClass.Back;
          }
 
          internal void SetEmpty()
          {
-             deckzone = GUIConstants.Empty;
+             deckzone = GameClass.Empty;
          }
 
          /// <summary>

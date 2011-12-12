@@ -1,4 +1,6 @@
-using BDSADominion.GUI;
+using System.Collections.Generic;
+using BDSADominion.Gamestate;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BDSADominion
 {

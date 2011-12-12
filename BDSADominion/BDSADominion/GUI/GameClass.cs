@@ -1,7 +1,7 @@
 using BDSADominion.Gamestate;
 using BDSADominion.Gamestate.Card_Types;
 
-namespace BDSADominion.GUI
+namespace BDSADominion
 {
     using System;
     using System.Collections.Generic;
@@ -16,6 +16,14 @@ namespace BDSADominion.GUI
     public class GameClass : Game
     {
         #region // Fields\\
+
+        public static CardSprite Empty = new CardSprite(CardName.Empty, -1);
+
+        public static CardSprite Back = new CardSprite(CardName.Backside, -1);
+
+        public static Dictionary<CardName, Texture2D> cardImages = new Dictionary<CardName, Texture2D>();
+
+        public static Dictionary<CardName, Texture2D> buttonImages = new Dictionary<CardName, Texture2D>();
 
         /// <summary>
         /// The Graphicsmanager for the game.
@@ -118,8 +126,9 @@ namespace BDSADominion.GUI
             discardZone = new DiscardZone();
             deckZone = new DeckZone();
             supplyZone = new SupplyZone();
-            graphics = new GraphicsDeviceManager(this)
-                           {PreferredBackBufferWidth = 1280, PreferredBackBufferHeight = 600};
+            graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 1280;
             Content.RootDirectory = "Content";
         }
 
@@ -132,7 +141,6 @@ namespace BDSADominion.GUI
         protected override void Initialize()
         {
             ////this.InitializeCards();
-
             base.Initialize();
         }
 
@@ -161,7 +169,7 @@ namespace BDSADominion.GUI
                 string content = card.ToString().ToUpper();
                 string contentLocation = string.Format("Kingdom\\{0}", content);
                 Texture2D cardTexture = Content.Load<Texture2D>(contentLocation);
-                GUIConstants.cardImages.Add(card, cardTexture);
+                GameClass.cardImages.Add(card, cardTexture);
             }
 
             foreach (CardName card in Enum.GetValues(typeof(CardName)))
@@ -171,7 +179,7 @@ namespace BDSADominion.GUI
                     //string content = card.ToString().ToUpper();
                     string contentLocation = string.Format("Supply\\{0}", card);
                     Texture2D cardTexture = Content.Load<Texture2D>(contentLocation);
-                    GUIConstants.buttonImages.Add(card, cardTexture);
+                    GameClass.buttonImages.Add(card, cardTexture);
                 }
             }
             ////TEST ZONE:

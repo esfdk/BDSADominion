@@ -1,4 +1,4 @@
-﻿﻿namespace BDSADominion.GUI
+﻿﻿namespace BDSADominion
  {
 
      using Microsoft.Xna.Framework;
@@ -53,7 +53,7 @@
 
          internal void SetEmpty()
          {
-             discardzone = GUIConstants.Empty;
+             discardzone = GameClass.Empty;
          }
 
          /// <summary>

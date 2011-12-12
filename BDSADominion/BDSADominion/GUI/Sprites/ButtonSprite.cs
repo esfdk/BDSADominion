@@ -1,4 +1,4 @@
-﻿namespace BDSADominion.GUI
+﻿namespace BDSADominion
 {
     using Gamestate;
     using Microsoft.Xna.Framework;
@@ -41,7 +41,7 @@
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
             Card = card;
             //Id = id;
-            this.buttonFront = GUIConstants.buttonImages[Card];
+            this.buttonFront = GameClass.buttonImages[Card];
         }
 
         /// <summary>
