@@ -155,7 +155,6 @@ namespace BDSADominion.GUI
         protected override void Initialize()
         {
             ////this.InitializeCards();
-
             base.Initialize();
         }
 

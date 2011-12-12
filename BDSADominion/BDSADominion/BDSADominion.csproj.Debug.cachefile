@@ -1,5 +1,7 @@
-Content\Fonts\Arial.xnb
 Content\Pics\Cursor.xnb
+Content\Fonts\Arial.xnb
+Content\Kingdom\EMPTY.xnb
+Content\Kingdom\BACKSIDE.xnb
 Content\Supply\Adventurer.xnb
 Content\Supply\Copper.xnb
 Content\Supply\CouncilRoom.xnb
@@ -16,6 +18,8 @@ Content\Supply\Silver.xnb
 Content\Supply\Smithy.xnb
 Content\Supply\Village.xnb
 Content\Supply\Woodcutter.xnb
+Content\Fonts\Winfont.xnb
+Content\Pics\EndButton.xnb
 Content\Kingdom\ADVENTURER.xnb
 Content\Kingdom\BUREAUCRAT.xnb
 Content\Kingdom\CELLAR.xnb
