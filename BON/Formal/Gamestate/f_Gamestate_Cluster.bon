@@ -8,6 +8,7 @@ component
 		ActivePlayer : PLAYER
 		InActionPhase : BOOLEAN
 		InBuyPhase : BOOLEAN
+		GetPhase : NATURAL
 		GetPlayers : SEQUENCE[PLAYER]
 		GetSupply : TABLE[CARD_NAME, INTEGER]
 		GetTrash : SEQUENCE[CARD]
@@ -25,7 +26,7 @@ component
 		
 		--Ccmmands
 		SetActivePlayer -> playerNumber : NATURAL
-			require playerNumber >= 1 and playerNumber <= NumberOfPlayers and playerNumber 
+			require playerNumber >= 1 and playerNumber <= NumberOfPlayers
 		end
 		StartActionPhase
 			require InActionPhase = false and InBuyPhase = false

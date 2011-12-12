@@ -320,6 +320,29 @@
         }
 
         /// <summary>
+        /// Takes all the cards in the players hand and in the played zone, and puts them in the discard pile. Then draws five cards.
+        /// </summary>
+        public void CleanUp()
+        {
+            foreach (Card card in hand)
+            {
+                discard.Push(card);
+                hand.Remove(card);
+            }
+
+            foreach (Card card in played)
+            {
+                discard.Push(card);
+                played.Remove(card);
+            }
+
+            for (int i = 1; i < 5; i++)
+            {
+                DrawCard();
+            }
+        }
+
+        /// <summary>
         /// A card cannot be in the DECK, DISCARD, HAND or PLAYED zones of a player 
         /// if it is not in the 'ALL CARDS'.
         /// </summary>

@@ -98,8 +98,8 @@ namespace BDSADominion
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (CardSprite)) return false;
-            return Equals((CardSprite) obj);
+            if (obj.GetType() != typeof(CardSprite)) return false;
+            return Equals((CardSprite)obj);
         }
 
         internal bool Equals(CardSprite other)
@@ -113,7 +113,7 @@ namespace BDSADominion
         {
             unchecked
             {
-                return (CardRef.GetHashCode()*397) ^ Index;
+                return (CardRef.GetHashCode() * 397) ^ Index;
             }
         }
     }
