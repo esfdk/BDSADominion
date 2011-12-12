@@ -34,6 +34,30 @@
         private Player activePlayer;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Gamestate"/> class.
+        /// </summary>
+        /// <param name="numberOfPlayers">
+        /// The number of players in the game.
+        /// </param>
+        /// <param name="startSupply">
+        /// The start supply of the Dominion game.
+        /// </param>
+        public Gamestate(uint numberOfPlayers, Dictionary<CardName, uint> startSupply)
+        {
+            Players = new List<Player>();
+            for (uint i = 1; i < numberOfPlayers; i++)
+            {
+                Players.Add(new Player(i));
+            }
+
+            Supply = new Dictionary<CardName, uint>();
+            foreach (CardName cn in startSupply.Keys)
+            {
+                Supply.Add(cn, startSupply[cn]);
+            }
+        }
+
+        /// <summary>
         /// Gets the Players in the game.
         /// </summary>
         public List<Player> Players { get; private set; }
@@ -217,7 +241,7 @@
             Contract.Requires(Players.Contains(player));
             Contract.Requires(Supply[card] != 0);
 
-            // TODO: Ensures Contract.Ensures();
+            Contract.Ensures(player.TopOfDiscard.Name == card);
 
             player.AddCardToZone(CardFactory.CreateCard(card), Zone.Discard);
             Supply[card]--;
