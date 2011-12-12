@@ -10,11 +10,18 @@ namespace BDSADominion.GUI
     /// <summary>
     /// This class holds the information for the representation of cards.
     /// </summary>
-    public class CardSprite
+    internal class CardSprite
     {
         ////public CardName Card { get; private set; }
 
-        public Card cardRef { get; private set; }
+        internal CardName CardRef { get; private set; }
+
+        internal int Index { get; private set; }
+
+        /// <summary>
+        /// Gets or sets isclicked
+        /// </summary>
+        internal bool Clicked { get; set; }
 
         /// <summary>
         /// The texture for the front of the card
@@ -24,14 +31,16 @@ namespace BDSADominion.GUI
         /// <summary>
         /// Initializes a new instance of the <see cref="CardSprite"/> class.
         /// </summary>
-        public CardSprite(Card card)
+        public CardSprite(CardName card, int index)
         {
+            Index = index;
+            CardRef = card;
             Clicked = false;
             ////position = Vector2.Zero;
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
             ////CardName = cardenum;
             ////Id = id;
-            this.cardFront = GUIConstants.cardImages[card.Name];
+            this.cardFront = GUIConstants.cardImages[CardRef];
         }
 
         /// <summary>
@@ -60,11 +69,6 @@ namespace BDSADominion.GUI
         /// Gets or sets rectangle size which holds the image of the card.
         /// </summary>
         ////public Rectangle Rectangle { get; set; }
-
-        /// <summary>
-        /// Gets or sets isclicked
-        /// </summary>
-        internal bool Clicked { get; set; }
 
         /// <summary>
         /// the draw method of card

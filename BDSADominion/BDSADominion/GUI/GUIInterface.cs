@@ -1,4 +1,5 @@
-﻿using BDSADominion.Gamestate.Card_Types;
+﻿using BDSADominion.Gamestate;
+using BDSADominion.Gamestate.Card_Types;
 using BDSADominion.Networking;
 
 namespace BDSADominion.GUI
@@ -26,6 +27,9 @@ namespace BDSADominion.GUI
 
             game = new GameClass();
             game.Run();
+
+            game.discardZone.AddCard(new CardSprite(CardName.Empty));
+            game.deckZone.AddCard(new CardSprite(CardName.Backside));
         }
 
         //public DrawHand(List<Card> ) TODO

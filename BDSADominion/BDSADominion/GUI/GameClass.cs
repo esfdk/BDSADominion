@@ -173,9 +173,6 @@ namespace BDSADominion.GUI
                 }
             }
 
-            discardZone.AddCard(new CardSprite(CardName.Empty, 1));
-            deckZone.AddCard(new CardSprite(CardName.Backside, 1));
-
             /*handZone.AddCards(
                 new List<CardSprite>() { new CardSprite(new Card()), new CardSprite(CardName.Gardens) });*/
             supplyZone.AddCards(
