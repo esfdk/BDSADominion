@@ -1,4 +1,6 @@
-﻿namespace BDSADominion.Networking
+﻿using System;
+
+namespace BDSADominion.Networking
 {
     using System.Linq;
     using System.Net;
@@ -48,6 +50,7 @@
 
         private void EmptyResponses()
         {
+            Console.WriteLine("Emptying messages");
             for (int i = 0; i < responseMessages.Length; i++)
             {
                 responseMessages[i] = string.Empty;
