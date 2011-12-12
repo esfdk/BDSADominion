@@ -53,6 +53,13 @@ namespace BDSADominion.GUI
             Console.WriteLine("Host Started");
             network = new NetworkingInterface();
             Console.WriteLine(network.GetServerIp());
+
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                network.TurnMessage(input);
+            }
         }
 
         static void runClient()
@@ -78,7 +85,12 @@ namespace BDSADominion.GUI
             network.MessageReceived += MessageRecieved;
 
 
-            while(true);
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                network.TurnMessage(input);
+            }
             
         }
 
