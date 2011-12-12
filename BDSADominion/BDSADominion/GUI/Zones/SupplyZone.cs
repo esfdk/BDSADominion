@@ -1,6 +1,6 @@
 ﻿﻿using BDSADominion.Gamestate;
 
-namespace BDSADominion
+namespace BDSADominion.GUI
 {
     using System;
     using System.Collections.Generic;
@@ -24,11 +24,6 @@ namespace BDSADominion
         private Vector2 offset = new Vector2(0, 35); //TODO Move to GUIConstants
 
         /// <summary>
-        /// touchrectangle.
-        /// </summary>
-        ////private Rectangle touchRect;
-
-        /// <summary>
         /// The starting position of the hand
         /// </summary>
         private Vector2 startPosition = new Vector2(1150, 50); //TODO Move to GUIConstants
@@ -36,9 +31,6 @@ namespace BDSADominion
         /// <summary>
         /// Initializes a new instance of the <see cref="HandZone"/> class.
         /// </summary>
-        /// <param name="topmostleftlocation">
-        /// The topmostleftlocation.
-        /// </param>
         internal SupplyZone()
         {
             TouchRect = new Rectangle(
@@ -49,11 +41,6 @@ namespace BDSADominion
         /// Gets or sets TouchRect.
         /// </summary>
         internal Rectangle TouchRect { get; private set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether Clicked.
-        /// </summary>
-        ////public bool Clicked { get; set; }
 
         /*public CardSprite RemoveCard(Cardmember cardmember, int id)
         {
@@ -82,14 +69,24 @@ namespace BDSADominion
             Supply.Add(newButtonSprite);
         }
 
+        //TODO: Contract: on return: hand is empty
+        public void ClearSupply()
+        {
+            foreach (ButtonSprite button in Supply)
+            {
+                Supply.Remove(button);
+            }
+        }
+
         /// <summary>
         /// Adds a list of cards to hand.
         /// </summary>
         /// <param name="buttons">
         /// The cards.
         /// </param>
-        internal void AddCards(List<CardName> buttons)
+        internal void NewCards(List<CardName> buttons)
         {
+            ClearSupply();
             foreach (CardName button in buttons)
             {
                 AddCard(new ButtonSprite(button));
@@ -119,8 +116,7 @@ namespace BDSADominion
             }
         }
 
-
-        internal bool isClickWithinHand(int mouseX, int mouseY)
+        internal bool isClickWithin(int mouseX, int mouseY)
         {
             return TouchRect.Contains(mouseX, mouseY);
         }
@@ -137,8 +133,8 @@ namespace BDSADominion
         /// <returns>
         /// The find card by mouse click.
         /// </returns>
-        internal CardName FindCardByMouseClick(int mouseX, int mouseY, SpriteBatch spriteBatch, SpriteFont font)
-        { //TODO Contract: isClickWithinHand(int mouseX, int mouseY) must be true
+        internal CardName FindCardByMouseClick(int mouseY)
+        { //TODO Contract: isClickWithinSupply(int mouseX, int mouseY) must be true
             int clickedIndex = ClickedIndex(mouseY);
             int count = 0;
             foreach (ButtonSprite card in Supply)
@@ -150,7 +146,7 @@ namespace BDSADominion
                 count++;
             }
             
-        return CardName.Empty; //TODO
+            return CardName.Empty; //TODO
         }
             
         private int ClickedIndex(int mouseY)

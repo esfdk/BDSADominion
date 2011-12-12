@@ -1,10 +1,7 @@
-﻿using BDSADominion.Gamestate;
-
-namespace BDSADominion
+﻿namespace BDSADominion.GUI
 {
-    using System.Collections.Generic;
-    using Microsoft.Xna.Framework.Graphics;
-
+    using Gamestate;
+    
     public class GUIConstants
     {
         //public static CardSprite Empty = new CardSprite(CardName.Empty, -1);
@@ -16,12 +13,16 @@ namespace BDSADominion
         //public static Dictionary<CardName, Texture2D> buttonImages = new Dictionary<CardName, Texture2D>();
     }
 
-    internal delegate void PressedSupplyCard(CardName pressedCard);
+    public delegate void ReturnSupplyHandler(CardName pressedCard);
 
-    public delegate void PressedHandIndex(int index);
+    internal delegate void PressedSupplyHandler(CardName pressedCard);
 
-    internal delegate void PressedHandCard(CardSprite card);
+    public delegate void ReturnHandHandler(int index);
 
-    internal delegate void PressedEndPhase();
+    internal delegate void PressedHandHandler(CardSprite card);
+
+    public delegate void ReturnEndPhaseHandler();
+
+    internal delegate void PressedEndPhaseHandler();
 }
 

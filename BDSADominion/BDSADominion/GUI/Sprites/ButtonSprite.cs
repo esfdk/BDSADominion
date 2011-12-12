@@ -1,4 +1,4 @@
-﻿namespace BDSADominion
+﻿namespace BDSADominion.GUI
 {
     using Gamestate;
     using Microsoft.Xna.Framework;

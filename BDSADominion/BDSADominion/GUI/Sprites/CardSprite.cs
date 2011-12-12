@@ -1,8 +1,6 @@
-﻿using BDSADominion.Gamestate;
-
-namespace BDSADominion
+﻿namespace BDSADominion.GUI
 {
-
+    using Gamestate;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
@@ -39,7 +37,7 @@ namespace BDSADominion
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
             ////CardName = cardenum;
             ////Id = id;
-            this.cardFront = GameClass.cardImages[CardRef];
+            cardFront = GameClass.cardImages[CardRef];
         }
 
         /// <summary>

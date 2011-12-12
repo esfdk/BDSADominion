@@ -128,11 +128,17 @@ namespace BDSADominion.GUI
 
         private MouseState currentMouseState;
 
-        private MouseState lastMouseState;
+        private MouseState lastMouseState; 
+        
+        public static CardSprite Empty;
+        public static CardSprite Back;
 
         public static Dictionary<CardName, Texture2D> cardImages = new Dictionary<CardName, Texture2D>();
-
         public static Dictionary<CardName, Texture2D> buttonImages = new Dictionary<CardName, Texture2D>();
+
+        internal event PressedHandHandler HandCardClicked;
+        internal event PressedSupplyHandler SupplyCardClicked;
+        internal event PressedEndPhaseHandler EndPhaseClicked;
 
         #endregion
 
@@ -168,7 +174,6 @@ namespace BDSADominion.GUI
         /// </summary>
         protected override void LoadContent()
         {
-
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -184,7 +189,6 @@ namespace BDSADominion.GUI
             turn = false;
             phase = false;
 
-
             foreach (CardName card in Enum.GetValues(typeof(CardName)))
             {
                 string content = card.ToString().ToUpper();
@@ -197,17 +201,20 @@ namespace BDSADominion.GUI
             {
                 if (card != CardName.Empty & card != CardName.Backside)
                 {
-                    // string content = card.ToString().ToUpper();
                     string contentLocation = string.Format("Supply\\{0}", card);
                     Texture2D cardTexture = Content.Load<Texture2D>(contentLocation);
                     buttonImages.Add(card, cardTexture);
                 }
             }
+
+            Empty = new CardSprite(CardName.Empty, -1);
+            Back = new CardSprite(CardName.Backside, -1);
+
             ////TEST ZONE:
-            handZone.AddCards(
-                new List<CardSprite>() { new CardSprite(CardName.Market, 1), new CardSprite(CardName.Gardens, 1) });
-            supplyZone.AddCards(
-                new List<CardName>() { CardName.Market, CardName.Gardens });
+            handZone.NewCards(
+                new List<CardSprite> { new CardSprite(CardName.Market, 1), new CardSprite(CardName.Gardens, 1) });
+            supplyZone.NewCards(
+                new List<CardName> { CardName.Market, CardName.Gardens });
         }
 
         /// <summary>
@@ -218,8 +225,6 @@ namespace BDSADominion.GUI
         {
             // TODO: Unload any non ContentManager content here
         }
-
-        internal event PressedHandCard HandCardClicked;
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -236,10 +241,17 @@ namespace BDSADominion.GUI
 
             if (currentMouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
             {
-                if (handZone.isClickWithinHand(mouseX, mouseY))
+                if (handZone.isClickWithin(mouseX, mouseY))
                 {
                     HandCardClicked(handZone.FindCardByMouseClick(mouseX));
                 }
+
+                if (supplyZone.isClickWithin(mouseX, mouseY))
+                {
+                    SupplyCardClicked(supplyZone.FindCardByMouseClick(mouseY));
+                }
+
+                //TODO EndPhaseButton
             }
 
             // Allows the game to exit

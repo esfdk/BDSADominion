@@ -1,6 +1,6 @@
 ﻿﻿using BDSADominion.Gamestate;
 
-namespace BDSADominion
+namespace BDSADominion.GUI
  {
 
      using Microsoft.Xna.Framework;
@@ -29,7 +29,6 @@ namespace BDSADominion
          /// </param>
          internal DeckZone()
          {
-
          }
 
          /// <summary>

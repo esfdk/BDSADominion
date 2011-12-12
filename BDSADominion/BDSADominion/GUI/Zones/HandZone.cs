@@ -1,6 +1,6 @@
 ﻿﻿using BDSADominion.Gamestate;
 
-namespace BDSADominion
+namespace BDSADominion.GUI
  {
      using System;
      using System.Collections.Generic;
@@ -92,13 +92,14 @@ namespace BDSADominion
          }
 
          /// <summary>
-         /// Adds a list of cards to hand.
+         /// Sets a list of cards as the hand.
          /// </summary>
          /// <param name="cards">
          /// The cards.
          /// </param>
-         internal void AddCards(List<CardSprite> cards)
+         internal void NewCards(List<CardSprite> cards)
          {
+             ClearHand();
              foreach (CardSprite card in cards)
              {
                  AddCard(card);
@@ -128,7 +129,7 @@ namespace BDSADominion
              }
          }
 
-         internal bool isClickWithinHand(int mouseX, int mouseY)
+         internal bool isClickWithin(int mouseX, int mouseY)
          {
              return TouchRect.Contains(mouseX, mouseY);
          }

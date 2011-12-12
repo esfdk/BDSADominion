@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using BDSADominion.Gamestate;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace BDSADominion
+namespace BDSADominion.GUI
 {
 #if WINDOWS || XBOX
     static class Program

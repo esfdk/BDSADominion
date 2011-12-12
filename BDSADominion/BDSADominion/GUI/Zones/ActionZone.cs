@@ -1,7 +1,7 @@
 ﻿﻿using System.Linq;
 ﻿using BDSADominion.Gamestate;
 
-namespace BDSADominion
+namespace BDSADominion.GUI
  {
      using System;
      using System.Collections.Generic;
