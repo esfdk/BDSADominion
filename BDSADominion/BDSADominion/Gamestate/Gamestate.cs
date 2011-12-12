@@ -217,7 +217,7 @@
             Contract.Requires(Players.Contains(player));
             Contract.Requires(Supply[card] != 0);
 
-
+            // TODO: Ensures Contract.Ensures();
 
             player.AddCardToZone(CardFactory.CreateCard(card), Zone.Discard);
             Supply[card]--;
