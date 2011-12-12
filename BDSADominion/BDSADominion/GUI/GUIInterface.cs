@@ -120,22 +120,23 @@ namespace BDSADominion.GUI
 
         public void EndGame(int playerId)
         {
-            //TODO
+            game.winnerNum = playerId;
+            game.endOfGame = true;
         }
 
         public void YourTurn(bool yourTurn)
         {
-            //TODO
+            game.turn = yourTurn;
         }
 
         public void SetPhase(int phase)
         {
-            //TODO
+            game.phase = phase;
         }
 
         public void UsedCards(CardName[] cards)
         {
-            //TODO
+            game.supplyZone.NewCards(cards.ToList());
         }
     }
 }

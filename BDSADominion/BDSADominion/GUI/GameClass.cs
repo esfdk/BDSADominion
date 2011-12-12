@@ -39,12 +39,12 @@ namespace BDSADominion.GUI
         /// <summary>
         /// Indicate player turn.
         /// </summary>
-        private bool turn;
+        internal bool turn;
 
         /// <summary>
         /// Indicate phase.
         /// </summary>
-        private bool phase;
+        internal int phase;
 
         /// <summary>
         /// indicate the players number.
@@ -74,12 +74,12 @@ namespace BDSADominion.GUI
         /// <summary>
         /// Indicates if games is over.
         /// </summary>
-        private bool endOfGame;
+        internal bool endOfGame;
 
         /// <summary>
         /// indicate the winer
         /// </summary>
-        private int winnerNum;
+        internal int winnerNum;
 
         /// <summary>
         /// The spritefont for WIN.
@@ -247,7 +247,7 @@ namespace BDSADominion.GUI
                     HandCardClicked(handZone.FindCardByMouseClick(mouseX));
                 }
 
-                if (supplyZone.isClickWithin(mouseX, mouseY))
+                if (supplyZone.IsClickWithin(mouseX, mouseY))
                 {
                     SupplyCardClicked(supplyZone.FindCardByMouseClick(mouseY));
                 }
@@ -311,11 +311,11 @@ namespace BDSADominion.GUI
             spriteBatch.DrawString(font, "Coins: " + coins.ToString(), new Vector2(800, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Player" + playernum.ToString(), new Vector2(10, 32), Color.RoyalBlue);
             spriteBatch.DrawString(font, turn ? "Your turn   -" : "Not your turn", new Vector2(10, 10), Color.RoyalBlue);
-            if (turn && !phase)
+            if (turn && phase == 0)
             {
                 spriteBatch.DrawString(font, "Action phase", new Vector2(163, 10), Color.RoyalBlue);
             }
-            if (turn && phase)
+            if (turn && phase == 1)
             {
                 spriteBatch.DrawString(font, "Buy phase", new Vector2(163, 10), Color.RoyalBlue);
             }

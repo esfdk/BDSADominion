@@ -1,6 +1,4 @@
-﻿﻿using BDSADominion.Gamestate;
-
-namespace BDSADominion.GUI
+﻿﻿namespace BDSADominion.GUI
  {
      using System;
      using System.Collections.Generic;

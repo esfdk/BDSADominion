@@ -116,7 +116,7 @@ namespace BDSADominion.GUI
             }
         }
 
-        internal bool isClickWithin(int mouseX, int mouseY)
+        internal bool IsClickWithin(int mouseX, int mouseY)
         {
             return TouchRect.Contains(mouseX, mouseY);
         }
