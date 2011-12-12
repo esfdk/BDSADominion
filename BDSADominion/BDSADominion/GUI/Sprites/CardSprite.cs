@@ -41,7 +41,7 @@
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
             CardMember = cardenum;
             Id = id;
-            this.cardFront = GUIConstants.cardimage[cardenum];
+            this.cardFront = GUIConstants.cardImages[cardenum];
         }
 
         /// <summary>

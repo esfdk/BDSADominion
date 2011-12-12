@@ -7,10 +7,6 @@
         GARDENS,
         EMPTY,
         BACKSIDE,
-    }
-
-    public enum Buttonmember
-    {
         Moat,
         Village,
         Smithy,

@@ -53,21 +53,21 @@
          /// </summary>
          ////public bool Clicked { get; set; }
 
-         public ButtonSprite RemoveCard(Buttonmember buttonmember, int id)
+         /*public CardSprite RemoveCard(Cardmember cardmember, int id)
          {
-             foreach (ButtonSprite button in supply)
+             foreach (ButtonSprite card in supply)
              {
-                 if (button.Id == id & button.ButtonMember == buttonmember)
+                 if (card.Id == id & card.CardMember == cardmember)
                  {
-                     bool success = supply.Remove(button);
+                     bool success = supply.Remove(card);
                      if (success)
                      {
-                         return button;
+                         return card;
                      }
                  }
              }
              return null;
-         }
+         }*/
 
          /// <summary>
          /// Add one card to the hand.
@@ -86,11 +86,11 @@
          /// <param name="buttons">
          /// The cards.
          /// </param>
-         public void AddCards(List<ButtonSprite> buttons)
+         public void AddCards(List<CardSprite> cards)
          {
-             foreach (ButtonSprite button in buttons)
+             foreach (CardSprite card in cards)
              {
-                 supply.Add(button);
+                 supply.Add(new ButtonSprite(card.CardMember));
              }
          }
 
@@ -106,11 +106,11 @@
              {
                  Vector2 currentPosition = startPosition;
 
-                 foreach (ButtonSprite button in supply)
+                 foreach (ButtonSprite card in supply)
                  {
-                     if (button != null)
+                     if (card != null)
                      {
-                         button.Draw(spriteBatch, currentPosition);
+                         card.Draw(spriteBatch, currentPosition);
                          currentPosition += offset;
                      }
                  }
@@ -129,23 +129,23 @@
          /// <returns>
          /// The find card by mouse click.
          /// </returns>
-         public ButtonSprite FindCardByMouseClick(int mouseX, int mouseY)
+         public CardSprite FindCardByMouseClick(int mouseX, int mouseY, SpriteBatch spriteBatch, SpriteFont font)
          {
              //Rectangle mouseRect = new Rectangle(mouseX, mouseY, 1, 1);
              if (TouchRect.Contains(mouseX, mouseY))
              {
 
-                 int mouseCardX = mouseX - (int)this.startPosition.X;
-                 float clickedValue = mouseCardX / this.offset.X;
-                 float clickedInto = (mouseCardX % this.offset.X) / offset.X;
+                 int mouseCardY = mouseY - (int)this.startPosition.Y;
+                 float clickedValue = mouseCardY / this.offset.Y;
+                 float clickedInto = (mouseCardY % this.offset.Y) / offset.Y;
 
                  int clickedIndex = (int)Math.Round(clickedValue - clickedInto);
                  int count = 0;
-                 foreach (ButtonSprite button in supply)
+                 foreach (ButtonSprite card in supply)
                  {
                      if (clickedIndex == count)
                      {
-                         return button;
+                         return new CardSprite(card.CardMember, 10);
                      }
                      count++;
                  }
