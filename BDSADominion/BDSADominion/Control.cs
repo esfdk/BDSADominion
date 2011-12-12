@@ -279,7 +279,7 @@
 
             if (card is Action)
             {
-                CardPlayed(clientPlayerNumber, handIndex);
+                CardPlayed(handIndex);
             }
             else
             {
