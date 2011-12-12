@@ -38,11 +38,11 @@ namespace BDSADominion.GUI
             game.Run();
         }
 
-        public event ReturnHandHandler CardInHandPressed;
+        public event IndexHandler CardInHandPressed;
 
-        public event ReturnSupplyHandler BuyAttempt;
+        public event CardNameHandler BuyAttempt;
 
-        public event ReturnEndPhaseHandler EndPhasePressed;
+        public event ClickHandler EndPhasePressed;
 
         void HandCardToControl(CardSprite card)
         {

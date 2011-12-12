@@ -13,16 +13,12 @@
         //public static Dictionary<CardName, Texture2D> buttonImages = new Dictionary<CardName, Texture2D>();
     }
 
-    public delegate void ReturnSupplyHandler(CardName pressedCard);
+    public delegate void CardNameHandler(CardName pressedCard);
 
-    internal delegate void PressedSupplyHandler(CardName pressedCard);
+    public delegate void IndexHandler(int index);
 
-    public delegate void ReturnHandHandler(int index);
+    public delegate void CardSpriteHandler(CardSprite card);
 
-    internal delegate void PressedHandHandler(CardSprite card);
-
-    public delegate void ReturnEndPhaseHandler();
-
-    internal delegate void PressedEndPhaseHandler();
+    public delegate void ClickHandler();
 }
 

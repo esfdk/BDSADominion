@@ -50,11 +50,6 @@ namespace BDSADominion.GUI
          /// </summary>
          internal Rectangle TouchRect { get; private set; }
 
-         /// <summary>
-         /// Gets or sets a value indicating whether Clicked.
-         /// </summary>
-         ////public bool Clicked { get; set; }
-
          /*private CardSprite RemoveCard(CardName card, int index)
          {
              foreach (CardSprite checkedCard in hand)
