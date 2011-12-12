@@ -8,6 +8,6 @@
     /// </author>
     public enum Zone
     {
-        Deck, Discard, Hand, Supply, Trash, Played
+        Deck, Discard, Hand, Played, Supply, Trash
     }
 }
