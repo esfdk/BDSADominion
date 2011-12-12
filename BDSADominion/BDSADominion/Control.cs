@@ -347,5 +347,22 @@
         }
 
         #endregion
+
+        #region Delegates
+
+        /// <summary>
+        /// Delegates used for the 
+        /// </summary>
+        /// <param name="message">
+        /// The message received from the server.
+        /// </param>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        private void MessageFromServer(string message, int sender)
+        {
+
+        }
+        #endregion
     }
 }
