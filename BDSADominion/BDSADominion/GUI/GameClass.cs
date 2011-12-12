@@ -187,7 +187,7 @@ namespace BDSADominion.GUI
             playernum = 0;
             winnerNum = 0;
             turn = false;
-            phase = false;
+            phase = 0;
             endOfGame = false;
 
             foreach (CardName card in Enum.GetValues(typeof(CardName)))

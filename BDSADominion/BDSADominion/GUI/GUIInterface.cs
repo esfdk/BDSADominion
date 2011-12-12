@@ -26,9 +26,8 @@ namespace BDSADominion.GUI
             game.SupplyCardClicked += SupplyAttemptToControl;
             game.EndPhaseClicked += EndPhaseToControl;
             CardInHandPressed += HandPressed;
-            BuyAttempt += 
-
-            
+            BuyAttempt += SupplyPressed;
+            EndPhasePressed += PhaseEndPressed;
 
             RunGame();
         }
@@ -65,12 +64,17 @@ namespace BDSADominion.GUI
         //Unnessecary //TODO
         void HandPressed(int index)
         {
-            Console.WriteLine("TROLOLO pressed " + index);
+            Console.WriteLine("Pressed index {0} in Hand", index);
         }
 
         void SupplyPressed(CardName card)
         {
-            Console.WriteLine("TROLOLO pressed " + card);
+            Console.WriteLine("Pressed {0} in Supply", card);
+        }
+
+        void PhaseEndPressed()
+        {
+            Console.WriteLine("EndPhase has been pressed");
         }
 
         public void DrawHand(Card[] cards)
