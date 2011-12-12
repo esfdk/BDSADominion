@@ -181,8 +181,10 @@ namespace BDSADominion.GUI
             buys = 0;
             coins = 0;
             playernum = 0;
+            winernum = 0;
             turn = false;
             phase = false;
+            endofgame = false;
 
 
             foreach (CardName card in Enum.GetValues(typeof(CardName)))
@@ -289,12 +291,12 @@ namespace BDSADominion.GUI
             discardZone.Draw(spriteBatch);
             deckZone.Draw(spriteBatch);
             supplyZone.Draw(spriteBatch);
-            spriteBatch.Draw(endphasebutton, new Vector2(300, 300), Color.White);
+            spriteBatch.Draw(endphasebutton, new Vector2(185, 340), Color.White);
             spriteBatch.Draw(cursor, new Vector2(mouseX, mouseY), Color.White);
             spriteBatch.DrawString(font, "Actions: " + actions.ToString(), new Vector2(400, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Buys: " + buys.ToString(), new Vector2(600, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Coins: " + coins.ToString(), new Vector2(800, 15), Color.RoyalBlue);
-            spriteBatch.DrawString(font, "Player" + playernum.ToString(), new Vector2(500, 500), Color.RoyalBlue);
+            spriteBatch.DrawString(font, "Player" + playernum.ToString(), new Vector2(10, 32), Color.RoyalBlue);
             spriteBatch.DrawString(font, turn == true ? "Your turn   -" : "Not your turn", new Vector2(10, 10), Color.RoyalBlue);
             if (turn == true && phase == false)
             {
@@ -307,11 +309,11 @@ namespace BDSADominion.GUI
 
             if (endofgame == true && playernum == winernum)
             {
-                spriteBatch.DrawString(fontWin, "YOU ARE THE WINER CONGRATULATIONS", new Vector2(450, 330), Color.Indigo);
+                spriteBatch.DrawString(fontWin, "YOU ARE THE WINER \n CONGRATULATIONS", new Vector2(200, 220), Color.Indigo);
             }
             if (endofgame == true && playernum != winernum)
             {
-                spriteBatch.DrawString(fontWin, "YOU LOOSE, NOW TAKE YOUR CRUSED SOUL AND GO AWAY", new Vector2(450, 330), Color.Indigo);
+                spriteBatch.DrawString(fontWin, "YOU LOOSE, NOW TAKE YOUR CRUSED SOUL AND GO AWAY", new Vector2(200, 220), Color.Indigo);
             }
 
             spriteBatch.End();
