@@ -22,17 +22,17 @@ namespace BDSADominion
         /// <summary>
         /// Number of actions left.
         /// </summary>
-        private int actions;
+        internal int actions;
 
         /// <summary>
         /// Number of buys left.
         /// </summary>
-        private int buys;
+        internal int buys;
 
         /// <summary>
         /// Number of extra coins.
         /// </summary>
-        private int coins;
+        internal int coins;
 
         /// <summary>
         /// mouse x coordinat.
@@ -57,27 +57,27 @@ namespace BDSADominion
         /// <summary>
         /// The discardsprite.
         /// </summary>
-        private DiscardZone discardZone;
+        internal DiscardZone discardZone;
 
         /// <summary>
         /// The Decksprite.
         /// </summary>
-        private DeckZone deckZone;
+        internal DeckZone deckZone;
 
         /// <summary>
         /// The ActionZone.
         /// </summary>
-        private ActionZone actionZone;
+        internal ActionZone actionZone;
 
         /// <summary>
         /// The handzone.
         /// </summary>
-        private HandZone handZone;
+        internal HandZone handZone;
 
         /// <summary>
         /// The supplyzone.
         /// </summary>
-        private SupplyZone supplyZone;
+        internal SupplyZone supplyZone;
 
         /// <summary>
         /// The playing table.
@@ -120,9 +120,8 @@ namespace BDSADominion
             discardZone = new DiscardZone();
             deckZone = new DeckZone();
             supplyZone = new SupplyZone();
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 600;
+            graphics = new GraphicsDeviceManager(this)
+                           {PreferredBackBufferWidth = 1280, PreferredBackBufferHeight = 600};
             Content.RootDirectory = "Content";
         }
 

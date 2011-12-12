@@ -1,4 +1,6 @@
-﻿﻿namespace BDSADominion
+﻿﻿using BDSADominion.GUI;
+
+namespace BDSADominion
  {
      using System;
      using System.Collections.Generic;
@@ -67,6 +69,15 @@
                  }
              }
              return null;
+         }
+
+         //TODO: Contract: on return: hand is empty
+         public void ClearHand()
+         {
+             foreach (CardSprite card in hand)
+             {
+                 hand.Remove(card);
+             }
          }
 
          /// <summary>

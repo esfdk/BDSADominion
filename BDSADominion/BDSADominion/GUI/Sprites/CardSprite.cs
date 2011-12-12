@@ -1,4 +1,6 @@
-﻿namespace BDSADominion
+﻿using BDSADominion.Gamestate.Card_Types;
+
+namespace BDSADominion.GUI
 {
 
     using Microsoft.Xna.Framework;
@@ -11,7 +13,7 @@
     {
         public Cardmember CardMember { get; private set; }
 
-        public int Id { get; private set; }
+        public Card cardRef { get; private set; }
 
         /// <summary>
         /// The texture for the front of the card

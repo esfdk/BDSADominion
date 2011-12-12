@@ -43,6 +43,8 @@
             int currentNumberOfPlayers = GetClientList().Count;
             SystemMessage(string.Format("<YPN{0}>", connection.Id), connection);
             SystemMessage(string.Format("<CP{0}>", currentNumberOfPlayers));
+
+            return true; // TODO What?
         }
 
         public event ConnectedClientHandler ClientConnectedEvent;
@@ -134,6 +136,8 @@
         {
             Console.WriteLine("Client {0} connected", conn.Id);
             conn.ReceivedMessageEvent += ServerRecievedMessage;
+
+            return true; // TODO What-what-what?!?
         }
 
         public List<Connection> GetClientList()
