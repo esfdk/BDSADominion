@@ -303,6 +303,20 @@
         }
 
         /// <summary>
+        /// Makes the player draw a specific amount of cards.
+        /// </summary>
+        /// <param name="amount">
+        /// The amount of cards to be drawn.
+        /// </param>
+        public void DrawCards(uint amount)
+        {
+            for (int i = 1; i < amount; i++)
+            {
+                DrawCard();
+            }
+        }
+
+        /// <summary>
         /// Draws a card from the deck into the hand.
         /// </summary>
         public void DrawCard()
@@ -336,10 +350,7 @@
                 played.Remove(card);
             }
 
-            for (int i = 1; i < 5; i++)
-            {
-                DrawCard();
-            }
+            DrawCards(5);
         }
 
         /// <summary>

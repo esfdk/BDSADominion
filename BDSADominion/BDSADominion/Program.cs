@@ -1,5 +1,3 @@
-using BDSADominion.GUI;
-
 namespace BDSADominion
 {
 #if WINDOWS || XBOX
@@ -10,7 +8,7 @@ namespace BDSADominion
         /// </summary>
         static void Main(string[] args)
         {
-            GUIInterface gui = new GUIInterface();
+            Control c = new Control();
         }
     }
 #endif

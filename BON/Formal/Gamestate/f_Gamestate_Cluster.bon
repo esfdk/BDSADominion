@@ -10,7 +10,7 @@ component
 		InBuyPhase : BOOLEAN
 		GetPhase : NATURAL
 		GetPlayers : SEQUENCE[PLAYER]
-		GetSupply : TABLE[CARD_NAME, INTEGER]
+		GetSupply : TABLE[CARD_NAME, NATURAL]
 		GetTrash : SEQUENCE[CARD]
 		NumberOfPlayers : NATURAL
 			ensure Result >= 2 and Result <= 4
@@ -20,7 +20,7 @@ component
 		NumberOfCoinsLeft : NATURAL
 		NewGamestate : GAMESTATE 
 			-> numberOfPlayers : NATURAL 
-			-> startSupply : TABLE[CARD_NAME, INTEGER]
+			-> startSupply : TABLE[CARD_NAME, NATURAL]
 			require numberOfPlayers >= 2 and numberOfPlayers <= 4
 		end
 		
