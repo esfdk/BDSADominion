@@ -208,7 +208,6 @@
 
             // TODO: Set GUI one-time stuff.
             UpdateGui();
-
         }
 
         /// <summary>
