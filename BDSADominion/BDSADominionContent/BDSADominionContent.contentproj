@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{B97FC7AF-06F7-44C4-BBFD-9E60A7B94FB4}</ProjectGuid>
@@ -56,6 +56,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Kingdom\BACKSIDE.png">
+      <Name>BACKSIDE</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Kingdom\EMPTY.png">
+      <Name>EMPTY</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Supply\Adventurer.png">
       <Name>Adventurer</Name>
       <Importer>TextureImporter</Importer>
@@ -86,11 +100,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Gardens.png">
-      <Name>Gardens</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Supply\Gold.png">
       <Name>Gold</Name>
       <Importer>TextureImporter</Importer>
@@ -98,11 +107,6 @@
     </Compile>
     <Compile Include="Supply\Laboratory.png">
       <Name>Laboratory</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Supply\Market.png">
-      <Name>Market</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -321,6 +325,25 @@
       <Name>WORKSHOP</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Supply\Garden.png">
+      <Name>Garden</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Supply\Markets.png">
+      <Name>Markets</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Fonts\Winfont.spritefont">
+      <Name>Winfont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
