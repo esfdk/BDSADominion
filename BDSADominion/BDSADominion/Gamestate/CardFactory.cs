@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Linq;
 
     using BDSADominion.Gamestate.Card_Types;
     using BDSADominion.Gamestate.Card_Types.Cards;
@@ -28,7 +29,7 @@
         /// <summary>
         /// All the cards created by the factory.
         /// </summary>
-        private static List<Card> createdCards = new List<Card>();
+        private static Dictionary<Card, bool> createdCards = new Dictionary<Card, bool>();
 
         /// <summary>
         /// Gets a value indicating whether set-up has already been performed.
@@ -38,7 +39,7 @@
         /// <summary>
         /// Gets CreatedCards.
         /// </summary>
-        public static List<Card> CreatedCards
+        public static Dictionary<Card, bool> CreatedCards
         {
             get { return createdCards; }
         }
@@ -73,8 +74,6 @@
         public static Card CreateCard(CardName card)
         {
             Contract.Ensures(Contract.Result<Card>().Name == card);
-            Contract.Ensures(Contract.OldValue(!CreatedCards.Contains(Contract.Result<Card>())));
-            Contract.Ensures(CreatedCards.Contains(Contract.Result<Card>()));
             Card c;
             switch (card)
             {
@@ -180,8 +179,34 @@
 
             c.Initialize(card, CardsMade[card]);
             CardsMade[card] += 1;
-            createdCards.Add(c);
+            createdCards.Add(c, true);
             return c;
+        }
+
+        /// <summary>
+        /// Makes sure a card cannot exist 
+        /// </summary>
+        [ContractInvariantMethod]
+        protected void ObjectInvariant()
+        {
+            Contract.Invariant(InvariantHelper());
+        }
+
+        /// <summary>
+        /// Helper method for the object invariant.
+        /// </summary>
+        /// <returns>
+        /// True, if invariant holds. False, if not.
+        /// </returns>
+        private static bool InvariantHelper()
+        {
+            if (CreatedCards.Keys.Any(card => CardsMade[card.Name] < card.Number))
+            {
+                return false;
+            }
+
+            // LINQ helped reduce this.
+            return !CardsMade.Keys.Any(cn => CreatedCards.Keys.Count(card => card.Name == cn) != CardsMade[cn]);
         }
     }
 }

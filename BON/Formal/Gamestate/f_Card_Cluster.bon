@@ -35,7 +35,8 @@ component
 			Result = "BUREAUCRAT" or Result = "FEAST" or Result = "GARDENS" or Result = "MILITIA" or 
 			Result = "MONEYLENDER" or Result = "REMODEL" or Result = "SMITHY" or Result = "SPY" or
 			Result = "THIEF" or Result = "THRONE_ROOM" or Result = "COUNCIL_ROOM" or Result = "FESTIVAL" or 
-			Result = "LABORATORY" or Result = "LIBRARY" or Result = "MARKET" or Result = "MINE" or Result = "WITCH"
+			Result = "LABORATORY" or Result = "LIBRARY" or Result = "MARKET" or Result = "MINE" or Result = "WITCH" or
+			Result = 'EMPTY' or Result = 'BACKSIDE'
 		end
 		--Commands
 	end
