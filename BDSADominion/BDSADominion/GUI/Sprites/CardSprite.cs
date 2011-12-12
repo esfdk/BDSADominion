@@ -1,5 +1,4 @@
 ﻿using BDSADominion.Gamestate;
-using BDSADominion.Gamestate.Card_Types;
 
 namespace BDSADominion.GUI
 {
@@ -40,7 +39,7 @@ namespace BDSADominion.GUI
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
             ////CardName = cardenum;
             ////Id = id;
-            this.cardFront = GUIConstants.cardImages[CardRef];
+            this.cardFront = GameClass.cardImages[CardRef];
         }
 
         /// <summary>
@@ -99,8 +98,8 @@ namespace BDSADominion.GUI
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (CardSprite)) return false;
-            return Equals((CardSprite) obj);
+            if (obj.GetType() != typeof(CardSprite)) return false;
+            return Equals((CardSprite)obj);
         }
 
         internal bool Equals(CardSprite other)
@@ -114,7 +113,7 @@ namespace BDSADominion.GUI
         {
             unchecked
             {
-                return (CardRef.GetHashCode()*397) ^ Index;
+                return (CardRef.GetHashCode() * 397) ^ Index;
             }
         }
     }
