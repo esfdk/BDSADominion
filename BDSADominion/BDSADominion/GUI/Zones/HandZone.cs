@@ -1,6 +1,6 @@
-﻿﻿using BDSADominion.GUI;
+﻿﻿using BDSADominion.Gamestate;
 
-namespace BDSADominion
+namespace BDSADominion.GUI
  {
      using System;
      using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace BDSADominion
      /// <summary>
      /// The class for the Handzone.
      /// </summary>
-     public class HandZone
+     internal class HandZone
      {
          /// <summary>
          /// The list of cards in the hand
@@ -21,7 +21,7 @@ namespace BDSADominion
          /// <summary>
          /// next card x-coor
          /// </summary>
-         private Vector2 offset = new Vector2(135, 0);
+         private Vector2 offset = new Vector2(135, 0); //TODO Move to GUIConstants
 
          /// <summary>
          /// touchrectangle.
@@ -31,7 +31,7 @@ namespace BDSADominion
          /// <summary>
          /// The starting position of the hand
          /// </summary>
-         private Vector2 startPosition = new Vector2(290, 375);
+         private Vector2 startPosition = new Vector2(290, 375); //TODO Move to GUIConstants
 
          /// <summary>
          /// Initializes a new instance of the <see cref="HandZone"/> class.
@@ -39,7 +39,7 @@ namespace BDSADominion
          /// <param name="topmostleftlocation">
          /// The topmostleftlocation.
          /// </param>
-         public HandZone()
+         internal HandZone()
          {
              TouchRect = new Rectangle(
                  (int)this.startPosition.X, (int)this.startPosition.Y, (int)(this.offset.X * 10), 218);
@@ -48,28 +48,28 @@ namespace BDSADominion
          /// <summary>
          /// Gets or sets TouchRect.
          /// </summary>
-         public Rectangle TouchRect { get; private set; }
+         internal Rectangle TouchRect { get; private set; }
 
          /// <summary>
          /// Gets or sets a value indicating whether Clicked.
          /// </summary>
          ////public bool Clicked { get; set; }
 
-         public CardSprite RemoveCard(Cardmember cardmember, int id)
+         /*private CardSprite RemoveCard(CardName card, int index)
          {
-             foreach (CardSprite card in hand)
+             foreach (CardSprite checkedCard in hand)
              {
-                 if (card.Id == id & card.Card == cardmember)
+                 if (card == checkedCard.CardRef & index == checkedCard.Index)
                  {
-                     bool success = hand.Remove(card);
+                     bool success = hand.Remove(checkedCard);
                      if (success)
                      {
-                         return card;
+                         return checkedCard;
                      }
                  }
              }
              return null;
-         }
+         }*/
 
          //TODO: Contract: on return: hand is empty
          public void ClearHand()
@@ -86,7 +86,7 @@ namespace BDSADominion
          /// <param name="newCardSprite">
          /// The new Card.
          /// </param>
-         public void AddCard(CardSprite newCardSprite)
+         internal void AddCard(CardSprite newCardSprite)
          {
              hand.Add(newCardSprite);
          }
@@ -97,11 +97,11 @@ namespace BDSADominion
          /// <param name="cards">
          /// The cards.
          /// </param>
-         public void AddCards(List<CardSprite> cards)
+         internal void AddCards(List<CardSprite> cards)
          {
              foreach (CardSprite card in cards)
              {
-                 hand.Add(card);
+                 AddCard(card);
              }
          }
 
@@ -111,7 +111,7 @@ namespace BDSADominion
          /// <param name="spriteBatch">
          /// The sprite Batch.
          /// </param>
-         public void Draw(SpriteBatch spriteBatch)
+         internal void Draw(SpriteBatch spriteBatch)
          {
              if (hand.Count > 0)
              {
@@ -128,6 +128,11 @@ namespace BDSADominion
              }
          }
 
+         internal bool isClickWithinHand(int mouseX, int mouseY)
+         {
+             return TouchRect.Contains(mouseX, mouseY);
+         }
+
          /// <summary>
          /// Returns the actual card clicked on 
          /// </summary>
@@ -140,29 +145,30 @@ namespace BDSADominion
          /// <returns>
          /// The find card by mouse click.
          /// </returns>
-         public CardSprite FindCardByMouseClick(int mouseX, int mouseY)
+         internal CardSprite FindCardByMouseClick(int mouseX)
          {
-             //Rectangle mouseRect = new Rectangle(mouseX, mouseY, 1, 1);
-             if (TouchRect.Contains(mouseX, mouseY))
+             int clickedIndex = ClickedIndex(mouseX);
+             int count = 0;
+             foreach (CardSprite card in hand)
              {
-
-                 int mouseCardX = mouseX - (int)this.startPosition.X;
-                 float clickedValue = mouseCardX / this.offset.X;
-                 float clickedInto = (mouseCardX % this.offset.X) / offset.X;
-
-                 int clickedIndex = (int)Math.Round(clickedValue - clickedInto);
-                 int count = 0;
-                 foreach (CardSprite card in hand)
+                 if (clickedIndex == count)
                  {
-                     if (clickedIndex == count)
-                     {
-                         return card;
-                     }
-                     count++;
+                     return card;
                  }
+                 count++;
              }
 
              return null; //TODO
+         }
+
+         private int ClickedIndex(int mouseX)
+         {
+             int mouseCardX = mouseX - (int) startPosition.X;
+             float clickedValue = mouseCardX/offset.X;
+             float clickedInto = (mouseCardX%offset.X)/offset.X;
+
+             int clickedIndex = (int) Math.Round(clickedValue - clickedInto);
+             return clickedIndex;
          }
      }
  }

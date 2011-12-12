@@ -1,4 +1,7 @@
-﻿﻿namespace BDSADominion.GUI
+﻿﻿using System.Linq;
+﻿using BDSADominion.Gamestate;
+
+namespace BDSADominion.GUI
  {
      using System;
      using System.Collections.Generic;
@@ -9,17 +12,17 @@
      /// <summary>
      /// The class for the Handzone.
      /// </summary>
-     public class ActionZone
+     internal class ActionZone
      {
          /// <summary>
          /// The list of cards in the hand
          /// </summary>
-         private List<CardSprite> action = new List<CardSprite>();
+         internal List<CardSprite> ActionCards = new List<CardSprite>();
 
          /// <summary>
          /// next card x-coor
          /// </summary>
-         private Vector2 offset = new Vector2(135, 0);
+         private Vector2 offset = new Vector2(135, 0); //TODO Move to GUIConstants
 
          /// <summary>
          /// touchrectangle.
@@ -29,69 +32,68 @@
          /// <summary>
          /// The starting position of the hand
          /// </summary>
-         private Vector2 startPosition = new Vector2(10, 50);
+         private Vector2 actionStartPosition = new Vector2(10, 50); //TODO Move to GUIConstants
 
          /// <summary>
-         /// Initializes a new instance of the <see cref="BDSADominion.ActionZone"/> class.
+         /// Initializes a new instance of the <see cref="ActionZone"/> class.
          /// </summary>
-         /// <param name="topmostleftlocation">
-         /// The topmostleftlocation.
-         /// </param>
-         public ActionZone()
+         internal ActionZone()
          {
              TouchRect = new Rectangle(
-                 (int)this.startPosition.X, (int)this.startPosition.Y, (int)(this.offset.X * 10), 218);
+                 (int)actionStartPosition.X, (int)actionStartPosition.Y, (int)(offset.X * 10), 218);
          }
 
          /// <summary>
          /// Gets or sets TouchRect.
          /// </summary>
-         public Rectangle TouchRect { get; private set; }
+         internal Rectangle TouchRect { get; private set; }
 
          /// <summary>
          /// Gets or sets a value indicating whether Clicked.
          /// </summary>
          ////public bool Clicked { get; set; }
 
-         public CardSprite RemoveCard(Cardmember cardmember, int id)
+         //TODO: Neccesary?
+         internal bool RemoveCard(CardSprite card)
          {
-             foreach (CardSprite card in action)
+             if (ActionCards.Any(card.Equals))
              {
-                 if (card.Id == id & card.Card == cardmember)
-                 {
-                     bool success = action.Remove(card);
-                     if (success)
-                     {
-                         return card;
-                     }
-                 }
+                 return ActionCards.Remove(card);
              }
-             return null;
+             return false;
          }
 
+         //TODO Contract assert empty
+         internal void Clear()
+         {
+             foreach (CardSprite card in ActionCards)
+             {
+                 ActionCards.Remove(card);
+             }
+         }
 
          /// <summary>
-         /// Add one card to the hand.
+         /// Add one card to the action zone.
          /// </summary>
          /// <param name="newCardSprite">
          /// The new Card.
          /// </param>
-         public void AddCard(CardSprite newCardSprite)
+         internal void AddCard(CardSprite newCardSprite)
          {
-             action.Add(newCardSprite);
+             ActionCards.Add(newCardSprite);
          }
 
          /// <summary>
-         /// Adds a list of cards to hand.
+         /// Adds a list of cards to the action zone.
          /// </summary>
          /// <param name="cards">
          /// The cards.
          /// </param>
-         public void AddCards(List<CardSprite> cards)
+         internal void AddCards(List<CardSprite> cards)
          {
              foreach (CardSprite card in cards)
              {
-                 action.Add(card);
+                 AddCard(card);
              }
          }
 
@@ -101,13 +103,13 @@
          /// <param name="spriteBatch">
          /// The sprite Batch.
          /// </param>
-         public void Draw(SpriteBatch spriteBatch)
+         internal void Draw(SpriteBatch spriteBatch)
          {
-             if (action.Count > 0)
+             if (ActionCards.Count > 0)
              {
-                 Vector2 currentPosition = startPosition;
+                 Vector2 currentPosition = actionStartPosition;
 
-                 foreach (CardSprite card in action)
+                 foreach (CardSprite card in ActionCards)
                  {
                      if (card != null)
                      {
@@ -130,18 +132,18 @@
          /// <returns>
          /// The find card by mouse click.
          /// </returns>
-         public CardSprite FindCardByMouseClick(int mouseX, int mouseY)
+         internal CardSprite FindCardByMouseClick(int mouseX, int mouseY)
          {
              //Rectangle mouseRect = new Rectangle(mouseX, mouseY, 1, 1);
              if (TouchRect.Contains(mouseX, mouseY))
              {
-                 int mouseCardX = mouseX - (int)this.startPosition.X;
+                 int mouseCardX = mouseX - (int)this.actionStartPosition.X;
                  float clickedValue = mouseCardX / this.offset.X;
                  float clickedInto = (mouseCardX % this.offset.X) / offset.X;
 
                  int clickedIndex = (int)Math.Round(clickedValue - clickedInto);
                  int count = 0;
-                 foreach (CardSprite card in action)
+                 foreach (CardSprite card in ActionCards)
                  {
                      if (clickedIndex == count)
                      {

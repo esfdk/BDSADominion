@@ -28,8 +28,17 @@ namespace BDSADominion.GUI
             game = new GameClass();
             game.Run();
 
-            game.discardZone.AddCard(new CardSprite(CardName.Empty));
-            game.deckZone.AddCard(new CardSprite(CardName.Backside));
+            game.discardZone.SetEmpty();
+            game.deckZone.SetFilled();
+
+            game.HandCardClicked += HandCardToControl;
+        }
+
+        public event PressedHandIndex CardInHandPressed;
+
+        void HandCardToControl(CardSprite card)
+        {
+            CardInHandPressed(card.Index);
         }
 
         //public DrawHand(List<Card> ) TODO

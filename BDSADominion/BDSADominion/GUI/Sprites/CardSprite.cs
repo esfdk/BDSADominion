@@ -31,7 +31,7 @@ namespace BDSADominion.GUI
         /// <summary>
         /// Initializes a new instance of the <see cref="CardSprite"/> class.
         /// </summary>
-        public CardSprite(CardName card, int index)
+        internal CardSprite(CardName card, int index)
         {
             Index = index;
             CardRef = card;
@@ -79,7 +79,7 @@ namespace BDSADominion.GUI
         /// <param name="position">
         /// The position.
         /// </param>
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        internal void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             /*
             spriteBatch.Draw(
@@ -93,6 +93,29 @@ namespace BDSADominion.GUI
                 SpriteEffects.None,
                 0);*/
             spriteBatch.Draw(cardFront, position, Color.White);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof (CardSprite)) return false;
+            return Equals((CardSprite) obj);
+        }
+
+        internal bool Equals(CardSprite other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(other.CardRef, CardRef) && other.Index == Index;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (CardRef.GetHashCode()*397) ^ Index;
+            }
         }
     }
 }
