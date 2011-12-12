@@ -130,6 +130,10 @@ namespace BDSADominion.GUI
 
         private MouseState lastMouseState;
 
+        public static Dictionary<CardName, Texture2D> cardImages = new Dictionary<CardName, Texture2D>();
+
+        public static Dictionary<CardName, Texture2D> buttonImages = new Dictionary<CardName, Texture2D>();
+
         #endregion
 
         /// <summary>
@@ -186,7 +190,7 @@ namespace BDSADominion.GUI
                 string content = card.ToString().ToUpper();
                 string contentLocation = string.Format("Kingdom\\{0}", content);
                 Texture2D cardTexture = Content.Load<Texture2D>(contentLocation);
-                GUIConstants.cardImages.Add(card, cardTexture);
+                cardImages.Add(card, cardTexture);
             }
 
             foreach (CardName card in Enum.GetValues(typeof(CardName)))
@@ -196,7 +200,7 @@ namespace BDSADominion.GUI
                     // string content = card.ToString().ToUpper();
                     string contentLocation = string.Format("Supply\\{0}", card);
                     Texture2D cardTexture = Content.Load<Texture2D>(contentLocation);
-                    GUIConstants.buttonImages.Add(card, cardTexture);
+                    buttonImages.Add(card, cardTexture);
                 }
             }
             ////TEST ZONE:
