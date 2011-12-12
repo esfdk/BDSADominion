@@ -9,9 +9,9 @@
     /// </summary>
     public class ButtonSprite
     {
-        public Buttonmember ButtonMember { get; private set; }
+        public Cardmember CardMember { get; private set; }
 
-        public int Id { get; private set; }
+        ////public int Id { get; private set; }
 
         /// <summary>
         /// The texture for the front of the card
@@ -34,14 +34,14 @@
         /// <param name="buttonenum">
         /// The cardenum.
         /// </param>
-        public ButtonSprite(Buttonmember buttonenum, int id)
+        public ButtonSprite(Cardmember cardenum)
         {
             Clicked = false;
             ////position = Vector2.Zero;
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
-            ButtonMember = buttonenum;
-            Id = id;
-            this.buttonFront = GUIConstants.buttonimage[buttonenum];
+            CardMember = cardenum;
+            //Id = id;
+            this.buttonFront = GUIConstants.buttonImages[cardenum];
         }
 
         /// <summary>
