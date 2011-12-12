@@ -135,16 +135,34 @@
         public void MoveFromZoneToTemporary(Zone zone)
         {
             Contract.Requires(zone == Zone.Deck | zone == Zone.Discard);
+            Contract.Requires(zone != Zone.Deck | !(DeckSize == 0 & DiscardSize == 0));
+            Contract.Requires(zone != Zone.Discard | DiscardSize != 0);
+
             Contract.Ensures(TempZone.Count == Contract.OldValue(TempZone.Count) + 1);
-            Contract.Ensures(zone != Zone.Deck || DeckSize == Contract.OldValue(DeckSize) - 1);
-            Contract.Ensures(zone != Zone.Discard || DiscardSize == Contract.OldValue(DiscardSize) - 1);
+            Contract.Ensures(zone != Zone.Deck | DeckSize == Contract.OldValue(DeckSize) - 1);
+            Contract.Ensures(zone != Zone.Discard | DiscardSize == Contract.OldValue(DiscardSize) - 1);
 
             switch (zone)
             {
                 case Zone.Deck:
+                    if (DeckSize == 0)
+                    {
+                        ShuffleDiscard();
+                    }
+
+                    if (DeckSize == 0)
+                    {
+                        break;
+                    }
+
                     temporary.Add(deck.Pop());
                     break;
                 case Zone.Discard:
+                    if (DiscardSize == 0)
+                    {
+                        break;
+                    }
+
                     temporary.Add(discard.Pop());
                     break;
             }
@@ -162,11 +180,13 @@
         public void MoveFromTemporaryToZone(Card card, Zone zone)
         {
             Contract.Requires(zone == Zone.Deck | zone == Zone.Discard | zone == Zone.Hand | zone == Zone.Played);
+            Contract.Requires(TempZone.Contains(card));
+
             Contract.Ensures(TempZone.Count == Contract.OldValue(TempZone.Count) - 1);
-            Contract.Ensures(zone != Zone.Deck || DeckSize == Contract.OldValue(DeckSize) + 1);
-            Contract.Ensures(zone != Zone.Discard || DiscardSize == Contract.OldValue(DiscardSize) + 1);
-            Contract.Ensures(zone != Zone.Hand || (Hand.Count == Contract.OldValue(Hand.Count) + 1) & Hand.Contains(card));
-            Contract.Ensures(zone != Zone.Played || (Played.Count == Contract.OldValue(Played.Count) + 1) & Played.Contains(card));
+            Contract.Ensures(zone != Zone.Deck | DeckSize == Contract.OldValue(DeckSize) + 1);
+            Contract.Ensures(zone != Zone.Discard | DiscardSize == Contract.OldValue(DiscardSize) + 1);
+            Contract.Ensures(zone != Zone.Hand | (Hand.Count == Contract.OldValue(Hand.Count) + 1) & Hand.Contains(card));
+            Contract.Ensures(zone != Zone.Played | (Played.Count == Contract.OldValue(Played.Count) + 1) & Played.Contains(card));
 
             switch (zone)
             {
@@ -204,14 +224,14 @@
 
             Contract.Ensures(AllCards[card]);
 
-            Contract.Ensures(zone != Zone.Hand || hand.Contains(card));
-            Contract.Ensures(zone != Zone.Hand || hand.Count == Contract.OldValue(hand.Count) + 1);
+            Contract.Ensures(zone != Zone.Hand | hand.Contains(card));
+            Contract.Ensures(zone != Zone.Hand | hand.Count == Contract.OldValue(hand.Count) + 1);
 
-            Contract.Ensures(zone != Zone.Played || played.Contains(card));
-            Contract.Ensures(zone != Zone.Played || played.Count == Contract.OldValue(played.Count) + 1);
+            Contract.Ensures(zone != Zone.Played | played.Contains(card));
+            Contract.Ensures(zone != Zone.Played | played.Count == Contract.OldValue(played.Count) + 1);
 
-            Contract.Ensures(zone != Zone.Deck || DeckSize == Contract.OldValue(DeckSize) + 1);
-            Contract.Ensures(zone != Zone.Discard || DiscardSize == Contract.OldValue(DiscardSize) + 1);
+            Contract.Ensures(zone != Zone.Deck | DeckSize == Contract.OldValue(DeckSize) + 1);
+            Contract.Ensures(zone != Zone.Discard | DiscardSize == Contract.OldValue(DiscardSize) + 1);
 
             AllCards.Add(card, true);
 
@@ -245,16 +265,22 @@
         {
             Contract.Requires(zone == Zone.Deck | zone == Zone.Discard | zone == Zone.Hand | zone == Zone.Played);
 
+            Contract.Requires(zone != Zone.Hand | hand.Contains(card));
+            Contract.Requires(zone != Zone.Played | Played.Contains(card));
+            Contract.Requires(zone != Zone.Deck | !(DeckSize == 0 & DiscardSize == 0));
+            Contract.Requires(zone != Zone.Discard | DiscardSize != 0);
+
             Contract.Ensures(!AllCards.ContainsKey(card));
 
-            Contract.Ensures(zone == Zone.Hand ? !hand.Contains(card)zone != Zone.Hand || !hand.Contains(card)));
-            Contract.Ensures(zone != Zone.Hand || hand.Count == Contract.OldValue(hand.Count) - 1);
+            Contract.Ensures(zone == Zone.Hand ? !hand.Contains(card) : true);
+            Contract.Ensures(zone != Zone.Hand | hand.Count == Contract.OldValue(hand.Count) - 1);
 
-            Contract.Ensures(zone != Zone.Played || !played.Contains(card));
-            Contract.Ensures(zone != Zone.Played || played.Count == Contract.OldValue(played.Count) - 1);
+            Contract.Ensures(zone != Zone.Played | !played.Contains(card));
+            Contract.Ensures(zone != Zone.Played | played.Count == Contract.OldValue(played.Count) - 1);
 
-            Contract.Ensures(zone != Zone.Deck || DeckSize == Contract.OldValue(DeckSize) - 1);
-            Contract.Ensures(zone != Zone.Discard || DiscardSize == Contract.OldValue(DiscardSize) - 1);
+            Contract.Ensures(zone != Zone.Deck | DeckSize == Contract.OldValue(DeckSize) - 1);
+            Contract.Ensures(zone != Zone.Discard | DiscardSize == Contract.OldValue(DiscardSize) - 1);
+
             switch (zone)
             {
                 case Zone.Deck:
@@ -267,7 +293,7 @@
                     break;
                 case Zone.Hand:
                     AllCards.Remove(card);
-                    hand.Add(card);
+                    hand.Remove(card);
                     break;
                 case Zone.Played:
                     AllCards.Remove(card);
@@ -277,11 +303,20 @@
         }
 
         /// <summary>
-        /// Shuffles the discard pile into the deck.
+        /// Draws a card from the deck into the hand.
         /// </summary>
-        private void ShuffleDeck()
+        public void DrawCard()
         {
+            Contract.Requires(!(DeckSize == 0 & DiscardSize == 0));
 
+            Contract.Ensures(hand.Count == Contract.OldValue(hand.Count) + 1);
+
+            if (DeckSize == 0)
+            {
+                ShuffleDiscard();
+            }
+
+            hand.Add(deck.Pop());
         }
 
         /// <summary>
@@ -336,6 +371,20 @@
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Shuffles the discard pile into the deck.
+        /// </summary>
+        private void ShuffleDiscard()
+        {
+            Contract.Requires(DeckSize == 0);
+
+            // TODO: Do better shuffling
+            while (discard.Count != 0)
+            {
+                deck.Push(discard.Pop());
+            }
         }
     }
 }

@@ -73,6 +73,7 @@
         /// </returns>
         public static Card CreateCard(CardName card)
         {
+            Contract.Requires(card != CardName.Backside & card != CardName.Empty);
             Contract.Ensures(Contract.Result<Card>().Name == card);
             Card c;
             switch (card)
