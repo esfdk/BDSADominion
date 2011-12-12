@@ -1,15 +1,15 @@
-﻿namespace BDSADominion
+﻿namespace BDSADominion.GUI
 {
-
+    using Gamestate;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
     /// <summary>
     /// This class holds the information for the representation of cards.
     /// </summary>
-    public class ButtonSprite
+    internal class ButtonSprite
     {
-        public Cardmember CardMember { get; private set; }
+        internal CardName Card { get; private set; }
 
         ////public int Id { get; private set; }
 
@@ -34,14 +34,14 @@
         /// <param name="buttonenum">
         /// The cardenum.
         /// </param>
-        public ButtonSprite(Cardmember cardenum)
+        internal ButtonSprite(CardName card)
         {
             Clicked = false;
             ////position = Vector2.Zero;
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
-            CardMember = cardenum;
+            Card = card;
             //Id = id;
-            this.buttonFront = GUIConstants.buttonImages[cardenum];
+            this.buttonFront = GUIConstants.buttonImages[Card];
         }
 
         /// <summary>

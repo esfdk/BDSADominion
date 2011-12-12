@@ -1,4 +1,4 @@
-﻿﻿namespace BDSADominion
+﻿﻿namespace BDSADominion.GUI
  {
 
      using Microsoft.Xna.Framework;
@@ -7,7 +7,7 @@
      /// <summary>
      /// The class for the Handzone.
      /// </summary>
-     public class DiscardZone
+     internal class DiscardZone
      {
          /// <summary>
          /// The list of cards in the hand
@@ -17,7 +17,7 @@
          /// <summary>
          /// The starting position of the hand
          /// </summary>
-         private Vector2 startPosition = new Vector2(10, 375);
+         private Vector2 drawPosition = new Vector2(10, 375); //TODO Move to GUIConstants
 
          /// <summary>
          /// Initializes a new instance of the <see cref="HandZone"/> class.
@@ -25,7 +25,7 @@
          /// <param name="topmostleftlocation">
          /// The topmostleftlocation.
          /// </param>
-         public DiscardZone()
+         internal DiscardZone()
          {
 
          }
@@ -33,7 +33,7 @@
          /// <summary>
          /// Gets or sets TouchRect.
          /// </summary>
-         public Rectangle TouchRect { get; private set; }
+         ////public Rectangle TouchRect { get; private set; }
 
          /// <summary>
          /// Gets or sets a value indicating whether Clicked.
@@ -48,7 +48,12 @@
          /// </param>
          public void AddCard(CardSprite newCardSprite)
          {
-             discardzone = (newCardSprite);
+             discardzone = newCardSprite;
+         }
+
+         internal void SetEmpty()
+         {
+             discardzone = GUIConstants.Empty;
          }
 
          /// <summary>
@@ -59,7 +64,7 @@
          /// </param>
          public void Draw(SpriteBatch spriteBatch)
          {
-             Vector2 currentPosition = startPosition;
+             Vector2 currentPosition = drawPosition;
 
              if (discardzone != null)
              {

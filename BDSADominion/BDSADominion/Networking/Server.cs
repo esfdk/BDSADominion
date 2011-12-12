@@ -30,7 +30,7 @@
             }
         }
 
-        public Server()
+        internal Server()
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
@@ -47,9 +47,9 @@
             return true; // TODO What?
         }
 
-        public event ConnectedClientHandler ClientConnectedEvent;
+        internal event ConnectedClientHandler ClientConnectedEvent;
 
-        public IPAddress Ip
+        internal IPAddress Ip
         {
             get
             {
@@ -59,7 +59,7 @@
             }
         }
 
-        public void Start()
+        internal void Start()
         {
             socket.Bind(new IPEndPoint(IPAddress.Any, NetworkConst.PORT));
             socket.Listen(100);
@@ -67,14 +67,14 @@
             socket.BeginAccept(AcceptCallback, socket);
         }
 
-        public void SystemMessage(string message, Connection client)
+        internal void SystemMessage(string message, Connection client)
         {
             string compoundMessage = string.Format("{0}|{1}<EOF>", 0, message);
 
             client.Send(compoundMessage);
         }
 
-        public void SystemMessage(string message)
+        internal void SystemMessage(string message)
         {
             GetClientList().ForEach(cli => SystemMessage(message, cli));
         }
@@ -88,7 +88,7 @@
         /// <param name="clientId">
         /// The Id of the sender.
         /// </param>
-        public void ForwardMessage(string message, int clientId)
+        internal void ForwardMessage(string message, int clientId)
         {
             Console.WriteLine("Forwarding message");
             string compoundMessage = string.Format("{0}|{1}<EOF>", clientId, message);
@@ -126,13 +126,13 @@
             connectedClients.Remove(connect.Id);
         }
 
-        public void ServerRecievedMessage(Connection conn, string message)
+        private void ServerRecievedMessage(Connection conn, string message)
         {
             Console.WriteLine("Server received '{0}' from player {1}", message, conn.Id);
             ForwardMessage(message, conn.Id);
         }
 
-        public bool ClientConnected(Connection conn)
+        private bool ClientConnected(Connection conn)
         {
             Console.WriteLine("Client {0} connected", conn.Id);
             conn.ReceivedMessageEvent += ServerRecievedMessage;
