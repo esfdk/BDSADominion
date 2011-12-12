@@ -50,13 +50,13 @@
         /// <param name="cards">
         /// The cards used in this game of Dominion.
         /// </param>
-        public static void SetUpCards(List<Card> cards)
+        public static void SetUpCards(ICollection<CardName> cards)
         {
             Contract.Requires(!SetUp);
             Contract.Ensures(SetUp);
-            foreach (Card c in cards)
+            foreach (CardName c in cards)
             {
-                CardsMade.Add(c.Name, 1);
+                CardsMade.Add(c, 1);
             }
 
             SetUp = true;
@@ -175,7 +175,7 @@
                     c = new Moat();
                     break;
                 default:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException("Tried to create a card that was not implemented when CardFactory was last updated.");
             }
 
             c.Initialize(card, CardsMade[card]);

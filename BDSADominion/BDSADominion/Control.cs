@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+
     using BDSADominion.Gamestate;
     using BDSADominion.Gamestate.Card_Types;
     using BDSADominion.GUI;
@@ -113,6 +115,9 @@
                     { CardName.Village, 10 },
                     { CardName.Woodcutter, 10 }
                 };
+
+            CardFactory.SetUpCards(startSupply.Keys);
+
             gs = new Gamestate.Gamestate(numberOfPlayers, startSupply);
 
             foreach (Player player in gs.Players)
@@ -134,6 +139,58 @@
         }
 
         /// <summary>
+        /// Updates the GUI with new values.
+        /// </summary>
+        private void UpdateGui()
+        {
+            // TODO: Not implemented yet.
+        }
+
+        #region EventCheckers
+
+        /// <summary>
+        /// Checks if it is possible for the player to buy a specific card.
+        /// </summary>
+        /// <param name="cardName">
+        /// The name of the card being checked.
+        /// </param>
+        private void CanBuyCard(CardName cardName)
+        {
+            if (gs.NumberOfCoins >= cardCost[cardName])
+            {
+                BuyCard(clientPlayerNumber, cardName);
+            }
+
+            // TODO: Send to server.
+        }
+
+        /// <summary>
+        /// Checks if the card is playable.
+        /// </summary>
+        /// <param name="handIndex">
+        /// The index of the card in the hand of the active player.
+        /// </param>
+        private void CanPlayCard(int handIndex)
+        {
+            Card card = this.gs.ActivePlayer.Hand[handIndex];
+
+            if (card is Action)
+            {
+                CardPlayed(handIndex);
+            }
+            else
+            {
+                // TODO: Remove this after testing
+                Console.WriteLine("Card is not an action card!");
+            }
+
+            // TODO: Send to server.
+        }
+
+        #endregion
+
+        #region TurnMethods
+        /// <summary>
         /// Starts the turn of the next player.
         /// </summary>
         private void StartTurn()
@@ -148,8 +205,36 @@
             }
 
             gs.StartActionPhase();
-            // TODO: Set GUI stuff.
+
+            // TODO: Set GUI one-time stuff.
+            UpdateGui();
+
         }
+
+        /// <summary>
+        /// Ends the turn of the active player.
+        /// </summary>
+        private void EndTurn()
+        {
+            Contract.Requires(!gs.InActionPhase & !gs.InBuyPhase);
+
+            // TODO: Send end turn message to server.
+            CleanUp();
+            StartTurn();
+        }
+
+        /// <summary>
+        /// Cleans up the player and other areas.
+        /// </summary>
+        private void CleanUp()
+        {
+            gs.ActivePlayer.CleanUp();
+            UpdateGui();
+        }
+
+        #endregion
+
+        #region PlayerActions
 
         /// <summary>
         /// Plays a card from the hand of the player indicated.
@@ -235,6 +320,11 @@
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            if (gs.NumberOfActions == 0)
+            {
+                gs.EndActionPhase();
+            }
         }
 
         /// <summary>
@@ -248,46 +338,17 @@
         /// </param>
         private void BuyCard(uint playerNumber, CardName cardName)
         {
-            gs.PlayerGainsCard(gs.Players[(int)playerNumber + 1], cardName);
+            gs.PlayerGainsCard(gs.Players[(int)playerNumber - 1], cardName);
+
+            if (gs.NumberOfBuys == 0)
+            {
+                gs.EndBuyPhase();
+                EndTurn();
+            }
         }
 
-        /// <summary>
-        /// Checks if it is possible for the player to buy a specific card.
-        /// </summary>
-        /// <param name="cardName">
-        /// The name of the card being checked.
-        /// </param>
-        private void CanBuyCard(CardName cardName)
-        {
-            if (gs.NumberOfCoins >= cardCost[cardName])
-            {
-                BuyCard(clientPlayerNumber, cardName);
-            }
+        #endregion
 
-            // TODO: Send to server.
-        }
 
-        /// <summary>
-        /// Checks if the card is playable.
-        /// </summary>
-        /// <param name="handIndex">
-        /// The index of the card in the hand of the active player.
-        /// </param>
-        private void CanPlayCard(int handIndex)
-        {
-            Card card = this.gs.ActivePlayer.Hand[handIndex];
-
-            if (card is Action)
-            {
-                CardPlayed(clientPlayerNumber, handIndex);
-            }
-            else
-            {
-                // TODO: Remove this after testing
-                Console.WriteLine("Card is not an action card!");
-            }
-
-            // TODO: Send to server.
-        }
     }
 }
