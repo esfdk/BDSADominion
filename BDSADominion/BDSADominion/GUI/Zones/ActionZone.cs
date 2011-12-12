@@ -1,4 +1,4 @@
-﻿﻿namespace BDSADominion
+﻿﻿namespace BDSADominion.GUI
  {
      using System;
      using System.Collections.Generic;
@@ -57,7 +57,7 @@
          {
              foreach (CardSprite card in action)
              {
-                 if (card.Id == id & card.CardMember == cardmember)
+                 if (card.Id == id & card.Card == cardmember)
                  {
                      bool success = action.Remove(card);
                      if (success)
@@ -132,7 +132,6 @@
          /// </returns>
          public CardSprite FindCardByMouseClick(int mouseX, int mouseY)
          {
-
              //Rectangle mouseRect = new Rectangle(mouseX, mouseY, 1, 1);
              if (TouchRect.Contains(mouseX, mouseY))
              {

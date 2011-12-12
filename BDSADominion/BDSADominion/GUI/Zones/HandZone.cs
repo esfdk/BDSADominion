@@ -59,7 +59,7 @@ namespace BDSADominion
          {
              foreach (CardSprite card in hand)
              {
-                 if (card.Id == id & card.CardMember == cardmember)
+                 if (card.Id == id & card.Card == cardmember)
                  {
                      bool success = hand.Remove(card);
                      if (success)

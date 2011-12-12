@@ -1,4 +1,4 @@
-﻿﻿namespace BDSADominion
+﻿﻿namespace BDSADominion.GUI
  {
 
      using Microsoft.Xna.Framework;

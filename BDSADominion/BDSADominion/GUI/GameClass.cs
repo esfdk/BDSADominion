@@ -1,4 +1,4 @@
-namespace BDSADominion
+namespace BDSADominion.GUI
 {
     using System;
     using System.Collections.Generic;
@@ -228,7 +228,7 @@ namespace BDSADominion
                     }
                     if (cardx != null)
                     {
-                        handZone.RemoveCard(cardx.CardMember, cardx.Id);
+                        handZone.RemoveCard(cardx.Card, cardx.Id);
                     }
 
 
@@ -243,7 +243,7 @@ namespace BDSADominion
                     }
                     if (cardx != null)
                     {
-                        actionZone.RemoveCard(cardx.CardMember, cardx.Id);
+                        actionZone.RemoveCard(cardx.Card, cardx.Id);
                     }
 
                 }

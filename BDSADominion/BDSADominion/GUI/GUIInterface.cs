@@ -1,4 +1,5 @@
 ﻿using BDSADominion.Gamestate.Card_Types;
+using BDSADominion.Networking;
 
 namespace BDSADominion.GUI
 {
@@ -14,8 +15,15 @@ namespace BDSADominion.GUI
     {
         private GameClass game;
 
+        /// <summary>
+        /// trolol to
+        /// </summary>
+        ////private Server server = new Server();
+
         public GUIInterface()
         {
+
+
             game = new GameClass();
             game.Run();
         }

@@ -1,4 +1,4 @@
-﻿﻿namespace BDSADominion
+﻿﻿namespace BDSADominion.GUI
  {
      using System;
      using System.Collections.Generic;
@@ -90,7 +90,7 @@
          {
              foreach (CardSprite card in cards)
              {
-                 supply.Add(new ButtonSprite(card.CardMember));
+                 supply.Add(new ButtonSprite(card.Card));
              }
          }
 

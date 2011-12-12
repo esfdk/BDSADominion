@@ -1,4 +1,5 @@
-﻿using BDSADominion.Gamestate.Card_Types;
+﻿using BDSADominion.Gamestate;
+using BDSADominion.Gamestate.Card_Types;
 
 namespace BDSADominion.GUI
 {
@@ -11,7 +12,7 @@ namespace BDSADominion.GUI
     /// </summary>
     public class CardSprite
     {
-        public Cardmember CardMember { get; private set; }
+        ////public CardName Card { get; private set; }
 
         public Card cardRef { get; private set; }
 
@@ -21,35 +22,22 @@ namespace BDSADominion.GUI
         private Texture2D cardFront;
 
         /// <summary>
-        /// the texture for the back of the card
-        /// </summary>
-        ////private Texture2D cardBack;
-
-        /// <summary>
-        /// bool to check if card has picture side faceup
-        /// </summary>
-        ////private bool faceUp;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CardSprite"/> class.
         /// </summary>
-        /// <param name="cardenum">
-        /// The cardenum.
-        /// </param>
-        public CardSprite(Cardmember cardenum, int id)
+        public CardSprite(Card card)
         {
             Clicked = false;
             ////position = Vector2.Zero;
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
-            CardMember = cardenum;
-            Id = id;
-            this.cardFront = GUIConstants.cardImages[cardenum];
+            ////CardName = cardenum;
+            ////Id = id;
+            this.cardFront = GUIConstants.cardImages[card.Name];
         }
 
         /// <summary>
         /// Gets ImageHeight.
         /// </summary>
-        public int ImageHeight
+        /*public int ImageHeight
         {
             get
             {
@@ -66,12 +54,7 @@ namespace BDSADominion.GUI
             {
                 return this.cardFront.Width;
             }
-        }
-
-        /// <summary>
-        /// Gets or sets position of the card on the screen.
-        /// </summary>
-        ////public Vector2 Position { get; set; }
+        }*/
 
         /// <summary>
         /// Gets or sets rectangle size which holds the image of the card.
@@ -81,10 +64,10 @@ namespace BDSADominion.GUI
         /// <summary>
         /// Gets or sets isclicked
         /// </summary>
-        public bool Clicked { get; set; }
+        internal bool Clicked { get; set; }
 
         /// <summary>
-        /// Gets or sets card is Faceuped
+        /// the draw method of card
         /// </summary>
         /// <param name="spriteBatch">
         /// The sprite Batch.
@@ -92,9 +75,6 @@ namespace BDSADominion.GUI
         /// <param name="position">
         /// The position.
         /// </param>
-        /// <summary>
-        /// the draw method of card
-        /// </summary>
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             /*
