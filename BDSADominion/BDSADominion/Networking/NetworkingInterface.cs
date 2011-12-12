@@ -18,6 +18,7 @@
         public NetworkingInterface() //If host
         {
             server = new Server();
+            server.Start();
             AlwaysDo(server.Ip);
         }
 

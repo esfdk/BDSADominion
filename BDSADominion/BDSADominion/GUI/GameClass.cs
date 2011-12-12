@@ -254,10 +254,7 @@ namespace BDSADominion.GUI
 
                 if ((mouseX < 285 && mouseX > 185) && (mouseY < 370 && mouseY > 340))
                 {
-                    if (currentMouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
-                    {
-                        EndPhaseClicked();
-                    }
+                    EndPhaseClicked();
                 }
             }
 
