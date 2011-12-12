@@ -1,81 +1,70 @@
-﻿namespace BDSADominion
-{
+﻿﻿namespace BDSADominion
+ {
 
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Content;
-    using Microsoft.Xna.Framework.Graphics;
+     using Microsoft.Xna.Framework;
+     using Microsoft.Xna.Framework.Graphics;
 
-    /// <summary>
-    /// The deck class contains information of the representation of the deck
-    /// </summary>
-    public class DeckZone : SpriteBatch
-    {
+     /// <summary>
+     /// The class for the Handzone.
+     /// </summary>
+     public class DeckZone
+     {
+         /// <summary>
+         /// The list of cards in the hand
+         /// </summary>
+         private CardSprite deckzone;
 
-        /// <summary>
-        /// The discardpile.
-        /// </summary>
-        private Texture2D deck;
+         /// <summary>
+         /// The starting position of the hand
+         /// </summary>
+         private Vector2 startPosition = new Vector2(145, 375);
 
-        /// <summary>
-        /// The asset name
-        /// </summary>
-        private string assetname = "Backside";
+         /// <summary>
+         /// Initializes a new instance of the <see cref="HandZone"/> class.
+         /// </summary>
+         /// <param name="topmostleftlocation">
+         /// The topmostleftlocation.
+         /// </param>
+         public DeckZone()
+         {
 
-        /// <summary>
-        /// The Size of the Sprite (with scale applied)
-        /// </summary>
-        private Rectangle size;
+         }
 
-        /// <summary>
-        /// The current position of the Sprite.
-        /// </summary>
-        private Vector2 position = new Vector2(200, 330);
+         /// <summary>
+         /// Gets or sets TouchRect.
+         /// </summary>
+         public Rectangle TouchRect { get; private set; }
 
-        /// <summary>
-        /// The amount to increase/decrease the size of the original sprite. 
-        /// </summary>
-        private float scale = 0.67f;
+         /// <summary>
+         /// Gets or sets a value indicating whether Clicked.
+         /// </summary>
+         ////public bool Clicked { get; set; }
 
-        public DeckZone(GraphicsDevice graphicsDevice)
-            : base(graphicsDevice)
-        {
-        }
+         /// <summary>
+         /// Add one card to the hand.
+         /// </summary>
+         /// <param name="newCardSprite">
+         /// The new Card.
+         /// </param>
+         public void AddCard(CardSprite newCardSprite)
+         {
+             deckzone = (newCardSprite);
+         }
 
-        /// <summary>
-        /// Loads the content for the Deck class.
-        /// </summary>
-        /// <param name="theContentManager">
-        /// The the content manager.
-        /// </param>
-        /// <param name="theAssetName">
-        /// The the Asset Name.
-        /// </param>
-        public void LoadContent(ContentManager theContentManager, string theAssetName)
-        {
-            this.deck = theContentManager.Load<Texture2D>("Backside");
-            assetname = theAssetName;
-            this.size = new Rectangle(
-                0, 0, (int)(this.deck.Width * this.scale), (int)(this.deck.Height * this.scale));
-        }
+         /// <summary>
+         /// Draw the handzone spritbatch
+         /// </summary>
+         /// <param name="spriteBatch">
+         /// The sprite Batch.
+         /// </param>
+         public void Draw(SpriteBatch spriteBatch)
+         {
+             Vector2 currentPosition = startPosition;
 
-        /// <summary>
-        /// Draw the deck spritbatch 
-        /// </summary>
-        /// <param name="spriteBatch">
-        /// The sprite Batch.
-        /// </param>
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(
-            this.deck,
-            this.position,
-            new Rectangle(0, 0, this.deck.Width, this.deck.Height),
-            Color.White,
-            0.0f,
-            Vector2.Zero,
-            this.scale,
-            SpriteEffects.None,
-            0);
-        }
-    }
-}
+             if (deckzone != null)
+             {
+                 deckzone.Draw(spriteBatch, currentPosition);
+             }
+         }
+     }
+ }

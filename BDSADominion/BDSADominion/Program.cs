@@ -1,3 +1,5 @@
+using BDSADominion.GUI;
+
 namespace BDSADominion
 {
 #if WINDOWS || XBOX
@@ -8,10 +10,7 @@ namespace BDSADominion
         /// </summary>
         static void Main(string[] args)
         {
-            using (GameClass gameClass = new GameClass())
-            {
-                gameClass.Run();
-            }
+            GUIInterface gui = new GUIInterface();
         }
     }
 #endif

@@ -19,7 +19,10 @@
     /// <param name="connection">
     /// The Connection through which the client is connected to the server
     /// </param>
-    internal delegate void ConnectedClientHandler(Connection connection);
+    /// <returns>
+    /// //TODO Why return anything?
+    /// </returns>
+    internal delegate bool ConnectedClientHandler(Connection connection);
 
     /// <summary>
     /// This is the delegate used when a Connection is closed.

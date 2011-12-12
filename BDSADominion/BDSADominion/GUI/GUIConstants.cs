@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Class1.cs" company="Hewlett-Packard">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace BDSADominion
+﻿namespace BDSADominion
 {
     using System.Collections.Generic;
 
@@ -12,6 +6,13 @@ namespace BDSADominion
 
     public static class GUIConstants
     {
-        public static Dictionary<Cardmember, Texture2D> cardimage = new Dictionary<Cardmember, Texture2D>();
+        public static CardSprite Empty;
+
+        public static CardSprite Back;
+
+        public static Dictionary<Cardmember, Texture2D> cardImages = new Dictionary<Cardmember, Texture2D>();
+
+        public static Dictionary<Cardmember, Texture2D> buttonImages = new Dictionary<Cardmember, Texture2D>();
     }
 }
+

@@ -1,6 +1,4 @@
-﻿using BDSADominion.Gamestate.Card_Types;
-
-namespace BDSADominion.GUI
+﻿namespace BDSADominion
 {
 
     using Microsoft.Xna.Framework;
@@ -9,16 +7,16 @@ namespace BDSADominion.GUI
     /// <summary>
     /// This class holds the information for the representation of cards.
     /// </summary>
-    public class CardSprite
+    public class ButtonSprite
     {
         public Cardmember CardMember { get; private set; }
 
-        public Card cardRef { get; private set; }
+        ////public int Id { get; private set; }
 
         /// <summary>
         /// The texture for the front of the card
         /// </summary>
-        private Texture2D cardFront;
+        private Texture2D buttonFront;
 
         /// <summary>
         /// the texture for the back of the card
@@ -33,17 +31,17 @@ namespace BDSADominion.GUI
         /// <summary>
         /// Initializes a new instance of the <see cref="CardSprite"/> class.
         /// </summary>
-        /// <param name="cardenum">
+        /// <param name="buttonenum">
         /// The cardenum.
         /// </param>
-        public CardSprite(Cardmember cardenum, int id)
+        public ButtonSprite(Cardmember cardenum)
         {
             Clicked = false;
             ////position = Vector2.Zero;
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
             CardMember = cardenum;
-            Id = id;
-            this.cardFront = GUIConstants.cardImages[cardenum];
+            //Id = id;
+            this.buttonFront = GUIConstants.buttonImages[cardenum];
         }
 
         /// <summary>
@@ -53,7 +51,7 @@ namespace BDSADominion.GUI
         {
             get
             {
-                return this.cardFront.Height;
+                return this.buttonFront.Height;
             }
         }
 
@@ -64,7 +62,7 @@ namespace BDSADominion.GUI
         {
             get
             {
-                return this.cardFront.Width;
+                return this.buttonFront.Width;
             }
         }
 
@@ -108,7 +106,7 @@ namespace BDSADominion.GUI
                 GUIConstants.SCALE,
                 SpriteEffects.None,
                 0);*/
-            spriteBatch.Draw(cardFront, position, Color.White);
+            spriteBatch.Draw(buttonFront, position, Color.White);
         }
     }
 }
