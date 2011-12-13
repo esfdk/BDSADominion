@@ -20,8 +20,6 @@
 
         private Dictionary<int, Connection> connectedClients = new Dictionary<int, Connection>();
 
-        ////public List<Connection> clientList = new List<Connection>();
-
         private int id = 0;
 
         private int NextIdAssign
