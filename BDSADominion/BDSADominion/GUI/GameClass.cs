@@ -49,7 +49,7 @@ namespace BDSADominion.GUI
         /// <summary>
         /// indicate the players number.
         /// </summary>
-        private int playernum;
+        internal int playernum;
 
         /// <summary>
         /// Texture for the end phase button.
