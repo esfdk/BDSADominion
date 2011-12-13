@@ -1,10 +1,6 @@
-system_chart BDSADominion
- explanation "solution for the third semester end project at the/
- software development line of IT University of Copenhagen"
- cluster GUI description""
-end
-
 cluster_chart GUI
+ indexing
+	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " The graphical representation part of the project"
  class GameClass description " The game class"
  class DeckZone description " The deck class"
@@ -20,18 +16,24 @@ cluster_chart GUI
 end
 
 class_chart DECKZONE
+ indexing
+	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " responsible for representing the deck"
  command
 	"Draw the content!"
 end
 
 class_chart BUTTONSPRITE
+ indexing
+	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " the basic class which all graphical objects should inherit from"
  command
 	"Draw the content!"
 end
 
 class_chart CARDSPRITE
+ indexing
+	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " responsible for representing the cards"
   query
 	"Is this cardsprite equal to this cardsprite?"
@@ -40,6 +42,8 @@ class_chart CARDSPRITE
 end
 
 class_chart PROGRAM
+ indexing
+	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " responsible for executing the game"
  command
 	" Run a clinet!"
@@ -48,6 +52,8 @@ class_chart PROGRAM
 end
 
 class_chart GAMECLASS
+ indexing
+	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " responsible for creating the initial GUI with the components from the other classes"
  command
 	" Initialize the content!"
@@ -58,10 +64,14 @@ class_chart GAMECLASS
 end
 
 class_chart GUICONSTANTS
+ indexing
+	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " responsible for keeping all the constants used in GUI i one place"
 end
 
 class_chart GUIINTERFACE
+ indexing
+	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " responsible for the interface between the GUI and the Controller"
  command
 	"Run the game!"
