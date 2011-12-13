@@ -1,23 +1,23 @@
-﻿﻿using BDSADominion.Gamestate;
-
-namespace BDSADominion.GUI
+﻿﻿namespace BDSADominion.GUI.Zones
  {
-
      using Microsoft.Xna.Framework;
      using Microsoft.Xna.Framework.Graphics;
 
      /// <summary>
-     /// The class for the Handzone.
+     /// The class for the Deckzone.
      /// </summary>
+     /// <author>
+     /// Frederik Lysgaard (frly@itu.dk)
+     /// </author>
      internal class DeckZone
      {
          /// <summary>
-         /// The list of cards in the hand
+         /// The list of cards in the deck.
          /// </summary>
          private CardSprite deckzone;
 
          /// <summary>
-         /// The starting position of the hand
+         /// The starting position of the deck.
          /// </summary>
          private Vector2 drawPosition = new Vector2(145, 375); //TODO Move to GUIConstants
 
@@ -32,17 +32,7 @@ namespace BDSADominion.GUI
          }
 
          /// <summary>
-         /// Gets or sets TouchRect.
-         /// </summary>
-         ////public Rectangle TouchRect { get; private set; }
-
-         /// <summary>
-         /// Gets or sets a value indicating whether Clicked.
-         /// </summary>
-         ////public bool Clicked { get; set; }
-
-         /// <summary>
-         /// Add one card to the hand.
+         /// Add one card to the deck.
          /// </summary>
          /// <param name="newCardSprite">
          /// The new Card.
@@ -58,7 +48,7 @@ namespace BDSADominion.GUI
          }
 
          /// <summary>
-         /// Draw the handzone spritbatch
+         /// Draw the deckzone spritbatch
          /// </summary>
          /// <param name="spriteBatch">
          /// The sprite Batch.

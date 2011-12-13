@@ -163,7 +163,6 @@
     <Compile Include="GUI\GameClass.cs" />
     <Compile Include="GUI\GUIConstants.cs" />
     <Compile Include="GUI\GUIInterface.cs" />
-    <Compile Include="GUI\InputState.cs" />
     <Compile Include="GUI\Sprites\ButtonSprite.cs" />
     <Compile Include="GUI\Sprites\CardSprite.cs" />
     <Compile Include="GUI\Zones\ActionZone.cs" />
