@@ -142,6 +142,14 @@
             // TODO: Not implemented yet.
         }
 
+        /// <summary>
+        /// Called when game finishes.
+        /// </summary>
+        private void EndOfGame()
+        {
+            // TODO: Make GUI show winner etc.
+        }
+
         #region TurnMethods
 
         /// <summary>
@@ -172,8 +180,15 @@
             Contract.Requires(!gs.InActionPhase & !gs.InBuyPhase);
 
             // TODO: Send end turn message to server.
-            CleanUp();
-            StartTurn();
+            if (gs.GameOver)
+            {
+                EndOfGame();
+            }
+            else
+            {
+                CleanUp();
+                StartTurn();
+            }
         }
 
         /// <summary>
@@ -361,7 +376,7 @@
         {
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
-                if (gs.NumberOfCoins >= cardCost[cardName])
+                if (gs.NumberOfCoins >= cardCost[cardName] & gs.Supply[cardName] != 0)
                 {
                     BuyCard(clientPlayerNumber, cardName);
                 }

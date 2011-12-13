@@ -13,6 +13,13 @@
     /// </author>
     public class Gamestate
     {
+        #region Fields
+
+        /// <summary>
+        /// The amount of piles that are empty.
+        /// </summary>
+        private uint numberOfEmptyPiles;
+
         /// <summary>
         /// Number Of Actions the active player has.
         /// </summary>
@@ -32,6 +39,8 @@
         /// The player currently interacting with the game.
         /// </summary>
         private Player activePlayer;
+
+        #endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Gamestate"/> class.
@@ -57,6 +66,7 @@
             }
         }
 
+        #region Properties
         /// <summary>
         /// Gets the Players in the game.
         /// </summary>
@@ -184,6 +194,13 @@
         }
 
         /// <summary>
+        /// Gets a value indicating whether the game is over.
+        /// </summary>
+        public bool GameOver { get; private set; }
+
+        #endregion
+
+        /// <summary>
         /// Starts the action phase for the active player.
         /// </summary>
         public void StartActionPhase()
@@ -245,6 +262,24 @@
 
             player.AddCardToZone(CardFactory.CreateCard(card), Zone.Discard);
             Supply[card]--;
+
+            if (Supply[card] == 0)
+            {
+                if (card == CardName.Province)
+                {
+                    GameOver = true;
+                }
+                else
+                {
+                    numberOfEmptyPiles++;
+                }
+            }
+
+            if (numberOfEmptyPiles == 3)
+            {
+                GameOver = true;
+            }
+
         }
     }
 }
