@@ -44,9 +44,9 @@
             return server.Ip.ToString();
         }
 
-        public void SetNumberOfClients(int otherClients)
+        public void SetNumberOfClients(int totalClients)
         {
-            responseMessages = new string[otherClients];
+            responseMessages = new string[totalClients-1];
             EmptyResponses();
         }
 
@@ -91,7 +91,7 @@
         private void ReceivedNewMessage(string message)
         {
             string[] messageParts = message.Split(new char[] { '|' });
-            //Console.WriteLine("Client received '{0}' from player {1}", messageParts[1], messageParts[0]);
+            Console.WriteLine("Client received '{0}' from player {1}", messageParts[2], messageParts[0]);
             int fromPlayer;
             MessageType type;
             bool playerParse = int.TryParse(messageParts[0], out fromPlayer);
@@ -101,13 +101,16 @@
                 switch (type)
                 {
                     case MessageType.System:
+                        Console.WriteLine("Client received a System message ({0})", type);
                         MessageReceived(messageParts[2], fromPlayer);
                         break;
                     case MessageType.Action:
+                        Console.WriteLine("Client received a Action message ({0})", type);
                         MessageReceived(messageParts[2], fromPlayer); // TODO ResponseWait, how to know?
                         client.Comm.Send(NetworkConst.ENCODER.GetBytes(ResponseMessage()));
                         break;
                     case MessageType.Response:
+                        Console.WriteLine("Client received a Response message ({0})", type);
                         int playerId = int.Parse(messageParts[0]) - 1;
                         if (playerId < responseMessages.Length)
                         {
