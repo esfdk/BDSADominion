@@ -18,6 +18,8 @@
         // the StyleCop/Resharper guidelines of 'simplifying' the expressions. I choose to let one of them stay in the Ensures contract for 'RemoveCardFromZone' method
         // to show how I would have done it otherwise.
 
+        #region Fields
+
         /// <summary>
         /// The deck belonging to the player.
         /// </summary>
@@ -42,6 +44,10 @@
         /// The cards in the temporary zone.
         /// </summary>
         private readonly List<Card> temporary = new List<Card>();
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Player"/> class.
@@ -111,6 +117,7 @@
         {
             get { return temporary; }
         }
+        #endregion
 
         /// <summary>
         /// Moves a card from the hand to the temporary zone.

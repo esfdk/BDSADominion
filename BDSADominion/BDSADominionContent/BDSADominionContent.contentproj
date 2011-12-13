@@ -149,6 +149,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Kingdom\MILITIA.jpg">
+      <Name>MILITIA</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Kingdom\MINE.jpg">
       <Name>MINE</Name>
       <Importer>TextureImporter</Importer>
@@ -234,15 +239,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Kingdom\MILITIA.jpg">
-      <Name>MILITIA</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Supply\Adventurer.png">
       <Name>Adventurer</Name>
       <Importer>TextureImporter</Importer>
@@ -310,16 +306,6 @@
     </Compile>
     <Compile Include="Supply\Festival.png">
       <Name>Festival</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Supply\Garden.png">
-      <Name>Garden</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Supply\gardens.png">
-      <Name>gardens</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -415,6 +401,13 @@
     </Compile>
     <Compile Include="Supply\workshop.png">
       <Name>workshop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Supply\gardens.png">
+      <Name>gardens</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

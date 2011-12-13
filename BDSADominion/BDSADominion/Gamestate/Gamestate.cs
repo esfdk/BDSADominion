@@ -102,7 +102,7 @@
         public bool InBuyPhase { get; private set; }
 
         /// <summary>
-        /// Gets the current phase the active player is in.
+        /// Gets the current phase the active player is in. 1 for Action Phase, 2 for BuyPhase.
         /// </summary>
         public uint GetPhase
         {

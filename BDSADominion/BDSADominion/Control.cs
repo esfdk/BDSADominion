@@ -1,7 +1,12 @@
-﻿namespace BDSADominion
+﻿using System.Net;
+using BDSADominion.Networking;
+
+namespace BDSADominion
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+
     using BDSADominion.Gamestate;
     using BDSADominion.Gamestate.Card_Types;
     using BDSADominion.GUI;
@@ -14,10 +19,20 @@
     public class Control
     {
         #region Fields
+
         /// <summary>
         /// The gui used by this client.
         /// </summary>
         private GUIInterface gui;
+
+        private bool serverStarted = false;
+
+        private int numberOfPlayers;
+
+        /// <summary>
+        /// The interface for communicating with the network
+        /// </summary>
+        private NetworkingInterface network;
 
         /// <summary>
         /// The gamestate used for this game.
@@ -35,39 +50,34 @@
         /// Used to determine costs of cards.
         /// </summary>
         private Dictionary<CardName, uint> cardCost = new Dictionary<CardName, uint>
-                {
-                    // The treasure cards.
-                    { CardName.Copper, 0 },
-                    { CardName.Silver, 3 },
-                    { CardName.Gold, 6 },
+            {
+                // The treasure cards.
+                { CardName.Copper, 0 },
+                { CardName.Silver, 3 },
+                { CardName.Gold, 6 },
+                // The victory cards.
+                { CardName.Curse, 0 },
+                { CardName.Estate, 2 },
+                { CardName.Duchy, 5 },
+                { CardName.Province, 8 },
+                // The kingdom cards.
+                // Cost : 2
+                { CardName.Moat, 2 },
+                // Cost : 3
+                { CardName.Village, 3 },
+                { CardName.Woodcutter, 3 },
+                // Cost : 4
+                { CardName.Gardens, 4 },
+                { CardName.Smithy, 4 },
+                // Cost : 5
+                { CardName.CouncilRoom, 5 },
+                { CardName.Laboratory, 5 },
+                { CardName.Festival, 5 },
+                { CardName.Market, 5 },
+                // Cost : 6
+                { CardName.Adventurer, 6 }
+            };
 
-                    // The victory cards.
-                    { CardName.Curse, 0 },
-                    { CardName.Estate, 2 },
-                    { CardName.Duchy, 5 },
-                    { CardName.Province, 8 },
-                    
-                    // The kingdom cards.
-                    // Cost : 2
-                    { CardName.Moat, 2 },
-
-                    // Cost : 3
-                    { CardName.Village, 3 },
-                    { CardName.Woodcutter, 3 },
-
-                    // Cost : 4
-                    { CardName.Gardens, 4 },
-                    { CardName.Smithy, 4 },
-
-                    // Cost : 5
-                    { CardName.CouncilRoom, 5 },
-                    { CardName.Laboratory, 5 },
-                    { CardName.Festival, 5 },
-                    { CardName.Market, 5 },
-                    
-                    // Cost : 6
-                    { CardName.Adventurer, 6 }
-                };
         #endregion
 
         #endregion
@@ -77,7 +87,84 @@
         /// </summary>
         public Control()
         {
-            gui = new GUIInterface();
+            string input = null;
+
+            bool host = false;
+
+            while (input == null)
+            {
+                Console.WriteLine("Please select server or client:");
+
+                input = Console.ReadLine();
+
+                if (input.Equals("client"))
+                {
+                    host = false;
+                }
+                else if (input.Equals("server"))
+                {
+                    host = true;
+                }
+                else
+                {
+                    Console.WriteLine("Unrecognized input");
+                    input = null;
+                }
+            }
+
+            if (host)
+            {
+                Console.WriteLine("Host Started");
+                network = new NetworkingInterface();
+                Console.WriteLine(network.GetServerIp());
+            }
+            else
+            {
+                IPAddress ipAddress = null;
+
+                bool parseSuccess = false;
+
+                while (!parseSuccess)
+                {
+                    Console.WriteLine("Please input IP for server:");
+                    string ip = Console.ReadLine();
+
+                    parseSuccess = IPAddress.TryParse(ip, out ipAddress);
+                    if (!parseSuccess)
+                    {
+                        Console.WriteLine("ip not valid, try again:");
+                    }
+                }
+
+                network = new NetworkingInterface(ipAddress);
+                Console.WriteLine("Client started");
+            }
+
+            network.MessageReceived += ReceivePreGameMessage;
+
+            while (!serverStarted)
+            {
+                input = Console.ReadLine();
+
+                network.PreGameMessage(input);
+            }
+
+            //TODO Start GameState
+            //We count on that client 1 is the server. 
+        }
+
+        private void ReceivePreGameMessage(string message, int playerId)
+        {
+            Console.WriteLine("<Interface> Client recieved {0} from {1}", message, playerId);
+            if (playerId == 0 & message.Contains("<STGM>"))
+            {
+                Console.WriteLine("SYSTEM: GAME STARTED");
+                string[] messageParts = message.Split(new char[] { ',' });
+                serverStarted = true;
+                network.SetNumberOfClients(int.Parse(messageParts[1]));
+                numberOfPlayers = int.Parse(messageParts[2]);
+                Console.WriteLine("SYSTEM: GAME STARTED. There are {0} players and you are player {1}", numberOfPlayers, int.Parse(messageParts[1]));
+            }
         }
 
         /// <summary>
@@ -100,7 +187,7 @@
                     { CardName.Estate, 19 },
                     { CardName.Duchy, 10 },
                     { CardName.Province, 10 },
-                    
+
                     // The kingdom cards.
                     { CardName.Adventurer, 10 },
                     { CardName.CouncilRoom, 10 },
@@ -113,6 +200,9 @@
                     { CardName.Village, 10 },
                     { CardName.Woodcutter, 10 }
                 };
+
+            CardFactory.SetUpCards(startSupply.Keys);
+
             gs = new Gamestate.Gamestate(numberOfPlayers, startSupply);
 
             foreach (Player player in gs.Players)
@@ -134,6 +224,16 @@
         }
 
         /// <summary>
+        /// Updates the GUI with new values.
+        /// </summary>
+        private void UpdateGui()
+        {
+            // TODO: Not implemented yet.
+        }
+
+        #region TurnMethods
+
+        /// <summary>
         /// Starts the turn of the next player.
         /// </summary>
         private void StartTurn()
@@ -148,8 +248,35 @@
             }
 
             gs.StartActionPhase();
-            // TODO: Set GUI stuff.
+
+            // TODO: Set GUI one-time stuff.
+            UpdateGui();
         }
+
+        /// <summary>
+        /// Ends the turn of the active player.
+        /// </summary>
+        private void EndTurn()
+        {
+            Contract.Requires(!gs.InActionPhase & !gs.InBuyPhase);
+
+            // TODO: Send end turn message to server.
+            CleanUp();
+            StartTurn();
+        }
+
+        /// <summary>
+        /// Cleans up the player and other areas.
+        /// </summary>
+        private void CleanUp()
+        {
+            gs.ActivePlayer.CleanUp();
+            UpdateGui();
+        }
+
+        #endregion
+
+        #region PlayerActions
 
         /// <summary>
         /// Plays a card from the hand of the player indicated.
@@ -235,6 +362,11 @@
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            if (gs.NumberOfActions == 0)
+            {
+                gs.EndActionPhase();
+            }
         }
 
         /// <summary>
@@ -248,46 +380,134 @@
         /// </param>
         private void BuyCard(uint playerNumber, CardName cardName)
         {
-            gs.PlayerGainsCard(gs.Players[(int)playerNumber + 1], cardName);
+            gs.PlayerGainsCard(gs.Players[(int)playerNumber - 1], cardName);
+
+            if (gs.NumberOfBuys == 0)
+            {
+                gs.EndBuyPhase();
+                EndTurn();
+            }
+        }
+
+        #endregion
+
+        #region Delegates
+
+        /// <summary>
+        /// Delegate used for messages received from the network.
+        /// </summary>
+        /// <param name="message">
+        /// The message received from the server.
+        /// </param>
+        /// <param name="sender">
+        /// The id of the client that sent the message.
+        /// </param>
+        private void MessageFromNetwork(string message, int sender)
+        {
+            if (message.Substring(0, 3).Equals("!cp"))
+            {
+                string msg = message.Substring(message.IndexOf("["), message.IndexOf("]") - message.IndexOf("[") - 1);
+                CardPlayed(int.Parse(msg));
+            }
+
+            if (message.Substring(0, 3).Equals("!bc"))
+            {
+                string msg = message.Substring(message.IndexOf("["), message.IndexOf("]") - message.IndexOf("[") - 1);
+                CardName cardOut;
+                if (!Enum.TryParse(msg, out cardOut))
+                {
+                    throw new Exception("Could not parse the CardName from server.");
+                }
+
+                BuyCard((uint)sender, cardOut);
+            }
+
+            if (message.Substring(0, 3).Equals("!ep"))
+            {
+                switch (gs.GetPhase)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        gs.EndActionPhase();
+                        gs.StartBuyPhase();
+                        break;
+                    case 2:
+                        gs.EndBuyPhase();
+                        EndTurn();
+                        break;
+                }
+            }
         }
 
         /// <summary>
-        /// Checks if it is possible for the player to buy a specific card.
+        /// Delegate for BuyAttempt. Checks if it is possible for the player to buy a specific card.
         /// </summary>
         /// <param name="cardName">
         /// The name of the card being checked.
         /// </param>
         private void CanBuyCard(CardName cardName)
         {
-            if (gs.NumberOfCoins >= cardCost[cardName])
+            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
-                BuyCard(clientPlayerNumber, cardName);
-            }
+                if (gs.NumberOfCoins >= cardCost[cardName])
+                {
+                    BuyCard(clientPlayerNumber, cardName);
+                }
 
-            // TODO: Send to server.
+                // TODO: Send to server.
+            }
         }
 
         /// <summary>
-        /// Checks if the card is playable.
+        /// Delegate for CardInHandPressed. Checks if the card is playable.
         /// </summary>
         /// <param name="handIndex">
         /// The index of the card in the hand of the active player.
         /// </param>
         private void CanPlayCard(int handIndex)
         {
-            Card card = this.gs.ActivePlayer.Hand[handIndex];
-
-            if (card is Action)
+            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
-                CardPlayed(handIndex);
-            }
-            else
-            {
-                // TODO: Remove this after testing
-                Console.WriteLine("Card is not an action card!");
-            }
+                Card card = gs.ActivePlayer.Hand[handIndex];
 
-            // TODO: Send to server.
+                if (card is Action)
+                {
+                    CardPlayed(handIndex);
+                }
+                else
+                {
+                    // TODO: Remove this after testing
+                    Console.WriteLine("Card is not an action card!");
+                }
+
+                // TODO: Send to server.
+            }
         }
+
+        /// <summary>
+        /// Delegate for the EndPhase button.
+        /// </summary>
+        private void EndPhase()
+        {
+            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
+            {
+                switch (gs.GetPhase)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        gs.EndActionPhase();
+                        gs.StartBuyPhase();
+                        break;
+                    case 2:
+                        gs.EndBuyPhase();
+                        EndTurn();
+                        break;
+                }
+            }
+        }
+
+        #endregion
     }
 }
