@@ -478,13 +478,12 @@
             gs.NumberOfActions = gs.NumberOfActions - 1;
 
             // TODO: Put back or delete permanently @ Melnyk
-            /*
             if (gs.NumberOfActions == 0 | gs.ActivePlayer.Hand.Count(c => c is Action) == 0)
             {
                 gs.EndActionPhase();
                 gs.StartBuyPhase();
             }
-            */
+
             UpdateGui();
         }
 
@@ -508,11 +507,11 @@
             gs.NumberOfCoins = gs.NumberOfCoins - cardCost[cardName];
 
             // TODO: Put back or delete permanently @ Melnyk
-            /*if (gs.NumberOfBuys == 0)
+            if (gs.NumberOfBuys == 0)
             {
                 gs.EndBuyPhase();
                 EndTurn();
-            }*/
+            }
 
             UpdateGui();
         }
@@ -537,7 +536,7 @@
         {
             if (message.Substring(0, 3).Equals("!cp"))
             {
-                string msg = message.Substring(message.IndexOf("[")+1, message.IndexOf("]") - message.IndexOf("[") - 1);
+                string msg = message.Substring(message.IndexOf("[") + 1, message.IndexOf("]") - message.IndexOf("[") - 1);
                 CardPlayed(int.Parse(msg));
             }
 
