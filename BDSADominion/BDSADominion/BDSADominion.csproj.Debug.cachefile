@@ -1,5 +1,7 @@
-Content\Fonts\Arial.xnb
 Content\Pics\Cursor.xnb
+Content\Fonts\Arial.xnb
+Content\Kingdom\EMPTY.xnb
+Content\Kingdom\BACKSIDE.xnb
 Content\Supply\Adventurer.xnb
 Content\Supply\Copper.xnb
 Content\Supply\CouncilRoom.xnb
@@ -14,6 +16,8 @@ Content\Supply\Silver.xnb
 Content\Supply\Smithy.xnb
 Content\Supply\Village.xnb
 Content\Supply\Woodcutter.xnb
+Content\Fonts\Winfont.xnb
+Content\Pics\EndButton.xnb
 Content\Kingdom\ADVENTURER.xnb
 Content\Kingdom\BUREAUCRAT.xnb
 Content\Kingdom\CELLAR.xnb
@@ -45,17 +49,13 @@ Content\Kingdom\VILLAGE.xnb
 Content\Kingdom\WITCH.xnb
 Content\Kingdom\WOODCUTTER.xnb
 Content\Kingdom\WORKSHOP.xnb
-Content\Fonts\Winfont.xnb
-Content\Kingdom\BACKSIDE.xnb
-Content\Kingdom\EMPTY.xnb
-Content\Pics\Dominiontable.xnb
-Content\Pics\EndButton.xnb
+Content\Kingdom\MILITIA.xnb
+Content\Supply\Curse.xnb
 Content\Supply\backside.xnb
 Content\Supply\bureaucrat.xnb
 Content\Supply\Cellar.xnb
 Content\Supply\chancellor.xnb
 Content\Supply\chapel.xnb
-Content\Supply\Curse.xnb
 Content\Supply\empty.xnb
 Content\Supply\feast.xnb
 Content\Supply\militia.xnb
@@ -66,8 +66,8 @@ Content\Supply\spy.xnb
 Content\Supply\throneroom.xnb
 Content\Supply\witch.xnb
 Content\Supply\workshop.xnb
-Content\Kingdom\MILITIA.xnb
 Content\Supply\library.xnb
 Content\Supply\Market.xnb
 Content\Supply\thief.xnb
+Content\Pics\Dominiontable.xnb
 Content\Supply\Gardens.xnb
