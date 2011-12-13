@@ -39,7 +39,7 @@
         /// Sends the message to the Client
         /// </summary>
         /// <param name="message">
-        /// The message, must be clean.
+        /// The message, must be compound.
         /// </param>
         internal void Send(string message)
         {
@@ -61,8 +61,6 @@
                 stringBuilder.Append(NetworkConst.ENCODER.GetString(buffer, 0, read));
 
                 string content = stringBuilder.ToString();
-
-                Console.WriteLine(content);
 
                 if (content.IndexOf("<EOF>") >= 0)
                 {

@@ -52,10 +52,13 @@
         {
             string[] messageParts = message.Split(new char[] { '|' });
             Console.WriteLine("Client.RecievedMessage: Client received '{0}' of type {1} from player {2}", messageParts[2], messageParts[1], messageParts[0]);
+            stringBuilder.Clear();
+            BeginReceive();
         }
 
         public void BeginReceive()
         {
+            ////Console.WriteLine("Client.BeginRecieve: Client BeginRecieve began");
             Comm.BeginReceive(buffer, 0, NetworkConst.BUFFERSIZE, 0, BeginReceiveCallback, this);
         }
 
@@ -63,14 +66,11 @@
         {
             ////Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
             int read = Comm.EndReceive(asyncResult);
-
             if (read > 0)
             {
                 stringBuilder.Append(NetworkConst.ENCODER.GetString(buffer, 0, read));
 
                 string content = stringBuilder.ToString();
-
-                ////Console.WriteLine(content);
 
                 if (content.IndexOf("<EOF>") >= 0)
                 {
@@ -79,11 +79,11 @@
                     if (NewMessageEvent != null)
                     {
                         NewMessageEvent(message);
+                        ////Console.WriteLine("Begin Receive reached");
                     }
 
                     stringBuilder.Clear();
                 }
-
                 BeginReceive();
             }
         }

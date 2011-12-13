@@ -98,7 +98,7 @@
             while (!serverStarted)
             {
                 string input = Console.ReadLine();
-                
+
                 network.PreGameMessage(input);
             }
 
@@ -207,8 +207,6 @@
             }
         }
 
-        private Dictionary<CardName, uint> startSupply;
-
         /// <summary>
         /// Sets up a new game with the number of players pass as parameter.
         /// </summary>
@@ -220,7 +218,7 @@
         /// </author>
         private void SetUpGame(uint numOfPlayers)
         {
-            startSupply = new Dictionary<CardName, uint>
+            Dictionary<CardName, uint> startSupply = new Dictionary<CardName, uint>
                 {
                     // The treasure cards.
                     { CardName.Copper, 51 },
@@ -274,7 +272,6 @@
             gui.EndPhasePressed += EndPhase;
             gui.BuyAttempt += CanBuyCard;
             gui.CardInHandPressed += CanPlayCard;
-            gui.StartUpdate += UpdateGui;
 
             StartTurn();
             gui.RunGame();
@@ -291,7 +288,6 @@
             gui.DrawAction(gs.ActivePlayer.Played.ToArray());
             gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null);
             gui.DrawHand(gs.Players[(int)clientPlayerNumber - 1].Hand.ToArray());
-            gui.UsedCards(startSupply.Keys.ToArray());
 
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
@@ -363,6 +359,10 @@
         {
             Contract.Requires(!gs.InActionPhase & !gs.InBuyPhase);
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7c8346a61f97630d8fe8379db0cb562a615f9ea7
             if (gs.GameOver)
             {
                 EndOfGame();
@@ -406,12 +406,11 @@
         /// </author>
         private void CardPlayed(int handIndex)
         {
-            Player p = gs.ActivePlayer;
-            Card card = p.Hand[handIndex];
+            Card card = this.gs.ActivePlayer.Hand[handIndex];
             switch (card.Name)
             {
                 case CardName.Village:
-                    p.DrawCards(1);
+                    gs.ActivePlayer.DrawCards(1);
                     gs.NumberOfActions += 2;
                     break;
 
@@ -421,7 +420,7 @@
                     break;
 
                 case CardName.Smithy:
-                    p.DrawCards(3);
+                    gs.ActivePlayer.DrawCards(3);
                     break;
 
                 case CardName.CouncilRoom:
@@ -430,7 +429,7 @@
                         player.DrawCards(1);
                     }
 
-                    p.DrawCards(3);
+                    gs.ActivePlayer.DrawCards(3);
                     gs.NumberOfBuys += 1;
                     break;
 
@@ -441,12 +440,12 @@
                     break;
 
                 case CardName.Laboratory:
-                    p.DrawCards(2);
+                    gs.ActivePlayer.DrawCards(2);
                     gs.NumberOfActions += 1;
                     break;
 
                 case CardName.Market:
-                    p.DrawCards(1);
+                    gs.ActivePlayer.DrawCards(1);
                     gs.NumberOfActions += 1;
                     gs.NumberOfBuys += 1;
                     gs.NumberOfCoins += 1;
@@ -454,6 +453,7 @@
 
                 case CardName.Adventurer:
                     int numberOfTreasures = 0;
+                    Player p = gs.ActivePlayer;
                     int temporarySizeAtStart = p.TempZone.Count; // In most cases will be zero.
 
                     while (numberOfTreasures < 2 & !(p.DeckSize == 0 & p.DiscardSize == 0))
@@ -476,15 +476,12 @@
                     break;
 
                 case CardName.Moat:
-                    p.DrawCards(2);
+                    gs.ActivePlayer.DrawCards(2);
                     break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            p.MoveFromHandToTemporary(p.Hand[handIndex]);
-            p.MoveFromTemporaryToZone(p.TempZone[p.TempZone.Count - 1], Zone.Played);
 
             if (gs.NumberOfActions == 0)
             {
@@ -509,9 +506,6 @@
         private void BuyCard(uint playerNumber, CardName cardName)
         {
             gs.PlayerGainsCard(gs.Players[(int)playerNumber - 1], cardName);
-
-            gs.NumberOfBuys--;
-            gs.NumberOfCoins = gs.NumberOfCoins - cardCost[cardName];
 
             if (gs.NumberOfBuys == 0)
             {
@@ -548,9 +542,9 @@
 
             if (message.Substring(0, 3).Equals("!bc"))
             {
-                string msg = message.Substring(message.IndexOf("[")+1, message.IndexOf("]") - message.IndexOf("[") - 1);
+                string msg = message.Substring(message.IndexOf("["), message.IndexOf("]") - message.IndexOf("[") - 1);
                 CardName cardOut;
-                if (!CardName.TryParse(msg, out cardOut))
+                if (!Enum.TryParse(msg, out cardOut))
                 {
                     throw new Exception("Could not parse the CardName from server.");
                 }

@@ -350,7 +350,7 @@
         /// </param>
         public void DrawCards(uint amount)
         {
-            for (int i = 1; i < amount; i++)
+            for (int i = 1; i <= amount; i++)
             {
                 if (DeckSize + DiscardSize < 1)
                 {
@@ -386,14 +386,16 @@
             foreach (Card card in hand)
             {
                 discard.Push(card);
-                hand.Remove(card);
             }
+
+            hand.Clear();
 
             foreach (Card card in played)
             {
                 discard.Push(card);
-                played.Remove(card);
             }
+
+            played.Clear();
 
             DrawCards(5);
         }

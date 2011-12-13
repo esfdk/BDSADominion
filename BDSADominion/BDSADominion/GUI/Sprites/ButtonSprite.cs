@@ -32,7 +32,10 @@
             Clicked = false;
             Card = card;
             //Id = id;
-            this.buttonFront = GameClass.buttonImages[Card];
+            if (GameClass.buttonImages.ContainsKey(card))
+            {
+                this.buttonFront = GameClass.buttonImages[Card];
+            }
         }
 
         /// <summary>
@@ -76,7 +79,11 @@
         /// </summary>
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteBatch.Draw(buttonFront, position, Color.White);
+            if (buttonFront != null)
+            {
+                spriteBatch.Draw(buttonFront, position, Color.White);
+            }
+            
         }
     }
 }
