@@ -61,7 +61,7 @@
 
         private void BeginReceiveCallback(IAsyncResult asyncResult)
         {
-            Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
+            ////Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
             int read = Comm.EndReceive(asyncResult);
 
             if (read > 0)

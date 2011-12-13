@@ -6,7 +6,6 @@ Content\Supply\CouncilRoom.xnb
 Content\Supply\Duchy.xnb
 Content\Supply\Estate.xnb
 Content\Supply\Festival.xnb
-Content\Supply\Gardens.xnb
 Content\Supply\Gold.xnb
 Content\Supply\Laboratory.xnb
 Content\Supply\Moat.xnb
@@ -71,3 +70,4 @@ Content\Kingdom\MILITIA.xnb
 Content\Supply\library.xnb
 Content\Supply\Market.xnb
 Content\Supply\thief.xnb
+Content\Supply\Gardens.xnb
