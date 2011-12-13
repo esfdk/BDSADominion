@@ -98,7 +98,7 @@
             while (!serverStarted)
             {
                 string input = Console.ReadLine();
-
+                
                 network.PreGameMessage(input);
             }
 
@@ -550,7 +550,7 @@
             {
                 string msg = message.Substring(message.IndexOf("["), message.IndexOf("]") - message.IndexOf("[") - 1);
                 CardName cardOut;
-                if (!Enum.TryParse(msg, out cardOut))
+                if (!CardName.TryParse(msg, out cardOut))
                 {
                     throw new Exception("Could not parse the CardName from server.");
                 }

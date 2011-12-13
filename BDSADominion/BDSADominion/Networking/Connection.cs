@@ -43,8 +43,8 @@
         /// </param>
         internal void Send(string message)
         {
-            Console.WriteLine("Sending message: " + message);
             connSocket.Send(NetworkConst.ENCODER.GetBytes(message));
+            Console.WriteLine("Sending message: " + message);
         }
 
         internal void BeginReceive()

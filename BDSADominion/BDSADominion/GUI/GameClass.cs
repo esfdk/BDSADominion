@@ -2,10 +2,8 @@ namespace BDSADominion.GUI
 {
     using System;
     using System.Collections.Generic;
-
-    using BDSADominion.Gamestate;
-    using BDSADominion.GUI.Zones;
-
+    using Gamestate;
+    using Zones;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
