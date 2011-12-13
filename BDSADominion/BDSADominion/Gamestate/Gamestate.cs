@@ -53,7 +53,7 @@
         /// </param>
         public Gamestate(uint numberOfPlayers, Dictionary<CardName, uint> startSupply)
         {
-            Contract.Requires(numberOfPlayers >= 2 & numberOfPlayers <= 4);
+            // TODO: Contract.Requires(numberOfPlayers >= 2 & numberOfPlayers <= 4);
             Contract.Requires(startSupply != null);
 
             Players = new List<Player>();
@@ -82,7 +82,7 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<uint>() >= 2 & Contract.Result<uint>() <= 4);
+                // TODO: Contract.Ensures(Contract.Result<uint>() >= 2 & Contract.Result<uint>() <= 4);
                 return (uint)Players.Count;
             }
         }

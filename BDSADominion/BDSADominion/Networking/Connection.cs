@@ -20,7 +20,7 @@
 
         internal IPAddress ClientIp
         {
-            get { return ((IPEndPoint) connSocket.LocalEndPoint).Address; }
+            get { return ((IPEndPoint)connSocket.LocalEndPoint).Address; }
         }
 
         internal int Id { get; private set; }

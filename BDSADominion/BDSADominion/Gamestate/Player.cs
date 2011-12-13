@@ -418,13 +418,13 @@
         /// </returns>
         private bool InvariantHelper()
         {
-            foreach (Card card in AllCards.Keys)
+            /*foreach (Card card in AllCards.Keys)
             {
                 if (!deck.Contains(card) & !discard.Contains(card) & !played.Contains(card) & !hand.Contains(card) & temporary.Contains(card))
                 {
                     return false;
                 }
-            }
+            }*/
 
             if (deck.Any(card => !AllCards.ContainsKey(card)))
             {

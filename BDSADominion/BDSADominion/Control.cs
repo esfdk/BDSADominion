@@ -484,10 +484,12 @@
 
             p.MoveFromHandToTemporary(p.Hand[handIndex]);
             p.MoveFromTemporaryToZone(p.TempZone[p.TempZone.Count - 1], Zone.Played);
+            gs.NumberOfActions = gs.NumberOfActions - 1;
 
-            if (gs.NumberOfActions == 0)
+            if (gs.NumberOfActions == 0 | gs.ActivePlayer.Hand.Count(c => c is Action) == 0)
             {
                 gs.EndActionPhase();
+                gs.StartBuyPhase();
             }
 
             UpdateGui();
@@ -509,7 +511,7 @@
         {
             gs.PlayerGainsCard(gs.Players[(int)playerNumber - 1], cardName);
 
-            gs.NumberOfBuys--;
+            gs.NumberOfBuys = gs.NumberOfBuys - 1;
             gs.NumberOfCoins = gs.NumberOfCoins - cardCost[cardName];
 
             if (gs.NumberOfBuys == 0)
@@ -635,6 +637,7 @@
             Console.WriteLine("EndPhase Called"); //TODO Remove
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
+                Console.WriteLine(gs.GetPhase); // TODO: Remove this
                 switch (gs.GetPhase)
                 {
                     case 0:
