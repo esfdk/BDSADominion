@@ -10,7 +10,6 @@ Content\Kingdom\COPPER.xnb
 Content\Kingdom\COUNCILROOM.xnb
 Content\Kingdom\CURSE.xnb
 Content\Kingdom\DUCHY.xnb
-Content\Kingdom\EMPTY.xnb
 Content\Kingdom\ESTATE.xnb
 Content\Kingdom\FEAST.xnb
 Content\Kingdom\FESTIVAL.xnb
@@ -69,5 +68,6 @@ Content\Supply\thief.xnb
 Content\Supply\throneroom.xnb
 Content\Supply\Village.xnb
 Content\Supply\witch.xnb
-Content\Supply\Woodcutter.xnb
 Content\Supply\workshop.xnb
+Content\Supply\Woodcutter.xnb
+Content\Kingdom\EMPTY.xnb

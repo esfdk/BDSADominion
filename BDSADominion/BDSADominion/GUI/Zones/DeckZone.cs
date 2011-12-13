@@ -19,14 +19,11 @@
          /// <summary>
          /// The starting position of the deck.
          /// </summary>
-         private Vector2 drawPosition = new Vector2(145, 375); //TODO Move to GUIConstants
+         private Vector2 drawPosition = new Vector2(145, 375); //This would be an interesting candidate for GUIConstants
 
          /// <summary>
          /// Initializes a new instance of the <see cref="HandZone"/> class.
          /// </summary>
-         /// <param name="topmostleftlocation">
-         /// The topmostleftlocation.
-         /// </param>
          internal DeckZone()
          {
          }

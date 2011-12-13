@@ -152,7 +152,7 @@
             Console.WriteLine("Server.ClientConnected: Client {0} connected", conn.Id);
             conn.ReceivedMessageEvent += ServerRecievedMessage;
 
-            return true; // TODO What-what-what?!?
+            return true;
         }
 
         public List<Connection> GetClientList()

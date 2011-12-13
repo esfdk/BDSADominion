@@ -1,3 +1,9 @@
+system_chart BDSADominion
+ explanation "solution for the third semester end project at the/
+ software development line of IT University of Copenhagen"
+ cluster GUI description""
+end
+
 cluster_chart GUI
  indexing
 	author: "Frederik Lysgaard (frly@itu.dk)";
@@ -75,14 +81,10 @@ class_chart GUIINTERFACE
  explanation " responsible for the interface between the GUI and the Controller"
  command
 	"Run the game!"
-	"Try to buy card!"-- will be some kind of event
-	"End phase!" -- will be some kind of event
-	"Hand is pressed!" -- will be some kind of event
-	"Supply is pressed!" -- will be some kind of event
-	"Endphase button is pressed!" -- will be some kind of event
 	"Draw the hand!"
 	"Draw the actionzone!"
 	"Draw the discardzone!"
+	"Draw the deck!"
 	"Set actions!"
 	"Set buys!"
 	"Set coins!"
