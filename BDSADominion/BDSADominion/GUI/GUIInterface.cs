@@ -30,13 +30,13 @@ namespace BDSADominion.GUI
             CardInHandPressed += HandPressed;
             BuyAttempt += SupplyPressed;
             EndPhasePressed += PhaseEndPressed;
-
-            RunGame();
         }
 
         public void RunGame()
         {
             game.Run();
+            string my = "lol";
+
         }
 
         public event IndexHandler CardInHandPressed;

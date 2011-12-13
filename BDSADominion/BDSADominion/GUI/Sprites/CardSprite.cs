@@ -35,7 +35,11 @@
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
             ////CardName = cardenum;
             ////Id = id;
-            cardFront = GameClass.cardImages[CardRef];
+            if (GameClass.cardImages.ContainsKey(CardRef))
+            {
+                cardFront = GameClass.cardImages[CardRef];
+            }
+            
         }
 
         /// <summary>
@@ -126,7 +130,10 @@
         /// </param>
         internal void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteBatch.Draw(cardFront, position, Color.White);
+            if (cardFront != null)
+            {
+                spriteBatch.Draw(cardFront, position, Color.White);
+            }
         }
     }
 }
