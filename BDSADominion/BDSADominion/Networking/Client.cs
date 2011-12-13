@@ -17,7 +17,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
         /// </summary>
-        public Client(IPAddress ipAddress)
+        internal Client(IPAddress ipAddress)
         {
             IPEndPoint ipEnd = new IPEndPoint(ipAddress, NetworkConst.PORT);
 
@@ -31,16 +31,16 @@
             ////Comm.BeginReceive(buffer, 0, buffer.length, 0, new AsyncCallback(AcceptReceive), Comm);
         }
 
-        public event ClientMessageHandler NewMessageEvent;
+        internal event ClientMessageHandler NewMessageEvent;
 
         /// <summary>
         /// Gets the Socket through which communication takes place.
         /// </summary>
-        public Socket Comm { get; private set; }
+        internal Socket Comm { get; private set; }
 
         private byte[] buffer = new byte[NetworkConst.BUFFERSIZE];
 
-        internal StringBuilder stringBuilder = new StringBuilder();
+        ////internal StringBuilder stringBuilder = new StringBuilder();
 
         /// <summary>
         /// This method should be called whenever the client recieves a message from the server.
@@ -48,7 +48,7 @@
         /// <param name="message">
         /// The recieved message
         /// </param>
-        public void RecievedMessage(string message)
+        private void RecievedMessage(string message)
         {
             string[] messageParts = message.Split(new char[] { '|' });
             Console.WriteLine("Client.RecievedMessage: Client received '{0}' of type {1} from player {2}", messageParts[2], messageParts[1], messageParts[0]);
@@ -62,12 +62,15 @@
             Comm.BeginReceive(buffer, 0, NetworkConst.BUFFERSIZE, 0, BeginReceiveCallback, this);
         }
 
+        //TODO: Contract: may only be called if end is <EOF>
+        //TODO: stringBuilder as only in method scope
         private void BeginReceiveCallback(IAsyncResult asyncResult)
         {
             ////Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
             int read = Comm.EndReceive(asyncResult);
             if (read > 0)
             {
+                StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append(NetworkConst.ENCODER.GetString(buffer, 0, read));
 
                 string content = stringBuilder.ToString();

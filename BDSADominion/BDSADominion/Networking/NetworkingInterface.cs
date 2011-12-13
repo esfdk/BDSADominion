@@ -57,7 +57,7 @@
             {
                 responseMessages[i] = string.Empty;
             }
-            client.stringBuilder.Clear();
+            ////client.stringBuilder.Clear();
             client.BeginReceive();
         }
 
