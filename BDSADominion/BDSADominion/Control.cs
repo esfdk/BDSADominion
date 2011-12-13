@@ -19,6 +19,7 @@ namespace BDSADominion
     public class Control
     {
         #region Fields
+
         /// <summary>
         /// The gui used by this client.
         /// </summary>
@@ -49,39 +50,34 @@ namespace BDSADominion
         /// Used to determine costs of cards.
         /// </summary>
         private Dictionary<CardName, uint> cardCost = new Dictionary<CardName, uint>
-                {
-                    // The treasure cards.
-                    { CardName.Copper, 0 },
-                    { CardName.Silver, 3 },
-                    { CardName.Gold, 6 },
+            {
+                // The treasure cards.
+                { CardName.Copper, 0 },
+                { CardName.Silver, 3 },
+                { CardName.Gold, 6 },
+                // The victory cards.
+                { CardName.Curse, 0 },
+                { CardName.Estate, 2 },
+                { CardName.Duchy, 5 },
+                { CardName.Province, 8 },
+                // The kingdom cards.
+                // Cost : 2
+                { CardName.Moat, 2 },
+                // Cost : 3
+                { CardName.Village, 3 },
+                { CardName.Woodcutter, 3 },
+                // Cost : 4
+                { CardName.Gardens, 4 },
+                { CardName.Smithy, 4 },
+                // Cost : 5
+                { CardName.CouncilRoom, 5 },
+                { CardName.Laboratory, 5 },
+                { CardName.Festival, 5 },
+                { CardName.Market, 5 },
+                // Cost : 6
+                { CardName.Adventurer, 6 }
+            };
 
-                    // The victory cards.
-                    { CardName.Curse, 0 },
-                    { CardName.Estate, 2 },
-                    { CardName.Duchy, 5 },
-                    { CardName.Province, 8 },
-                    
-                    // The kingdom cards.
-                    // Cost : 2
-                    { CardName.Moat, 2 },
-
-                    // Cost : 3
-                    { CardName.Village, 3 },
-                    { CardName.Woodcutter, 3 },
-
-                    // Cost : 4
-                    { CardName.Gardens, 4 },
-                    { CardName.Smithy, 4 },
-
-                    // Cost : 5
-                    { CardName.CouncilRoom, 5 },
-                    { CardName.Laboratory, 5 },
-                    { CardName.Festival, 5 },
-                    { CardName.Market, 5 },
-                    
-                    // Cost : 6
-                    { CardName.Adventurer, 6 }
-                };
         #endregion
 
         #endregion
@@ -191,7 +187,7 @@ namespace BDSADominion
                     { CardName.Estate, 19 },
                     { CardName.Duchy, 10 },
                     { CardName.Province, 10 },
-                    
+
                     // The kingdom cards.
                     { CardName.Adventurer, 10 },
                     { CardName.CouncilRoom, 10 },
@@ -235,50 +231,8 @@ namespace BDSADominion
             // TODO: Not implemented yet.
         }
 
-        #region EventCheckers
-
-        /// <summary>
-        /// Checks if it is possible for the player to buy a specific card.
-        /// </summary>
-        /// <param name="cardName">
-        /// The name of the card being checked.
-        /// </param>
-        private void CanBuyCard(CardName cardName)
-        {
-            if (gs.NumberOfCoins >= cardCost[cardName])
-            {
-                BuyCard(clientPlayerNumber, cardName);
-            }
-
-            // TODO: Send to server.
-        }
-
-        /// <summary>
-        /// Checks if the card is playable.
-        /// </summary>
-        /// <param name="handIndex">
-        /// The index of the card in the hand of the active player.
-        /// </param>
-        private void CanPlayCard(int handIndex)
-        {
-            Card card = this.gs.ActivePlayer.Hand[handIndex];
-
-            if (card is Action)
-            {
-                CardPlayed(handIndex);
-            }
-            else
-            {
-                // TODO: Remove this after testing
-                Console.WriteLine("Card is not an action card!");
-            }
-
-            // TODO: Send to server.
-        }
-
-        #endregion
-
         #region TurnMethods
+
         /// <summary>
         /// Starts the turn of the next player.
         /// </summary>
@@ -440,18 +394,120 @@ namespace BDSADominion
         #region Delegates
 
         /// <summary>
-        /// Delegates used for the 
+        /// Delegate used for messages received from the network.
         /// </summary>
         /// <param name="message">
         /// The message received from the server.
         /// </param>
         /// <param name="sender">
-        /// The sender.
+        /// The id of the client that sent the message.
         /// </param>
-        private void MessageFromServer(string message, int sender)
+        private void MessageFromNetwork(string message, int sender)
         {
+            if (message.Substring(0, 3).Equals("!cp"))
+            {
+                string msg = message.Substring(message.IndexOf("["), message.IndexOf("]") - message.IndexOf("[") - 1);
+                CardPlayed(int.Parse(msg));
+            }
 
+            if (message.Substring(0, 3).Equals("!bc"))
+            {
+                string msg = message.Substring(message.IndexOf("["), message.IndexOf("]") - message.IndexOf("[") - 1);
+                CardName cardOut;
+                if (!Enum.TryParse(msg, out cardOut))
+                {
+                    throw new Exception("Could not parse the CardName from server.");
+                }
+
+                BuyCard((uint)sender, cardOut);
+            }
+
+            if (message.Substring(0, 3).Equals("!ep"))
+            {
+                switch (gs.GetPhase)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        gs.EndActionPhase();
+                        gs.StartBuyPhase();
+                        break;
+                    case 2:
+                        gs.EndBuyPhase();
+                        EndTurn();
+                        break;
+                }
+            }
         }
+
+        /// <summary>
+        /// Delegate for BuyAttempt. Checks if it is possible for the player to buy a specific card.
+        /// </summary>
+        /// <param name="cardName">
+        /// The name of the card being checked.
+        /// </param>
+        private void CanBuyCard(CardName cardName)
+        {
+            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
+            {
+                if (gs.NumberOfCoins >= cardCost[cardName])
+                {
+                    BuyCard(clientPlayerNumber, cardName);
+                }
+
+                // TODO: Send to server.
+            }
+        }
+
+        /// <summary>
+        /// Delegate for CardInHandPressed. Checks if the card is playable.
+        /// </summary>
+        /// <param name="handIndex">
+        /// The index of the card in the hand of the active player.
+        /// </param>
+        private void CanPlayCard(int handIndex)
+        {
+            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
+            {
+                Card card = gs.ActivePlayer.Hand[handIndex];
+
+                if (card is Action)
+                {
+                    CardPlayed(handIndex);
+                }
+                else
+                {
+                    // TODO: Remove this after testing
+                    Console.WriteLine("Card is not an action card!");
+                }
+
+                // TODO: Send to server.
+            }
+        }
+
+        /// <summary>
+        /// Delegate for the EndPhase button.
+        /// </summary>
+        private void EndPhase()
+        {
+            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
+            {
+                switch (gs.GetPhase)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        gs.EndActionPhase();
+                        gs.StartBuyPhase();
+                        break;
+                    case 2:
+                        gs.EndBuyPhase();
+                        EndTurn();
+                        break;
+                }
+            }
+        }
+
         #endregion
     }
 }
