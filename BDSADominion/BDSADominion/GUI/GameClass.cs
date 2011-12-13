@@ -3,10 +3,10 @@ namespace BDSADominion.GUI
     using System;
     using System.Collections.Generic;
     using Gamestate;
-    using Zones;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+    using Zones;
 
     /// <summary>
     /// This is the main type for your game.
@@ -106,7 +106,7 @@ namespace BDSADominion.GUI
         /// <summary>
         /// The playing table.
         /// </summary>
-        ////private Texture2D table;
+        private Texture2D table;
 
         /// <summary>
         /// indicate the players number.
@@ -216,7 +216,7 @@ namespace BDSADominion.GUI
 
             font = Content.Load<SpriteFont>("Fonts\\Arial");
             fontWin = Content.Load<SpriteFont>("Fonts\\Winfont");
-            ////table = Content.Load<Texture2D>("Dominiontable");
+            table = Content.Load<Texture2D>("Pics\\Dominiontable");
             cursor = Content.Load<Texture2D>("Pics\\Cursor");
             endphasebutton = Content.Load<Texture2D>("Pics\\EndButton");
             actions = 0;
@@ -271,7 +271,7 @@ namespace BDSADominion.GUI
                 StartUp = true;
                 StartUpdate();
             }
-            
+
             lastMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
 
@@ -313,14 +313,14 @@ namespace BDSADominion.GUI
         {
             graphics.GraphicsDevice.Clear(Color.BlanchedAlmond);
             spriteBatch.Begin();
-            //spriteBatch.Draw(table, Vector2.Zero, Color.White);
+            spriteBatch.Draw(table, Vector2.Zero, Color.White);
 
             handZone.Draw(spriteBatch);
             actionZone.Draw(spriteBatch);
             discardZone.Draw(spriteBatch);
             deckZone.Draw(spriteBatch);
             supplyZone.Draw(spriteBatch);
-            spriteBatch.Draw(endphasebutton, new Vector2(185, 340), Color.White);
+            spriteBatch.Draw(endphasebutton, new Vector2(165, 340), Color.White);
             spriteBatch.Draw(cursor, new Vector2(mouseX, mouseY), Color.White);
             spriteBatch.DrawString(font, "Actions: " + actions.ToString(), new Vector2(400, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Buys: " + buys.ToString(), new Vector2(600, 15), Color.RoyalBlue);
