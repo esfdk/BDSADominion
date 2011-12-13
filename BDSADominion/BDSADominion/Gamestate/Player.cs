@@ -1,5 +1,6 @@
 ﻿namespace BDSADominion.Gamestate
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
@@ -176,11 +177,6 @@
                     if (DeckSize == 0)
                     {
                         ShuffleDiscard();
-                    }
-
-                    if (DeckSize == 0)
-                    {
-                        break;
                     }
 
                     temporary.Add(deck.Pop());
@@ -372,6 +368,7 @@
 
             if (DeckSize == 0)
             {
+                Console.WriteLine("Buggy decksize!"); // TODO: Remove this
                 ShuffleDiscard();
             }
 

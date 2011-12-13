@@ -2,4 +2,16 @@ system_chart BDSADominion
 indexing
 	author: "Frederik Lysgaard";
 	author: "Christian 'Troy' Jensen";
-	author: "Jakob Melnyk";
+	author: "Jakob Melnyk (jmel@itu.dk)";
+	supervisor: "Joe Kiniry";
+	course: "BDSA-E2011";
+	created: "28th November 2011";
+	lastModified: "14th December 2011";
+explanation "System chart for the BDSADominion project in the Analysis, Design and Software Architecture fall 2011 course."
+class Control
+	description
+cluster GUI
+	description ""
+cluster Gamestate_cluster
+	description "The 'model' of the project. Remembers information about most of the states and the "
+end

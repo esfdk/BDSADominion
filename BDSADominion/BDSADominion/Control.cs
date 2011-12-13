@@ -274,7 +274,6 @@
             network.MessageReceived += MessageFromNetwork;
 
             gui = new GUIInterface();
-            gui.SetPlayerNumber((int)clientPlayerNumber);
             gui.EndPhasePressed += EndPhase;
             gui.BuyAttempt += CanBuyCard;
             gui.CardInHandPressed += CanPlayCard;
@@ -299,6 +298,7 @@
             gui.SetAction((int)gs.NumberOfActions);
             gui.SetBuys((int)gs.NumberOfBuys);
             gui.SetCoins((int)gs.NumberOfCoins);
+            gui.SetPlayerNumber((int)clientPlayerNumber);
 
             switch (gs.GetPhase)
             {
@@ -370,6 +370,7 @@
                 {
                     network.TurnMessage("!ep");
                 }
+
                 StartTurn();
             }
         }
@@ -573,6 +574,8 @@
                         break;
                 }
             }
+
+            UpdateGui();
         }
 
         /// <summary>
@@ -644,7 +647,6 @@
                         break;
                 }
             }
-            UpdateGui(); //TODO Remove
         }
 
         #endregion

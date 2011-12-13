@@ -1,9 +1,3 @@
-system_chart BDSADominion
- explanation "solution for the third semester end project at the/
- software development line of IT University of Copenhagen"
- cluster GUI description""
-end
-
 cluster_chart GUI
  explanation " The graphical representation part of the project"
  class GameClass description " The game class"
