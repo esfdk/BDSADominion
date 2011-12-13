@@ -359,11 +359,6 @@
         {
             Contract.Requires(!gs.InActionPhase & !gs.InBuyPhase);
 
-            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
-            {
-                network.TurnMessage("!ep");
-            }
-
             if (gs.GameOver)
             {
                 EndOfGame();
@@ -372,6 +367,11 @@
             {
                 CleanUp();
                 StartTurn();
+            }
+
+            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
+            {
+                network.TurnMessage("!ep");
             }
         }
 

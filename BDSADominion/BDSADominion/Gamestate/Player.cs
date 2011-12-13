@@ -386,14 +386,16 @@
             foreach (Card card in hand)
             {
                 discard.Push(card);
-                hand.Remove(card);
             }
+
+            hand.Clear();
 
             foreach (Card card in played)
             {
                 discard.Push(card);
-                played.Remove(card);
             }
+
+            played.Clear();
 
             DrawCards(5);
         }
