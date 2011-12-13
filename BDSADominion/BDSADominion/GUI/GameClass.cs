@@ -332,7 +332,7 @@ namespace BDSADominion.GUI
             spriteBatch.DrawString(font, "Buys: " + buys.ToString(), new Vector2(600, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Coins: " + coins.ToString(), new Vector2(800, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Player" + playernum.ToString(), new Vector2(10, 32), Color.RoyalBlue);
-            spriteBatch.DrawString(font, turn ? "Your turn   -" : "Not your turn", new Vector2(10, 10), Color.RoyalBlue);
+            spriteBatch.DrawString(font, turn ? "Your turn   -" : "Not your turn  -", new Vector2(10, 10), Color.RoyalBlue);
             if (phase == 0)
             {
                 spriteBatch.DrawString(font, "Action phase", new Vector2(163, 10), Color.RoyalBlue);
@@ -344,12 +344,12 @@ namespace BDSADominion.GUI
 
             if (endOfGame && playernum == winnerNum)
             {
-                spriteBatch.DrawString(fontWin, "YOU ARE THE WINNER \n CONGRATULATIONS", new Vector2(200, 220), Color.Indigo);
+                spriteBatch.DrawString(fontWin, "YOU ARE THE WINNER \n CONGRATULATIONS", new Vector2(200, 220), Color.Red);
             }
 
             if (endOfGame && playernum != winnerNum)
             {
-                spriteBatch.DrawString(fontWin, "YOU LOSE\n NOW TAKE YOUR\n CURSED SOUL AND GO AWAY", new Vector2(200, 220), Color.Indigo);
+                spriteBatch.DrawString(fontWin, "YOU LOSE\n NOW TAKE YOUR\n CRUSHED SOUL AND GO AWAY", new Vector2(200, 220), Color.Red);
             }
 
             spriteBatch.End();
