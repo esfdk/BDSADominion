@@ -1,9 +1,10 @@
-using BDSADominion.Gamestate;
-
 namespace BDSADominion.GUI
 {
     using System;
     using System.Collections.Generic;
+
+    using BDSADominion.Gamestate;
+    using BDSADominion.GUI.Zones;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -12,14 +13,77 @@ namespace BDSADominion.GUI
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
+    /// <author>
+    /// Frederik Lysgaard (frly@itu.dk)
+    /// </author>
     public class GameClass : Game
     {
         #region // Fields\\
 
         /// <summary>
-        /// The Graphicsmanager for the game.
+        /// Indicate player turn.
         /// </summary>
-        private readonly GraphicsDeviceManager graphics;
+        internal bool turn;
+
+        /// <summary>
+        /// Indicate phase.
+        /// </summary>
+        internal int phase;
+
+        /// <summary>
+        /// Indicates if games is over.
+        /// </summary>
+        internal bool endOfGame;
+
+        /// <summary>
+        /// indicate the winer
+        /// </summary>
+        internal int winnerNum;
+
+        /// <summary>
+        /// The Discardzone.
+        /// </summary>
+        internal DiscardZone discardZone;
+
+        /// <summary>
+        /// The Deckzone.
+        /// </summary>
+        internal DeckZone deckZone;
+
+        /// <summary>
+        /// The ActionZone.
+        /// </summary>
+        internal ActionZone actionZone;
+
+        /// <summary>
+        /// The Handzone.
+        /// </summary>
+        internal HandZone handZone;
+
+        /// <summary>
+        /// The Supplyzone.
+        /// </summary>
+        internal SupplyZone supplyZone;
+
+        /// <summary>
+        /// emptysprite used to show an emptyspot.
+        /// </summary>
+        public static CardSprite Empty;
+
+        /// <summary>
+        /// backsprite used to show backside of card.
+        /// </summary>
+        public static CardSprite Back;
+
+        /// <summary>
+        /// A dictionary containing a cardmember and the corresponding cardtexture.
+        /// </summary>
+        public static Dictionary<CardName, Texture2D> cardImages = new Dictionary<CardName, Texture2D>();
+
+        /// <summary>
+        /// A dictionary containing a cardmember and the corresponding buttontexture.
+        /// </summary>
+        public static Dictionary<CardName, Texture2D> buttonImages = new Dictionary<CardName, Texture2D>();
 
         /// <summary>
         /// Number of actions left.
@@ -37,14 +101,14 @@ namespace BDSADominion.GUI
         internal int coins;
 
         /// <summary>
-        /// Indicate player turn.
+        /// The Graphicsmanager for the game.
         /// </summary>
-        internal bool turn;
+        private readonly GraphicsDeviceManager graphics;
 
         /// <summary>
-        /// Indicate phase.
+        /// The playing table.
         /// </summary>
-        internal int phase;
+        ////private Texture2D table;
 
         /// <summary>
         /// indicate the players number.
@@ -67,22 +131,12 @@ namespace BDSADominion.GUI
         private int mouseY;
 
         /// <summary>
-        /// The spritefont.
+        /// The spritefont for writing standart text outputs.
         /// </summary>
         private SpriteFont font;
 
         /// <summary>
-        /// Indicates if games is over.
-        /// </summary>
-        internal bool endOfGame;
-
-        /// <summary>
-        /// indicate the winer
-        /// </summary>
-        internal int winnerNum;
-
-        /// <summary>
-        /// The spritefont for WIN.
+        /// The spritefont for the endgame text "slidly" bigger than normal text.
         /// </summary>
         private SpriteFont fontWin;
 
@@ -92,52 +146,19 @@ namespace BDSADominion.GUI
         private SpriteBatch spriteBatch;
 
         /// <summary>
-        /// The discardsprite.
-        /// </summary>
-        internal DiscardZone discardZone;
-
-        /// <summary>
-        /// The Decksprite.
-        /// </summary>
-        internal DeckZone deckZone;
-
-        /// <summary>
-        /// The ActionZone.
-        /// </summary>
-        internal ActionZone actionZone;
-
-        /// <summary>
-        /// The handzone.
-        /// </summary>
-        internal HandZone handZone;
-
-        /// <summary>
-        /// The supplyzone.
-        /// </summary>
-        internal SupplyZone supplyZone;
-
-        /// <summary>
-        /// The playing table.
-        /// </summary>
-        ////private Texture2D table;
-
-        /// <summary>
         /// The cursor.
         /// </summary>
         private Texture2D cursor;
 
+        /// <summary>
+        /// The current state of the mouse.
+        /// </summary>
         private MouseState currentMouseState;
+
+        /// <summary>
+        /// last state of the mouse.
+        /// </summary>
         private MouseState lastMouseState;
-
-        public static CardSprite Empty;
-        public static CardSprite Back;
-
-        public static Dictionary<CardName, Texture2D> cardImages = new Dictionary<CardName, Texture2D>();
-        public static Dictionary<CardName, Texture2D> buttonImages = new Dictionary<CardName, Texture2D>();
-
-        internal event CardSpriteHandler HandCardClicked;
-        internal event CardNameHandler SupplyCardClicked;
-        internal event ClickHandler EndPhaseClicked;
 
         #endregion
 
@@ -154,6 +175,22 @@ namespace BDSADominion.GUI
             graphics = new GraphicsDeviceManager(this) { PreferredBackBufferWidth = 1280, PreferredBackBufferHeight = 600 };
             Content.RootDirectory = "Content";
         }
+
+        /// <summary>
+        /// event for when a card is clicked in the handzone.
+        /// </summary>
+        internal event CardSpriteHandler HandCardClicked;
+
+        /// <summary>
+        /// event for when a button is clicked in the supplyzone.
+        /// </summary>
+        internal event CardNameHandler SupplyCardClicked;
+
+        /// <summary>
+        /// event for when the endphase button is clicked.
+        /// </summary>
+        internal event ClickHandler EndPhaseClicked;
+
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -210,12 +247,6 @@ namespace BDSADominion.GUI
 
             Empty = new CardSprite(CardName.Empty, -1);
             Back = new CardSprite(CardName.Backside, -1);
-
-            ////TEST ZONE:
-            handZone.NewCards(
-                new List<CardSprite> { new CardSprite(CardName.Market, 1), new CardSprite(CardName.Gardens, 1) });
-            supplyZone.NewCards(
-                new List<CardName> { CardName.Market, CardName.Gardens });
         }
 
         /// <summary>
@@ -277,29 +308,6 @@ namespace BDSADominion.GUI
             spriteBatch.Begin();
             //spriteBatch.Draw(table, Vector2.Zero, Color.White);
 
-            /*if (ButtonState.Pressed == currentMouseState.LeftButton && lastMouseState.LeftButton == ButtonState.Released)
-            {
-                CardSprite cardx = actionZone.FindCardByMouseClick(mouseX, mouseY);
-                if (cardx != null)
-                {
-                    discardZone.AddCard(cardx);
-                }
-                if (cardx != null)
-                {
-                    actionZone.RemoveCard(cardx.Card, cardx.Id);
-                }
-
-            }
-
-            if (ButtonState.Pressed == currentMouseState.LeftButton && lastMouseState.LeftButton == ButtonState.Released)
-            {
-                CardName cardx = supplyZone.FindCardByMouseClick(mouseX, mouseY, spriteBatch, font);
-                if (cardx != null)
-                {
-                    discardZone.AddCard(cardx);
-                }
-            }*/
-
             handZone.Draw(spriteBatch);
             actionZone.Draw(spriteBatch);
             discardZone.Draw(spriteBatch);
@@ -328,7 +336,7 @@ namespace BDSADominion.GUI
 
             if (endOfGame && playernum != winnerNum)
             {
-                spriteBatch.DrawString(fontWin, "YOU LOSE, NOW TAKE YOUR CURSED SOUL AND GO AWAY", new Vector2(200, 220), Color.Indigo);
+                spriteBatch.DrawString(fontWin, "YOU LOSE\n NOW TAKE YOUR\n CURSED SOUL AND GO AWAY", new Vector2(200, 220), Color.Indigo);
             }
 
             spriteBatch.End();
