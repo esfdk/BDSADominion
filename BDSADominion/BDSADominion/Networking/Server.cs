@@ -135,7 +135,7 @@
             ////Console.WriteLine("Server.ServerReceivedMessage: Server received '{0}' of type {1} from player {2}", messageParts[1], messageParts[0], conn.Id);
             if (messageParts[1].StartsWith("<STGM>") && conn.Id == 1)
             {
-                ////Console.WriteLine("Server.ServerReceivedMessage: Game Starting");
+                ////Console.WriteLine("Server.ServerReceivedMessage: Start Game!");
                 foreach (KeyValuePair<int, Connection> connectedClient in connectedClients)
                 {
                     SystemMessage(string.Format("<STGM>,{0},{1}", connectedClients.Count, connectedClient.Key), connectedClient.Value);

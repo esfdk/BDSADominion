@@ -548,7 +548,7 @@
 
             if (message.Substring(0, 3).Equals("!bc"))
             {
-                string msg = message.Substring(message.IndexOf("["), message.IndexOf("]") - message.IndexOf("[") - 1);
+                string msg = message.Substring(message.IndexOf("[")+1, message.IndexOf("]") - message.IndexOf("[") - 1);
                 CardName cardOut;
                 if (!CardName.TryParse(msg, out cardOut))
                 {
