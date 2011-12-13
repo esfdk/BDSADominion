@@ -69,7 +69,7 @@
             client.Comm.Send(NetworkConst.ENCODER.GetBytes(typeMessage));
             while (responseMessages.Any(mes => mes.Equals(string.Empty)))
             {
-                Console.WriteLine("Waiting for responses");
+
             }
             string[] responses = new string[responseMessages.Length];
             responseMessages.CopyTo(responses, 0);
