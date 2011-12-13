@@ -103,7 +103,6 @@
             }
 
             Console.WriteLine("game started");
-            SetUpGame((uint) numberOfPlayers);
             //TODO Start GameState
             //We count on that client 1 is the server. 
         }
@@ -201,10 +200,12 @@
             {
                 string[] messageParts = message.Split(new char[] { ',' });
                 serverStarted = true;
+                clientPlayerNumber = (uint.Parse(messageParts[2]));
                 network.SetNumberOfClients(int.Parse(messageParts[1]));
-                numberOfPlayers = int.Parse(messageParts[2]);
-                Console.WriteLine("SYSTEM: GAME STARTED. There are {0} players and you are player {1}", 
+                numberOfPlayers = int.Parse(messageParts[1]);
+                Console.WriteLine("SYSTEM: GAME STARTED. There are {1} players and you are player {0}",
                                   int.Parse(messageParts[1]), numberOfPlayers);
+                SetUpGame((uint)numberOfPlayers);
             }
         }
 
@@ -277,7 +278,7 @@
         private void UpdateGui()
         {
             gui.DrawAction(gs.ActivePlayer.Played.ToArray());
-            gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null, 0); // TODO: Explain why index is needed in draw discard??
+            gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null);
             gui.DrawHand(gs.ActivePlayer.Hand.ToArray());
 
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)

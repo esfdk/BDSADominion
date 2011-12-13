@@ -53,7 +53,7 @@
 
         private void BeginReceiveCallback(IAsyncResult asyncResult)
         {
-            Console.WriteLine("Recieve begun on Connection");
+            ////Console.WriteLine("Recieve begun on Connection");
             int read = connSocket.EndReceive(asyncResult);
 
             if (read > 0)
