@@ -248,6 +248,8 @@
 
             gs = new Gamestate.Gamestate(numOfPlayers, startSupply);
 
+            gs.ActivePlayer = gs.Players[0];
+
             foreach (Player player in gs.Players)
             {
                 for (int i = 1; i < 7; i++)
@@ -285,7 +287,7 @@
         {
             gui.DrawAction(gs.ActivePlayer.Played.ToArray());
             gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null);
-            gui.DrawHand(gs.ActivePlayer.Hand.ToArray());
+            gui.DrawHand(gs.Players[(int)clientPlayerNumber - 1].Hand.ToArray());
 
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
@@ -333,11 +335,7 @@
         /// </author>
         private void StartTurn()
         {
-            if (gs.ActivePlayer == null)
-            {
-                gs.ActivePlayer = gs.Players[0];
-            }
-            else if (gs.ActivePlayer.PlayerNumber == gs.Players.Count)
+            if (gs.ActivePlayer.PlayerNumber == gs.Players.Count)
             {
                 gs.ActivePlayer = gs.Players[0];
             }
@@ -360,7 +358,6 @@
         private void EndTurn()
         {
             Contract.Requires(!gs.InActionPhase & !gs.InBuyPhase);
-
 
             if (gs.GameOver)
             {
@@ -486,6 +483,8 @@
             {
                 gs.EndActionPhase();
             }
+
+            UpdateGui();
         }
 
         /// <summary>
@@ -509,6 +508,8 @@
                 gs.EndBuyPhase();
                 EndTurn();
             }
+
+            UpdateGui();
         }
 
         #endregion
