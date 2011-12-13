@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
-
+    using System.Linq;
     using BDSADominion.Gamestate.Card_Types;
 
     /// <summary>
@@ -207,6 +207,10 @@
         {
             Contract.Requires(!InActionPhase & !InBuyPhase);
             Contract.Ensures(InActionPhase & !InBuyPhase);
+
+            InActionPhase = true;
+            NumberOfActions = 1;
+            NumberOfBuys = 1;
         }
 
         /// <summary>
@@ -216,6 +220,9 @@
         {
             Contract.Requires(InActionPhase & !InBuyPhase);
             Contract.Ensures(!InActionPhase & !InBuyPhase);
+
+            InActionPhase = false;
+            NumberOfActions = 0;
         }
 
         /// <summary>
@@ -225,6 +232,15 @@
         {
             Contract.Requires(!InActionPhase & !InBuyPhase);
             Contract.Ensures(!InActionPhase & InBuyPhase);
+
+            InBuyPhase = true;
+
+            ICollection<Card> hand = ActivePlayer.Hand;
+            int numCopper = hand.Count(card => card.Name == CardName.Copper);
+            int numSilver = hand.Count(card => card.Name == CardName.Silver);
+            int numGold = hand.Count(card => card.Name == CardName.Gold);
+
+            numberOfCoins += (uint)(numCopper + (2 * numSilver) + (3 * numGold));
         }
 
         /// <summary>
@@ -234,6 +250,9 @@
         {
             Contract.Requires(!InActionPhase & InBuyPhase);
             Contract.Ensures(!InActionPhase & !InBuyPhase);
+
+            InBuyPhase = false;
+            NumberOfBuys = 0;
         }
 
         /// <summary>
@@ -280,6 +299,33 @@
                 GameOver = true;
             }
 
+        }
+
+        /// <summary>
+        /// A list containing the scores of the players.
+        /// </summary>
+        /// <returns>
+        /// The scores of all the players.
+        /// </returns>
+        public List<int> GetScores()
+        {
+            List<int> scores = new List<int>();
+
+            for (int i = 0; i < Players.Count - 1; i++)
+            {
+                ICollection<Card> allCards = Players[i].AllCards.Keys;
+
+                int numEstate = allCards.Count(card => card.Name == CardName.Estate);
+                int numDuchy = allCards.Count(card => card.Name == CardName.Duchy);
+                int numProvince = allCards.Count(card => card.Name == CardName.Province);
+                int numCurse = allCards.Count(card => card.Name == CardName.Curse);
+                int numGardens = allCards.Count(card => card.Name == CardName.Gardens);
+
+                int score = numEstate + (3 * numDuchy) + (6 * numProvince) + ((allCards.Count / 10) * numGardens) - numCurse;
+                scores.Add(score);
+            }
+
+            return scores;
         }
     }
 }

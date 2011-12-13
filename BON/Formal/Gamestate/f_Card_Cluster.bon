@@ -5,9 +5,20 @@ component
 			author: "Jakob Melnyk (jmel@itu.dk)";
 		feature
 		--Queries
+		Equals : BOOLEAN
+			-> obj : VALUE -- Object in C#.
+		Equals : BOOLEAN
+			-> other : CARD
 		GetName : CARD_NAME
 		GetNumber : NATURAL
+		SetUp : BOOLEAN
 		--Commands
+		Initialize 
+			-> name : CARD
+			-> number : NATURAL
+			require SetUp = false
+			ensure  SetUp = true
+		end
 	end
 	
 	class CARD_FACTORY
@@ -15,11 +26,21 @@ component
 			author: "Jakob Melnyk (jmel@itu.dk)";
 		feature
 		--Queries
+		SetUp : BOOLEAN
+		CreatedCards : SET[CARD]
+		CardsMade : TABLE[CARD_NAME, NATURAL]
+		
+		--Commands
 		CreateCard : CARD
-			-> CARD_NAME
+			-> Card : CARD_NAME
 			ensure Result.GetName = CARD_NAME
 		end
-		--Commands
+		SetUpCards
+			-> cards : COLLECTION[CARD_NAME]
+			require SetUp = false and /= void
+			ensure SetUp = true
+		end
+		Invariant: for_all c member_of CreatedCards it_holds c.
 	end
 	
 	class CARD_NAME
