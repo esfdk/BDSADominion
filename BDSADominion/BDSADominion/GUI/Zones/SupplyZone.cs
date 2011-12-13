@@ -22,12 +22,12 @@
          /// <summary>
          /// next card x-coor
          /// </summary>
-         private Vector2 offset = new Vector2(0, 35); //TODO Move to GUIConstants
+         private Vector2 offset = new Vector2(0, 35); //This would be an interesting candidate for GUIConstants
 
          /// <summary>
          /// The starting position of the supplyzone.
          /// </summary>
-         private Vector2 startPosition = new Vector2(1150, 10); //TODO Move to GUIConstants
+         private Vector2 startPosition = new Vector2(1150, 10); //This would be an interesting candidate for GUIConstants
 
          /// <summary>
          /// Initializes a new instance of the <see cref="HandZone"/> class.
@@ -131,7 +131,7 @@
                  count++;
              }
 
-             return CardName.Empty; //TODO
+             return CardName.Empty;
          }
 
          private int ClickedIndex(int mouseY)

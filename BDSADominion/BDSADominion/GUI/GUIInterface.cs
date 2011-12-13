@@ -76,22 +76,22 @@ namespace BDSADominion.GUI
         //Unnessecary //TODO
         private void HandPressed(int index)
         {
-            //Console.WriteLine("Pressed index {0} in Hand", index);
+            ////Console.WriteLine("Pressed index {0} in Hand", index);
         }
 
         private void SupplyPressed(CardName card)
         {
-            //Console.WriteLine("Pressed {0} in Supply", card);
+            ////Console.WriteLine("Pressed {0} in Supply", card);
         }
 
         private void PhaseEndPressed()
         {
-            //Console.WriteLine("EndPhase has been pressed");
+            ////Console.WriteLine("EndPhase has been pressed");
         }
 
         private void UpdateHappened()
         {
-            //Console.WriteLine("Update has happened");
+            ////Console.WriteLine("Update has happened");
         }
 
         public void DrawHand(Card[] cards)

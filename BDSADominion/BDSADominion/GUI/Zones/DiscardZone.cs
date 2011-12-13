@@ -19,7 +19,7 @@
          /// <summary>
          /// The starting position of the discardzone.
          /// </summary>
-         private Vector2 drawPosition = new Vector2(10, 375); //TODO Move to GUIConstants
+         private Vector2 drawPosition = new Vector2(10, 375); //This would be an interesting candidate for GUIConstants
 
          /// <summary>
          /// Initializes a new instance of the <see cref="HandZone"/> class.

@@ -22,12 +22,12 @@
          /// <summary>
          /// next card x-coor
          /// </summary>
-         private Vector2 offset = new Vector2(135, 0); //TODO Move to GUIConstants
+         private Vector2 offset = new Vector2(135, 0); //This would be an interesting candidate for GUIConstants
 
          /// <summary>
          /// The starting position of the hand.
          /// </summary>
-         private Vector2 startPosition = new Vector2(290, 375); //TODO Move to GUIConstants
+         private Vector2 startPosition = new Vector2(290, 375); //This would be an interesting candidate for GUIConstants
 
          /// <summary>
          /// Initializes a new instance of the <see cref="HandZone"/> class.
@@ -132,7 +132,7 @@
                  count++;
              }
 
-             return null; //TODO
+             return null; //TODO Contract. isClickedWithin must be true
          }
 
          private int ClickedIndex(int mouseX)

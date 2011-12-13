@@ -108,7 +108,7 @@
                         MessageReceived(messageParts[2], fromPlayer);
                         break;
                     case MessageType.Action:
-                        MessageReceived(messageParts[2], fromPlayer); // TODO ResponseWait, how to know?
+                        MessageReceived(messageParts[2], fromPlayer);
                         client.Comm.Send(NetworkConst.ENCODER.GetBytes(ResponseMessage()));
                         break;
                     case MessageType.Response:
@@ -120,11 +120,11 @@
                         
                         break;
                     case MessageType.WaitResponse:
-                        //TODO ResponseWait Message
+                        //MessageWait is not implemented and not needed by any cards.
                         break;
                     default:
-                    //TODO Error
-                    break;
+                        Console.WriteLine("NetworkInterface.ReceivedNewMessage: Unrecognized MessageType");
+                        break;
                 }
             }
 

@@ -84,6 +84,7 @@ class_chart GUIINTERFACE
 	"Draw the hand!"
 	"Draw the actionzone!"
 	"Draw the discardzone!"
+	"Draw the deck!"
 	"Set actions!"
 	"Set buys!"
 	"Set coins!"
