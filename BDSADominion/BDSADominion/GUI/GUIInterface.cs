@@ -96,7 +96,7 @@ namespace BDSADominion.GUI
             game.supplyZone.NewCards(cards.Select(card => card.Name).ToList());
         }
 
-        public void DrawDiscard(Card card, int index)
+        public void DrawDiscard(Card card)
         {
             if (card == null)
             {
@@ -104,7 +104,7 @@ namespace BDSADominion.GUI
             }
             else
             {
-                game.discardZone.AddCard(new CardSprite(card.Name, index));
+                game.discardZone.AddCard(new CardSprite(card.Name, -1));
             }
             
         }

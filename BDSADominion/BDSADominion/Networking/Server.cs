@@ -41,14 +41,14 @@
             //ClientConnectedEvent += ServerPreGameMessage;
         }
 
-        private bool ServerPreGameMessage(Connection connection)
+        /*private bool ServerPreGameMessage(Connection connection)
         {
             int currentNumberOfPlayers = GetClientList().Count;
             SystemMessage(string.Format("<YPN{0}>", connection.Id), connection);
             SystemMessage(string.Format("<CP{0}>", currentNumberOfPlayers));
 
             return true; // TODO What?
-        }
+        }*/
 
         internal event ConnectedClientHandler ClientConnectedEvent;
 
@@ -93,7 +93,7 @@
         /// </param>
         internal void ForwardMessage(string message, int clientId, MessageType type)
         {
-            Console.WriteLine("Server.ForwardMessage: Forwarding message: " + message);
+            ////Console.WriteLine("Server.ForwardMessage: Forwarding message: " + message);
             string compoundMessage = string.Format("{0}|{1}|{2}<EOF>", clientId, type, message);
 
             foreach (Connection connection in GetClientList().Where(con => con.Id != clientId))
@@ -135,7 +135,7 @@
             Console.WriteLine("Server.ServerReceivedMessage: Server received '{0}' of type {1} from player {2}", messageParts[1], messageParts[0], conn.Id);
             if (messageParts[1].StartsWith("<STGM>") && conn.Id == 1)
             {
-                Console.WriteLine("Server.ServerReceivedMessage: Game Starting");
+                ////Console.WriteLine("Server.ServerReceivedMessage: Game Starting");
                 foreach (KeyValuePair<int, Connection> connectedClient in connectedClients)
                 {
                     SystemMessage(string.Format("<STGM>,{0},{1}", connectedClients.Count, connectedClient.Key), connectedClient.Value);

@@ -103,9 +103,6 @@
             }
 
             Console.WriteLine("game started");
-            SetUpGame((uint)numberOfPlayers);
-            //TODO Start GameState
-            //We count on that client 1 is the server. 
         }
 
         /// <summary>
@@ -201,10 +198,12 @@
             {
                 string[] messageParts = message.Split(new char[] { ',' });
                 serverStarted = true;
-                network.SetNumberOfClients(int.Parse(messageParts[1]));
+                clientPlayerNumber = (uint.Parse(messageParts[1]));
+                network.SetNumberOfClients(int.Parse(messageParts[2]));
                 numberOfPlayers = int.Parse(messageParts[2]);
                 Console.WriteLine("SYSTEM: GAME STARTED. There are {0} players and you are player {1}",
                                   int.Parse(messageParts[1]), numberOfPlayers);
+                SetUpGame((uint)numberOfPlayers);
             }
         }
 
@@ -281,7 +280,7 @@
         private void UpdateGui()
         {
             gui.DrawAction(gs.ActivePlayer.Played.ToArray());
-            gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null, 0);
+            gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null);
             gui.DrawHand(gs.ActivePlayer.Hand.ToArray());
 
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
