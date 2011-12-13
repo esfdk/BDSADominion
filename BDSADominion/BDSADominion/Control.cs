@@ -198,7 +198,7 @@
             {
                 string[] messageParts = message.Split(new[] { ',' });
                 serverStarted = true;
-                clientPlayerNumber = (uint.Parse(messageParts[2]));
+                clientPlayerNumber = uint.Parse(messageParts[2]);
                 network.SetNumberOfClients(int.Parse(messageParts[1]));
                 numberOfPlayers = int.Parse(messageParts[1]);
                 Console.WriteLine("SYSTEM: GAME STARTED. There are {1} players and you are player {0}",
@@ -270,9 +270,9 @@
             gui.EndPhasePressed += EndPhase;
             gui.BuyAttempt += CanBuyCard;
             gui.CardInHandPressed += CanPlayCard;
-            UpdateGui();
 
             StartTurn();
+            gui.RunGame();
         }
 
         /// <summary>
@@ -575,7 +575,7 @@
         /// </author>
         private void CanBuyCard(CardName cardName)
         {
-            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
+            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber & cardName != CardName.Empty & cardName != CardName.Backside)
             {
                 if (gs.NumberOfCoins >= cardCost[cardName] & gs.Supply[cardName] != 0)
                 {
