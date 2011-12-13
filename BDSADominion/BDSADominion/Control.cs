@@ -103,8 +103,6 @@
             }
 
             Console.WriteLine("game started");
-            //TODO Start GameState
-            //We count on that client 1 is the server. 
         }
 
         /// <summary>
@@ -212,13 +210,13 @@
         /// <summary>
         /// Sets up a new game with the number of players pass as parameter.
         /// </summary>
-        /// <param name="numberOfPlayers">
+        /// <param name="numOfPlayers">
         /// The number Of Players.
         /// </param>
         /// <author>
         /// Jakob Melnyk (jmel@itu.dk)
         /// </author>
-        private void SetUpGame(uint numberOfPlayers)
+        private void SetUpGame(uint numOfPlayers)
         {
             Dictionary<CardName, uint> startSupply = new Dictionary<CardName, uint>
                 {
@@ -248,7 +246,7 @@
 
             CardFactory.SetUpCards(startSupply.Keys);
 
-            gs = new Gamestate.Gamestate(numberOfPlayers, startSupply);
+            gs = new Gamestate.Gamestate(numOfPlayers, startSupply);
 
             foreach (Player player in gs.Players)
             {
@@ -265,7 +263,15 @@
                 player.DrawCards(5);
             }
 
-            // TODO: Set GUI one-time stuff.
+            network.MessageReceived += MessageFromNetwork;
+
+            gui = new GUIInterface();
+            gui.SetPlayerNumber((int)clientPlayerNumber);
+            gui.EndPhasePressed += EndPhase;
+            gui.BuyAttempt += CanBuyCard;
+            gui.CardInHandPressed += CanPlayCard;
+            UpdateGui();
+
             StartTurn();
         }
 
@@ -327,7 +333,11 @@
         /// </author>
         private void StartTurn()
         {
-            if (gs.ActivePlayer.PlayerNumber == gs.Players.Count | gs.ActivePlayer == null)
+            if (gs.ActivePlayer == null)
+            {
+                gs.ActivePlayer = gs.Players[0];
+            }
+            else if (gs.ActivePlayer.PlayerNumber == gs.Players.Count)
             {
                 gs.ActivePlayer = gs.Players[0];
             }
