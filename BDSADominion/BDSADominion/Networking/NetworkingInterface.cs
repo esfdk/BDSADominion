@@ -33,7 +33,7 @@ namespace BDSADominion.Networking
         {
             client = new Client(ip);
             client.NewMessageEvent += ReceivedNewMessage;
-            SetNumberOfClients(2); //TODO hardcoded number of total clients
+            SetNumberOfClients(2); //TODO hardcoded number of total clients. Must be updated with each serverMessage
         }
 
         //May only be called if this is server //TODO contract
@@ -42,7 +42,7 @@ namespace BDSADominion.Networking
             return server.Ip.ToString();
         }
 
-        private void SetNumberOfClients(int otherClients)
+        public void SetNumberOfClients(int otherClients)
         {
             responseMessages = new string[otherClients];
             EmptyResponses();
@@ -67,7 +67,13 @@ namespace BDSADominion.Networking
             {
                 //Waiting for responses
             }
-            return null;
+            return null; //TODO WTF what should be returned?
+        }
+
+        public void PreGameMessage(string message)
+        {
+            string typeMessage = string.Format("{0}|{1}<EOF>", MessageType.System, message);
+            client.Comm.Send(NetworkConst.ENCODER.GetBytes(typeMessage));
         }
 
         private string ResponseMessage()
@@ -98,7 +104,12 @@ namespace BDSADominion.Networking
                         client.Comm.Send(NetworkConst.ENCODER.GetBytes(ResponseMessage()));
                         break;
                     case MessageType.Response:
-                        responseMessages[int.Parse(messageParts[0]) - 1] = messageParts[2];
+                        int playerId = int.Parse(messageParts[0]) - 1;
+                        if (playerId < responseMessages.Length)
+                        {
+                            responseMessages[playerId] = messageParts[2];
+                        }
+                        
                         break;
                     case MessageType.WaitResponse:
                         //TODO ResponseWait Message

@@ -90,7 +90,7 @@
         /// </param>
         internal void ForwardMessage(string message, int clientId)
         {
-            Console.WriteLine("Forwarding message");
+            Console.WriteLine("Server.ForwardMessage: Forwarding message: " + message);
             string compoundMessage = string.Format("{0}|{1}<EOF>", clientId, message);
 
             foreach (Connection connection in GetClientList().Where(con => con.Id != clientId))
@@ -128,8 +128,19 @@
 
         private void ServerRecievedMessage(Connection conn, string message)
         {
-            Console.WriteLine("Server received '{0}' from player {1}", message, conn.Id);
-            ForwardMessage(message, conn.Id);
+            Console.WriteLine("Server.ServerReceivedMessage: Server received '{0}' from player {1}", message, conn.Id);
+            if (message.Contains("<STGM>") && conn.Id == 1)
+            {
+                Console.WriteLine("Server.ServerReceivedMessage: Game Starting");
+                foreach (KeyValuePair<int, Connection> connectedClient in connectedClients)
+                {
+                    SystemMessage(string.Format("<STGM>,{0},{1}", connectedClients.Count, connectedClient.Key), connectedClient.Value);
+                }
+            }
+            else
+            {
+                ForwardMessage(message, conn.Id);
+            }
         }
 
         private bool ClientConnected(Connection conn)

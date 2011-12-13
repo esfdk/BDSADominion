@@ -43,7 +43,7 @@
 
         private void BeginReceiveCallback(IAsyncResult asyncResult)
         {
-            Console.WriteLine("Recieve begun");
+            Console.WriteLine("Recieve begun on Connection");
             int read = connSocket.EndReceive(asyncResult);
 
             if (read > 0)
@@ -52,7 +52,7 @@
 
                 string content = stringBuilder.ToString();
 
-                ////Console.WriteLine(content);
+                Console.WriteLine(content);
 
                 if (content.IndexOf("<EOF>") >= 0)
                 {
