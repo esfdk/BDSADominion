@@ -27,7 +27,7 @@
          /// <summary>
          /// The starting position of the supplyzone.
          /// </summary>
-         private Vector2 startPosition = new Vector2(1150, 10); //TODO Move to GUIConstants
+         private Vector2 startPosition = new Vector2(1150, 35); //TODO Move to GUIConstants
 
          /// <summary>
          /// Initializes a new instance of the <see cref="HandZone"/> class.
