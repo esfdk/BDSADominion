@@ -141,8 +141,8 @@
             else
             {
                 MessageType messageType;
-                MessageType.TryParse(messageParts[1], out messageType);
-                ForwardMessage(message, conn.Id, messageType);
+                MessageType.TryParse(messageParts[0], out messageType);
+                ForwardMessage(messageParts[1], conn.Id, messageType);
             }
         }
 
