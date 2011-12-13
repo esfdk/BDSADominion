@@ -203,6 +203,7 @@
                 numberOfPlayers = int.Parse(messageParts[1]);
                 Console.WriteLine("SYSTEM: GAME STARTED. There are {1} players and you are player {0}",
                                   clientPlayerNumber, numberOfPlayers);
+                network.MessageReceived -= ReceivePreGameMessage;
                 SetUpGame((uint)numberOfPlayers);
             }
         }
@@ -544,7 +545,7 @@
         {
             if (message.Substring(0, 3).Equals("!cp"))
             {
-                string msg = message.Substring(message.IndexOf("["), message.IndexOf("]") - message.IndexOf("[") - 1);
+                string msg = message.Substring(message.IndexOf("[")+1, message.IndexOf("]") - message.IndexOf("[") - 1);
                 CardPlayed(int.Parse(msg));
             }
 
