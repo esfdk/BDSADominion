@@ -163,7 +163,8 @@ namespace BDSADominion
                 serverStarted = true;
                 network.SetNumberOfClients(int.Parse(messageParts[1]));
                 numberOfPlayers = int.Parse(messageParts[2]);
-                Console.WriteLine("SYSTEM: GAME STARTED. There are {0} players and you are player {1}", numberOfPlayers, int.Parse(messageParts[1]));
+                Console.WriteLine("SYSTEM: GAME STARTED. There are {0} players and you are player {1}", 
+                                  int.Parse(messageParts[1]), numberOfPlayers);
             }
         }
 
