@@ -149,6 +149,8 @@ namespace BDSADominion
                 network.PreGameMessage(input);
             }
 
+            Console.WriteLine("game started");
+            SetUpGame((uint) numberOfPlayers);
             //TODO Start GameState
             //We count on that client 1 is the server. 
         }
@@ -158,7 +160,6 @@ namespace BDSADominion
             Console.WriteLine("<Interface> Client recieved {0} from {1}", message, playerId);
             if (playerId == 0 & message.Contains("<STGM>"))
             {
-                Console.WriteLine("SYSTEM: GAME STARTED");
                 string[] messageParts = message.Split(new char[] { ',' });
                 serverStarted = true;
                 network.SetNumberOfClients(int.Parse(messageParts[1]));
