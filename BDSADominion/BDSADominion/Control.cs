@@ -29,25 +29,31 @@
                 { CardName.Copper, 0 },
                 { CardName.Silver, 3 },
                 { CardName.Gold, 6 },
+                
                 // The victory cards.
                 { CardName.Curse, 0 },
                 { CardName.Estate, 2 },
                 { CardName.Duchy, 5 },
                 { CardName.Province, 8 },
+
                 // The kingdom cards.
                 // Cost : 2
                 { CardName.Moat, 2 },
+
                 // Cost : 3
                 { CardName.Village, 3 },
                 { CardName.Woodcutter, 3 },
+                
                 // Cost : 4
                 { CardName.Gardens, 4 },
                 { CardName.Smithy, 4 },
+                
                 // Cost : 5
                 { CardName.CouncilRoom, 5 },
                 { CardName.Laboratory, 5 },
                 { CardName.Festival, 5 },
                 { CardName.Market, 5 },
+                
                 // Cost : 6
                 { CardName.Adventurer, 6 }
             };
@@ -182,6 +188,7 @@
                     input = null;
                 }
             }
+
             return host;
         }
 
@@ -206,8 +213,10 @@
                 clientPlayerNumber = uint.Parse(messageParts[2]);
                 network.SetNumberOfClients(int.Parse(messageParts[1]));
                 numberOfPlayers = int.Parse(messageParts[1]);
-                Console.WriteLine("SYSTEM: GAME STARTED. There are {1} players and you are player {0}",
-                                  clientPlayerNumber, numberOfPlayers);
+                Console.WriteLine(
+                    "SYSTEM: GAME STARTED. There are {1} players and you are player {0}",
+                    clientPlayerNumber,
+                    numberOfPlayers);
                 network.MessageReceived -= ReceivePreGameMessage;
                 SetUpGame((uint)numberOfPlayers);
             }
@@ -337,11 +346,11 @@
         {
             if (gs.ActivePlayer.PlayerNumber == gs.Players.Count)
             {
-                gs.ActivePlayer = gs.Players[0];
+                gs.ActivePlayer = gs.Players[gs.Players.FindIndex(player => player.PlayerNumber == 1)];
             }
             else
             {
-                gs.ActivePlayer = gs.Players[(int)gs.ActivePlayer.PlayerNumber];
+                gs.ActivePlayer = gs.Players[gs.Players.FindIndex(player => player.PlayerNumber == gs.ActivePlayer.PlayerNumber + 1)];
             }
 
             gs.StartActionPhase();
@@ -366,11 +375,6 @@
             else
             {
                 CleanUp();
-                if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
-                {
-                    network.TurnMessage("!ep");
-                }
-
                 StartTurn();
             }
         }
@@ -483,13 +487,6 @@
             p.MoveFromTemporaryToZone(p.TempZone[p.TempZone.Count - 1], Zone.Played);
             gs.NumberOfActions = gs.NumberOfActions - 1;
 
-            // TODO: Put back or delete permanently @ Melnyk
-            if (gs.NumberOfActions == 0 | gs.ActivePlayer.Hand.Count(c => c is Action) == 0)
-            {
-                gs.EndActionPhase();
-                gs.StartBuyPhase();
-            }
-
             UpdateGui();
         }
 
@@ -511,13 +508,6 @@
 
             gs.NumberOfBuys = gs.NumberOfBuys - 1;
             gs.NumberOfCoins = gs.NumberOfCoins - cardCost[cardName];
-
-            // TODO: Put back or delete permanently @ Melnyk
-            if (gs.NumberOfBuys == 0)
-            {
-                gs.EndBuyPhase();
-                EndTurn();
-            }
 
             UpdateGui();
         }
@@ -591,7 +581,7 @@
         {
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber & cardName != CardName.Empty & cardName != CardName.Backside)
             {
-                if (gs.NumberOfCoins >= cardCost[cardName] & gs.Supply[cardName] != 0)
+                if (gs.NumberOfCoins >= cardCost[cardName] & gs.Supply[cardName] != 0 & gs.NumberOfBuys > 0)
                 {
                     network.TurnMessage("!bc [" + cardName + "]");
                     BuyCard(clientPlayerNumber, cardName);
@@ -612,12 +602,15 @@
         {
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
-                Card card = gs.ActivePlayer.Hand[handIndex];
-
-                if (card is Action)
+                if (gs.NumberOfActions > 0)
                 {
-                    network.TurnMessage("!cp [" + handIndex + "]");
-                    CardPlayed(handIndex);
+                    Card card = gs.ActivePlayer.Hand[handIndex];
+
+                    if (card is Action)
+                    {
+                        network.TurnMessage("!cp [" + handIndex + "]");
+                        CardPlayed(handIndex);
+                    }
                 }
             }
         }
@@ -643,10 +636,13 @@
                         break;
                     case 2:
                         gs.EndBuyPhase();
+                        network.TurnMessage("!ep");
                         EndTurn();
                         break;
                 }
             }
+
+            UpdateGui();
         }
 
         #endregion
