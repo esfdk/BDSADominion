@@ -53,7 +53,10 @@
         public static void SetUpCards(ICollection<CardName> cards)
         {
             Contract.Requires(!SetUp);
+            Contract.Requires(cards != null);
+
             Contract.Ensures(SetUp);
+
             foreach (CardName c in cards)
             {
                 CardsMade.Add(c, 1);
@@ -74,7 +77,9 @@
         public static Card CreateCard(CardName card)
         {
             Contract.Requires(card != CardName.Backside & card != CardName.Empty);
+
             Contract.Ensures(Contract.Result<Card>().Name == card);
+
             Card c;
             switch (card)
             {

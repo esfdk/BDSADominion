@@ -9,6 +9,9 @@
     /// <summary>
     /// This is the server that handles all communication over the network
     /// </summary>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// </author>
     internal class Server
     {
         ////private byte[] messageBuffer = new byte[NetworkConst.BUFFERSIZE];

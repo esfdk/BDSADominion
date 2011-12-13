@@ -16,7 +16,7 @@
     {
         // I realise that a lot of my contracts could have used the if(exp1) ? then(exp2) : else(exp3) to make them easier to read, but I decided to follow
         // the StyleCop/Resharper guidelines of 'simplifying' the expressions. I choose to let one of them stay in the Ensures contract for 'RemoveCardFromZone' method
-        // to show how I would have done it otherwise.
+        //// to show how I would have done it otherwise.
 
         #region Fields
 
@@ -87,11 +87,27 @@
         }
 
         /// <summary>
-        /// Gets the object at the top of the discard pile.
+        /// Gets the card at the top of the discard pile.
         /// </summary>
         public Card TopOfDiscard
         {
-            get { return discard.Peek(); }
+            get
+            {
+                Contract.Requires(DiscardSize != 0);
+                return discard.Peek();
+            }
+        }
+
+        /// <summary>
+        /// Gets the card at the top of the deck.
+        /// </summary>
+        public Card TopOfDeck
+        {
+            get
+            {
+                Contract.Requires(DeckSize != 0);
+                return deck.Peek();
+            }
         }
 
         /// <summary>
@@ -127,8 +143,11 @@
         /// </param>
         public void MoveFromHandToTemporary(Card card)
         {
+            Contract.Requires(Hand.Contains(card));
+
             Contract.Ensures(!hand.Contains(card));
             Contract.Ensures(TempZone.Contains(card));
+
             temporary.Add(hand[hand.IndexOf(card)]);
             hand.Remove(card);
         }
@@ -142,12 +161,17 @@
         public void MoveFromZoneToTemporary(Zone zone)
         {
             Contract.Requires(zone == Zone.Deck | zone == Zone.Discard);
+
             Contract.Requires(zone != Zone.Deck | !(DeckSize == 0 & DiscardSize == 0));
             Contract.Requires(zone != Zone.Discard | DiscardSize != 0);
 
             Contract.Ensures(TempZone.Count == Contract.OldValue(TempZone.Count) + 1);
+
             Contract.Ensures(zone != Zone.Deck | DeckSize == Contract.OldValue(DeckSize) - 1);
+            Contract.Ensures(TopOfDeck != Contract.OldValue(TopOfDeck));
+
             Contract.Ensures(zone != Zone.Discard | DiscardSize == Contract.OldValue(DiscardSize) - 1);
+            Contract.Ensures(TopOfDiscard != Contract.OldValue(TopOfDiscard));
 
             switch (zone)
             {
@@ -190,10 +214,18 @@
             Contract.Requires(TempZone.Contains(card));
 
             Contract.Ensures(TempZone.Count == Contract.OldValue(TempZone.Count) - 1);
+
             Contract.Ensures(zone != Zone.Deck | DeckSize == Contract.OldValue(DeckSize) + 1);
+            Contract.Ensures(zone != Zone.Deck | TopOfDeck == Contract.OldValue(TempZone[TempZone.Count - 1]));
+
             Contract.Ensures(zone != Zone.Discard | DiscardSize == Contract.OldValue(DiscardSize) + 1);
+            Contract.Ensures(zone != Zone.Discard | TopOfDiscard == Contract.OldValue(TempZone[TempZone.Count - 1]));
+
             Contract.Ensures(zone != Zone.Hand | (Hand.Count == Contract.OldValue(Hand.Count) + 1) & Hand.Contains(card));
+            Contract.Ensures(zone != Zone.Hand | Hand[Hand.Count - 1] == Contract.OldValue(TempZone[TempZone.Count - 1]));
+
             Contract.Ensures(zone != Zone.Played | (Played.Count == Contract.OldValue(Played.Count) + 1) & Played.Contains(card));
+            Contract.Ensures(zone != Zone.Played | Played[Played.Count - 1] == Contract.OldValue(TempZone[TempZone.Count - 1]));
 
             switch (zone)
             {
@@ -231,13 +263,16 @@
 
             Contract.Ensures(AllCards[card]);
 
-            Contract.Ensures(zone != Zone.Hand | hand.Contains(card));
+            Contract.Ensures(zone != Zone.Hand | Hand[Hand.Count - 1] == card);
             Contract.Ensures(zone != Zone.Hand | hand.Count == Contract.OldValue(hand.Count) + 1);
 
-            Contract.Ensures(zone != Zone.Played | played.Contains(card));
+            Contract.Ensures(zone != Zone.Played | Played[Played.Count - 1] == card);
             Contract.Ensures(zone != Zone.Played | played.Count == Contract.OldValue(played.Count) + 1);
 
+            Contract.Ensures(zone != Zone.Deck | TopOfDeck == card);
             Contract.Ensures(zone != Zone.Deck | DeckSize == Contract.OldValue(DeckSize) + 1);
+
+            Contract.Ensures(zone != Zone.Discard | TopOfDiscard == card);
             Contract.Ensures(zone != Zone.Discard | DiscardSize == Contract.OldValue(DiscardSize) + 1);
 
             AllCards.Add(card, true);
@@ -271,6 +306,7 @@
         public void RemoveCardFromZone(Card card, Zone zone)
         {
             Contract.Requires(zone == Zone.Deck | zone == Zone.Discard | zone == Zone.Hand | zone == Zone.Played);
+            Contract.Requires(AllCards.ContainsKey(card));
 
             Contract.Requires(zone != Zone.Hand | hand.Contains(card));
             Contract.Requires(zone != Zone.Played | Played.Contains(card));
@@ -319,16 +355,21 @@
         {
             for (int i = 1; i < amount; i++)
             {
+                if (DeckSize + DiscardSize < 1)
+                {
+                    break;
+                }
+
                 DrawCard();
             }
         }
 
         /// <summary>
-        /// Draws a card from the deck into the hand.
+        /// Makes the player draw a card from his deck. The player will shuffle the discard pile into the deck if necessary.
         /// </summary>
         public void DrawCard()
         {
-            Contract.Requires(!(DeckSize == 0 & DiscardSize == 0));
+            Contract.Requires(DeckSize + DiscardSize != 0);
 
             Contract.Ensures(hand.Count == Contract.OldValue(hand.Count) + 1);
 
@@ -419,7 +460,7 @@
         /// </summary>
         private void ShuffleDiscard()
         {
-            Contract.Requires(DeckSize == 0);
+            Contract.Requires(DeckSize == 0 & DiscardSize != 0);
 
             // TODO: Do better shuffling
             while (discard.Count != 0)

@@ -1,16 +1,14 @@
-﻿using System.Net;
-using BDSADominion.Networking;
-
-namespace BDSADominion
+﻿namespace BDSADominion
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
-
+    using System.Linq;
+    using System.Net;
     using BDSADominion.Gamestate;
     using BDSADominion.Gamestate.Card_Types;
     using BDSADominion.GUI;
-
+    using BDSADominion.Networking;
     using Action = BDSADominion.Gamestate.Card_Types.Action;
 
     /// <summary>
@@ -37,6 +35,9 @@ namespace BDSADominion
         /// <summary>
         /// The gamestate used for this game.
         /// </summary>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private Gamestate.Gamestate gs;
 
         /// <summary>
@@ -85,33 +86,38 @@ namespace BDSADominion
         /// <summary>
         /// Initializes a new instance of the <see cref="Control"/> class.
         /// </summary>
+        /// <author>
+        /// Christian 'Troy' Jensen (chrj@itu.dk)
+        /// </author>
         public Control()
         {
-            string input = null;
+            StartNetwork(clientType());
 
-            bool host = false;
+            network.MessageReceived += ReceivePreGameMessage;
 
-            while (input == null)
+            while (!serverStarted)
             {
-                Console.WriteLine("Please select server or client:");
+                string input = Console.ReadLine();
 
-                input = Console.ReadLine();
-
-                if (input.Equals("client"))
-                {
-                    host = false;
-                }
-                else if (input.Equals("server"))
-                {
-                    host = true;
-                }
-                else
-                {
-                    Console.WriteLine("Unrecognized input");
-                    input = null;
-                }
+                network.PreGameMessage(input);
             }
 
+            Console.WriteLine("game started");
+            SetUpGame((uint) numberOfPlayers);
+            //TODO Start GameState
+            //We count on that client 1 is the server. 
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="host">
+        /// The host.
+        /// </param>
+        /// <author>
+        /// Christian 'Troy' Jensen (chrj@itu.dk)
+        /// </author>
+        private void StartNetwork(bool host)
+        {
             if (host)
             {
                 Console.WriteLine("Host Started");
@@ -139,31 +145,66 @@ namespace BDSADominion
                 network = new NetworkingInterface(ipAddress);
                 Console.WriteLine("Client started");
             }
-
-            network.MessageReceived += ReceivePreGameMessage;
-
-            while (!serverStarted)
-            {
-                input = Console.ReadLine();
-
-                network.PreGameMessage(input);
-            }
-
-            //TODO Start GameState
-            //We count on that client 1 is the server. 
         }
 
+        /// <summary>
+        /// </summary>
+        /// <returns>
+        /// </returns>
+        /// <author>
+        /// Christian 'Troy' Jensen (chrj@itu.dk)
+        /// </author>
+        private bool clientType()
+        {
+            bool host = false;
+            string input = null;
+
+            while (input == null)
+            {
+                Console.WriteLine("Please select server or client:");
+
+                input = Console.ReadLine();
+
+                if (input.Equals("client"))
+                {
+                    host = false;
+                }
+                else if (input.Equals("server"))
+                {
+                    host = true;
+                }
+                else
+                {
+                    Console.WriteLine("Unrecognized input");
+                    input = null;
+                }
+            }
+            return host;
+        }
+
+        /// <summary>
+        /// used to recieve messages before the game starts
+        /// </summary>
+        /// <param name="message">
+        /// The message that is being passed. Clean
+        /// </param>
+        /// <param name="playerId">
+        /// The Id of the player that sent it.
+        /// </param>
+        /// <author>
+        /// Christian Jensen (chrj@itu.dk)
+        /// </author>
         private void ReceivePreGameMessage(string message, int playerId)
         {
             Console.WriteLine("<Interface> Client recieved {0} from {1}", message, playerId);
             if (playerId == 0 & message.Contains("<STGM>"))
             {
-                Console.WriteLine("SYSTEM: GAME STARTED");
                 string[] messageParts = message.Split(new char[] { ',' });
                 serverStarted = true;
                 network.SetNumberOfClients(int.Parse(messageParts[1]));
                 numberOfPlayers = int.Parse(messageParts[2]);
-                Console.WriteLine("SYSTEM: GAME STARTED. There are {0} players and you are player {1}", numberOfPlayers, int.Parse(messageParts[1]));
+                Console.WriteLine("SYSTEM: GAME STARTED. There are {0} players and you are player {1}", 
+                                  int.Parse(messageParts[1]), numberOfPlayers);
             }
         }
 
@@ -173,6 +214,9 @@ namespace BDSADominion
         /// <param name="numberOfPlayers">
         /// The number Of Players.
         /// </param>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private void SetUpGame(uint numberOfPlayers)
         {
             Dictionary<CardName, uint> startSupply = new Dictionary<CardName, uint>
@@ -220,15 +264,56 @@ namespace BDSADominion
                 player.DrawCards(5);
             }
 
+            // TODO: Set GUI one-time stuff.
             StartTurn();
         }
 
         /// <summary>
         /// Updates the GUI with new values.
         /// </summary>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private void UpdateGui()
         {
-            // TODO: Not implemented yet.
+            gui.DrawAction(gs.ActivePlayer.Played.ToArray());
+            gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null, 0); // TODO: Explain why index is needed in draw discard??
+            gui.DrawHand(gs.ActivePlayer.Hand.ToArray());
+
+            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
+            {
+                gui.SetAction((int)gs.NumberOfActions);
+                gui.SetBuys((int)gs.NumberOfBuys);
+                gui.SetCoins((int)gs.NumberOfCoins);
+
+                switch (gs.GetPhase)
+                {
+                    case 1:
+                        gui.SetPhase(0);
+                        break;
+                    case 2:
+                        gui.SetPhase(1);
+                        break;
+                }
+
+                gui.YourTurn(true);
+            }
+            else
+            {
+                gui.YourTurn(false);
+            }
+        }
+
+        /// <summary>
+        /// Called when game finishes.
+        /// </summary>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
+        private void EndOfGame()
+        {
+            List<int> scores = gs.GetScores();
+            gui.EndGame(scores.IndexOf(scores.Max()) + 1); // TODO: In case of a draw, lowest numbered player wins.
         }
 
         #region TurnMethods
@@ -236,6 +321,9 @@ namespace BDSADominion
         /// <summary>
         /// Starts the turn of the next player.
         /// </summary>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private void StartTurn()
         {
             if (gs.ActivePlayer.PlayerNumber == gs.Players.Count | gs.ActivePlayer == null)
@@ -249,25 +337,41 @@ namespace BDSADominion
 
             gs.StartActionPhase();
 
-            // TODO: Set GUI one-time stuff.
             UpdateGui();
         }
 
         /// <summary>
         /// Ends the turn of the active player.
         /// </summary>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private void EndTurn()
         {
             Contract.Requires(!gs.InActionPhase & !gs.InBuyPhase);
 
-            // TODO: Send end turn message to server.
-            CleanUp();
-            StartTurn();
+            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
+            {
+                network.TurnMessage("!ep");
+            }
+
+            if (gs.GameOver)
+            {
+                EndOfGame();
+            }
+            else
+            {
+                CleanUp();
+                StartTurn();
+            }
         }
 
         /// <summary>
         /// Cleans up the player and other areas.
         /// </summary>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private void CleanUp()
         {
             gs.ActivePlayer.CleanUp();
@@ -284,6 +388,9 @@ namespace BDSADominion
         /// <param name="handIndex">
         /// The index of the card in the hand.
         /// </param>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private void CardPlayed(int handIndex)
         {
             Card card = this.gs.ActivePlayer.Hand[handIndex];
@@ -378,6 +485,9 @@ namespace BDSADominion
         /// <param name="cardName">
         /// The card name to be bought.
         /// </param>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private void BuyCard(uint playerNumber, CardName cardName)
         {
             gs.PlayerGainsCard(gs.Players[(int)playerNumber - 1], cardName);
@@ -402,6 +512,9 @@ namespace BDSADominion
         /// <param name="sender">
         /// The id of the client that sent the message.
         /// </param>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private void MessageFromNetwork(string message, int sender)
         {
             if (message.Substring(0, 3).Equals("!cp"))
@@ -446,16 +559,18 @@ namespace BDSADominion
         /// <param name="cardName">
         /// The name of the card being checked.
         /// </param>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private void CanBuyCard(CardName cardName)
         {
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
-                if (gs.NumberOfCoins >= cardCost[cardName])
+                if (gs.NumberOfCoins >= cardCost[cardName] & gs.Supply[cardName] != 0)
                 {
+                    network.TurnMessage("!bc [" + cardName + "]");
                     BuyCard(clientPlayerNumber, cardName);
                 }
-
-                // TODO: Send to server.
             }
         }
 
@@ -465,6 +580,9 @@ namespace BDSADominion
         /// <param name="handIndex">
         /// The index of the card in the hand of the active player.
         /// </param>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private void CanPlayCard(int handIndex)
         {
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
@@ -473,6 +591,7 @@ namespace BDSADominion
 
                 if (card is Action)
                 {
+                    network.TurnMessage("!cp [" + handIndex + "]");
                     CardPlayed(handIndex);
                 }
                 else
@@ -480,14 +599,15 @@ namespace BDSADominion
                     // TODO: Remove this after testing
                     Console.WriteLine("Card is not an action card!");
                 }
-
-                // TODO: Send to server.
             }
         }
 
         /// <summary>
         /// Delegate for the EndPhase button.
         /// </summary>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
         private void EndPhase()
         {
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)

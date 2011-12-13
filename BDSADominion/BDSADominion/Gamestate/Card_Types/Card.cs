@@ -1,6 +1,7 @@
 ﻿namespace BDSADominion.Gamestate.Card_Types
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// A card in the game of Dominion.
@@ -19,6 +20,11 @@
         /// Gets number of the card.
         /// </summary>
         public uint Number { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether Initialize was performed on this card.
+        /// </summary>
+        public bool SetUp { get; private set; }
 
         /// <summary>
         /// Check if two cards are equal.
@@ -65,9 +71,13 @@
         /// </param>
         public virtual void Initialize(CardName name, uint number)
         {
+            Contract.Requires(!SetUp);
+            Contract.Ensures(SetUp);
+
             // This is not done in constructor, because we wanted to inherit the setting of properties without having to do code duplication in all of our cards.
             this.Name = name;
             this.Number = number;
+            SetUp = true;
         }
 
         /// <summary>

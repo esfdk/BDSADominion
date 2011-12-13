@@ -1,13 +1,15 @@
-﻿using System;
-
-namespace BDSADominion.Networking
+﻿namespace BDSADominion.Networking
 {
+    using System;
     using System.Linq;
     using System.Net;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk)
+    /// </author>
     public class NetworkingInterface
     {
         private Server server;
