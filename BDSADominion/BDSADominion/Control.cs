@@ -263,7 +263,13 @@
                 player.DrawCards(5);
             }
 
+            network.MessageReceived += MessageFromNetwork;
+
             gui = new GUIInterface();
+            gui.SetPlayerNumber((int)clientPlayerNumber);
+            gui.EndPhasePressed += EndPhase;
+            gui.BuyAttempt += CanBuyCard;
+            gui.CardInHandPressed += CanPlayCard;
             UpdateGui();
 
             StartTurn();
