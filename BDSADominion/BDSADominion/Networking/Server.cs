@@ -35,7 +35,7 @@
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             ClientConnectedEvent += ClientConnected;
-            ClientConnectedEvent += ServerPreGameMessage;
+            //ClientConnectedEvent += ServerPreGameMessage;
         }
 
         private bool ServerPreGameMessage(Connection connection)
@@ -69,7 +69,7 @@
 
         internal void SystemMessage(string message, Connection client)
         {
-            string compoundMessage = string.Format("{0}|{1}<EOF>", 0, message);
+            string compoundMessage = string.Format("{0}|{1}|{2}<EOF>", 0, MessageType.System, message);
 
             client.Send(compoundMessage);
         }
@@ -83,15 +83,15 @@
         /// Use this to send a message recieved from one client to all clients except the sender.
         /// </summary>
         /// <param name="message">
-        /// The recieved message
+        /// The clean message
         /// </param>
         /// <param name="clientId">
         /// The Id of the sender.
         /// </param>
-        internal void ForwardMessage(string message, int clientId)
+        internal void ForwardMessage(string message, int clientId, MessageType type)
         {
             Console.WriteLine("Server.ForwardMessage: Forwarding message: " + message);
-            string compoundMessage = string.Format("{0}|{1}<EOF>", clientId, message);
+            string compoundMessage = string.Format("{0}|{1}|{2}<EOF>", clientId, type, message);
 
             foreach (Connection connection in GetClientList().Where(con => con.Id != clientId))
             {
@@ -128,8 +128,9 @@
 
         private void ServerRecievedMessage(Connection conn, string message)
         {
-            Console.WriteLine("Server.ServerReceivedMessage: Server received '{0}' from player {1}", message, conn.Id);
-            if (message.Contains("<STGM>") && conn.Id == 1)
+            string[] messageParts = message.Split(new char[] {'|'});
+            Console.WriteLine("Server.ServerReceivedMessage: Server received '{0}' of type {1} from player {2}", messageParts[1], messageParts[0], conn.Id);
+            if (messageParts[1].StartsWith("<STGM>") && conn.Id == 1)
             {
                 Console.WriteLine("Server.ServerReceivedMessage: Game Starting");
                 foreach (KeyValuePair<int, Connection> connectedClient in connectedClients)
@@ -139,13 +140,15 @@
             }
             else
             {
-                ForwardMessage(message, conn.Id);
+                MessageType messageType;
+                MessageType.TryParse(messageParts[1], out messageType);
+                ForwardMessage(message, conn.Id, messageType);
             }
         }
 
         private bool ClientConnected(Connection conn)
         {
-            Console.WriteLine("Client {0} connected", conn.Id);
+            Console.WriteLine("Server.ClientConnected: Client {0} connected", conn.Id);
             conn.ReceivedMessageEvent += ServerRecievedMessage;
 
             return true; // TODO What-what-what?!?

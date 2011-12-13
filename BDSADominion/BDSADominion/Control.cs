@@ -144,77 +144,30 @@ namespace BDSADominion
                 Console.WriteLine("Client started");
             }
 
-            network.MessageReceived += PreGameMessage;
+            network.MessageReceived += ReceivePreGameMessage;
 
-            while (true)
+            while (!serverStarted)
             {
                 input = Console.ReadLine();
 
                 network.PreGameMessage(input);
             }
 
+            //TODO Start GameState
             //We count on that client 1 is the server. 
-
-        /*void runHost()
-        {
-
-            while (true)
-            {
-                string input = Console.ReadLine();
-
-                network.TurnMessage(input);
-            }
         }
 
-        static void runClient()
-        {
-            Console.WriteLine("Client started");
-            IPAddress ipAddress = null;
-
-            bool parseSuccess = false;
-
-            while (!parseSuccess)
-            {
-                Console.WriteLine("Please input IP for server:");
-                string ip = Console.ReadLine();
-
-                parseSuccess = IPAddress.TryParse(ip, out ipAddress);
-                if (!parseSuccess)
-                {
-                    Console.WriteLine("ip not valid, try again:");
-                }
-            }
-
-            network = new NetworkingInterface(ipAddress);
-            network.MessageReceived += MessageRecieved;
-
-
-            while (true)
-            {
-                string input = Console.ReadLine();
-
-                network.TurnMessage(input);
-            }
-            
-        }
-
-        static void MessageRecieved(string message, int playerId)
+        private void ReceivePreGameMessage(string message, int playerId)
         {
             Console.WriteLine("<Interface> Client recieved {0} from {1}", message, playerId);
-        }
-            gui = new GUIInterface();*/
-        }
-
-        private void PreGameMessage(string message, int playerId)
-        {
-            Console.WriteLine("<Interface> Client recieved {0} from {1}", message, playerId);
-            if (playerId == 0 & message.StartsWith("<STGM>"))
+            if (playerId == 0 & message.Contains("<STGM>"))
             {
                 Console.WriteLine("SYSTEM: GAME STARTED");
                 string[] messageParts = message.Split(new char[] { ',' });
                 serverStarted = true;
                 network.SetNumberOfClients(int.Parse(messageParts[1]));
                 numberOfPlayers = int.Parse(messageParts[2]);
+                Console.WriteLine("SYSTEM: GAME STARTED. There are {0} players and you are player {1}", numberOfPlayers, int.Parse(messageParts[1]));
             }
         }
 

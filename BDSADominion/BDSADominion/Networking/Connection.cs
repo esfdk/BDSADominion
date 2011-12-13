@@ -30,10 +30,15 @@
             Id = id;
         }
 
-        public int Send(string message)
+        /// <summary>
+        /// Sends the message to the Client
+        /// </summary>
+        /// <param name="message">
+        /// The message, must be clean.
+        /// </param>
+        public void Send(string message)
         {
-            int value = connSocket.Send(NetworkConst.ENCODER.GetBytes(string.Format("{0}<EOF>", message)));
-            return value;
+            connSocket.Send(NetworkConst.ENCODER.GetBytes(message));
         }
 
         public void BeginReceive()
