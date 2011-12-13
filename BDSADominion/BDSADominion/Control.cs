@@ -18,39 +18,12 @@
     {
         #region Fields
 
-        /// <summary>
-        /// The gui used by this client.
-        /// </summary>
-        private GUIInterface gui;
-
-        private bool serverStarted = false;
-
-        private int numberOfPlayers;
-
-        /// <summary>
-        /// The interface for communicating with the network
-        /// </summary>
-        private NetworkingInterface network;
-
-        /// <summary>
-        /// The gamestate used for this game.
-        /// </summary>
-        /// <author>
-        /// Jakob Melnyk (jmel@itu.dk)
-        /// </author>
-        private Gamestate.Gamestate gs;
-
-        /// <summary>
-        /// The player number of this client.
-        /// </summary>
-        private uint clientPlayerNumber;
-
         #region CardCost
 
         /// <summary>
         /// Used to determine costs of cards.
         /// </summary>
-        private Dictionary<CardName, uint> cardCost = new Dictionary<CardName, uint>
+        private readonly Dictionary<CardName, uint> cardCost = new Dictionary<CardName, uint>
             {
                 // The treasure cards.
                 { CardName.Copper, 0 },
@@ -80,6 +53,41 @@
             };
 
         #endregion
+
+        /// <summary>
+        /// The gui used by this client.
+        /// </summary>
+        private GUIInterface gui;
+
+        /// <summary>
+        /// Object used to create the gamestate.
+        /// </summary>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
+        private Dictionary<CardName, uint> startSupply;
+
+        private bool serverStarted = false;
+
+        private int numberOfPlayers;
+
+        /// <summary>
+        /// The interface for communicating with the network
+        /// </summary>
+        private NetworkingInterface network;
+
+        /// <summary>
+        /// The gamestate used for this game.
+        /// </summary>
+        /// <author>
+        /// Jakob Melnyk (jmel@itu.dk)
+        /// </author>
+        private Gamestate.Gamestate gs;
+
+        /// <summary>
+        /// The player number of this client.
+        /// </summary>
+        private uint clientPlayerNumber;
 
         #endregion
 
@@ -204,8 +212,6 @@
                 SetUpGame((uint)numberOfPlayers);
             }
         }
-
-        private Dictionary<CardName, uint> startSupply;
 
         /// <summary>
         /// Sets up a new game with the number of players pass as parameter.
@@ -360,12 +366,11 @@
             else
             {
                 CleanUp();
+                if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
+                {
+                    network.TurnMessage("!ep");
+                }
                 StartTurn();
-            }
-
-            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
-            {
-                network.TurnMessage("!ep");
             }
         }
 
@@ -640,7 +645,6 @@
                 }
             }
             UpdateGui(); //TODO Remove
-
         }
 
         #endregion

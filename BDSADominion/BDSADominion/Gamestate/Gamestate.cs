@@ -53,7 +53,7 @@
         /// </param>
         public Gamestate(uint numberOfPlayers, Dictionary<CardName, uint> startSupply)
         {
-            // TODO: Contract.Requires(numberOfPlayers >= 2 & numberOfPlayers <= 4);
+            Contract.Requires(numberOfPlayers >= 2 & numberOfPlayers <= 4);
             Contract.Requires(startSupply != null);
 
             Players = new List<Player>();
@@ -82,7 +82,7 @@
         {
             get
             {
-                // TODO: Contract.Ensures(Contract.Result<uint>() >= 2 & Contract.Result<uint>() <= 4);
+                Contract.Ensures(Contract.Result<uint>() >= 2 & Contract.Result<uint>() <= 4);
                 return (uint)Players.Count;
             }
         }
@@ -99,7 +99,7 @@
 
             set
             {
-                Contract.Requires(value.PlayerNumber >= 1 & value.PlayerNumber <= NumberOfPlayers);
+                Contract.Requires(value != null ? value.PlayerNumber >= 1 & value.PlayerNumber <= NumberOfPlayers : false);
                 activePlayer = value;
             }
         }
@@ -223,6 +223,7 @@
         {
             Contract.Requires(InActionPhase & !InBuyPhase);
             Contract.Ensures(!InActionPhase & !InBuyPhase);
+            Contract.Ensures(NumberOfActions == 0);
 
             InActionPhase = false;
             NumberOfActions = 0;
@@ -253,6 +254,7 @@
         {
             Contract.Requires(!InActionPhase & InBuyPhase);
             Contract.Ensures(!InActionPhase & !InBuyPhase);
+            Contract.Ensures(NumberOfBuys == 0 & NumberOfCoins == 0);
 
             InBuyPhase = false;
             NumberOfCoins = 0;
@@ -264,6 +266,7 @@
         /// </summary>
         public void DoCleanUp()
         {
+            Contract.Requires(!InActionPhase & !InBuyPhase);
             ActivePlayer.CleanUp();
         }
 

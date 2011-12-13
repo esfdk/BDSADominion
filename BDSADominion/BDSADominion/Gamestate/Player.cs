@@ -368,7 +368,7 @@
         {
             Contract.Requires(DeckSize + DiscardSize != 0);
 
-            Contract.Ensures(hand.Count == Contract.OldValue(hand.Count) + 1);
+            Contract.Ensures(Hand.Count == Contract.OldValue(Hand.Count) + 1);
 
             if (DeckSize == 0)
             {
