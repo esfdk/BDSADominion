@@ -151,7 +151,7 @@
             }
 
             Console.WriteLine("game started");
-            SetUpGame((uint) numberOfPlayers);
+            SetUpGame((uint)numberOfPlayers);
             //TODO Start GameState
             //We count on that client 1 is the server. 
         }
@@ -165,7 +165,7 @@
                 serverStarted = true;
                 network.SetNumberOfClients(int.Parse(messageParts[1]));
                 numberOfPlayers = int.Parse(messageParts[2]);
-                Console.WriteLine("SYSTEM: GAME STARTED. There are {0} players and you are player {1}", 
+                Console.WriteLine("SYSTEM: GAME STARTED. There are {0} players and you are player {1}",
                                   int.Parse(messageParts[1]), numberOfPlayers);
             }
         }
@@ -173,13 +173,13 @@
         /// <summary>
         /// Sets up a new game with the number of players pass as parameter.
         /// </summary>
-        /// <param name="numberOfPlayers">
+        /// <param name="numOfPlayers">
         /// The number Of Players.
         /// </param>
         /// <author>
         /// Jakob Melnyk (jmel@itu.dk)
         /// </author>
-        private void SetUpGame(uint numberOfPlayers)
+        private void SetUpGame(uint numOfPlayers)
         {
             Dictionary<CardName, uint> startSupply = new Dictionary<CardName, uint>
                 {
@@ -209,7 +209,7 @@
 
             CardFactory.SetUpCards(startSupply.Keys);
 
-            gs = new Gamestate.Gamestate(numberOfPlayers, startSupply);
+            gs = new Gamestate.Gamestate(numOfPlayers, startSupply);
 
             foreach (Player player in gs.Players)
             {
@@ -288,7 +288,11 @@
         /// </author>
         private void StartTurn()
         {
-            if (gs.ActivePlayer.PlayerNumber == gs.Players.Count | gs.ActivePlayer == null)
+            if (gs.ActivePlayer == null)
+            {
+                gs.ActivePlayer = gs.Players[0];
+            }
+            else if (gs.ActivePlayer.PlayerNumber == gs.Players.Count)
             {
                 gs.ActivePlayer = gs.Players[0];
             }
