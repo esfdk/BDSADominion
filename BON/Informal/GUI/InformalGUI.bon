@@ -6,41 +6,46 @@ end
 
 cluster_chart GUI
  explanation " The graphical representation part of the project"
- class Game description " The game class"
- class Deck description " The deck class"
- class Card description " The card class"
- class View description " The view class"
- class Sprite description " The sprite class"
+ class GameClass description " The game class"
+ class DeckZone description " The deck class"
+ class ActionZone description " The card class"
+ class DiscardZone description " The discardzone class"
+ class HandZone description " The handzone class"
+ class SupplyZone description " The supplyzone class"
+ class ButtonSprite description " The buttonsprite class"
+ class CardSprite description " The cardsprite class"
  class Program description " The program class"
-ened
-
-class_chart DECK
- explanation " responsible for representing the deck"
- command
-	"Load the content!"
 end
 
-class_chart SPRITE
- explanation " the basic class which all graphical objects should inherit from"
+class_chart DECKZONE
+ explanation " responsible for representing the deck"
  command
-	"Load the content!"
 	"Draw the content!"
 end
 
-class_chart CARD
- explanation " responsible for representing the cards"
+class_chart BUTTONSPRITE
+ explanation " the basic class which all graphical objects should inherit from"
  command
-	"Load the content!"
+	"Draw the content!"
+end
+
+class_chart CARDSPRITE
+ explanation " responsible for representing the cards"
+  query
+	"Is this cardsprite equal to this cardsprite?"
+  command
 	"Draw the content!"
 end
 
 class_chart PROGRAM
  explanation " responsible for executing the game"
  command
-	" Run the game!"
+	" Run a clinet!"
+	" Run a Host!"
+	" Start the GUI!"
 end
 
-class_chart GAME
+class_chart GAMECLASS
  explanation " responsible for creating the initial GUI with the components from the other classes"
  command
 	" Initialize the content!"
@@ -48,12 +53,4 @@ class_chart GAME
 	" Unload the content!"
 	" Update the game!"
 	" Draw the content!"
-end
-
-class_chart VIEW
- explanation " responsible for the viewport and ho big screen will be at launch"
- command
-	" Initialize the content!"
-	" Set a default viewport area!"
-	" Initialize the scrrensize!"
 end

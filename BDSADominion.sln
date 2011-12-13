@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDSADominion", "BDSADominion\BDSADominion\BDSADominion.csproj", "{BF10C04E-6BB6-4A88-A645-357BD83A6155}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "BDSADominionContent", "BDSADominion\BDSADominionContent\BDSADominionContent.contentproj", "{B97FC7AF-06F7-44C4-BBFD-9E60A7B94FB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDSADominionContent", "BDSADominion\BDSADominionContent\BDSADominionContent.contentproj", "{B97FC7AF-06F7-44C4-BBFD-9E60A7B94FB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
