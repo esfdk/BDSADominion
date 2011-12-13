@@ -5,9 +5,9 @@ component
 			author: "Jakob Melnyk (jmel@itu.dk)";
 		feature
 		--Queries
-		Equals : BOOLEAN
+		EqualsOtherObj : BOOLEAN
 			-> obj : VALUE -- Object in C#.
-		Equals : BOOLEAN
+		EqualsOtherCard : BOOLEAN
 			-> other : CARD
 		GetName : CARD_NAME
 		GetNumber : NATURAL
@@ -37,10 +37,11 @@ component
 		end
 		SetUpCards
 			-> cards : COLLECTION[CARD_NAME]
-			require SetUp = false and /= void
+			require SetUp = false and cards /= void
 			ensure SetUp = true
 		end
-		Invariant: for_all c member_of CreatedCards it_holds c.
+		--Invariant commented because I could not get it to compile, but below is a rough idea of what I wanted to express.
+		--for_all c member_of CreatedCards it_holds c.GetNumber < CardsMade.get(c.GetName)
 	end
 	
 	class CARD_NAME
@@ -57,7 +58,7 @@ component
 			Result = "MONEYLENDER" or Result = "REMODEL" or Result = "SMITHY" or Result = "SPY" or
 			Result = "THIEF" or Result = "THRONE_ROOM" or Result = "COUNCIL_ROOM" or Result = "FESTIVAL" or 
 			Result = "LABORATORY" or Result = "LIBRARY" or Result = "MARKET" or Result = "MINE" or Result = "WITCH" or
-			Result = 'EMPTY' or Result = 'BACKSIDE'
+			Result = "EMPTY" or Result = "BACKSIDE"
 		end
 		--Commands
 	end

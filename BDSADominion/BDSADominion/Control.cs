@@ -98,7 +98,7 @@
             while (!serverStarted)
             {
                 string input = Console.ReadLine();
-                
+
                 network.PreGameMessage(input);
             }
 
@@ -292,29 +292,21 @@
             gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null);
             gui.DrawHand(gs.Players[(int)clientPlayerNumber - 1].Hand.ToArray());
             gui.UsedCards(startSupply.Keys.ToArray());
+            gui.SetAction((int)gs.NumberOfActions);
+            gui.SetBuys((int)gs.NumberOfBuys);
+            gui.SetCoins((int)gs.NumberOfCoins);
 
-            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
+            switch (gs.GetPhase)
             {
-                gui.SetAction((int)gs.NumberOfActions);
-                gui.SetBuys((int)gs.NumberOfBuys);
-                gui.SetCoins((int)gs.NumberOfCoins);
-
-                switch (gs.GetPhase)
-                {
-                    case 1:
-                        gui.SetPhase(0);
-                        break;
-                    case 2:
-                        gui.SetPhase(1);
-                        break;
-                }
-
-                gui.YourTurn(true);
+                case 1:
+                    gui.SetPhase(0);
+                    break;
+                case 2:
+                    gui.SetPhase(1);
+                    break;
             }
-            else
-            {
-                gui.YourTurn(false);
-            }
+
+            gui.YourTurn(gs.ActivePlayer.PlayerNumber == clientPlayerNumber);
         }
 
         /// <summary>
@@ -487,12 +479,14 @@
             p.MoveFromTemporaryToZone(p.TempZone[p.TempZone.Count - 1], Zone.Played);
             gs.NumberOfActions = gs.NumberOfActions - 1;
 
+            // TODO: Put back or delete permanently @ Melnyk
+            /*
             if (gs.NumberOfActions == 0 | gs.ActivePlayer.Hand.Count(c => c is Action) == 0)
             {
                 gs.EndActionPhase();
                 gs.StartBuyPhase();
             }
-
+            */
             UpdateGui();
         }
 
@@ -515,11 +509,12 @@
             gs.NumberOfBuys = gs.NumberOfBuys - 1;
             gs.NumberOfCoins = gs.NumberOfCoins - cardCost[cardName];
 
-            if (gs.NumberOfBuys == 0)
+            // TODO: Put back or delete permanently @ Melnyk
+            /*if (gs.NumberOfBuys == 0)
             {
                 gs.EndBuyPhase();
                 EndTurn();
-            }
+            }*/
 
             UpdateGui();
         }
@@ -550,7 +545,7 @@
 
             if (message.Substring(0, 3).Equals("!bc"))
             {
-                string msg = message.Substring(message.IndexOf("[")+1, message.IndexOf("]") - message.IndexOf("[") - 1);
+                string msg = message.Substring(message.IndexOf("[") + 1, message.IndexOf("]") - message.IndexOf("[") - 1);
                 CardName cardOut;
                 if (!CardName.TryParse(msg, out cardOut))
                 {

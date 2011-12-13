@@ -70,22 +70,48 @@ component
 			author: "Jakob Melnyk (jmel@itu.dk)";
 		feature
 		--Queries
-		GetAllCards : SEQUENCE
+		GetAllCards : SET[CARD]
 		GetDeckSize : NATURAL
 		GetDiscardSize : NATURAL
-		GetHand : SEQUENCE
+		GetHand : SEQUENCE[CARD]
 		GetPlayerNumber : NATURAL
 		GetTopOfDiscard : CARD
-		GetPlayed : SEQUENCE
+			require GetDiscardSize /= 0
+		end
+		GetTopOfDeck : CARD
+			require GetDiscardSize /= 0
+		end
+		GetPlayed : SEQUENCE[CARD]
+		GetTemporaryZone : SEQUENCE[CARD]
 		
 		--Commands
 		MoveFromZoneToTemporary
 			-> zone : ZONE
+			require (zone = DECK or zone = DISCARD) and (zone = DECK -> (GetDeckSize = 0 and GetDiscardSize = 0) /= true)
+					and (zone = DISCARD -> (GetDiscardSize /= 0))
+			
+			ensure GetTemporaryZone.Count = old GetTemporaryZone.Count + 1	and (zone = DECK -> GetDeckSize = old GetDeckSize - 1) and (GetTopOfDeck /= old GetTopOfDeck)
+					and (zone = DISCARD -> GetDiscardSize = old GetDiscardSize - 1) and (GetTopOfDiscard /= old GetTopOfDiscard)
+		end
 		MoveFromHandToTemporary
-			->
+			->card : CARD
+			require GetHand.Contains(card) = false
+			ensure GetHand.Contains(card) = false and GetTemporaryZone.Contains(card)
+		end
 		MoveFromTemporary
 			-> card : CARD
 			-> zone : ZONE
+			require (zone = DECK or zone = DISCARD or zone = HAND or zone = PLAYED) and GetTemporaryZone.Contains(card)
+			ensure (GetTemporaryZone.Count = old GetTemporaryZone.Count - 1) and 
+					(zone = DECK -> GetDeckSize = old GetDeckSize +1 ) and
+					(zone = DECK -> GetTopOfDeck = old GetTemporaryZone.Get(old GetTemporaryZone.Count - 1)) and
+					(zone = DISCARD -> GetDiscardSize = old GetDiscardSize + 1) and
+					(zone = DISCARD -> GetTopOfDiscard = old GetTemporaryZone.Get(old GetTemporaryZone.Count - 1)) and
+					(zone = HAND -> GetHand.Count = old GetHand.Count + 1) and GetHand.Contains(card) and
+					(zone = HAND -> GetHand.Get(GetHand.Count - 1) = old GetTemporaryZone.Get(old GetTemporaryZone.Count - 1)) and 
+					(zone = PLAYED -> GetPlayed.Count = old Played.Count + 1) and
+					(zone = PLAYED -> GetPlayed.Get(Played.Count - 1) = old GetTemporaryZone.Get(old GetTemporaryZone.Count - 1))
+		end
 		AddCardToZone
 			-> card : CARD
 			-> zone : ZONE
