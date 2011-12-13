@@ -402,11 +402,12 @@
         /// </author>
         private void CardPlayed(int handIndex)
         {
-            Card card = this.gs.ActivePlayer.Hand[handIndex];
+            Player p = gs.ActivePlayer;
+            Card card = p.Hand[handIndex];
             switch (card.Name)
             {
                 case CardName.Village:
-                    gs.ActivePlayer.DrawCards(1);
+                    p.DrawCards(1);
                     gs.NumberOfActions += 2;
                     break;
 
@@ -416,7 +417,7 @@
                     break;
 
                 case CardName.Smithy:
-                    gs.ActivePlayer.DrawCards(3);
+                    p.DrawCards(3);
                     break;
 
                 case CardName.CouncilRoom:
@@ -425,7 +426,7 @@
                         player.DrawCards(1);
                     }
 
-                    gs.ActivePlayer.DrawCards(3);
+                    p.DrawCards(3);
                     gs.NumberOfBuys += 1;
                     break;
 
@@ -436,12 +437,12 @@
                     break;
 
                 case CardName.Laboratory:
-                    gs.ActivePlayer.DrawCards(2);
+                    p.DrawCards(2);
                     gs.NumberOfActions += 1;
                     break;
 
                 case CardName.Market:
-                    gs.ActivePlayer.DrawCards(1);
+                    p.DrawCards(1);
                     gs.NumberOfActions += 1;
                     gs.NumberOfBuys += 1;
                     gs.NumberOfCoins += 1;
@@ -449,7 +450,6 @@
 
                 case CardName.Adventurer:
                     int numberOfTreasures = 0;
-                    Player p = gs.ActivePlayer;
                     int temporarySizeAtStart = p.TempZone.Count; // In most cases will be zero.
 
                     while (numberOfTreasures < 2 & !(p.DeckSize == 0 & p.DiscardSize == 0))
@@ -472,12 +472,15 @@
                     break;
 
                 case CardName.Moat:
-                    gs.ActivePlayer.DrawCards(2);
+                    p.DrawCards(2);
                     break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            p.MoveFromHandToTemporary(p.Hand[handIndex]);
+            p.MoveFromTemporaryToZone(p.TempZone[p.TempZone.Count - 1], Zone.Played);
 
             if (gs.NumberOfActions == 0)
             {
@@ -502,6 +505,9 @@
         private void BuyCard(uint playerNumber, CardName cardName)
         {
             gs.PlayerGainsCard(gs.Players[(int)playerNumber - 1], cardName);
+
+            gs.NumberOfBuys--;
+            gs.NumberOfCoins = gs.NumberOfCoins - cardCost[cardName];
 
             if (gs.NumberOfBuys == 0)
             {

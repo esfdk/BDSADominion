@@ -255,6 +255,7 @@
             Contract.Ensures(!InActionPhase & !InBuyPhase);
 
             InBuyPhase = false;
+            NumberOfCoins = 0;
             NumberOfBuys = 0;
         }
 

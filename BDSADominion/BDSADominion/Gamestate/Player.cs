@@ -350,7 +350,7 @@
         /// </param>
         public void DrawCards(uint amount)
         {
-            for (int i = 1; i < amount; i++)
+            for (int i = 1; i <= amount; i++)
             {
                 if (DeckSize + DiscardSize < 1)
                 {
