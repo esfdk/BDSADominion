@@ -239,6 +239,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Supply\Adventurer.png">
       <Name>Adventurer</Name>
       <Importer>TextureImporter</Importer>
