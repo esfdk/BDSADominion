@@ -57,6 +57,8 @@
             {
                 responseMessages[i] = string.Empty;
             }
+            client.stringBuilder.Clear();
+            client.BeginReceive();
         }
 
         //May only be called with a string not containing '|', '<' and '>' //TODO Contract
@@ -67,7 +69,7 @@
             client.Comm.Send(NetworkConst.ENCODER.GetBytes(typeMessage));
             while (responseMessages.Any(mes => mes.Equals(string.Empty)))
             {
-                //Waiting for responses
+                Console.WriteLine("Waiting for responses");
             }
             string[] responses = new string[responseMessages.Length];
             responseMessages.CopyTo(responses, 0);
@@ -82,7 +84,7 @@
 
         private string ResponseMessage()
         {
-            string typeMessage = string.Format("{0}|{1}", MessageType.Response, "<MR>");
+            string typeMessage = string.Format("{0}|{1}<EOF>", MessageType.Response, "<MR>");
             return typeMessage;
         }
 

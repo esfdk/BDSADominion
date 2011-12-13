@@ -40,7 +40,7 @@
 
         private byte[] buffer = new byte[NetworkConst.BUFFERSIZE];
 
-        private StringBuilder stringBuilder = new StringBuilder();
+        internal StringBuilder stringBuilder = new StringBuilder();
 
         /// <summary>
         /// This method should be called whenever the client recieves a message from the server.
@@ -52,19 +52,19 @@
         {
             string[] messageParts = message.Split(new char[] { '|' });
             Console.WriteLine("Client.RecievedMessage: Client received '{0}' of type {1} from player {2}", messageParts[2], messageParts[1], messageParts[0]);
-            stringBuilder.Clear();
-            BeginReceive();
+            //stringBuilder.Clear();
+            //BeginReceive();
         }
 
         public void BeginReceive()
         {
-            ////Console.WriteLine("Client.BeginRecieve: Client BeginRecieve began");
+            Console.WriteLine("Client.BeginRecieve: Client BeginRecieve began");
             Comm.BeginReceive(buffer, 0, NetworkConst.BUFFERSIZE, 0, BeginReceiveCallback, this);
         }
 
         private void BeginReceiveCallback(IAsyncResult asyncResult)
         {
-            ////Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
+            Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
             int read = Comm.EndReceive(asyncResult);
             if (read > 0)
             {
@@ -79,7 +79,7 @@
                     if (NewMessageEvent != null)
                     {
                         NewMessageEvent(message);
-                        ////Console.WriteLine("Begin Receive reached");
+                        Console.WriteLine("Client.BeginReceiveCallback: Begin Receive reached");
                     }
 
                     stringBuilder.Clear();

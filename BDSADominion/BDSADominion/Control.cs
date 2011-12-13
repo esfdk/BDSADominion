@@ -101,8 +101,6 @@
 
                 network.PreGameMessage(input);
             }
-
-            Console.WriteLine("game started");
         }
 
         /// <summary>
@@ -135,7 +133,7 @@
                     parseSuccess = IPAddress.TryParse(ip, out ipAddress);
                     if (!parseSuccess)
                     {
-                        Console.WriteLine("ip not valid, try again:");
+                        Console.WriteLine("IP not valid, try again:");
                     }
                 }
 
@@ -193,7 +191,6 @@
         /// </author>
         private void ReceivePreGameMessage(string message, int playerId)
         {
-            Console.WriteLine("<Interface> Client recieved {0} from {1}", message, playerId);
             if (playerId == 0 & message.Contains("<STGM>"))
             {
                 string[] messageParts = message.Split(new[] { ',' });
@@ -203,6 +200,7 @@
                 numberOfPlayers = int.Parse(messageParts[1]);
                 Console.WriteLine("SYSTEM: GAME STARTED. There are {1} players and you are player {0}",
                                   clientPlayerNumber, numberOfPlayers);
+                network.MessageReceived -= ReceivePreGameMessage;
                 SetUpGame((uint)numberOfPlayers);
             }
         }
@@ -539,7 +537,7 @@
         {
             if (message.Substring(0, 3).Equals("!cp"))
             {
-                string msg = message.Substring(message.IndexOf("["), message.IndexOf("]") - message.IndexOf("[") - 1);
+                string msg = message.Substring(message.IndexOf("[")+1, message.IndexOf("]") - message.IndexOf("[") - 1);
                 CardPlayed(int.Parse(msg));
             }
 
@@ -625,7 +623,6 @@
         /// </author>
         private void EndPhase()
         {
-            Console.WriteLine("EndPhase Called"); //TODO Remove
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
                 switch (gs.GetPhase)

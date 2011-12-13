@@ -333,11 +333,11 @@ namespace BDSADominion.GUI
             spriteBatch.DrawString(font, "Coins: " + coins.ToString(), new Vector2(800, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Player" + playernum.ToString(), new Vector2(10, 32), Color.RoyalBlue);
             spriteBatch.DrawString(font, turn ? "Your turn   -" : "Not your turn", new Vector2(10, 10), Color.RoyalBlue);
-            if (turn && phase == 0)
+            if (phase == 0)
             {
                 spriteBatch.DrawString(font, "Action phase", new Vector2(163, 10), Color.RoyalBlue);
             }
-            if (turn && phase == 1)
+            if (phase == 1)
             {
                 spriteBatch.DrawString(font, "Buy phase", new Vector2(163, 10), Color.RoyalBlue);
             }
