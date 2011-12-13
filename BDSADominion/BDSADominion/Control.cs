@@ -101,8 +101,6 @@
                 
                 network.PreGameMessage(input);
             }
-
-            Console.WriteLine("game started");
         }
 
         /// <summary>
@@ -135,7 +133,7 @@
                     parseSuccess = IPAddress.TryParse(ip, out ipAddress);
                     if (!parseSuccess)
                     {
-                        Console.WriteLine("ip not valid, try again:");
+                        Console.WriteLine("IP not valid, try again:");
                     }
                 }
 
@@ -193,7 +191,6 @@
         /// </author>
         private void ReceivePreGameMessage(string message, int playerId)
         {
-            Console.WriteLine("<Interface> Client recieved {0} from {1}", message, playerId);
             if (playerId == 0 & message.Contains("<STGM>"))
             {
                 string[] messageParts = message.Split(new[] { ',' });
@@ -631,7 +628,6 @@
         /// </author>
         private void EndPhase()
         {
-            Console.WriteLine("EndPhase Called"); //TODO Remove
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
                 switch (gs.GetPhase)
