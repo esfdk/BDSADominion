@@ -160,6 +160,8 @@ namespace BDSADominion.GUI
         /// </summary>
         private MouseState lastMouseState;
 
+        private bool StartUp = false;
+
         #endregion
 
         /// <summary>
@@ -190,6 +192,13 @@ namespace BDSADominion.GUI
         /// event for when the endphase button is clicked.
         /// </summary>
         internal event ClickHandler EndPhaseClicked;
+
+        internal event ClickHandler StartUpdate;
+
+        private void Trololo() //TODO Remove
+        {
+            Console.WriteLine("Trololo");
+        }
 
 
         /// <summary>
@@ -265,6 +274,12 @@ namespace BDSADominion.GUI
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (StartUpdate != null & StartUp == false)
+            {
+                StartUp = true;
+                StartUpdate();
+            }
+            
             lastMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
 
