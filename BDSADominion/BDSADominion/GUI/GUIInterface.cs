@@ -27,9 +27,12 @@ namespace BDSADominion.GUI
             game.HandCardClicked += HandCardToControl;
             game.SupplyCardClicked += SupplyAttemptToControl;
             game.EndPhaseClicked += EndPhaseToControl;
+            game.StartUpdate += StartUpdateToControl;
             CardInHandPressed += HandPressed;
             BuyAttempt += SupplyPressed;
             EndPhasePressed += PhaseEndPressed;
+            StartUpdate += UpdateHappened;
+
         }
 
         public void RunGame()
@@ -44,6 +47,8 @@ namespace BDSADominion.GUI
         public event CardNameHandler BuyAttempt;
 
         public event ClickHandler EndPhasePressed;
+
+        public event ClickHandler StartUpdate;
 
         void HandCardToControl(CardSprite card)
         {
@@ -63,6 +68,11 @@ namespace BDSADominion.GUI
             EndPhasePressed();
         }
 
+        void StartUpdateToControl()
+        {
+            StartUpdate();
+        }
+
         //Unnessecary //TODO
         void HandPressed(int index)
         {
@@ -79,6 +89,11 @@ namespace BDSADominion.GUI
             Console.WriteLine("EndPhase has been pressed");
         }
 
+        void UpdateHappened()
+        {
+            Console.WriteLine("Update has happened");
+        }
+
         public void DrawHand(Card[] cards)
         {
             List<CardSprite> sprite = new List<CardSprite>();
@@ -93,7 +108,14 @@ namespace BDSADominion.GUI
         
         public void DrawAction(Card[] cards)
         {
-            game.supplyZone.NewCards(cards.Select(card => card.Name).ToList());
+            List<CardSprite> sprite = new List<CardSprite>();
+
+            for (int i = 0; i < cards.Length; i++)
+            {
+                sprite.Add(new CardSprite(cards[i].Name, i));
+            }
+
+            game.actionZone.NewCards(sprite);
         }
 
         public void DrawDiscard(Card card)

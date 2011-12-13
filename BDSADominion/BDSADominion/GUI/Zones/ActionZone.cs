@@ -24,7 +24,6 @@
         /// </summary>
         private Vector2 offset = new Vector2(135, 0); //TODO Move to GUIConstants
 
-
         /// <summary>
         /// The starting position of the actionzone.
         /// </summary>
@@ -62,9 +61,10 @@
         }
 
         //TODO Contract assert empty
-        internal void Clear()
+        internal void ClearAction()
         {
-            foreach (CardSprite card in ActionCards)
+            CardSprite[] list = ActionCards.ToArray();
+            foreach (CardSprite card in list)
             {
                 ActionCards.Remove(card);
             }
@@ -87,8 +87,9 @@
         /// <param name="cards">
         /// The cards.
         /// </param>
-        internal void AddCards(List<CardSprite> cards)
+        internal void NewCards(List<CardSprite> cards)
         {
+            ClearAction();
             foreach (CardSprite card in cards)
             {
                 AddCard(card);

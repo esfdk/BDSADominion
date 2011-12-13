@@ -274,6 +274,7 @@
             gui.EndPhasePressed += EndPhase;
             gui.BuyAttempt += CanBuyCard;
             gui.CardInHandPressed += CanPlayCard;
+            gui.StartUpdate += UpdateGui;
 
             StartTurn();
             gui.RunGame();
