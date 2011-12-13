@@ -27,11 +27,11 @@ namespace BDSADominion.GUI
             game.HandCardClicked += HandCardToControl;
             game.SupplyCardClicked += SupplyAttemptToControl;
             game.EndPhaseClicked += EndPhaseToControl;
-            game.StartUpdate += StartUpdate;
+            game.StartUpdate += StartUpdateToControl;
             CardInHandPressed += HandPressed;
             BuyAttempt += SupplyPressed;
             EndPhasePressed += PhaseEndPressed;
-            StartUpdate += StartUpdateToControl;
+            StartUpdate += UpdateHappened;
 
         }
 
@@ -87,6 +87,11 @@ namespace BDSADominion.GUI
         void PhaseEndPressed()
         {
             Console.WriteLine("EndPhase has been pressed");
+        }
+
+        void UpdateHappened()
+        {
+            Console.WriteLine("Update has happened");
         }
 
         public void DrawHand(Card[] cards)
