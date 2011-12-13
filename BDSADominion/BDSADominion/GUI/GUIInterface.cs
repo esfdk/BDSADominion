@@ -144,5 +144,10 @@ namespace BDSADominion.GUI
         {
             game.supplyZone.NewCards(cards.ToList());
         }
+
+        public void SetPlayerNumber(int number)
+        {
+            game.playernum = number;
+        }
     }
 }

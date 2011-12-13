@@ -198,7 +198,7 @@
             Console.WriteLine("<Interface> Client recieved {0} from {1}", message, playerId);
             if (playerId == 0 & message.Contains("<STGM>"))
             {
-                string[] messageParts = message.Split(new char[] { ',' });
+                string[] messageParts = message.Split(new[] { ',' });
                 serverStarted = true;
                 clientPlayerNumber = (uint.Parse(messageParts[2]));
                 network.SetNumberOfClients(int.Parse(messageParts[1]));
