@@ -202,7 +202,7 @@
                 network.SetNumberOfClients(int.Parse(messageParts[1]));
                 numberOfPlayers = int.Parse(messageParts[1]);
                 Console.WriteLine("SYSTEM: GAME STARTED. There are {1} players and you are player {0}",
-                                  int.Parse(messageParts[1]), numberOfPlayers);
+                                  clientPlayerNumber, numberOfPlayers);
                 SetUpGame((uint)numberOfPlayers);
             }
         }
@@ -361,10 +361,6 @@
         {
             Contract.Requires(!gs.InActionPhase & !gs.InBuyPhase);
 
-            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
-            {
-                network.TurnMessage("!ep");
-            }
 
             if (gs.GameOver)
             {
@@ -374,6 +370,11 @@
             {
                 CleanUp();
                 StartTurn();
+            }
+
+            if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
+            {
+                network.TurnMessage("!ep");
             }
         }
 
@@ -621,6 +622,7 @@
         /// </author>
         private void EndPhase()
         {
+            Console.WriteLine("EndPhase Called"); //TODO Remove
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
                 switch (gs.GetPhase)
@@ -637,6 +639,8 @@
                         break;
                 }
             }
+            UpdateGui(); //TODO Remove
+
         }
 
         #endregion

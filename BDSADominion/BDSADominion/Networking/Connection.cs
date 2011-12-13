@@ -39,10 +39,11 @@
         /// Sends the message to the Client
         /// </summary>
         /// <param name="message">
-        /// The message, must be clean.
+        /// The message, must be compound.
         /// </param>
         internal void Send(string message)
         {
+            Console.WriteLine("Sending message: " + message);
             connSocket.Send(NetworkConst.ENCODER.GetBytes(message));
         }
 

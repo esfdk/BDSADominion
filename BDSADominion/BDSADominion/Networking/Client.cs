@@ -61,16 +61,16 @@
 
         private void BeginReceiveCallback(IAsyncResult asyncResult)
         {
-            ////Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
+            Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
             int read = Comm.EndReceive(asyncResult);
-
+            Console.WriteLine("1test " + read);
             if (read > 0)
             {
                 stringBuilder.Append(NetworkConst.ENCODER.GetString(buffer, 0, read));
 
                 string content = stringBuilder.ToString();
 
-                ////Console.WriteLine(content);
+                Console.WriteLine("2test: " + content);
 
                 if (content.IndexOf("<EOF>") >= 0)
                 {

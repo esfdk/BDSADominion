@@ -35,7 +35,7 @@ namespace BDSADominion.GUI
         public void RunGame()
         {
             game.Run();
-            string my = "lol";
+            ////string my = "lol";
 
         }
 
