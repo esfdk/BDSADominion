@@ -43,7 +43,6 @@
         /// </param>
         internal void Send(string message)
         {
-            Console.WriteLine("Sending message: " + message);
             connSocket.Send(NetworkConst.ENCODER.GetBytes(message));
         }
 
@@ -62,8 +61,6 @@
                 stringBuilder.Append(NetworkConst.ENCODER.GetString(buffer, 0, read));
 
                 string content = stringBuilder.ToString();
-
-                Console.WriteLine(content);
 
                 if (content.IndexOf("<EOF>") >= 0)
                 {
