@@ -193,7 +193,7 @@
         /// Makes sure a card cannot exist 
         /// </summary>
         [ContractInvariantMethod]
-        protected void ObjectInvariant()
+        private void ObjectInvariant()
         {
             Contract.Invariant(InvariantHelper());
         }

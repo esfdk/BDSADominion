@@ -53,8 +53,11 @@
         /// </param>
         public Gamestate(uint numberOfPlayers, Dictionary<CardName, uint> startSupply)
         {
+            Contract.Requires(numberOfPlayers >= 2 & numberOfPlayers <= 4);
+            Contract.Requires(startSupply != null);
+
             Players = new List<Player>();
-            for (uint i = 1; i < numberOfPlayers; i++)
+            for (uint i = 1; i <= numberOfPlayers; i++)
             {
                 Players.Add(new Player(i));
             }
@@ -154,7 +157,7 @@
 
             set
             {
-                Contract.Requires(!(numberOfActions + value < 0));
+                Contract.Requires(!(NumberOfActions + value < 0));
                 numberOfActions = value;
             }
         }
@@ -171,7 +174,7 @@
 
             set
             {
-                Contract.Requires(!(numberOfBuys + value < 0));
+                Contract.Requires(!(NumberOfBuys + value < 0));
                 numberOfBuys = value;
             }
         }
@@ -188,7 +191,7 @@
 
             set
             {
-                Contract.Requires(!(numberOfCoins + value < 0));
+                Contract.Requires(!(NumberOfCoins + value < 0));
                 numberOfCoins = value;
             }
         }

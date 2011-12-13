@@ -103,7 +103,7 @@
             }
 
             Console.WriteLine("game started");
-            SetUpGame((uint) numberOfPlayers);
+            SetUpGame((uint)numberOfPlayers);
             //TODO Start GameState
             //We count on that client 1 is the server. 
         }
@@ -247,17 +247,21 @@
 
             CardFactory.SetUpCards(startSupply.Keys);
 
+            Console.WriteLine(numOfPlayers);
             gs = new Gamestate.Gamestate(numOfPlayers, startSupply);
 
             foreach (Player player in gs.Players)
             {
+                Console.WriteLine("New player got cards!");
                 for (int i = 1; i < 7; i++)
                 {
+                    Console.WriteLine("Player got a copper!");
                     gs.PlayerGainsCard(player, CardName.Copper);
                 }
 
                 for (int i = 1; i < 3; i++)
                 {
+                    Console.WriteLine("Player got a Estate!");
                     gs.PlayerGainsCard(player, CardName.Estate);
                 }
 
@@ -277,7 +281,7 @@
         private void UpdateGui()
         {
             gui.DrawAction(gs.ActivePlayer.Played.ToArray());
-            gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null, 0); // TODO: Explain why index is needed in draw discard??
+            gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null, 0);
             gui.DrawHand(gs.ActivePlayer.Hand.ToArray());
 
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)

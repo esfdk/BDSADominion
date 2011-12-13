@@ -58,6 +58,7 @@
         public Player(uint playerNumber)
         {
             this.PlayerNumber = playerNumber;
+            AllCards = new Dictionary<Card, bool>();
         }
 
         /// <summary>
@@ -308,18 +309,18 @@
             Contract.Requires(zone == Zone.Deck | zone == Zone.Discard | zone == Zone.Hand | zone == Zone.Played);
             Contract.Requires(AllCards.ContainsKey(card));
 
-            Contract.Requires(zone != Zone.Hand | hand.Contains(card));
+            Contract.Requires(zone != Zone.Hand | Hand.Contains(card));
             Contract.Requires(zone != Zone.Played | Played.Contains(card));
             Contract.Requires(zone != Zone.Deck | !(DeckSize == 0 & DiscardSize == 0));
             Contract.Requires(zone != Zone.Discard | DiscardSize != 0);
 
             Contract.Ensures(!AllCards.ContainsKey(card));
 
-            Contract.Ensures(zone == Zone.Hand ? !hand.Contains(card) : true);
-            Contract.Ensures(zone != Zone.Hand | hand.Count == Contract.OldValue(hand.Count) - 1);
+            Contract.Ensures(zone == Zone.Hand ? !Hand.Contains(card) : true);
+            Contract.Ensures(zone != Zone.Hand | Hand.Count == Contract.OldValue(hand.Count) - 1);
 
-            Contract.Ensures(zone != Zone.Played | !played.Contains(card));
-            Contract.Ensures(zone != Zone.Played | played.Count == Contract.OldValue(played.Count) - 1);
+            Contract.Ensures(zone != Zone.Played | !Played.Contains(card));
+            Contract.Ensures(zone != Zone.Played | Played.Count == Contract.OldValue(played.Count) - 1);
 
             Contract.Ensures(zone != Zone.Deck | DeckSize == Contract.OldValue(DeckSize) - 1);
             Contract.Ensures(zone != Zone.Discard | DiscardSize == Contract.OldValue(DiscardSize) - 1);
@@ -406,7 +407,7 @@
         /// if it is not in the 'ALL CARDS'.
         /// </summary>
         [ContractInvariantMethod]
-        protected void ObjectInvariant()
+        private void ObjectInvariant()
         {
             Contract.Invariant(InvariantHelper());
         }
