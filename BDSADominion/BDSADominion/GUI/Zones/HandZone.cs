@@ -1,4 +1,6 @@
-﻿﻿namespace BDSADominion.GUI.Zones
+﻿﻿using System.Diagnostics.Contracts;
+
+namespace BDSADominion.GUI.Zones
  {
      using System;
      using System.Collections.Generic;
@@ -43,10 +45,10 @@
          /// </summary>
          internal Rectangle TouchRect { get; private set; }
 
-
-         //TODO: Contract: on return: hand is empty
          public void ClearHand()
          {
+             Contract.Ensures(hand.Count == 0);
+
              CardSprite[] list = hand.ToArray();
 
              foreach (CardSprite card in list)
@@ -105,7 +107,7 @@
              }
          }
 
-         internal bool isClickWithin(int mouseX, int mouseY)
+         internal bool IsClickWithin(int mouseX, int mouseY)
          {
              return TouchRect.Contains(mouseX, mouseY);
          }
@@ -119,8 +121,10 @@
          /// <returns>
          /// The find card by mouse click.
          /// </returns>
-         internal CardSprite FindCardByMouseClick(int mouseX)
+         internal CardSprite FindCardByMouseClick(int mouseX, int mouseY)
          {
+             Contract.Requires(IsClickWithin(mouseX, mouseY));
+
              int clickedIndex = ClickedIndex(mouseX);
              int count = 0;
              foreach (CardSprite card in hand)
@@ -132,7 +136,7 @@
                  count++;
              }
 
-             return null; //TODO Contract. isClickedWithin must be true
+             return null;
          }
 
          private int ClickedIndex(int mouseX)

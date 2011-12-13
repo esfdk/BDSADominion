@@ -256,7 +256,6 @@ namespace BDSADominion.GUI
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
         /// <summary>
@@ -280,14 +279,14 @@ namespace BDSADominion.GUI
 
             if (currentMouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
             {
-                if (handZone.isClickWithin(mouseX, mouseY))
+                if (handZone.IsClickWithin(mouseX, mouseY))
                 {
-                    HandCardClicked(handZone.FindCardByMouseClick(mouseX));
+                    HandCardClicked(handZone.FindCardByMouseClick(mouseX, mouseY));
                 }
 
                 if (supplyZone.IsClickWithin(mouseX, mouseY))
                 {
-                    SupplyCardClicked(supplyZone.FindCardByMouseClick(mouseY));
+                    SupplyCardClicked(supplyZone.FindCardByMouseClick(mouseX, mouseY));
                 }
 
                 if ((mouseX < 285 && mouseX > 185) && (mouseY < 370 && mouseY > 340))

@@ -332,6 +332,8 @@
         {
             List<int> scores = gs.GetScores();
             gui.EndGame(scores.IndexOf(scores.Max()) + 1); // TODO: In case of a draw, lowest numbered player wins.
+            Console.WriteLine("Winner: player: " + scores.IndexOf(scores.Max()) + 1);
+            Console.Read();
         }
 
         #region TurnMethods

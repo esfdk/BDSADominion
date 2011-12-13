@@ -63,7 +63,6 @@
         }
 
         //TODO: Contract: may only be called if end is <EOF>
-        //TODO: stringBuilder as only in method scope
         private void BeginReceiveCallback(IAsyncResult asyncResult)
         {
             ////Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");

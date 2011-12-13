@@ -1,4 +1,6 @@
-﻿﻿namespace BDSADominion.GUI.Zones
+﻿﻿using System.Diagnostics.Contracts;
+
+namespace BDSADominion.GUI.Zones
  {
      using System;
      using System.Collections.Generic;
@@ -17,7 +19,7 @@
          /// <summary>
          /// The list of cards in the supplyzone.
          /// </summary>
-         internal List<ButtonSprite> Supply = new List<ButtonSprite>();
+         private readonly List<ButtonSprite> supply = new List<ButtonSprite>();
 
          /// <summary>
          /// next card x-coor
@@ -51,18 +53,18 @@
          /// </param>
          internal void AddCard(ButtonSprite newButtonSprite)
          {
-             Supply.Add(newButtonSprite);
+             supply.Add(newButtonSprite);
          }
 
-         //TODO: Contract: on return: hand is empty
          public void ClearSupply()
          {
-             ButtonSprite[] list = Supply.ToArray();
+             Contract.Ensures(supply.Count == 0);
 
+             ButtonSprite[] list = supply.ToArray();
 
              foreach (ButtonSprite button in list)
              {
-                 Supply.Remove(button);
+                 supply.Remove(button);
              }
          }
 
@@ -89,11 +91,11 @@
          /// </param>
          internal void Draw(SpriteBatch spriteBatch)
          {
-             if (Supply.Count > 0)
+             if (supply.Count > 0)
              {
                  Vector2 currentPosition = startPosition;
 
-                 foreach (ButtonSprite card in Supply)
+                 foreach (ButtonSprite card in supply)
                  {
                      if (card != null)
                      {
@@ -112,17 +114,22 @@
          /// <summary>
          /// finds which button has been clicked on in supplyzone.
          /// </summary>
+         /// <param name="mouseX">
+         /// The mouse X.
+         /// </param>
          /// <param name="mouseY">
          /// The mouse Y.
          /// </param>
          /// <returns>
          /// The find card by mouse click.
          /// </returns>
-         internal CardName FindCardByMouseClick(int mouseY)
-         { //TODO Contract: isClickWithinSupply(int mouseX, int mouseY) must be true
+         internal CardName FindCardByMouseClick(int mouseX, int mouseY)
+         {
+             Contract.Requires(IsClickWithin(mouseX, mouseY));
+
              int clickedIndex = ClickedIndex(mouseY);
              int count = 0;
-             foreach (ButtonSprite card in Supply)
+             foreach (ButtonSprite card in supply)
              {
                  if (clickedIndex == count)
                  {
@@ -136,9 +143,9 @@
 
          private int ClickedIndex(int mouseY)
          {
-             int mouseCardY = mouseY - (int)this.startPosition.Y;
-             float clickedValue = mouseCardY / this.offset.Y;
-             float clickedInto = (mouseCardY % this.offset.Y) / offset.Y;
+             int mouseCardY = mouseY - (int)startPosition.Y;
+             float clickedValue = mouseCardY / offset.Y;
+             float clickedInto = (mouseCardY % offset.Y) / offset.Y;
 
              return (int)Math.Round(clickedValue - clickedInto);
          }

@@ -24,9 +24,6 @@
          /// <summary>
          /// Initializes a new instance of the <see cref="HandZone"/> class.
          /// </summary>
-         /// <param name="topmostleftlocation">
-         /// The topmostleftlocation.
-         /// </param>
          internal DeckZone()
          {
          }

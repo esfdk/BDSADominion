@@ -1,4 +1,6 @@
-﻿namespace BDSADominion.GUI.Zones
+﻿using System.Diagnostics.Contracts;
+
+namespace BDSADominion.GUI.Zones
 {
     using System;
     using System.Collections.Generic;
@@ -60,13 +62,14 @@
             return false;
         }
 
-        //TODO Contract assert empty
         internal void ClearAction()
         {
+            Contract.Ensures(ActionCards.Count == 0);
+
             CardSprite[] list = ActionCards.ToArray();
             foreach (CardSprite card in list)
             {
-                ActionCards.Remove(card);
+                RemoveCard(card);
             }
         }
 
@@ -118,40 +121,5 @@
                 }
             }
         }
-        /*
-        /// <summary>
-        /// Returns the actual card clicked on.
-        /// </summary>
-        /// <param name="mouseX">
-        /// The mouse X.
-        /// </param>
-        /// <param name="mouseY">
-        /// The mouse Y.
-        /// </param>
-        /// <returns>
-        /// The find card by mouse click.
-        /// </returns>
-        internal CardSprite FindCardByMouseClick(int mouseX, int mouseY)
-        {
-            if (TouchRect.Contains(mouseX, mouseY))
-            {
-                int mouseCardX = mouseX - (int)this.actionStartPosition.X;
-                float clickedValue = mouseCardX / this.offset.X;
-                float clickedInto = (mouseCardX % this.offset.X) / offset.X;
-
-                int clickedIndex = (int)Math.Round(clickedValue - clickedInto);
-                int count = 0;
-                foreach (CardSprite card in ActionCards)
-                {
-                    if (clickedIndex == count)
-                    {
-                        return card;
-                    }
-                    count++;
-                }
-            }
-
-            return null; //TODO
-        }*/
     }
 }
