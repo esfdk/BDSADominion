@@ -9,6 +9,9 @@
     /// This class is a client that can be used to connect to a server,
     /// to facilitate communication over a network. The communication must be strings.
     /// </summary>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// </author>
     internal class Client
     {
         /// <summary>

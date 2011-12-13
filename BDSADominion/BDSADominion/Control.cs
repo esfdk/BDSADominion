@@ -86,33 +86,38 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Control"/> class.
         /// </summary>
+        /// <author>
+        /// Christian 'Troy' Jensen (chrj@itu.dk)
+        /// </author>
         public Control()
         {
-            string input = null;
+            StartNetwork(clientType());
 
-            bool host = false;
+            network.MessageReceived += ReceivePreGameMessage;
 
-            while (input == null)
+            while (!serverStarted)
             {
-                Console.WriteLine("Please select server or client:");
+                string input = Console.ReadLine();
 
-                input = Console.ReadLine();
-
-                if (input.Equals("client"))
-                {
-                    host = false;
-                }
-                else if (input.Equals("server"))
-                {
-                    host = true;
-                }
-                else
-                {
-                    Console.WriteLine("Unrecognized input");
-                    input = null;
-                }
+                network.PreGameMessage(input);
             }
 
+            Console.WriteLine("game started");
+            SetUpGame((uint) numberOfPlayers);
+            //TODO Start GameState
+            //We count on that client 1 is the server. 
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="host">
+        /// The host.
+        /// </param>
+        /// <author>
+        /// Christian 'Troy' Jensen (chrj@itu.dk)
+        /// </author>
+        private void StartNetwork(bool host)
+        {
             if (host)
             {
                 Console.WriteLine("Host Started");
@@ -140,22 +145,55 @@
                 network = new NetworkingInterface(ipAddress);
                 Console.WriteLine("Client started");
             }
-
-            network.MessageReceived += ReceivePreGameMessage;
-
-            while (!serverStarted)
-            {
-                input = Console.ReadLine();
-
-                network.PreGameMessage(input);
-            }
-
-            Console.WriteLine("game started");
-            SetUpGame((uint) numberOfPlayers);
-            //TODO Start GameState
-            //We count on that client 1 is the server. 
         }
 
+        /// <summary>
+        /// </summary>
+        /// <returns>
+        /// </returns>
+        /// <author>
+        /// Christian 'Troy' Jensen (chrj@itu.dk)
+        /// </author>
+        private bool clientType()
+        {
+            bool host = false;
+            string input = null;
+
+            while (input == null)
+            {
+                Console.WriteLine("Please select server or client:");
+
+                input = Console.ReadLine();
+
+                if (input.Equals("client"))
+                {
+                    host = false;
+                }
+                else if (input.Equals("server"))
+                {
+                    host = true;
+                }
+                else
+                {
+                    Console.WriteLine("Unrecognized input");
+                    input = null;
+                }
+            }
+            return host;
+        }
+
+        /// <summary>
+        /// used to recieve messages before the game starts
+        /// </summary>
+        /// <param name="message">
+        /// The message that is being passed. Clean
+        /// </param>
+        /// <param name="playerId">
+        /// The Id of the player that sent it.
+        /// </param>
+        /// <author>
+        /// Christian Jensen (chrj@itu.dk)
+        /// </author>
         private void ReceivePreGameMessage(string message, int playerId)
         {
             Console.WriteLine("<Interface> Client recieved {0} from {1}", message, playerId);

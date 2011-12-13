@@ -309,11 +309,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Gardens .png">
-      <Name>Gardens</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Supply\Gold.png">
       <Name>Gold</Name>
       <Importer>TextureImporter</Importer>
@@ -406,6 +401,13 @@
     </Compile>
     <Compile Include="Supply\workshop.png">
       <Name>workshop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Supply\gardens.png">
+      <Name>gardens</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
