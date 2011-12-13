@@ -58,13 +58,13 @@
 
         public void BeginReceive()
         {
-            Console.WriteLine("Client.BeginRecieve: Client BeginRecieve began");
+            ////Console.WriteLine("Client.BeginRecieve: Client BeginRecieve began");
             Comm.BeginReceive(buffer, 0, NetworkConst.BUFFERSIZE, 0, BeginReceiveCallback, this);
         }
 
         private void BeginReceiveCallback(IAsyncResult asyncResult)
         {
-            Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
+            ////Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
             int read = Comm.EndReceive(asyncResult);
             if (read > 0)
             {
