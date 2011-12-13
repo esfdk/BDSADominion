@@ -50,7 +50,7 @@ namespace BDSADominion.GUI
 
         public event ClickHandler StartUpdate;
 
-        void HandCardToControl(CardSprite card)
+        private void HandCardToControl(CardSprite card)
         {
             if (card != null)
             {
@@ -58,38 +58,38 @@ namespace BDSADominion.GUI
             }
         }
 
-        void SupplyAttemptToControl(CardName card)
+        private void SupplyAttemptToControl(CardName card)
         {
             BuyAttempt(card);
         }
 
-        void EndPhaseToControl()
+        private void EndPhaseToControl()
         {
             EndPhasePressed();
         }
 
-        void StartUpdateToControl()
+        private void StartUpdateToControl()
         {
             StartUpdate();
         }
 
         //Unnessecary //TODO
-        void HandPressed(int index)
+        private void HandPressed(int index)
         {
             //Console.WriteLine("Pressed index {0} in Hand", index);
         }
 
-        void SupplyPressed(CardName card)
+        private void SupplyPressed(CardName card)
         {
             //Console.WriteLine("Pressed {0} in Supply", card);
         }
 
-        void PhaseEndPressed()
+        private void PhaseEndPressed()
         {
             //Console.WriteLine("EndPhase has been pressed");
         }
 
-        void UpdateHappened()
+        private void UpdateHappened()
         {
             //Console.WriteLine("Update has happened");
         }
