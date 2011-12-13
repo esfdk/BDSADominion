@@ -267,12 +267,12 @@
 
             foreach (Player player in gs.Players)
             {
-                for (int i = 1; i < 7; i++)
+                for (int i = 1; i <= 7; i++)
                 {
                     gs.PlayerGainsCard(player, CardName.Copper);
                 }
 
-                for (int i = 1; i < 3; i++)
+                for (int i = 1; i <= 3; i++)
                 {
                     gs.PlayerGainsCard(player, CardName.Estate);
                 }

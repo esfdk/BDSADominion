@@ -8,8 +8,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("BDSADominion")]
 [assembly: AssemblyProduct("BDSADominion")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("Hewlett-Packard")]
-[assembly: AssemblyCopyright("Copyright © Hewlett-Packard 2011")]
+[assembly: AssemblyCompany("Dominion Dominators")]
+[assembly: AssemblyCopyright("Copyright © Dominion Dominators 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
