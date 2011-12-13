@@ -115,6 +115,17 @@ component
 		AddCardToZone
 			-> card : CARD
 			-> zone : ZONE
+			require (zone = DECK or zone = DISCARD or zone = HAND or zone = PLAYED)
+			ensure GetAllCards.Contains(card) and 
+					(zone = HAND -> GetHand.Get(GetHand.Count - 1) = card) and
+					(zone = HAND -> GetHand.Count = old GetHand.Count + 1) and
+					(zone = PLAYED -> GetPlayed.Get(GetPlayed.Count - 1) = card) and
+					(zone = PLAYED -> GetPlayed.Count = old GetPlayed.Count + 1) and
+					(zone = DISCARD -> GetDiscardSize = old GetDiscardSize + 1) and
+					(zone = DISCARD -> GetTopOfDiscard = card) and
+					(zone = DECK -> GetDeckSize = old GetDeckSize +1 ) and
+					(zone = Deck -> GetTopOfDeck = card)
+		end
 		RemoveCardFromZone
 			-> card : CARD
 			-> zone : ZONE
