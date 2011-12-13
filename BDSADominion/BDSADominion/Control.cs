@@ -1,4 +1,7 @@
-﻿namespace BDSADominion
+﻿using System.Net;
+using BDSADominion.Networking;
+
+namespace BDSADominion
 {
     using System;
     using System.Collections.Generic;
@@ -21,6 +24,15 @@
         /// The gui used by this client.
         /// </summary>
         private GUIInterface gui;
+
+        private bool serverStarted = false;
+
+        private int numberOfPlayers;
+
+        /// <summary>
+        /// The interface for communicating with the network
+        /// </summary>
+        private NetworkingInterface network;
 
         /// <summary>
         /// The gamestate used for this game.
@@ -75,7 +87,84 @@
         /// </summary>
         public Control()
         {
-            gui = new GUIInterface();
+            string input = null;
+
+            bool host = false;
+
+            while (input == null)
+            {
+                Console.WriteLine("Please select server or client:");
+
+                input = Console.ReadLine();
+
+                if (input.Equals("client"))
+                {
+                    host = false;
+                }
+                else if (input.Equals("server"))
+                {
+                    host = true;
+                }
+                else
+                {
+                    Console.WriteLine("Unrecognized input");
+                    input = null;
+                }
+            }
+
+            if (host)
+            {
+                Console.WriteLine("Host Started");
+                network = new NetworkingInterface();
+                Console.WriteLine(network.GetServerIp());
+            }
+            else
+            {
+                IPAddress ipAddress = null;
+
+                bool parseSuccess = false;
+
+                while (!parseSuccess)
+                {
+                    Console.WriteLine("Please input IP for server:");
+                    string ip = Console.ReadLine();
+
+                    parseSuccess = IPAddress.TryParse(ip, out ipAddress);
+                    if (!parseSuccess)
+                    {
+                        Console.WriteLine("ip not valid, try again:");
+                    }
+                }
+
+                network = new NetworkingInterface(ipAddress);
+                Console.WriteLine("Client started");
+            }
+
+            network.MessageReceived += ReceivePreGameMessage;
+
+            while (!serverStarted)
+            {
+                input = Console.ReadLine();
+
+                network.PreGameMessage(input);
+            }
+
+            //TODO Start GameState
+            //We count on that client 1 is the server. 
+        }
+
+        private void ReceivePreGameMessage(string message, int playerId)
+        {
+            Console.WriteLine("<Interface> Client recieved {0} from {1}", message, playerId);
+            if (playerId == 0 & message.Contains("<STGM>"))
+            {
+                Console.WriteLine("SYSTEM: GAME STARTED");
+                string[] messageParts = message.Split(new char[] { ',' });
+                serverStarted = true;
+                network.SetNumberOfClients(int.Parse(messageParts[1]));
+                numberOfPlayers = int.Parse(messageParts[2]);
+                Console.WriteLine("SYSTEM: GAME STARTED. There are {0} players and you are player {1}", numberOfPlayers, int.Parse(messageParts[1]));
+            }
         }
 
         /// <summary>

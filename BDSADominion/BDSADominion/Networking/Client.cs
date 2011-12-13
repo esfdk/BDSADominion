@@ -21,6 +21,8 @@
             Comm = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             Comm.Connect(ipEnd);
 
+            NewMessageEvent += RecievedMessage;
+
             BeginReceive();
 
             ////Comm.BeginReceive(buffer, 0, buffer.length, 0, new AsyncCallback(AcceptReceive), Comm);
@@ -40,16 +42,13 @@
         /// <summary>
         /// This method should be called whenever the client recieves a message from the server.
         /// </summary>
-        /// <param name="senderId">
-        /// The network Id of the player responisble for sending the message in the first place.
-        /// </param>
         /// <param name="message">
         /// The recieved message
         /// </param>
         public void RecievedMessage(string message)
         {
             string[] messageParts = message.Split(new char[] { '|' });
-            Console.WriteLine("Client received '{0}' from player {1}", messageParts[1], messageParts[0]);
+            Console.WriteLine("Client.RecievedMessage: Client received '{0}' of type {1} from player {2}", messageParts[2], messageParts[1], messageParts[0]);
         }
 
         public void BeginReceive()
@@ -59,7 +58,7 @@
 
         private void BeginReceiveCallback(IAsyncResult asyncResult)
         {
-            Console.WriteLine("Client recieve begun");
+            Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
             int read = Comm.EndReceive(asyncResult);
 
             if (read > 0)

@@ -30,10 +30,15 @@
             Id = id;
         }
 
-        public int Send(string message)
+        /// <summary>
+        /// Sends the message to the Client
+        /// </summary>
+        /// <param name="message">
+        /// The message, must be clean.
+        /// </param>
+        public void Send(string message)
         {
-            int value = connSocket.Send(NetworkConst.ENCODER.GetBytes(string.Format("{0}<EOF>", message)));
-            return value;
+            connSocket.Send(NetworkConst.ENCODER.GetBytes(message));
         }
 
         public void BeginReceive()
@@ -43,7 +48,7 @@
 
         private void BeginReceiveCallback(IAsyncResult asyncResult)
         {
-            Console.WriteLine("Recieve begun");
+            Console.WriteLine("Recieve begun on Connection");
             int read = connSocket.EndReceive(asyncResult);
 
             if (read > 0)
@@ -52,7 +57,7 @@
 
                 string content = stringBuilder.ToString();
 
-                ////Console.WriteLine(content);
+                Console.WriteLine(content);
 
                 if (content.IndexOf("<EOF>") >= 0)
                 {
