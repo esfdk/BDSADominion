@@ -52,7 +52,7 @@
 
         private void EmptyResponses()
         {
-            Console.WriteLine("Emptying messages");
+            ////Console.WriteLine("Emptying messages");
             for (int i = 0; i < responseMessages.Length; i++)
             {
                 responseMessages[i] = string.Empty;
@@ -67,7 +67,7 @@
             EmptyResponses();
             string typeMessage = string.Format("{0}|{1}<EOF>", MessageType.Action, message);
             client.Comm.Send(NetworkConst.ENCODER.GetBytes(typeMessage));
-            while (responseMessages.Any(mes => mes.Equals(string.Empty)))
+            ////while (responseMessages.Any(mes => mes.Equals(string.Empty)))
             {
 
             }
