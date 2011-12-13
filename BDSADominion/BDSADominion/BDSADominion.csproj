@@ -173,7 +173,7 @@
     <Compile Include="GUI\Zones\SupplyZone.cs" />
     <Compile Include="Networking\Client.cs" />
     <Compile Include="Networking\Connection.cs" />
-    <Compile Include="Networking\NetworkConst.cs" />
+    <Compile Include="Networking\NetworkDelegates.cs" />
     <Compile Include="Networking\NetworkingInterface.cs" />
     <Compile Include="Networking\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

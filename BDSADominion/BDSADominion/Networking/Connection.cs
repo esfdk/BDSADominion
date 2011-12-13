@@ -5,7 +5,12 @@
     using System.Net.Sockets;
     using System.Text;
 
-    public class Connection
+    /// <summary>
+    /// </summary>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// </author>
+    internal class Connection
     {
         private readonly Socket connSocket;
 
@@ -13,18 +18,18 @@
 
         private StringBuilder stringBuilder = new StringBuilder();
 
-        public IPAddress ClientIp
+        internal IPAddress ClientIp
         {
             get { return ((IPEndPoint) connSocket.LocalEndPoint).Address; }
         }
 
-        public int Id { get; private set; }
+        internal int Id { get; private set; }
 
         internal event ServerMessageHandler ReceivedMessageEvent;
 
         internal event ClosedConnectionHandler ClosedConnectionEvent;
 
-        public Connection(Socket clientSocket, int id)
+        internal Connection(Socket clientSocket, int id)
         {
             connSocket = clientSocket;
             Id = id;
@@ -36,12 +41,12 @@
         /// <param name="message">
         /// The message, must be clean.
         /// </param>
-        public void Send(string message)
+        internal void Send(string message)
         {
             connSocket.Send(NetworkConst.ENCODER.GetBytes(message));
         }
 
-        public void BeginReceive()
+        internal void BeginReceive()
         {
             connSocket.BeginReceive(buffer, 0, NetworkConst.BUFFERSIZE, 0, BeginReceiveCallback, this);
         }

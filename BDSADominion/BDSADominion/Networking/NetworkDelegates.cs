@@ -11,6 +11,9 @@
     /// <param name="sender">
     /// The id of the sender of the message, with 0 being the Server
     /// </param>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk)
+    /// </author>
     public delegate void InterfaceMessageHandler(string message, int sender);
 
     /// <summary>
@@ -22,6 +25,9 @@
     /// <returns>
     /// //TODO Why return anything?
     /// </returns>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// </author>
     internal delegate bool ConnectedClientHandler(Connection connection);
 
     /// <summary>
@@ -30,6 +36,9 @@
     /// <param name="connection">
     /// The Connection through which the client was connected to the server
     /// </param>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// </author>
     internal delegate void ClosedConnectionHandler(Connection connection);
 
     /// <summary>
@@ -41,6 +50,9 @@
     /// <param name="message">
     /// The message that has been received
     /// </param>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// </author>
     internal delegate void ServerMessageHandler(Connection connection, string message);
 
     /// <summary>
@@ -49,11 +61,17 @@
     /// <param name="message">
     /// The message that has been recieved
     /// </param>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// </author>
     internal delegate void ClientMessageHandler(string message);
 
     /// <summary>
     /// This describes the types of communication that can happen over the network
     /// </summary>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk)
+    /// </author>
     internal enum MessageType
     {
         System = 0, Action = 1, Response = 2, WaitResponse = 3
@@ -62,6 +80,9 @@
     /// <summary>
     /// Contains various System Constants.
     /// </summary>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk)
+    /// </author>
     internal class NetworkConst
     {
         /// <summary>

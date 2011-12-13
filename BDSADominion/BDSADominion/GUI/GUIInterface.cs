@@ -9,14 +9,16 @@ namespace BDSADominion.GUI
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    /// <author>
+    /// Christian 'Troy' Jensen (chrj@itu.dk)
+    /// </author>
     public class GUIInterface
     {
         private GameClass game;
 
         /// <summary>
-        /// trolol to
+        /// Initializes a new instance of the <see cref="GUIInterface"/> class. 
         /// </summary>
-        ////private Server server = new Server();
 
         public GUIInterface()
         {
