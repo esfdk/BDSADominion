@@ -246,28 +246,26 @@
 
             CardFactory.SetUpCards(startSupply.Keys);
 
-            Console.WriteLine(numOfPlayers);
             gs = new Gamestate.Gamestate(numOfPlayers, startSupply);
 
             foreach (Player player in gs.Players)
             {
-                Console.WriteLine("New player got cards!");
                 for (int i = 1; i < 7; i++)
                 {
-                    Console.WriteLine("Player got a copper!");
                     gs.PlayerGainsCard(player, CardName.Copper);
                 }
 
                 for (int i = 1; i < 3; i++)
                 {
-                    Console.WriteLine("Player got a Estate!");
                     gs.PlayerGainsCard(player, CardName.Estate);
                 }
 
                 player.DrawCards(5);
             }
 
-            // TODO: Set GUI one-time stuff.
+            gui = new GUIInterface();
+            UpdateGui();
+
             StartTurn();
         }
 
