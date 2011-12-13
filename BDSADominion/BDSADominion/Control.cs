@@ -618,11 +618,6 @@
                     network.TurnMessage("!cp [" + handIndex + "]");
                     CardPlayed(handIndex);
                 }
-                else
-                {
-                    // TODO: Remove this after testing
-                    Console.WriteLine("Card is not an action card!");
-                }
             }
         }
 
@@ -637,7 +632,6 @@
             Console.WriteLine("EndPhase Called"); //TODO Remove
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
-                Console.WriteLine(gs.GetPhase); // TODO: Remove this
                 switch (gs.GetPhase)
                 {
                     case 0:
@@ -645,6 +639,7 @@
                     case 1:
                         gs.EndActionPhase();
                         gs.StartBuyPhase();
+                        network.TurnMessage("!ep");
                         break;
                     case 2:
                         gs.EndBuyPhase();
