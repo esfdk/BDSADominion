@@ -90,7 +90,7 @@ namespace BDSADominion.GUI
 
             game.handZone.NewCards(sprite);
         }
-        
+
         public void DrawAction(Card[] cards)
         {
             game.supplyZone.NewCards(cards.Select(card => card.Name).ToList());
@@ -106,7 +106,7 @@ namespace BDSADominion.GUI
             {
                 game.discardZone.AddCard(new CardSprite(card.Name, -1));
             }
-            
+
         }
 
         public void SetAction(int number)
