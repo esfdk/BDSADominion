@@ -47,7 +47,9 @@
          //TODO: Contract: on return: hand is empty
          public void ClearHand()
          {
-             foreach (CardSprite card in hand)
+             CardSprite[] list = hand.ToArray();
+
+             foreach (CardSprite card in list)
              {
                  hand.Remove(card);
              }
@@ -73,6 +75,7 @@
          internal void NewCards(List<CardSprite> cards)
          {
              ClearHand();
+
              foreach (CardSprite card in cards)
              {
                  AddCard(card);

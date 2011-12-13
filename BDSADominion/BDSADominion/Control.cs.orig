@@ -207,8 +207,6 @@
             }
         }
 
-        private Dictionary<CardName, uint> startSupply;
-
         /// <summary>
         /// Sets up a new game with the number of players pass as parameter.
         /// </summary>
@@ -220,7 +218,7 @@
         /// </author>
         private void SetUpGame(uint numOfPlayers)
         {
-            startSupply = new Dictionary<CardName, uint>
+            Dictionary<CardName, uint> startSupply = new Dictionary<CardName, uint>
                 {
                     // The treasure cards.
                     { CardName.Copper, 51 },
@@ -290,7 +288,6 @@
             gui.DrawAction(gs.ActivePlayer.Played.ToArray());
             gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null);
             gui.DrawHand(gs.Players[(int)clientPlayerNumber - 1].Hand.ToArray());
-            gui.UsedCards(startSupply.Keys.ToArray());
 
             if (gs.ActivePlayer.PlayerNumber == clientPlayerNumber)
             {
@@ -362,6 +359,10 @@
         {
             Contract.Requires(!gs.InActionPhase & !gs.InBuyPhase);
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7c8346a61f97630d8fe8379db0cb562a615f9ea7
             if (gs.GameOver)
             {
                 EndOfGame();

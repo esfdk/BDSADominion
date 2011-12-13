@@ -44,9 +44,9 @@
             return server.Ip.ToString();
         }
 
-        public void SetNumberOfClients(int otherClients)
+        public void SetNumberOfClients(int totalClients)
         {
-            responseMessages = new string[otherClients];
+            responseMessages = new string[totalClients-1];
             EmptyResponses();
         }
 

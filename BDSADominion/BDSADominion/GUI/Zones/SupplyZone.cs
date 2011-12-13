@@ -27,7 +27,7 @@
          /// <summary>
          /// The starting position of the supplyzone.
          /// </summary>
-         private Vector2 startPosition = new Vector2(1150, 50); //TODO Move to GUIConstants
+         private Vector2 startPosition = new Vector2(1150, 10); //TODO Move to GUIConstants
 
          /// <summary>
          /// Initializes a new instance of the <see cref="HandZone"/> class.
@@ -57,7 +57,10 @@
          //TODO: Contract: on return: hand is empty
          public void ClearSupply()
          {
-             foreach (ButtonSprite button in Supply)
+             ButtonSprite[] list = Supply.ToArray();
+
+
+             foreach (ButtonSprite button in list)
              {
                  Supply.Remove(button);
              }
