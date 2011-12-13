@@ -22,12 +22,12 @@
         /// <summary>
         /// next card x-coor.
         /// </summary>
-        private Vector2 offset = new Vector2(135, 0); //TODO Move to GUIConstants
+        private Vector2 offset = new Vector2(135, 0); //This would be an interesting candidate for GUIConstants
 
         /// <summary>
         /// The starting position of the actionzone.
         /// </summary>
-        private Vector2 actionStartPosition = new Vector2(10, 50); //TODO Move to GUIConstants
+        private Vector2 actionStartPosition = new Vector2(10, 50); //This would be an interesting candidate for GUIConstants
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ActionZone"/> class.
@@ -118,7 +118,7 @@
                 }
             }
         }
-
+        /*
         /// <summary>
         /// Returns the actual card clicked on.
         /// </summary>
@@ -152,6 +152,6 @@
             }
 
             return null; //TODO
-        }
+        }*/
     }
 }

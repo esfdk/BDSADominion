@@ -26,8 +26,10 @@
             AlwaysDo(server.Ip);
         }
 
+        //TODO Contract check for valid ip
         public NetworkingInterface(IPAddress ip) //If joining a game
         {
+            
             AlwaysDo(ip);
         }
 

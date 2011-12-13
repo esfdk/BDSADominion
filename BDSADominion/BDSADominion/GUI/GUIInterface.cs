@@ -128,7 +128,18 @@ namespace BDSADominion.GUI
             {
                 game.discardZone.AddCard(new CardSprite(card.Name, -1));
             }
+        }
 
+        public void DrawDeck(bool filled)
+        {
+            if (filled)
+            {
+                game.deckZone.SetFilled();
+            }
+            else
+            {
+                game.deckZone.SetEmpty();
+            }
         }
 
         public void SetAction(int number)
