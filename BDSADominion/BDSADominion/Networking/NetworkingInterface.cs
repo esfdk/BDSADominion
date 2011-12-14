@@ -15,11 +15,19 @@ namespace BDSADominion.Networking
     /// </author>
     public class NetworkingInterface
     {
+        /// <summary>
+        /// The server (if used)
+        /// </summary>
         private Server server;
+
+        /// <summary>
+        /// The client
+        /// </summary>
         private Client client;
 
-        public bool IsServer { get; private set; }
-
+        /// <summary>
+        /// Holds the ResponseMessages recieved from other player
+        /// </summary>
         private string[] responseMessages;
 
         /// <summary>
@@ -50,13 +58,22 @@ namespace BDSADominion.Networking
             AlwaysDo(ip);
         }
 
-        private void AlwaysDo(IPAddress ip)
-        {
-            client = new Client(ip);
-            client.NewMessageEvent += ReceivedNewMessage;
-            ////SetNumberOfClients(2); //TODO hardcoded number of total clients. Must be updated with each serverMessage
-        }
+        /// <summary>
+        /// Tells when a new message is recieved
+        /// </summary>
+        public event InterfaceMessageHandler MessageReceived;
 
+        /// <summary>
+        /// Gets a value indicating whether this NetworkingInterface runs a Server.
+        /// </summary>
+        public bool IsServer { get; private set; }
+
+        /// <summary>
+        /// Gets the IP of the server, if this is running a Server
+        /// </summary>
+        /// <returns>
+        /// the IP of the Server
+        /// </returns>
         public string GetServerIp()
         {
             Contract.Requires(IsServer);
@@ -64,23 +81,27 @@ namespace BDSADominion.Networking
             return server.Ip.ToString();
         }
 
-        public void SetNumberOfClients(int totalClients)
+        /// <summary>
+        /// This sets the Response List to a new value
+        /// </summary>
+        /// <param name="totalClients">
+        /// The total number of people in the game
+        /// </param>
+        public void SetResponseList(int totalClients)
         {
-            responseMessages = new string[totalClients-1];
+            responseMessages = new string[totalClients - 1];
             EmptyResponses();
         }
 
-        private void EmptyResponses()
-        {
-            ////Console.WriteLine("Emptying messages");
-            for (int i = 0; i < responseMessages.Length; i++)
-            {
-                responseMessages[i] = string.Empty;
-            }
-            ////client.stringBuilder.Clear();
-            client.BeginReceive();
-        }
-
+        /// <summary>
+        /// This is called when a message should be sent to the other clients
+        /// </summary>
+        /// <param name="message">
+        /// The message to be sent
+        /// </param>
+        /// <returns>
+        /// The list of Messages of responses
+        /// </returns>
         public string[] TurnMessage(string message)
         {
             Contract.Requires(!message.Contains("|"));
@@ -99,20 +120,62 @@ namespace BDSADominion.Networking
             return responses;
         }
 
+        /// <summary>
+        /// this should be called for pregame messages
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
         public void PreGameMessage(string message)
         {
             string typeMessage = string.Format("{0}|{1}<EOF>", MessageType.System, message);
             client.Comm.Send(NetworkConst.ENCODER.GetBytes(typeMessage));
         }
 
+        /// <summary>
+        /// This should always be done by the constructor
+        /// </summary>
+        /// <param name="ip">
+        /// The IP if the server
+        /// </param>
+        private void AlwaysDo(IPAddress ip)
+        {
+            client = new Client(ip);
+            client.NewMessageEvent += ReceivedNewMessage;
+        }
+
+        /// <summary>
+        /// Empty the ResponseList
+        /// </summary>
+        private void EmptyResponses()
+        {
+            ////Console.WriteLine("Emptying messages");
+            for (int i = 0; i < responseMessages.Length; i++)
+            {
+                responseMessages[i] = string.Empty;
+            }
+            ////client.stringBuilder.Clear();
+            client.BeginReceive();
+        }
+
+        /// <summary>
+        /// This creates the response message
+        /// </summary>
+        /// <returns>
+        /// The message of Response
+        /// </returns>
         private string ResponseMessage()
         {
             string typeMessage = string.Format("{0}|{1}<EOF>", MessageType.Response, "<MR>");
             return typeMessage;
         }
 
-        public event InterfaceMessageHandler MessageReceived;
-
+        /// <summary>
+        /// This is called whenever a message comes in through the Client
+        /// </summary>
+        /// <param name="message">
+        /// The message received
+        /// </param>
         private void ReceivedNewMessage(string message)
         {
             string[] messageParts = message.Split(new char[] { '|' });
