@@ -248,8 +248,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BDSADominionContent\BDSADominionContent.contentproj">
-      <Name>BDSADominionContent</Name>
+      <Name>BDSADominionContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{B97FC7AF-06F7-44C4-BBFD-9E60A7B94FB4}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -229,7 +229,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Pics\Dominiontable.png">
+    <Compile Include="Pics\Dominiontable.jpg">
       <Name>Dominiontable</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -239,9 +239,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Supply\Adventurer.png">
+    <Compile Include="Supply\Adventurer.jpg">
       <Name>Adventurer</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -271,22 +269,22 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Copper.png">
+    <Compile Include="Supply\Copper.jpg">
       <Name>Copper</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\CouncilRoom.png">
-      <Name>CouncilRoom</Name>
+    <Compile Include="Supply\Councilroom.jpg">
+      <Name>Councilroom</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Curse.png">
+    <Compile Include="Supply\Curse.jpg">
       <Name>Curse</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Duchy.png">
+    <Compile Include="Supply\Duchy.jpg">
       <Name>Duchy</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -296,7 +294,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Estate.png">
+    <Compile Include="Supply\Estate.jpg">
       <Name>Estate</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -306,22 +304,22 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Festival.png">
+    <Compile Include="Supply\Festival.jpg">
       <Name>Festival</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Gardens .png">
+    <Compile Include="Supply\Gardens.jpg">
       <Name>Gardens</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Gold.png">
+    <Compile Include="Supply\Gold.jpg">
       <Name>Gold</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Laboratory.png">
+    <Compile Include="Supply\Laboratory.jpg">
       <Name>Laboratory</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -331,7 +329,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Market.png">
+    <Compile Include="Supply\Market.jpg">
       <Name>Market</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -346,7 +344,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Moat.png">
+    <Compile Include="Supply\Moat.jpg">
       <Name>Moat</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -356,7 +354,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Province.png">
+    <Compile Include="Supply\Province.jpg">
       <Name>Province</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -366,12 +364,12 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Silver.png">
+    <Compile Include="Supply\Silver.jpg">
       <Name>Silver</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Smithy.png">
+    <Compile Include="Supply\Smithy.jpg">
       <Name>Smithy</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -391,7 +389,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Village.png">
+    <Compile Include="Supply\Village.jpg">
       <Name>Village</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -401,7 +399,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\Woodcutter.png">
+    <Compile Include="Supply\Woodcutter.jpg">
       <Name>Woodcutter</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

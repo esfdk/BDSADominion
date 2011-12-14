@@ -1,5 +1,6 @@
 ﻿namespace BDSADominion.Gamestate
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
@@ -456,10 +457,22 @@
             Contract.Requires(DeckSize == 0);
             Contract.Requires(DiscardSize != 0);
 
-            // TODO: Do better shuffling
-            while (discard.Count != 0)
+            Random r = new Random();
+            List<Card> cards = discard.ToList();
+
+            for (int i = 0; i < cards.Count; i++)
             {
-                deck.Push(discard.Pop());
+                int index = r.Next(cards.Count);
+                Card c = cards[i];
+                cards[i] = cards[index];
+                cards[index] = c;
+            }
+
+            discard.Clear();
+
+            foreach (Card card in cards)
+            {
+                deck.Push(card);
             }
         }
     }
