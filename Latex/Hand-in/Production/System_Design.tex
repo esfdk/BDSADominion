@@ -13,6 +13,21 @@ if you know you're going to work in a new framework, learn it beforehand.
 
 \subsubsection{Client \& Server and Control (Server and start-up parts)}
 \subparagraph{Christian Jensen}
+When we set out to make Dominion, we knew that network should not be a mandatory requirement, yet here we are with it.
+There are several reasons for this, such as that even to be moderately able to play the game, multiple computers should be involved.
+However, on a more practical level, I lacked an area of responsibility after we decided to couple the Control and GameState tighter, and network
+seemed an obvious idea.
+
+I had one problem however: I had little to no idea about how to build a network system that would be appropriate for the project (nor did any of my teammates), both in terms of C# and networks in general. 
+This is the primary reason why I could not sit down and design a network off my head. I needed to study the options first.
+
+I did what any respectable coder would do; I searched the internet to see if somebody already had coded a solution. 
+I came by several solutions but they were either not doing what we needed or was too complex.
+An answer presented itself. I knew of a guy who is in a group doing a seperate project and who is a wiz at networks in general (Simon Henriksen, shen@itu.dk) and the network part for their project (Descent) was quite similar to what we needed. 
+We had several inter-group meetings during the project period with his group and a third (Magic the Gathering) and I asked him to help me understand several concept related to networks and how C# could use them.
+
+He often referenced to his own implementation and just like using an Internet example to provide the basis for an implementation, he graciously allowed me to use his implementation as the basis for mine.
+I am not peticularly proud of this point, but my options was either use some structure I didn't really understand or use this, which I will claim to have grasped quite well.
 
 \subsubsection{Gamestate and Control (Game Logic)}
 \subparagraph{Jakob Melnyk}

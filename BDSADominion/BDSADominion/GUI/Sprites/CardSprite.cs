@@ -1,6 +1,7 @@
-﻿namespace BDSADominion.GUI
+﻿namespace BDSADominion.GUI.Sprites
 {
-    using Gamestate;
+    using BDSADominion.Gamestate;
+
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
@@ -35,11 +36,10 @@
             ////rectangle = new Rectangle((int)position.X, (int)position.Y, 1, 1);
             ////CardName = cardenum;
             ////Id = id;
-            if (GameClass.cardImages.ContainsKey(CardRef))
+            if (GameClass.CardImages.ContainsKey(CardRef))
             {
-                cardFront = GameClass.cardImages[CardRef];
+                cardFront = GameClass.CardImages[CardRef];
             }
-            
         }
 
         /// <summary>
@@ -72,19 +72,22 @@
             {
                 return false;
             }
+
             if (ReferenceEquals(this, obj))
             {
                 return true;
             }
+
             if (obj.GetType() != typeof(CardSprite))
             {
                 return false;
             }
+
             return Equals((CardSprite)obj);
         }
 
         /// <summary>
-        /// hashcode.
+        /// Gets the hashcode.
         /// </summary>
         /// <returns>
         /// returns the given hashcode.
@@ -112,10 +115,12 @@
             {
                 return false;
             }
+
             if (ReferenceEquals(this, other))
             {
                 return true;
             }
+
             return Equals(other.CardRef, CardRef) && other.Index == Index;
         }
 

@@ -16,6 +16,61 @@ I then ended up with what is our end GUI which consist of a lot of zones where y
 
 \subsubsection{Server and Control (Server and start-up parts)}
 \subparagraph{Christian Jensen}
+We had talked about networks and it was clear that we didn't want to communicate directly with clients and server. An interface was needed.
+Dominion has several cards that require a player to respond to how they want to react to it when another player plays it. 
+This means that we needed to ensure that the other players has a chance to make a choice if such a card is played. 
+The way that this works is though the TurnMessage method, through which all communication takes place. 
+
+In TurnMessage a arbitrary string is passed to the NetworkInterface.
+The only requirement is that it does not contain '|', '<' and '>', as these characters are used by the system.
+This is then wrapped in 2 pieces of information: a MessageType, which tells the server and the other clients what kind of message it is, and also added, is an piece of text that signifies the end of the message.
+
+This is then sent to the server. The server communicates with the clients through a number of Connection objects, one for each client. 
+These also contains the Socket objects on the server side. The Socket listens to incoming messages thanks to the BeginRecieve method, which then calls BeginRecieveCallback when a message is received. 
+This method and the asyncResult it takes as a parameter, along with BeginRecieve, is the basis of the entire network.
+
+The message is then passed to the server itself through an event.
+This ensures that the server can take any messages it receives at the "same" time. 
+The message passed to the server no longer contains the End of File textpiece, but still contains the message type.
+The Server can then use the message type to determine how to act with it. In most cases, the server will simply forward the message.
+
+The server keep all its Connections (which basically is is its clients) in a Dictionary, with the Id of the player as the key. 
+As keys are created incrementally as clients join before the game, 1 is defined by us as the Host, since the Host joins almost instantly after creating the server.
+The server can then use this Dictionary to forward the message, by excluding the Connection with the Id matching the Connection that the message was received from.
+
+The message gets reattached with its message type and also joining it is the Id of the player that sent the message. 
+The Client recieves it in almost the same way that the Connection does; through a BeginRecieve and a BeginRecieveCallback.
+The Client then passes the message to GuiInterface, after removing the End of File text.
+
+Then we are back at the GuiInterface, this is where things gets interesting. 
+Depending on the message type, the GuiInterface reacts differently.
+System messages are passed on through the event MessageReceived.
+Action messages are also passed on, but they also flings a message of the third type back through the system, the Response.
+Response messages are stored in an array, where they await something to pick them up.
+
+The Response message is how I have planned to implement cards that require a reaction from another player.
+The Idea is that on all normal action cards (i.e. cards that doesn't require another player to actively make a choice) a 'message received' Response, sent from every other player and this is then the 'insurance' that all players have received the message by the TurnMessage waiting for replys from all other players. 
+These 'message received' returns are sent to all players, not just the active, so that everyone can be sure that everyone is still in the game.
+However, on a card that require a real reply, it would instead send a WaitResponse type message, which would tell the sender that they should wait, because a message from that player was coming later.
+
+Almost the entire system for this is in the code, apart from the infrastructure to WaitResponse. 
+We have however chosen not to enable any of it in the build. We found that for one, it causes bugs in rare cases.
+Network is a fiddly thing to test and bugs happened, one reason being that messages were received too quickly after one another, due to the Threads that lie behind the listening structure. Another reason to disable it is that with the current structure we have no cards which require replys from any player that is not currently active.
+Basically we prioritized our mandatory requirement, that the game should be able to be played, rather than implementing a prehaps overly fancy feature.
+
+PreGame:
+The server need to set up the group of people playing. 
+This is accomplished through these step: first a person creates a server though the console at the beginning of the game. 
+This command creates a server and a client object, the last of which instantly connects to the first. 
+He is then shown his IP, which other people can connect to, by creating a client instead of a server and typing the IP address of the host.
+To begin the game, a special command is required. All players can type messages, which are sent with PreGameMessage, which uses System message type instead of action. 
+They are sent to all players and shown in the Console. The server is hardcoded to wait for the command '<STGM>' from client 1 (the host). 
+This will cause the server to send a system message to all players, who are in turn hardcoded to wait for it, because it contains 2 key pieces of information: The total number of players and the id of the player. 
+After this is recieved, the game will begin.
+
+Obviously a console start-menu is not optimal, but the primary reason for not having this as part of the GUI is because the GUI lagged behind and we needed to fullfill our mandatory requirement: The game must work.
+
+While the grand design might not have been there from the start, thought has gone into how the network should run, as this text should show.
 
 \subsection{Gamestate and Control (Game Logic)}
 \subparagraph{Jakob Melnyk}

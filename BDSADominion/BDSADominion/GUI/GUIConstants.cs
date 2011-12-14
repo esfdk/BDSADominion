@@ -1,24 +1,35 @@
 ﻿namespace BDSADominion.GUI
 {
+    using BDSADominion.GUI.Sprites;
+
     using Gamestate;
-    
-    public class GUIConstants
-    {
-        //public static CardSprite Empty = new CardSprite(CardName.Empty, -1);
 
-        //public static CardSprite Back = new CardSprite(CardName.Backside, -1);
-
-        //public static Dictionary<CardName, Texture2D> cardImages = new Dictionary<CardName, Texture2D>();
-
-        //public static Dictionary<CardName, Texture2D> buttonImages = new Dictionary<CardName, Texture2D>();
-    }
-
+    /// <summary>
+    /// Listener on cardname.
+    /// </summary>
+    /// <param name="pressedCard">
+    /// The pressed card.
+    /// </param>
     public delegate void CardNameHandler(CardName pressedCard);
 
+    /// <summary>
+    /// event is raised when index in hand is pressed.
+    /// </summary>
+    /// <param name="index">
+    /// The index.
+    /// </param>
     public delegate void IndexHandler(int index);
 
+    /// <summary>
+    /// event is raised when card is clicked on in handzone.
+    /// </summary>
+    /// <param name="card">
+    /// The card.
+    /// </param>
     public delegate void CardSpriteHandler(CardSprite card);
 
+    /// <summary>
+    /// event is raised when card is clicked.
+    /// </summary>
     public delegate void ClickHandler();
 }
-
