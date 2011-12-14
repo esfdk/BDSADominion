@@ -1,0 +1,38 @@
+static_diagram CARD_TYPES_CLUSTER
+	component		
+		class TREASURE
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit CARD
+		end
+
+		class VICTORY
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit CARD
+		end
+
+		class ACTION
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit CARD
+		end
+
+		class ACTION_ATTACK
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class ACTION_REACTION
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class KINGDOM_VICTORY
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit VICTORY
+		end
+end

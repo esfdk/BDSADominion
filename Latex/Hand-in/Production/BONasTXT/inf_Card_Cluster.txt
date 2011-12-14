@@ -37,7 +37,8 @@ cluster_chart CARD_TYPES
 	class VICTORY
 		description "A card that grants the points used to win the game."
 	class ACTION
-		description "A card used to help the player buy more cards, get rid of unwanted cards, etc."
+		description "A card used to help the player buy more cards,
+		get rid of unwanted cards, etc."
 	class ACTION_ATTACK
 		description "A card that is used to 'attack' other players."
 	class ACTION_REACTION
@@ -63,7 +64,8 @@ end
 class_chart ACTION
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "A card used to help the player buy more cards, get rid of unwanted cards, etc."
+	explanation "A card used to help the player buy more cards,
+	get rid of unwanted cards, etc."
 	inherit CARD
 end
 
@@ -100,7 +102,8 @@ class_chart CARD_NAME
 		\'CELLAR', 'CHAPEL', 'MOAT', 'CHANCELLOR', 'VILLAGE', 'WOODCUTTER', \
 		\'WORKSHOP', 'BUREAUCRAT', 'FEAST', 'GARDENS', 'MILITIA', 'MONEYLENDER', \
 		\'REMODEL', 'SMITHY', 'SPY', 'THIEF', 'THRONE_ROOM', 'COUNCIL_ROOM', 'FESTIVAL', \
-		\'LABORATORY', 'LIBRARY', 'MARKET', 'MINE', 'WITCH', 'ADVENTURER', 'EMPTY', 'BACKSIDE'."
+		\'LABORATORY', 'LIBRARY', 'MARKET', 'MINE',
+		'WITCH', 'ADVENTURER', 'EMPTY', 'BACKSIDE'."
 end
 
 class_chart CARD_FACTORY

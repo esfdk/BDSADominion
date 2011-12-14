@@ -1,0 +1,867 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="(@1 @2 @14 @106)" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="CardFactory" />
+    <Node Id="(@1 @2 @14 Member=.cctor)" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="static CardFactory" />
+    <Node Id="(@1 @2 @14 Member=ObjectInvariant)" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="ObjectInvariant" />
+    <Node Id="(@1 @2 @14 Member=get_SetUp)" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_SetUp" />
+    <Node Id="(@1 @2 @29 Member=(Name=set_ActivePlayer OverloadingParameters=[@42]))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_ActivePlayer" />
+    <Node Id="(@1 @2 @29 Member=(Name=set_Trash OverloadingParameters=[(@57 @58 Type=(Name=List GenericParameterCount=1 GenericArguments=[@13]))]))" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_Trash" />
+    <Node Id="(@1 @2 @29 Member=get_GameOver)" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_GameOver" />
+    <Node Id="(@1 @2 @29 Member=get_NumberOfActions)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_NumberOfActions" />
+    <Node Id="(@1 @2 @29 Member=get_NumberOfBuys)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_NumberOfBuys" />
+    <Node Id="(@1 @2 @29 Member=get_NumberOfCoins)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_NumberOfCoins" />
+    <Node Id="(@1 @2 @29 Member=get_Trash)" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_Trash" />
+    <Node Id="(@1 @2 @41 Member=(Name=MoveFromHandToTemporary @70))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="MoveFromHandToTemporary" />
+    <Node Id="(@1 @2 @41 Member=ObjectInvariant)" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="ObjectInvariant" />
+    <Node Id="(@1 @2 @41 Member=get_Played)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_Played" />
+    <Node Id="(@1 @2 @41 Member=get_PlayerNumber)" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_PlayerNumber" />
+    <Node Id="(@1 @2 @41 Member=get_TempZone)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_TempZone" />
+    <Node Id="(@1 @4 @12 Member=(Name=op_Equality OverloadingParameters=[@13,@13]))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="op_Equality" />
+    <Node Id="(@1 @4 @12 Member=(Name=op_Inequality OverloadingParameters=[@13,@13]))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="op_Inequality" />
+    <Node Id="(@1 @4 @12 Member=get_SetUp)" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_SetUp" />
+    <Node Id="@100" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Gamestate" />
+    <Node Id="@101" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="PlayerGainsCard" />
+    <Node Id="@102" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="Initialize" />
+    <Node Id="@103" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="AddCardToZone" />
+    <Node Id="@104" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="MoveFromTemporaryToZone" />
+    <Node Id="@105" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="RemoveCardFromZone" />
+    <Node Id="@107" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="&lt;&gt;c__DisplayClass5" />
+    <Node Id="@108" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" Label="Action" />
+    <Node Id="@109" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" Label="ActionAttack" />
+    <Node Id="@11" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Bureaucrat" />
+    <Node Id="@110" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" Label="ActionReaction" />
+    <Node Id="@111" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Adventurer" />
+    <Node Id="@112" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Bureaucrat" />
+    <Node Id="@113" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" Label="Card" />
+    <Node Id="@114" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Cellar" />
+    <Node Id="@115" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Chancellor" />
+    <Node Id="@116" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Chapel" />
+    <Node Id="@117" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Copper" />
+    <Node Id="@118" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="CouncilRoom" />
+    <Node Id="@119" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Curse" />
+    <Node Id="@120" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Duchy" />
+    <Node Id="@121" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Estate" />
+    <Node Id="@122" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Feast" />
+    <Node Id="@123" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Festival" />
+    <Node Id="@124" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Gardens" />
+    <Node Id="@125" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Gold" />
+    <Node Id="@126" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" Label="KingdomVictory" />
+    <Node Id="@127" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Laboratory" />
+    <Node Id="@128" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Library" />
+    <Node Id="@129" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Market" />
+    <Node Id="@13" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Card" />
+    <Node Id="@130" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Militia" />
+    <Node Id="@131" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Mine" />
+    <Node Id="@132" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Moat" />
+    <Node Id="@133" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Moneylender" />
+    <Node Id="@134" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Province" />
+    <Node Id="@135" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Remodel" />
+    <Node Id="@136" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Silver" />
+    <Node Id="@137" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Smithy" />
+    <Node Id="@138" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Spy" />
+    <Node Id="@139" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Thief" />
+    <Node Id="@140" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="ThroneRoom" />
+    <Node Id="@141" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" Label="Treasure" />
+    <Node Id="@142" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" Label="Victory" />
+    <Node Id="@143" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Village" />
+    <Node Id="@144" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Witch" />
+    <Node Id="@145" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Woodcutter" />
+    <Node Id="@146" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Workshop" />
+    <Node Id="@147" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="CleanUp" />
+    <Node Id="@148" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="DoCleanUp" />
+    <Node Id="@149" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="DrawCard" />
+    <Node Id="@15" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="CardFactory" />
+    <Node Id="@150" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="EndActionPhase" />
+    <Node Id="@151" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="EndBuyPhase" />
+    <Node Id="@152" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_ActivePlayer" />
+    <Node Id="@153" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_AllCards" />
+    <Node Id="@154" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_CreatedCards" />
+    <Node Id="@155" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_DeckSize" />
+    <Node Id="@156" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_DiscardSize" />
+    <Node Id="@157" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_GetPhase" />
+    <Node Id="@158" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_Hand" />
+    <Node Id="@159" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_InActionPhase" />
+    <Node Id="@16" Category="CodeSchema_Enum" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="CardName" />
+    <Node Id="@160" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_InBuyPhase" />
+    <Node Id="@161" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_Name" />
+    <Node Id="@162" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_Number" />
+    <Node Id="@163" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_NumberOfPlayers" />
+    <Node Id="@164" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_Players" />
+    <Node Id="@165" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_Supply" />
+    <Node Id="@166" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_TopOfDeck" />
+    <Node Id="@167" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_TopOfDiscard" />
+    <Node Id="@168" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="GetHashCode" />
+    <Node Id="@169" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="GetScores" />
+    <Node Id="@17" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Cellar" />
+    <Node Id="@170" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="InvariantHelper" />
+    <Node Id="@171" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="InvariantHelper" />
+    <Node Id="@172" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="ShuffleDiscard" />
+    <Node Id="@173" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="StartActionPhase" />
+    <Node Id="@174" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="StartBuyPhase" />
+    <Node Id="@18" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Chancellor" />
+    <Node Id="@19" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Chapel" />
+    <Node Id="@21" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Copper" />
+    <Node Id="@22" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="CouncilRoom" />
+    <Node Id="@23" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Curse" />
+    <Node Id="@25" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Duchy" />
+    <Node Id="@26" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Estate" />
+    <Node Id="@27" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Feast" />
+    <Node Id="@28" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Festival" />
+    <Node Id="@3" Category="CodeSchema_Class" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Group="Collapsed" Label="CardFactory.&lt;&gt;c__DisplayClass5" />
+    <Node Id="@30" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Gamestate" />
+    <Node Id="@31" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Gardens" />
+    <Node Id="@32" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Gold" />
+    <Node Id="@33" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="KingdomVictory" />
+    <Node Id="@34" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Laboratory" />
+    <Node Id="@35" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Library" />
+    <Node Id="@36" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Market" />
+    <Node Id="@37" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Militia" />
+    <Node Id="@38" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Mine" />
+    <Node Id="@39" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Moat" />
+    <Node Id="@40" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Moneylender" />
+    <Node Id="@42" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Player" />
+    <Node Id="@43" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Province" />
+    <Node Id="@44" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Remodel" />
+    <Node Id="@45" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Silver" />
+    <Node Id="@46" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Smithy" />
+    <Node Id="@47" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Spy" />
+    <Node Id="@48" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Thief" />
+    <Node Id="@49" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="ThroneRoom" />
+    <Node Id="@5" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Action" />
+    <Node Id="@50" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Treasure" />
+    <Node Id="@51" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Victory" />
+    <Node Id="@52" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Village" />
+    <Node Id="@53" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Witch" />
+    <Node Id="@54" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Woodcutter" />
+    <Node Id="@55" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Workshop" />
+    <Node Id="@56" Category="CodeSchema_Enum" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Zone" />
+    <Node Id="@59" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="SetUpCards" />
+    <Node Id="@6" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="ActionAttack" />
+    <Node Id="@60" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_Players" />
+    <Node Id="@61" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_AllCards" />
+    <Node Id="@63" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_Supply" />
+    <Node Id="@65" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_GameOver" />
+    <Node Id="@66" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_InActionPhase" />
+    <Node Id="@67" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_InBuyPhase" />
+    <Node Id="@68" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_SetUp" />
+    <Node Id="@69" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_SetUp" />
+    <Node Id="@7" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="ActionReaction" />
+    <Node Id="@71" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;GetScores&gt;b__6" />
+    <Node Id="@72" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;GetScores&gt;b__7" />
+    <Node Id="@73" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;GetScores&gt;b__8" />
+    <Node Id="@74" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;GetScores&gt;b__9" />
+    <Node Id="@75" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;GetScores&gt;b__a" />
+    <Node Id="@76" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;InvariantHelper&gt;b__0" />
+    <Node Id="@77" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;InvariantHelper&gt;b__0" />
+    <Node Id="@78" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;InvariantHelper&gt;b__1" />
+    <Node Id="@79" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="&lt;InvariantHelper&gt;b__2" />
+    <Node Id="@80" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;InvariantHelper&gt;b__2" />
+    <Node Id="@81" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;InvariantHelper&gt;b__3" />
+    <Node Id="@82" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;InvariantHelper&gt;b__4" />
+    <Node Id="@83" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;StartBuyPhase&gt;b__0" />
+    <Node Id="@84" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;StartBuyPhase&gt;b__1" />
+    <Node Id="@85" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;StartBuyPhase&gt;b__2" />
+    <Node Id="@86" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="Equals" />
+    <Node Id="@87" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" Label="&lt;InvariantHelper&gt;b__1" />
+    <Node Id="@88" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="CreateCard" />
+    <Node Id="@89" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_Name" />
+    <Node Id="@9" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Adventurer" />
+    <Node Id="@90" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="Equals" />
+    <Node Id="@92" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Player" />
+    <Node Id="@93" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="DrawCards" />
+    <Node Id="@94" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_Number" />
+    <Node Id="@95" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_NumberOfActions" />
+    <Node Id="@96" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_NumberOfBuys" />
+    <Node Id="@97" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_NumberOfCoins" />
+    <Node Id="@98" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="set_PlayerNumber" />
+    <Node Id="@99" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="MoveFromZoneToTemporary" />
+  </Nodes>
+  <Links>
+    <Link Source="@100" Target="@16" Category="References" />
+    <Link Source="@100" Target="@164" Category="CodeSchema_Calls" />
+    <Link Source="@100" Target="@165" Category="CodeSchema_Calls" />
+    <Link Source="@100" Target="@60" Category="CodeSchema_Calls" />
+    <Link Source="@100" Target="@63" Category="CodeSchema_Calls" />
+    <Link Source="@100" Target="@92" Category="CodeSchema_Calls" />
+    <Link Source="@101" Target="@103" Category="CodeSchema_Calls" />
+    <Link Source="@101" Target="@16" Category="References" />
+    <Link Source="@101" Target="@165" Category="CodeSchema_Calls" />
+    <Link Source="@101" Target="@65" Category="CodeSchema_Calls" />
+    <Link Source="@101" Target="@88" Category="CodeSchema_Calls" />
+    <Link Source="@102" Target="@68" Category="CodeSchema_Calls" />
+    <Link Source="@102" Target="@89" Category="CodeSchema_Calls" />
+    <Link Source="@102" Target="@94" Category="CodeSchema_Calls" />
+    <Link Source="@103" Target="@153" Category="CodeSchema_Calls" />
+    <Link Source="@103" Target="@56" Category="References" />
+    <Link Source="@104" Target="@56" Category="References" />
+    <Link Source="@105" Target="@153" Category="CodeSchema_Calls" />
+    <Link Source="@105" Target="@56" Category="References" />
+    <Link Source="@108" Target="@113" Category="CodeSchema_Calls" />
+    <Link Source="@109" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@11" Target="@112" Category="Contains" />
+    <Link Source="@11" Target="@6" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@110" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@111" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@112" Target="@109" Category="CodeSchema_Calls" />
+    <Link Source="@114" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@115" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@116" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@117" Target="@141" Category="CodeSchema_Calls" />
+    <Link Source="@118" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@119" Target="@113" Category="CodeSchema_Calls" />
+    <Link Source="@120" Target="@142" Category="CodeSchema_Calls" />
+    <Link Source="@121" Target="@142" Category="CodeSchema_Calls" />
+    <Link Source="@122" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@123" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@124" Target="@142" Category="CodeSchema_Calls" />
+    <Link Source="@125" Target="@141" Category="CodeSchema_Calls" />
+    <Link Source="@126" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@127" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@128" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@129" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@13" Target="(@1 @4 @12 Member=(Name=op_Equality OverloadingParameters=[@13,@13]))" Category="Contains" />
+    <Link Source="@13" Target="(@1 @4 @12 Member=(Name=op_Inequality OverloadingParameters=[@13,@13]))" Category="Contains" />
+    <Link Source="@13" Target="(@1 @4 @12 Member=get_SetUp)" Category="Contains" />
+    <Link Source="@13" Target="@102" Category="Contains" />
+    <Link Source="@13" Target="@113" Category="Contains" />
+    <Link Source="@13" Target="@16" Category="References">
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@13" Target="@161" Category="Contains" />
+    <Link Source="@13" Target="@162" Category="Contains" />
+    <Link Source="@13" Target="@168" Category="Contains" />
+    <Link Source="@13" Target="@68" Category="Contains" />
+    <Link Source="@13" Target="@86" Category="Contains" />
+    <Link Source="@13" Target="@89" Category="Contains" />
+    <Link Source="@13" Target="@90" Category="Contains" />
+    <Link Source="@13" Target="@94" Category="Contains" />
+    <Link Source="@130" Target="@109" Category="CodeSchema_Calls" />
+    <Link Source="@131" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@132" Target="@110" Category="CodeSchema_Calls" />
+    <Link Source="@133" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@134" Target="@142" Category="CodeSchema_Calls" />
+    <Link Source="@135" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@136" Target="@141" Category="CodeSchema_Calls" />
+    <Link Source="@137" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@138" Target="@109" Category="CodeSchema_Calls" />
+    <Link Source="@139" Target="@109" Category="CodeSchema_Calls" />
+    <Link Source="@140" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@141" Target="@113" Category="CodeSchema_Calls" />
+    <Link Source="@142" Target="@113" Category="CodeSchema_Calls" />
+    <Link Source="@143" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@144" Target="@109" Category="CodeSchema_Calls" />
+    <Link Source="@145" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@146" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@147" Target="@13" Category="References" />
+    <Link Source="@147" Target="@93" Category="CodeSchema_Calls" />
+    <Link Source="@148" Target="@147" Category="CodeSchema_Calls" />
+    <Link Source="@148" Target="@152" Category="CodeSchema_Calls" />
+    <Link Source="@149" Target="@155" Category="CodeSchema_Calls" />
+    <Link Source="@149" Target="@172" Category="CodeSchema_Calls" />
+    <Link Source="@15" Target="(@1 @2 @14 @106)" Category="Contains" />
+    <Link Source="@15" Target="(@1 @2 @14 Member=.cctor)" Category="Contains" />
+    <Link Source="@15" Target="(@1 @2 @14 Member=ObjectInvariant)" Category="Contains" />
+    <Link Source="@15" Target="(@1 @2 @14 Member=get_SetUp)" Category="Contains" />
+    <Link Source="@15" Target="@154" Category="Contains" />
+    <Link Source="@15" Target="@170" Category="Contains" />
+    <Link Source="@15" Target="@3" Category="Contains" />
+    <Link Source="@15" Target="@59" Category="Contains" />
+    <Link Source="@15" Target="@69" Category="Contains" />
+    <Link Source="@15" Target="@76" Category="Contains" />
+    <Link Source="@15" Target="@87" Category="Contains" />
+    <Link Source="@15" Target="@88" Category="Contains" />
+    <Link Source="@150" Target="@66" Category="CodeSchema_Calls" />
+    <Link Source="@150" Target="@95" Category="CodeSchema_Calls" />
+    <Link Source="@151" Target="@67" Category="CodeSchema_Calls" />
+    <Link Source="@151" Target="@96" Category="CodeSchema_Calls" />
+    <Link Source="@151" Target="@97" Category="CodeSchema_Calls" />
+    <Link Source="@152" Target="@42" Category="CodeSchema_ReturnTypeLink" />
+    <Link Source="@157" Target="@159" Category="CodeSchema_Calls" />
+    <Link Source="@157" Target="@160" Category="CodeSchema_Calls" />
+    <Link Source="@16" Target="@16" Category="References" />
+    <Link Source="@161" Target="@16" Category="CodeSchema_ReturnTypeLink" />
+    <Link Source="@163" Target="@164" Category="CodeSchema_Calls" />
+    <Link Source="@166" Target="@13" Category="CodeSchema_ReturnTypeLink" />
+    <Link Source="@167" Target="@13" Category="CodeSchema_ReturnTypeLink" />
+    <Link Source="@168" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@168" Target="@162" Category="CodeSchema_Calls" />
+    <Link Source="@169" Target="@153" Category="CodeSchema_Calls" />
+    <Link Source="@169" Target="@164" Category="CodeSchema_Calls" />
+    <Link Source="@169" Target="@71" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@169" Target="@72" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@169" Target="@73" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@169" Target="@74" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@169" Target="@75" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@17" Target="@114" Category="Contains" />
+    <Link Source="@17" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@170" Target="@154" Category="CodeSchema_Calls" />
+    <Link Source="@170" Target="@76" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@170" Target="@87" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@171" Target="@13" Category="References" />
+    <Link Source="@171" Target="@153" Category="CodeSchema_Calls" />
+    <Link Source="@171" Target="@77" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@171" Target="@78" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@171" Target="@80" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@171" Target="@81" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@171" Target="@82" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@172" Target="@156" Category="CodeSchema_Calls" />
+    <Link Source="@173" Target="@66" Category="CodeSchema_Calls" />
+    <Link Source="@173" Target="@95" Category="CodeSchema_Calls" />
+    <Link Source="@173" Target="@96" Category="CodeSchema_Calls" />
+    <Link Source="@174" Target="@152" Category="CodeSchema_Calls" />
+    <Link Source="@174" Target="@158" Category="CodeSchema_Calls" />
+    <Link Source="@174" Target="@67" Category="CodeSchema_Calls" />
+    <Link Source="@174" Target="@83" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@174" Target="@84" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@174" Target="@85" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@18" Target="@115" Category="Contains" />
+    <Link Source="@18" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@19" Target="@116" Category="Contains" />
+    <Link Source="@19" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@21" Target="@117" Category="Contains" />
+    <Link Source="@21" Target="@50" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@22" Target="@118" Category="Contains" />
+    <Link Source="@22" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@23" Target="@119" Category="Contains" />
+    <Link Source="@23" Target="@13" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@25" Target="@120" Category="Contains" />
+    <Link Source="@25" Target="@51" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@26" Target="@121" Category="Contains" />
+    <Link Source="@26" Target="@51" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@27" Target="@122" Category="Contains" />
+    <Link Source="@27" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@28" Target="@123" Category="Contains" />
+    <Link Source="@28" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@3" Target="@107" Category="Contains" />
+    <Link Source="@3" Target="@16" Category="References" />
+    <Link Source="@3" Target="@79" Category="Contains" />
+    <Link Source="@30" Target="(@1 @2 @29 Member=(Name=set_ActivePlayer OverloadingParameters=[@42]))" Category="Contains" />
+    <Link Source="@30" Target="(@1 @2 @29 Member=(Name=set_Trash OverloadingParameters=[(@57 @58 Type=(Name=List GenericParameterCount=1 GenericArguments=[@13]))]))" Category="Contains" />
+    <Link Source="@30" Target="(@1 @2 @29 Member=get_GameOver)" Category="Contains" />
+    <Link Source="@30" Target="(@1 @2 @29 Member=get_NumberOfActions)" Category="Contains" />
+    <Link Source="@30" Target="(@1 @2 @29 Member=get_NumberOfBuys)" Category="Contains" />
+    <Link Source="@30" Target="(@1 @2 @29 Member=get_NumberOfCoins)" Category="Contains" />
+    <Link Source="@30" Target="(@1 @2 @29 Member=get_Trash)" Category="Contains" />
+    <Link Source="@30" Target="@100" Category="Contains" />
+    <Link Source="@30" Target="@101" Category="Contains" />
+    <Link Source="@30" Target="@148" Category="Contains" />
+    <Link Source="@30" Target="@150" Category="Contains" />
+    <Link Source="@30" Target="@151" Category="Contains" />
+    <Link Source="@30" Target="@152" Category="Contains" />
+    <Link Source="@30" Target="@157" Category="Contains" />
+    <Link Source="@30" Target="@159" Category="Contains" />
+    <Link Source="@30" Target="@160" Category="Contains" />
+    <Link Source="@30" Target="@163" Category="Contains" />
+    <Link Source="@30" Target="@164" Category="Contains" />
+    <Link Source="@30" Target="@165" Category="Contains" />
+    <Link Source="@30" Target="@169" Category="Contains" />
+    <Link Source="@30" Target="@173" Category="Contains" />
+    <Link Source="@30" Target="@174" Category="Contains" />
+    <Link Source="@30" Target="@42" Category="References">
+      <Category Ref="CodeSchema_Calls" />
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@30" Target="@60" Category="Contains" />
+    <Link Source="@30" Target="@63" Category="Contains" />
+    <Link Source="@30" Target="@65" Category="Contains" />
+    <Link Source="@30" Target="@66" Category="Contains" />
+    <Link Source="@30" Target="@67" Category="Contains" />
+    <Link Source="@30" Target="@71" Category="Contains" />
+    <Link Source="@30" Target="@72" Category="Contains" />
+    <Link Source="@30" Target="@73" Category="Contains" />
+    <Link Source="@30" Target="@74" Category="Contains" />
+    <Link Source="@30" Target="@75" Category="Contains" />
+    <Link Source="@30" Target="@83" Category="Contains" />
+    <Link Source="@30" Target="@84" Category="Contains" />
+    <Link Source="@30" Target="@85" Category="Contains" />
+    <Link Source="@30" Target="@95" Category="Contains" />
+    <Link Source="@30" Target="@96" Category="Contains" />
+    <Link Source="@30" Target="@97" Category="Contains" />
+    <Link Source="@31" Target="@124" Category="Contains" />
+    <Link Source="@31" Target="@51" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@32" Target="@125" Category="Contains" />
+    <Link Source="@32" Target="@50" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@33" Target="@126" Category="Contains" />
+    <Link Source="@33" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@34" Target="@127" Category="Contains" />
+    <Link Source="@34" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@35" Target="@128" Category="Contains" />
+    <Link Source="@35" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@36" Target="@129" Category="Contains" />
+    <Link Source="@36" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@37" Target="@130" Category="Contains" />
+    <Link Source="@37" Target="@6" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@38" Target="@131" Category="Contains" />
+    <Link Source="@38" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@39" Target="@132" Category="Contains" />
+    <Link Source="@39" Target="@7" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@40" Target="@133" Category="Contains" />
+    <Link Source="@40" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@42" Target="(@1 @2 @41 Member=(Name=MoveFromHandToTemporary @70))" Category="Contains" />
+    <Link Source="@42" Target="(@1 @2 @41 Member=ObjectInvariant)" Category="Contains" />
+    <Link Source="@42" Target="(@1 @2 @41 Member=get_Played)" Category="Contains" />
+    <Link Source="@42" Target="(@1 @2 @41 Member=get_PlayerNumber)" Category="Contains" />
+    <Link Source="@42" Target="(@1 @2 @41 Member=get_TempZone)" Category="Contains" />
+    <Link Source="@42" Target="@103" Category="Contains" />
+    <Link Source="@42" Target="@104" Category="Contains" />
+    <Link Source="@42" Target="@105" Category="Contains" />
+    <Link Source="@42" Target="@147" Category="Contains" />
+    <Link Source="@42" Target="@149" Category="Contains" />
+    <Link Source="@42" Target="@153" Category="Contains" />
+    <Link Source="@42" Target="@155" Category="Contains" />
+    <Link Source="@42" Target="@156" Category="Contains" />
+    <Link Source="@42" Target="@158" Category="Contains" />
+    <Link Source="@42" Target="@166" Category="Contains" />
+    <Link Source="@42" Target="@167" Category="Contains" />
+    <Link Source="@42" Target="@171" Category="Contains" />
+    <Link Source="@42" Target="@172" Category="Contains" />
+    <Link Source="@42" Target="@61" Category="Contains" />
+    <Link Source="@42" Target="@77" Category="Contains" />
+    <Link Source="@42" Target="@78" Category="Contains" />
+    <Link Source="@42" Target="@80" Category="Contains" />
+    <Link Source="@42" Target="@81" Category="Contains" />
+    <Link Source="@42" Target="@82" Category="Contains" />
+    <Link Source="@42" Target="@92" Category="Contains" />
+    <Link Source="@42" Target="@93" Category="Contains" />
+    <Link Source="@42" Target="@98" Category="Contains" />
+    <Link Source="@42" Target="@99" Category="Contains" />
+    <Link Source="@43" Target="@134" Category="Contains" />
+    <Link Source="@43" Target="@51" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@44" Target="@135" Category="Contains" />
+    <Link Source="@44" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@45" Target="@136" Category="Contains" />
+    <Link Source="@45" Target="@50" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@46" Target="@137" Category="Contains" />
+    <Link Source="@46" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@47" Target="@138" Category="Contains" />
+    <Link Source="@47" Target="@6" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@48" Target="@139" Category="Contains" />
+    <Link Source="@48" Target="@6" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@49" Target="@140" Category="Contains" />
+    <Link Source="@49" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@5" Target="@108" Category="Contains" />
+    <Link Source="@5" Target="@13" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@50" Target="@13" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@50" Target="@141" Category="Contains" />
+    <Link Source="@51" Target="@13" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@51" Target="@142" Category="Contains" />
+    <Link Source="@52" Target="@143" Category="Contains" />
+    <Link Source="@52" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@53" Target="@144" Category="Contains" />
+    <Link Source="@53" Target="@6" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@54" Target="@145" Category="Contains" />
+    <Link Source="@54" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@55" Target="@146" Category="Contains" />
+    <Link Source="@55" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@56" Target="@56" Category="References" />
+    <Link Source="@59" Target="@16" Category="References" />
+    <Link Source="@59" Target="@69" Category="CodeSchema_Calls" />
+    <Link Source="@6" Target="@109" Category="Contains" />
+    <Link Source="@6" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@7" Target="@110" Category="Contains" />
+    <Link Source="@7" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@71" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@72" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@73" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@74" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@75" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@76" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@76" Target="@162" Category="CodeSchema_Calls" />
+    <Link Source="@77" Target="@153" Category="CodeSchema_Calls" />
+    <Link Source="@78" Target="@153" Category="CodeSchema_Calls" />
+    <Link Source="@79" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@80" Target="@153" Category="CodeSchema_Calls" />
+    <Link Source="@81" Target="@153" Category="CodeSchema_Calls" />
+    <Link Source="@82" Target="@153" Category="CodeSchema_Calls" />
+    <Link Source="@83" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@84" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@85" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@86" Target="@161" Category="CodeSchema_Calls" />
+    <Link Source="@86" Target="@162" Category="CodeSchema_Calls" />
+    <Link Source="@87" Target="@107" Category="CodeSchema_Calls" />
+    <Link Source="@87" Target="@154" Category="CodeSchema_Calls" />
+    <Link Source="@87" Target="@3" Category="References">
+      <Category Ref="CodeSchema_Calls" />
+      <Category Ref="CodeSchema_FunctionPointer" />
+    </Link>
+    <Link Source="@87" Target="@79" Category="CodeSchema_FunctionPointer" />
+    <Link Source="@88" Target="@102" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@111" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@112" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@114" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@115" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@116" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@117" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@118" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@119" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@120" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@121" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@122" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@123" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@124" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@125" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@127" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@128" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@129" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@13" Category="References">
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@88" Target="@130" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@131" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@132" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@133" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@134" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@135" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@136" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@137" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@138" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@139" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@140" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@143" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@144" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@145" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@146" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@16" Category="References" />
+    <Link Source="@9" Target="@111" Category="Contains" />
+    <Link Source="@9" Target="@5" Category="InheritsFrom">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@90" Target="@13" Category="References" />
+    <Link Source="@90" Target="@86" Category="CodeSchema_Calls" />
+    <Link Source="@92" Target="@61" Category="CodeSchema_Calls" />
+    <Link Source="@92" Target="@98" Category="CodeSchema_Calls" />
+    <Link Source="@93" Target="@149" Category="CodeSchema_Calls" />
+    <Link Source="@93" Target="@155" Category="CodeSchema_Calls" />
+    <Link Source="@93" Target="@156" Category="CodeSchema_Calls" />
+    <Link Source="@99" Target="@155" Category="CodeSchema_Calls" />
+    <Link Source="@99" Target="@156" Category="CodeSchema_Calls" />
+    <Link Source="@99" Target="@172" Category="CodeSchema_Calls" />
+    <Link Source="@99" Target="@56" Category="References" />
+  </Links>
+  <Categories>
+    <Category Id="CodeSchema_Block" Label="Block" BasedOn="CodeSchema_Statement" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" IsProviderRoot="False" NavigationActionLabel="Blocks" />
+    <Category Id="CodeSchema_Calls" Label="Calls" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Called By" OutgoingActionLabel="Calls" />
+    <Category Id="CodeSchema_Class" Label="Class" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" IsProviderRoot="False" NavigationActionLabel="Classes" />
+    <Category Id="CodeSchema_Enum" Label="Enum" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Enum" IsProviderRoot="False" NavigationActionLabel="Enums" />
+    <Category Id="CodeSchema_FunctionPointer" Label="Function Pointer" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Function Pointers" OutgoingActionLabel="Function Pointers" />
+    <Category Id="CodeSchema_Member" Label="Member" BasedOn="CodeSchema_Block" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="CodeSchema_Field" IsProviderRoot="False" NavigationActionLabel="Members" />
+    <Category Id="CodeSchema_Method" Label="Method" BasedOn="CodeSchema_Member" CanBeDataDriven="True" DefaultAction="Link:Forward:CodeSchema_Calls" Icon="CodeSchema_Method" IsProviderRoot="False" NavigationActionLabel="Methods" />
+    <Category Id="CodeSchema_ReturnTypeLink" Label="Return" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Return types" OutgoingActionLabel="Return types" />
+    <Category Id="CodeSchema_Statement" Label="Statement" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" IsProviderRoot="False" NavigationActionLabel="Statement" />
+    <Category Id="CodeSchema_Type" Label="Type" BasedOn="CodeSchema_Block" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" IsProviderRoot="False" NavigationActionLabel="Types" />
+    <Category Id="Contains" Label="Contains" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
+    <Category Id="InheritsFrom" Label="Inherits From" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Inherited By" OutgoingActionLabel="Inherits From" />
+    <Category Id="References" Label="References" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Referenced By" OutgoingActionLabel="References" />
+  </Categories>
+  <Properties>
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsCompilerGenerated" Label="IsCompilerGenerated" Description="IsCompilerGenerated" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsConstructor" Label="IsConstructor" Description="IsConstructor" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsPrivate" Label="IsPrivate" Description="IsPrivate" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsProtected" Label="IsProtected" Description="IsProtected" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsPublic" Label="IsPublic" Description="IsPublic" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsSpecialName" Label="IsSpecialName" Description="IsSpecialName" DataType="System.Boolean" />
+    <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
+    <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.Progression.GraphModel.GroupStyle" />
+    <Property Id="Icon" Label="Icon" Description="Icon" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsProviderRoot" Label="IsProviderRoot" Description="IsProviderRoot" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+  </Properties>
+  <QualifiedNames>
+    <Name Id="Assembly" Label="Assembly" ValueType="Uri" />
+    <Name Id="GenericArguments" Label="Generic Arguments" ValueType="Microsoft.VisualStudio.Progression.GraphModel.QualifiedIdentifierArrayCollection" />
+    <Name Id="GenericParameterCount" Label="Generic Parameter Count" ValueType="System.String" />
+    <Name Id="Member" Label="Member" ValueType="System.Object" />
+    <Name Id="Name" Label="Name" ValueType="System.String" />
+    <Name Id="Namespace" Label="Namespace" ValueType="System.String" />
+    <Name Id="OverloadingParameters" Label="Parameter" ValueType="Microsoft.VisualStudio.Progression.GraphModel.QualifiedIdentifierArrayCollection" Formatter="NameValueNoEscape" />
+    <Name Id="ParentType" Label="Parent Type" ValueType="System.Object" />
+    <Name Id="Type" Label="Type" ValueType="System.Object" />
+  </QualifiedNames>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Assembly" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Assembly')" />
+      <Setter Property="Background" Value="#1C3068" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Namespace" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Namespace')" />
+      <Setter Property="Background" Value="#4A65A0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Type" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Type')" />
+      <Setter Property="Background" Value="#D3DCEF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Method" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Method')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Generics" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Generics')" />
+      <Setter Property="Background" Value="#FFA080A0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Externals" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Externals')" />
+      <Setter Property="Background" Value="#FFA08080" />
+    </Style>
+  </Styles>
+  <IdentifierAliases>
+    <Alias n="1" Uri="Assembly=$(bf10c04e-6bb6-4a88-a645-357bd83a6155.OutputPathUri)" />
+    <Alias n="2" Id="Namespace=BDSADominion.Gamestate" />
+    <Alias n="3" Id="(@1 @2 Type=(Name=&lt;&gt;c__DisplayClass5 ParentType=CardFactory))" />
+    <Alias n="4" Id="Namespace=BDSADominion.Gamestate.Card_Types" />
+    <Alias n="5" Id="(@1 @4 Type=Action)" />
+    <Alias n="6" Id="(@1 @4 Type=ActionAttack)" />
+    <Alias n="7" Id="(@1 @4 Type=ActionReaction)" />
+    <Alias n="8" Id="Namespace=BDSADominion.Gamestate.Card_Types.Cards.Action_Cards" />
+    <Alias n="9" Id="(@1 @8 Type=Adventurer)" />
+    <Alias n="10" Id="Namespace=BDSADominion.Gamestate.Card_Types.Cards.Action_Cards.Attack_Cards" />
+    <Alias n="11" Id="(@1 @10 Type=Bureaucrat)" />
+    <Alias n="12" Id="Type=Card" />
+    <Alias n="13" Id="(@1 @4 @12)" />
+    <Alias n="14" Id="Type=CardFactory" />
+    <Alias n="15" Id="(@1 @2 @14)" />
+    <Alias n="16" Id="(@1 @2 Type=CardName)" />
+    <Alias n="17" Id="(@1 @8 Type=Cellar)" />
+    <Alias n="18" Id="(@1 @8 Type=Chancellor)" />
+    <Alias n="19" Id="(@1 @8 Type=Chapel)" />
+    <Alias n="20" Id="Namespace=BDSADominion.Gamestate.Card_Types.Cards.Treasure_Cards" />
+    <Alias n="21" Id="(@1 @20 Type=Copper)" />
+    <Alias n="22" Id="(@1 @8 Type=CouncilRoom)" />
+    <Alias n="23" Id="(@1 Namespace=BDSADominion.Gamestate.Card_Types.Cards Type=Curse)" />
+    <Alias n="24" Id="Namespace=BDSADominion.Gamestate.Card_Types.Cards.Victory_Cards" />
+    <Alias n="25" Id="(@1 @24 Type=Duchy)" />
+    <Alias n="26" Id="(@1 @24 Type=Estate)" />
+    <Alias n="27" Id="(@1 @8 Type=Feast)" />
+    <Alias n="28" Id="(@1 @8 Type=Festival)" />
+    <Alias n="29" Id="Type=Gamestate" />
+    <Alias n="30" Id="(@1 @2 @29)" />
+    <Alias n="31" Id="(@1 @24 Type=Gardens)" />
+    <Alias n="32" Id="(@1 @20 Type=Gold)" />
+    <Alias n="33" Id="(@1 @4 Type=KingdomVictory)" />
+    <Alias n="34" Id="(@1 @8 Type=Laboratory)" />
+    <Alias n="35" Id="(@1 @8 Type=Library)" />
+    <Alias n="36" Id="(@1 @8 Type=Market)" />
+    <Alias n="37" Id="(@1 @10 Type=Militia)" />
+    <Alias n="38" Id="(@1 @8 Type=Mine)" />
+    <Alias n="39" Id="(@1 Namespace=BDSADominion.Gamestate.Card_Types.Cards.Action_Cards.Reaction_Cards Type=Moat)" />
+    <Alias n="40" Id="(@1 @8 Type=Moneylender)" />
+    <Alias n="41" Id="Type=Player" />
+    <Alias n="42" Id="(@1 @2 @41)" />
+    <Alias n="43" Id="(@1 @24 Type=Province)" />
+    <Alias n="44" Id="(@1 @8 Type=Remodel)" />
+    <Alias n="45" Id="(@1 @20 Type=Silver)" />
+    <Alias n="46" Id="(@1 @8 Type=Smithy)" />
+    <Alias n="47" Id="(@1 @10 Type=Spy)" />
+    <Alias n="48" Id="(@1 @10 Type=Thief)" />
+    <Alias n="49" Id="(@1 @8 Type=ThroneRoom)" />
+    <Alias n="50" Id="(@1 @4 Type=Treasure)" />
+    <Alias n="51" Id="(@1 @4 Type=Victory)" />
+    <Alias n="52" Id="(@1 @8 Type=Village)" />
+    <Alias n="53" Id="(@1 @10 Type=Witch)" />
+    <Alias n="54" Id="(@1 @8 Type=Woodcutter)" />
+    <Alias n="55" Id="(@1 @8 Type=Workshop)" />
+    <Alias n="56" Id="(@1 @2 Type=Zone)" />
+    <Alias n="57" Uri="Assembly=$(FxReferenceAssembliesUri)/.NETFramework/v4.0/Profile/Client/mscorlib.dll" />
+    <Alias n="58" Id="Namespace=System.Collections.Generic" />
+    <Alias n="59" Id="(@1 @2 @14 Member=(Name=SetUpCards OverloadingParameters=[(@57 @58 Type=(Name=ICollection GenericParameterCount=1 GenericArguments=[@16]))]))" />
+    <Alias n="60" Id="(@1 @2 @29 Member=(Name=set_Players OverloadingParameters=[(@57 @58 Type=(Name=List GenericParameterCount=1 GenericArguments=[@42]))]))" />
+    <Alias n="61" Id="(@1 @2 @41 Member=(Name=set_AllCards OverloadingParameters=[(@57 @58 Type=(Name=Dictionary GenericParameterCount=2 GenericArguments=[@13,(@57 Namespace=System Type=Boolean)]))]))" />
+    <Alias n="62" Id="(@57 Namespace=System Type=UInt32)" />
+    <Alias n="63" Id="(@1 @2 @29 Member=(Name=set_Supply OverloadingParameters=[(@57 @58 Type=(Name=Dictionary GenericParameterCount=2 GenericArguments=[@16,@62]))]))" />
+    <Alias n="64" Id="OverloadingParameters=[(@57 Namespace=System Type=Boolean)]" />
+    <Alias n="65" Id="(@1 @2 @29 Member=(Name=set_GameOver @64))" />
+    <Alias n="66" Id="(@1 @2 @29 Member=(Name=set_InActionPhase @64))" />
+    <Alias n="67" Id="(@1 @2 @29 Member=(Name=set_InBuyPhase @64))" />
+    <Alias n="68" Id="(@1 @4 @12 Member=(Name=set_SetUp @64))" />
+    <Alias n="69" Id="(@1 @2 @14 Member=(Name=set_SetUp @64))" />
+    <Alias n="70" Id="OverloadingParameters=[@13]" />
+    <Alias n="71" Id="(@1 @2 @29 Member=(Name=&lt;GetScores&gt;b__6 @70))" />
+    <Alias n="72" Id="(@1 @2 @29 Member=(Name=&lt;GetScores&gt;b__7 @70))" />
+    <Alias n="73" Id="(@1 @2 @29 Member=(Name=&lt;GetScores&gt;b__8 @70))" />
+    <Alias n="74" Id="(@1 @2 @29 Member=(Name=&lt;GetScores&gt;b__9 @70))" />
+    <Alias n="75" Id="(@1 @2 @29 Member=(Name=&lt;GetScores&gt;b__a @70))" />
+    <Alias n="76" Id="(@1 @2 @14 Member=(Name=&lt;InvariantHelper&gt;b__0 @70))" />
+    <Alias n="77" Id="(@1 @2 @41 Member=(Name=&lt;InvariantHelper&gt;b__0 @70))" />
+    <Alias n="78" Id="(@1 @2 @41 Member=(Name=&lt;InvariantHelper&gt;b__1 @70))" />
+    <Alias n="79" Id="(@1 @2 Type=(Name=&lt;&gt;c__DisplayClass5 ParentType=CardFactory) Member=(Name=&lt;InvariantHelper&gt;b__2 @70))" />
+    <Alias n="80" Id="(@1 @2 @41 Member=(Name=&lt;InvariantHelper&gt;b__2 @70))" />
+    <Alias n="81" Id="(@1 @2 @41 Member=(Name=&lt;InvariantHelper&gt;b__3 @70))" />
+    <Alias n="82" Id="(@1 @2 @41 Member=(Name=&lt;InvariantHelper&gt;b__4 @70))" />
+    <Alias n="83" Id="(@1 @2 @29 Member=(Name=&lt;StartBuyPhase&gt;b__0 @70))" />
+    <Alias n="84" Id="(@1 @2 @29 Member=(Name=&lt;StartBuyPhase&gt;b__1 @70))" />
+    <Alias n="85" Id="(@1 @2 @29 Member=(Name=&lt;StartBuyPhase&gt;b__2 @70))" />
+    <Alias n="86" Id="(@1 @4 @12 Member=(Name=Equals @70))" />
+    <Alias n="87" Id="(@1 @2 @14 Member=(Name=&lt;InvariantHelper&gt;b__1 OverloadingParameters=[@16]))" />
+    <Alias n="88" Id="(@1 @2 @14 Member=(Name=CreateCard OverloadingParameters=[@16]))" />
+    <Alias n="89" Id="(@1 @4 @12 Member=(Name=set_Name OverloadingParameters=[@16]))" />
+    <Alias n="90" Id="(@1 @4 @12 Member=(Name=Equals OverloadingParameters=[(@57 Namespace=System Type=Object)]))" />
+    <Alias n="91" Id="OverloadingParameters=[@62]" />
+    <Alias n="92" Id="(@1 @2 @41 Member=(Name=.ctor @91))" />
+    <Alias n="93" Id="(@1 @2 @41 Member=(Name=DrawCards @91))" />
+    <Alias n="94" Id="(@1 @4 @12 Member=(Name=set_Number @91))" />
+    <Alias n="95" Id="(@1 @2 @29 Member=(Name=set_NumberOfActions @91))" />
+    <Alias n="96" Id="(@1 @2 @29 Member=(Name=set_NumberOfBuys @91))" />
+    <Alias n="97" Id="(@1 @2 @29 Member=(Name=set_NumberOfCoins @91))" />
+    <Alias n="98" Id="(@1 @2 @41 Member=(Name=set_PlayerNumber @91))" />
+    <Alias n="99" Id="(@1 @2 @41 Member=(Name=MoveFromZoneToTemporary OverloadingParameters=[@56]))" />
+    <Alias n="100" Id="(@1 @2 @29 Member=(Name=.ctor OverloadingParameters=[@62,(@57 @58 Type=(Name=Dictionary GenericParameterCount=2 GenericArguments=[@16,@62]))]))" />
+    <Alias n="101" Id="(@1 @2 @29 Member=(Name=PlayerGainsCard OverloadingParameters=[@42,@16]))" />
+    <Alias n="102" Id="(@1 @4 @12 Member=(Name=Initialize OverloadingParameters=[@16,@62]))" />
+    <Alias n="103" Id="(@1 @2 @41 Member=(Name=AddCardToZone OverloadingParameters=[@13,@56]))" />
+    <Alias n="104" Id="(@1 @2 @41 Member=(Name=MoveFromTemporaryToZone OverloadingParameters=[@13,@56]))" />
+    <Alias n="105" Id="(@1 @2 @41 Member=(Name=RemoveCardFromZone OverloadingParameters=[@13,@56]))" />
+    <Alias n="106" Id="Member=.ctor" />
+    <Alias n="107" Id="(@1 @2 Type=(Name=&lt;&gt;c__DisplayClass5 ParentType=CardFactory) @106)" />
+    <Alias n="108" Id="(@1 @4 Type=Action @106)" />
+    <Alias n="109" Id="(@1 @4 Type=ActionAttack @106)" />
+    <Alias n="110" Id="(@1 @4 Type=ActionReaction @106)" />
+    <Alias n="111" Id="(@1 @8 Type=Adventurer @106)" />
+    <Alias n="112" Id="(@1 @10 Type=Bureaucrat @106)" />
+    <Alias n="113" Id="(@1 @4 @12 @106)" />
+    <Alias n="114" Id="(@1 @8 Type=Cellar @106)" />
+    <Alias n="115" Id="(@1 @8 Type=Chancellor @106)" />
+    <Alias n="116" Id="(@1 @8 Type=Chapel @106)" />
+    <Alias n="117" Id="(@1 @20 Type=Copper @106)" />
+    <Alias n="118" Id="(@1 @8 Type=CouncilRoom @106)" />
+    <Alias n="119" Id="(@1 Namespace=BDSADominion.Gamestate.Card_Types.Cards Type=Curse @106)" />
+    <Alias n="120" Id="(@1 @24 Type=Duchy @106)" />
+    <Alias n="121" Id="(@1 @24 Type=Estate @106)" />
+    <Alias n="122" Id="(@1 @8 Type=Feast @106)" />
+    <Alias n="123" Id="(@1 @8 Type=Festival @106)" />
+    <Alias n="124" Id="(@1 @24 Type=Gardens @106)" />
+    <Alias n="125" Id="(@1 @20 Type=Gold @106)" />
+    <Alias n="126" Id="(@1 @4 Type=KingdomVictory @106)" />
+    <Alias n="127" Id="(@1 @8 Type=Laboratory @106)" />
+    <Alias n="128" Id="(@1 @8 Type=Library @106)" />
+    <Alias n="129" Id="(@1 @8 Type=Market @106)" />
+    <Alias n="130" Id="(@1 @10 Type=Militia @106)" />
+    <Alias n="131" Id="(@1 @8 Type=Mine @106)" />
+    <Alias n="132" Id="(@1 Namespace=BDSADominion.Gamestate.Card_Types.Cards.Action_Cards.Reaction_Cards Type=Moat @106)" />
+    <Alias n="133" Id="(@1 @8 Type=Moneylender @106)" />
+    <Alias n="134" Id="(@1 @24 Type=Province @106)" />
+    <Alias n="135" Id="(@1 @8 Type=Remodel @106)" />
+    <Alias n="136" Id="(@1 @20 Type=Silver @106)" />
+    <Alias n="137" Id="(@1 @8 Type=Smithy @106)" />
+    <Alias n="138" Id="(@1 @10 Type=Spy @106)" />
+    <Alias n="139" Id="(@1 @10 Type=Thief @106)" />
+    <Alias n="140" Id="(@1 @8 Type=ThroneRoom @106)" />
+    <Alias n="141" Id="(@1 @4 Type=Treasure @106)" />
+    <Alias n="142" Id="(@1 @4 Type=Victory @106)" />
+    <Alias n="143" Id="(@1 @8 Type=Village @106)" />
+    <Alias n="144" Id="(@1 @10 Type=Witch @106)" />
+    <Alias n="145" Id="(@1 @8 Type=Woodcutter @106)" />
+    <Alias n="146" Id="(@1 @8 Type=Workshop @106)" />
+    <Alias n="147" Id="(@1 @2 @41 Member=CleanUp)" />
+    <Alias n="148" Id="(@1 @2 @29 Member=DoCleanUp)" />
+    <Alias n="149" Id="(@1 @2 @41 Member=DrawCard)" />
+    <Alias n="150" Id="(@1 @2 @29 Member=EndActionPhase)" />
+    <Alias n="151" Id="(@1 @2 @29 Member=EndBuyPhase)" />
+    <Alias n="152" Id="(@1 @2 @29 Member=get_ActivePlayer)" />
+    <Alias n="153" Id="(@1 @2 @41 Member=get_AllCards)" />
+    <Alias n="154" Id="(@1 @2 @14 Member=get_CreatedCards)" />
+    <Alias n="155" Id="(@1 @2 @41 Member=get_DeckSize)" />
+    <Alias n="156" Id="(@1 @2 @41 Member=get_DiscardSize)" />
+    <Alias n="157" Id="(@1 @2 @29 Member=get_GetPhase)" />
+    <Alias n="158" Id="(@1 @2 @41 Member=get_Hand)" />
+    <Alias n="159" Id="(@1 @2 @29 Member=get_InActionPhase)" />
+    <Alias n="160" Id="(@1 @2 @29 Member=get_InBuyPhase)" />
+    <Alias n="161" Id="(@1 @4 @12 Member=get_Name)" />
+    <Alias n="162" Id="(@1 @4 @12 Member=get_Number)" />
+    <Alias n="163" Id="(@1 @2 @29 Member=get_NumberOfPlayers)" />
+    <Alias n="164" Id="(@1 @2 @29 Member=get_Players)" />
+    <Alias n="165" Id="(@1 @2 @29 Member=get_Supply)" />
+    <Alias n="166" Id="(@1 @2 @41 Member=get_TopOfDeck)" />
+    <Alias n="167" Id="(@1 @2 @41 Member=get_TopOfDiscard)" />
+    <Alias n="168" Id="(@1 @4 @12 Member=GetHashCode)" />
+    <Alias n="169" Id="(@1 @2 @29 Member=GetScores)" />
+    <Alias n="170" Id="(@1 @2 @14 Member=InvariantHelper)" />
+    <Alias n="171" Id="(@1 @2 @41 Member=InvariantHelper)" />
+    <Alias n="172" Id="(@1 @2 @41 Member=ShuffleDiscard)" />
+    <Alias n="173" Id="(@1 @2 @29 Member=StartActionPhase)" />
+    <Alias n="174" Id="(@1 @2 @29 Member=StartBuyPhase)" />
+  </IdentifierAliases>
+  <Paths>
+    <Path Id="bf10c04e-6bb6-4a88-a645-357bd83a6155.OutputPathUri" Value="file:///C:/Users/Jakob Melnyk/Documents/BDSADominion/BDSADominion/BDSADominion/bin/x86/Release/BDSADominion.exe" />
+    <Path Id="FxReferenceAssembliesUri" Value="file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework" />
+  </Paths>
+</DirectedGraph>

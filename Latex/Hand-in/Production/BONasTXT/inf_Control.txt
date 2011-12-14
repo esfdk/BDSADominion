@@ -1,21 +1,22 @@
 system_chart BDSADominion
 indexing
-	author: "Frederik Lysgaard (frly@itu.dk)";
-	author: "Christian 'Troy' Jensen";
-	author: "Jakob Melnyk (jmel@itu.dk)";
+	author: "Frederik Lysgaard (frly@itu.dk), Christian 'Troy' Jensen,
+	Jakob Melnyk (jmel@itu.dk)";
 	supervisor: "Joe Kiniry";
 	course: "BDSA-E2011";
 	created: "28th November 2011";
 	lastModified: "14th December 2011";
 explanation 
-	"System chart for the BDSADominion project in the Analysis, Design and Software Architecture fall 2011 course."
+	"System chart for the BDSADominion project in the Analysis, Design
+     and Software Architecture fall 2011 course."
 cluster DOMINION_SYSTEM
 	description "The Dominion game system."
 end 
 
 cluster_chart DOMINION_SYSTEM
 class CONTROL
-	description "The man in the middle between the three parts of the architecture. Contains game logic, starts the program, etc."
+	description "The man in the middle between the three parts of the architecture.
+	Contains game logic, starts the program, etc."
 cluster GUI
 	description "Used to display the current state of the model and to interact with the user."
 cluster GAMESTATE_CLUSTER

@@ -1,6 +1,6 @@
 \subsection{System production}
 \subsubsection{General}
-
+Our split into the different, very seperate parts of the code, made it somewhat cumbersome to combine at the end, but once it actually combined, it was quite an easy ride home in terms of getting the game to play. The different parts of the architecture should be quite replaceable, especially considering the GUIInterface and NetworkingInterface concepts and the way Gamestate works.
 \subsubsection{GUI}
 \subparagraph{Frederik Lysgaard}
 The production of the GUI can be split into three parts:
@@ -9,10 +9,10 @@ The production of the GUI can be split into three parts:
 \item The attempt to write it.
 \item  And at last the rewrite of it all.
 \end{itemize}
- So let's start at the begining. The initial idea of how to produce the gui was that all drawed classes should inherit from a super Sprite class but as i began coding I realized that the idea wouldn't be so optimal, since we had diffrent objects with diffrent positions which at that point, in my XNA traning, semmed to make it all very hard to draw, atleast with different positions.
+So let's start at the begining. The initial idea of how to produce the gui was that all drawn classes should inherit from a super Sprite class but as I began coding I realized that the idea wouldn't be so optimal, since we had different objects with different positions which at that point, in my XNA traning, semmed to make it all very hard to draw, atleast with different positions.
 
- So after realizing that my first attempt of code was not going to work, i set to rewriting what i've allready got and try and reform it with my new knowledge of XNA.
-I then ended up with what is our end GUI which is consisting of alot of zones where you can either draw buttons or cards sprites to, this seemed like a extremly easy straight forward solution even though if I had, had more time i would have loved to code in some inheritance, espcially a super zoneclass that would act as template for the other zoneclasses.
+So after realizing that my first attempt of code was not going to work, I set to rewriting what I already had and try and reform it with my new knowledge of XNA.
+I then ended up with what is our end GUI which consist of a lot of zones where you can either draw buttons or cards sprites to, this seemed like a extremly easy straight forward solution, even though if I had had more time, I would have loved to code in some inheritance, espcially a super zoneclass that would act as template for the other zoneclasses.
 
 \subsubsection{Server and Control (Server and start-up parts)}
 \subparagraph{Christian Jensen}

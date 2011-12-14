@@ -1,0 +1,60 @@
+cluster_chart NETWORK_CLUSTER
+indexing
+	author: "Christian 'Troy' Jensen, chrj@itu.dk";
+explanation "The part of the program responsible for running the network"
+class CLIENT description "A network client"
+class SERVER description "A network server"
+class CONNECTION description "A connection between a server and a client"
+class NETWORKING_INTERFACE description "A network interface"
+
+end
+
+class_chart CLIENT
+indexing
+	author: "Christian 'Troy' Jensen, chrj@itu.dk";
+explanation "Represents a player in a game of Dominion, one for each player"
+query
+	"Can I have the connection for this client?",
+command
+	"Begin recieving more messages!",
+end
+
+class_chart SERVER
+indexing
+	author: "Christian 'Troy' Jensen, chrj@itu.dk";
+explanation "Responsible for managing the clients of a game, only one per game"
+query
+	"Can I have the IP of the server?",
+	"Can I have a list of the known clients",
+command
+	"Start the server!",
+	"Send this as a system message to this client!",
+	"Send this as a system message to all clients!",
+	"Forward this message!",
+end
+
+class_chart CONNECTION
+indexing
+	author: "Christian 'Troy' Jensen, chrj@itu.dk";
+explanation "Responsible for holding all the information
+			on a client that a server has, one for each client"
+query
+	"Can I have the IP of the client",
+	"Can I have  the Id of the Client",
+command
+	"Send this message!",
+	"Begin recieving more messages!",
+end
+
+class_chart NETWORKING_INTERFACE
+indexing
+	author: "Christian 'Troy' Jensen, chrj@itu.dk";
+explanation "The outward face of a networking session, keeps track of a client and maybe a server"
+query
+	"Is this interface running a server?",
+	"Can I have the IP of the server?",
+command
+	"This is the number of clients!",
+	"Send this message, and you better give me some answers!",
+	"Send this message",
+end

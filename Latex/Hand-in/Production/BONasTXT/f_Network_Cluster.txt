@@ -71,10 +71,11 @@ component
 			--Queries
 				IsServer : BOOLEAN
 				GetServerIP : STRING
-			--Commands
 				SetNumberOfClients
 					-> TotalClients : INTEGER
-				SendTurnMessage : SEQUENCE[STRING] --Responses from the other players
+			--Commands
+				SendTurnMessage : SEQUENCE[STRING]
+				--Responses from the other players
 					-> Message : STRING
 				SendPreGameMessage
 					-> Message : STRING
