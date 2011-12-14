@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_29 = [
+  ];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src29" class="dotCoverSource"><pre>﻿namespace BDSADominion.GUI.Zones
+ {
+     using BDSADominion.GUI.Sprites;
+
+     using Microsoft.Xna.Framework;
+     using Microsoft.Xna.Framework.Graphics;
+
+     /// &lt;summary&gt;
+     /// The class for the Deckzone.
+     /// &lt;/summary&gt;
+     /// &lt;author&gt;
+     /// Frederik Lysgaard (frly@itu.dk)
+     /// &lt;/author&gt;
+     internal class DeckZone
+     {
+         /// &lt;summary&gt;
+         /// The list of cards in the deck.
+         /// &lt;/summary&gt;
+         private CardSprite deckzone;
+
+         /// &lt;summary&gt;
+         /// The starting position of the deck.
+         /// &lt;/summary&gt;
+         private readonly Vector2 drawPosition = new Vector2(145, 375); //This would be an interesting candidate for GUIConstants
+
+         /// &lt;summary&gt;
+         /// Add one card to the deck.
+         /// &lt;/summary&gt;
+         internal void SetFilled()
+         {
+             deckzone = GameClass.Back;
+         }
+
+         internal void SetEmpty()
+         {
+             deckzone = GameClass.Empty;
+         }
+
+         /// &lt;summary&gt;
+         /// Draw the deckzone spritbatch
+         /// &lt;/summary&gt;
+         /// &lt;param name=&quot;spriteBatch&quot;&gt;
+         /// The sprite Batch.
+         /// &lt;/param&gt;
+         internal void Draw(SpriteBatch spriteBatch)
+         {
+             Vector2 currentPosition = drawPosition;
+
+             if (deckzone != null)
+             {
+                 deckzone.Draw(spriteBatch, currentPosition);
+             }
+         }
+     }
+ }</pre></code><script type="text/javascript">
+			applyranges('src29', RANGES_29)
+		</script>
+	</body>
+</html>

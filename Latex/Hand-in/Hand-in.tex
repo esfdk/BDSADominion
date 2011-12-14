@@ -88,16 +88,71 @@ Low priority
 \item Be able to support Extensions of the basic game
 \item Implement Achievements for funny and/or hard accomplishments
 \end{itemize}
+\pagebreak
 \section{Overview}
+\subsection{About}
 This project is about our virtual representation of the card game Dominion. Dominion is a turn-based, deck-building game. The objective of the game is to use Action cards to improve your chances or damage the opponent players and using Treasure cards to buy more powerful Action/Treasure/Victory cards to gain the upper hand. 
 
-We are planning on using a Model-View-Controller architecture. We want to separate our GUI from both the game rules and the state of the game via the controller. In essence we are likely to have a somewhat static model of the rules and a more dynamic and changing model of the state of the current game.
+Requirements that are fulfilled:
+\begin{itemize}
+\item All three mandatory requirements.
+\item Able to play with three or four players.
+\item Able to play the game over LAN.
+\end{itemize}
+Section \ref{sec:Examp} on page \pageref{sec:Examp} walks through it in more detail.
 
-Frederik Lysgaard is the guy responsible for the design of our graphical interface. He is also the best Dominion player in our group. Because of this, he knows a lot of the usual strategies and is our general "go-to" guy when it comes to the tactics of the game.
+\subsection{Team members}
+Frederik Lysgaard is the guy responsible for the design of our graphical interface. He designed the interface using XNA, which he learned during the project. He is also the best Dominion player in our group. Because of this, he knows a lot of the usual strategies and is our general "go-to" guy when it comes to the tactics of the game.
 
-Christian Jensen is responsible for implementing the way the different cards interact with the state of the game when used. Christian is also the guy who will be looking into the networking portion of the project if/when it becomes relevant.
+Christian 'Troy' Jensen is our networking guy. He set up all of the networking with a server-client architecture and made it interface well with Control. He also did the proxy interface between the GUI and Control, so that the GUI could be replaced and Control would never know. 
 
-Jakob Melnyk is responsible for modeling the state of the game and the communication between the GUI and the model (in our model-view-controller architecture). Jakob Melnyk is also the "version-control-guy", the person with the final word in discussions and the general log-keeper for the group.
+Jakob Melnyk is responsible for modeling the state of the game and the communication between Control and the Model (Gamestate), Control and GUI (the proxy-interface that Christian developed) and between Control and some parts of the network interface. Jakob is also the "version-control-guy", the person with the final word in discussions and the general log-keeper.
+
+\subsection{Architecture}
+We have used a Model-View-Control architecture to do a heavy separation of concerns in terms of the GUI, server, model and game logic. We planned on having a static model outside of the controller to contain the game logic (in terms of card attributes), but we decided to do it more simply in the controller and then focus on getting networking in the game. 
+
+The networking is done with a server-client architecture where the server has a number of clients and one or more of these clients can be itself. Currently we have only tested it on the server's local machine and on a LAN with the server. It should be possible to play over the Internet, but we have not tested it to any degree and as such cannot make any promises that it will work.
+
+In the "Related Documents/Dependency Graphs" we have included dependency graphs for the Card Inheritance hierarchy, Control's dependencies and Gamestate's dependencies.
+
+\subsection{Known bugs}
+\begin{itemize}
+\item It is very hard to click on the bottommost field in the Supply in the GUI.
+\item Sometimes a player will not be shown on the GUI at the end of the game whether he has won or lost the game. It is however shown in the console.
+\item While the hand can contain more than seven cards, it is not possible to see and use cards beyond the seventh card in the hand.
+\item If more than nine cards are played in any given turn, the tenth card and beyond will be drawn outside of the game window.
+\item The number of cards in the supply does not vary according to how many players are in the game.
+\end{itemize}
+
+\subsection{Validation}
+\subsubsection{Code Contracts and Pex}
+We have been debugging with Code Contracts enabled, but we do not have them enabled for the released version. We used to not only to have contracts on our classes, but also so that we could use Pex to generate some unit tests for us. The main amount of the contracts are in the Gamestate namespace, but there are a few contracts elsewhere in our project.
+
+Pex could not generate as many unit tests as we would have liked within the time we had, but it covers about 8\% of our code on its own. dotCover html report file of only the Pex tests can be found in "BDSADominion/dotCover Coverage Runs/Pex solitaire snap.html".
+
+\subsubsection{Screencast}
+We did a screencast of ourselves playing a couple of turns at the start of a game and of a player winning the game. These are called "BDSADominion - Screencast pt 1" and "BDSADominion - Screencast pt 2", respectively. These can be found in "Related Documents/DominionScreencast".
+
+Because we play a few rounds and the game continues doing the same turn-based play, we feel that showing that a couple of turns work can be used as validation for the functionality of our game. Because we also show that a game can be won in the second screencast, we have shown that the game can end.
+
+\subsubsection{Code Coverage of a game}
+While we have not done scenarios, we have instead played the game many times and so, in a sense, have validated it to some degree.
+
+Besides the Pex code coverage, we also ran dotCover with "Cover Startup Project". This checks how much of the code is covered during the run of the Project's Start. 
+
+The most code coverage we got in any single run using this way of covering code was Christian running his game as a server and then joining another client on his server from his own machine. The results of this can be see in "BDSADominion/dotCover Coverage Runs/TroyServerRun1.html". This report covered a lot of the code from the Connection and Server classes. 
+
+Another report merged from a solo player running the game "BDSADominion/dotCover Coverage Runs/Merge\textunderscore Report.html", the Pex results and the game being run as a client on another computer, did not really do so well in covering the network area, but covered the other parts of the application better than "TroyServerRun1" did. We should be able to reach at least 85\% code coverage by our calculations.
+
+\subsection{Code Metrics}
+
+\subsection{Notes}
+\begin{itemize}
+\item Given more time, we would definitely have used BON to better describe our architecture.
+\item We could have added more and better contracts, given more time. Especially invariants could have been done in more classes.
+\item We could probably have done without the inheritance as it looks now, because we never use the fact that something is a specific card, only ever its type (Action, Treasure, etc.)
+\end{itemize}
+
 \pagebreak
 \include{Subfiles/Dictionary}
 \pagebreak

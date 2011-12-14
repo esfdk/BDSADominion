@@ -1,0 +1,308 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_34 = [
+  ];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src34" class="dotCoverSource"><pre>namespace BDSADominion.GUI
+{
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using BDSADominion.Gamestate;
+    using BDSADominion.Gamestate.Card_Types;
+    using BDSADominion.GUI.Sprites;
+
+    /// &lt;summary&gt;
+    /// Class responsible for talk between GUI and controller.
+    /// &lt;/summary&gt;
+    /// &lt;author&gt;
+    /// Christian &#39;Troy&#39; Jensen (chrj@itu.dk)
+    /// &lt;/author&gt;
+    public class GUIInterface
+    {
+        /// &lt;summary&gt;
+        /// gamegclass game
+        /// &lt;/summary&gt;
+        private readonly GameClass game;
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;GUIInterface&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        public GUIInterface()
+        {
+            game = new GameClass();
+            game.HandCardClicked += HandCardToControl;
+            game.SupplyCardClicked += SupplyAttemptToControl;
+            game.EndPhaseClicked += EndPhaseToControl;
+            game.StartUpdate += StartUpdateToControl;
+            CardInHandPressed += HandPressed;
+            BuyAttempt += SupplyPressed;
+            EndPhasePressed += PhaseEndPressed;
+            StartUpdate += UpdateHappened;
+        }
+
+        /// &lt;summary&gt;
+        /// event is raised when index in hand is pressed.
+        /// &lt;/summary&gt;
+        public event IndexHandler CardInHandPressed;
+
+        /// &lt;summary&gt;
+        /// Listener on cardname.
+        /// &lt;/summary&gt;
+        public event CardNameHandler BuyAttempt;
+
+        /// &lt;summary&gt;
+        /// event is raised when endphase button is clicked.
+        /// &lt;/summary&gt;
+        public event ClickHandler EndPhasePressed;
+
+        /// &lt;summary&gt;
+        /// event is raised when startupdate
+        /// &lt;/summary&gt;
+        public event ClickHandler StartUpdate;
+
+        /// &lt;summary&gt;
+        /// RUN the game!.
+        /// &lt;/summary&gt;
+        public void RunGame()
+        {
+            game.Run();
+            ////string my = &quot;lol&quot;;
+        }
+
+        /// &lt;summary&gt;
+        /// Draw the hand.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;cards&quot;&gt;
+        /// The cards.
+        /// &lt;/param&gt;
+        public void DrawHand(Card[] cards)
+        {
+            var sprite = cards.Select((t, i) =&gt; new CardSprite(t.Name, i)).ToList();
+            game.HandZone.NewCards(sprite);
+        }
+
+        /// &lt;summary&gt;
+        /// Draw the action cards.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;cards&quot;&gt;
+        /// The cards.
+        /// &lt;/param&gt;
+        public void DrawAction(Card[] cards)
+        {
+            List&lt;CardSprite&gt; sprite = cards.Select((t, i) =&gt; new CardSprite(t.Name, i)).ToList();
+            game.ActionZone.NewCards(sprite);
+        }
+
+        /// &lt;summary&gt;
+        /// Draw the dsicard card.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;card&quot;&gt;
+        /// The card.
+        /// &lt;/param&gt;
+        public void DrawDiscard(Card card)
+        {
+            if (card == null)
+            {
+                game.DiscardZone.SetEmpty();
+            }
+            else
+            {
+                game.DiscardZone.AddCard(new CardSprite(card.Name, -1));
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Draw the deck.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;filled&quot;&gt;
+        /// The filled.
+        /// &lt;/param&gt;
+        public void DrawDeck(bool filled)
+        {
+            if (filled)
+            {
+                game.DeckZone.SetFilled();
+            }
+            else
+            {
+                game.DeckZone.SetEmpty();
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Set actions.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;number&quot;&gt;
+        /// The number.
+        /// &lt;/param&gt;
+        public void SetAction(int number)
+        {
+            game.Actions = number;
+        }
+
+        /// &lt;summary&gt;
+        /// Set buys.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;number&quot;&gt;
+        /// The number.
+        /// &lt;/param&gt;
+        public void SetBuys(int number)
+        {
+            game.Buys = number;
+        }
+
+        /// &lt;summary&gt;
+        /// Set coins.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;number&quot;&gt;
+        /// The number.
+        /// &lt;/param&gt;
+        public void SetCoins(int number)
+        {
+            game.Coins = number;
+        }
+
+        /// &lt;summary&gt;
+        /// Set winner id.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;playerId&quot;&gt;
+        /// The player id.
+        /// &lt;/param&gt;
+        public void EndGame(int playerId)
+        {
+            game.WinnerNum = playerId;
+            game.EndOfGame = true;
+        }
+
+        /// &lt;summary&gt;
+        /// Set yourturn.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;yourTurn&quot;&gt;
+        /// The your turn.
+        /// &lt;/param&gt;
+        public void YourTurn(bool yourTurn)
+        {
+            game.Turn = yourTurn;
+        }
+
+        /// &lt;summary&gt;
+        /// Sets the phase.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;phase&quot;&gt;
+        /// The phase.
+        /// &lt;/param&gt;
+        public void SetPhase(int phase)
+        {
+            game.Phase = phase;
+        }
+
+        /// &lt;summary&gt;
+        /// adds all the used cards.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;cards&quot;&gt;
+        /// The cards.
+        /// &lt;/param&gt;
+        public void UsedCards(CardName[] cards)
+        {
+            game.SupplyZone.NewCards(cards.ToList());
+        }
+
+        /// &lt;summary&gt;
+        /// Sets playernumber.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;number&quot;&gt;
+        /// The number.
+        /// &lt;/param&gt;
+        public void SetPlayerNumber(int number)
+        {
+            game.Playernum = number;
+        }
+
+        /// &lt;summary&gt;
+        /// returns the handcard to interact with.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;card&quot;&gt;
+        /// The card.
+        /// &lt;/param&gt;
+        private void HandCardToControl(CardSprite card)
+        {
+            if (card != null)
+            {
+                CardInHandPressed(card.Index);
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// try and buy supply card.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;card&quot;&gt;
+        /// The card.
+        /// &lt;/param&gt;
+        private void SupplyAttemptToControl(CardName card)
+        {
+            BuyAttempt(card);
+        }
+
+        /// &lt;summary&gt;
+        /// Endphasebutton is pressed endphase.
+        /// &lt;/summary&gt;
+        private void EndPhaseToControl()
+        {
+            EndPhasePressed();
+        }
+
+        /// &lt;summary&gt;
+        /// Start the update.
+        /// &lt;/summary&gt;
+        private void StartUpdateToControl()
+        {
+            StartUpdate();
+        }
+
+        /// &lt;summary&gt;
+        /// Not needed class atm.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;index&quot;&gt;
+        /// The index.
+        /// &lt;/param&gt;
+        private void HandPressed(int index)
+        {
+        }
+
+        /// &lt;summary&gt;
+        /// supply is pressed.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;card&quot;&gt;
+        /// The card.
+        /// &lt;/param&gt;
+        private void SupplyPressed(CardName card)
+        {
+            ////Console.WriteLine(&quot;Pressed {0} in Supply&quot;, card);
+        }
+
+        /// &lt;summary&gt;
+        /// endphase button pressed.
+        /// &lt;/summary&gt;
+        private void PhaseEndPressed()
+        {
+            ////Console.WriteLine(&quot;EndPhase has been pressed&quot;);
+        }
+
+        /// &lt;summary&gt;
+        /// update happend.
+        /// &lt;/summary&gt;
+        private void UpdateHappened()
+        {
+            ////Console.WriteLine(&quot;Update has happened&quot;);
+        }
+    }
+}</pre></code><script type="text/javascript">
+			applyranges('src34', RANGES_34)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,352 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_36 = [
+  ];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src36" class="dotCoverSource"><pre>namespace BDSADominion.Gamestate
+{
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Linq;
+    using BDSADominion.Gamestate.Card_Types;
+
+    /// &lt;summary&gt;
+    /// Keeps track of the players and everything the players share, such as the trash pile and the supply.
+    /// &lt;/summary&gt;
+    /// &lt;author&gt;
+    /// Jakob Melnyk (jmel@itu.dk)
+    /// &lt;/author&gt;
+    public class Gamestate
+    {
+        #region Fields
+
+        /// &lt;summary&gt;
+        /// The amount of piles that are empty.
+        /// &lt;/summary&gt;
+        private uint numberOfEmptyPiles;
+
+        /// &lt;summary&gt;
+        /// Number Of Actions the active player has.
+        /// &lt;/summary&gt;
+        private uint numberOfActions;
+
+        /// &lt;summary&gt;
+        /// Number Of Buys the active player has.
+        /// &lt;/summary&gt;
+        private uint numberOfBuys;
+
+        /// &lt;summary&gt;
+        /// Number Of Coins the active player has.
+        /// &lt;/summary&gt;
+        private uint numberOfCoins;
+
+        /// &lt;summary&gt;
+        /// The player currently interacting with the game.
+        /// &lt;/summary&gt;
+        private Player activePlayer;
+
+        #endregion
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;Gamestate&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;numberOfPlayers&quot;&gt;
+        /// The number of players in the game.
+        /// &lt;/param&gt;
+        /// &lt;param name=&quot;startSupply&quot;&gt;
+        /// The start supply of the Dominion game.
+        /// &lt;/param&gt;
+        public Gamestate(uint numberOfPlayers, Dictionary&lt;CardName, uint&gt; startSupply)
+        {
+            Contract.Requires(numberOfPlayers &gt;= 2 &amp; numberOfPlayers &lt;= 4);
+            Contract.Requires(startSupply != null);
+
+            Players = new List&lt;Player&gt;();
+            for (uint i = 1; i &lt;= numberOfPlayers; i++)
+            {
+                Players.Add(new Player(i));
+            }
+
+            Supply = new Dictionary&lt;CardName, uint&gt;();
+            foreach (CardName cn in startSupply.Keys)
+            {
+                Supply.Add(cn, startSupply[cn]);
+            }
+        }
+
+        #region Properties
+        /// &lt;summary&gt;
+        /// Gets the Players in the game.
+        /// &lt;/summary&gt;
+        public List&lt;Player&gt; Players { get; private set; }
+
+        /// &lt;summary&gt;
+        /// Gets the Number Of Players in the game.
+        /// &lt;/summary&gt;
+        public uint NumberOfPlayers
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result&lt;uint&gt;() &gt;= 2 &amp; Contract.Result&lt;uint&gt;() &lt;= 4);
+                return (uint)Players.Count;
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Gets or sets ActivePlayer.
+        /// &lt;/summary&gt;
+        public Player ActivePlayer
+        {
+            get
+            {
+                return activePlayer;
+            }
+
+            set
+            {
+                Contract.Requires(value != null ? value.PlayerNumber &gt;= 1 &amp; value.PlayerNumber &lt;= NumberOfPlayers : false);
+                activePlayer = value;
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Gets a value indicating whether the player is in the action phase.
+        /// &lt;/summary&gt;
+        public bool InActionPhase { get; private set; }
+
+        /// &lt;summary&gt;
+        /// Gets a value indicating whether the player is in the buy phase.
+        /// &lt;/summary&gt;
+        public bool InBuyPhase { get; private set; }
+
+        /// &lt;summary&gt;
+        /// Gets the current phase the active player is in. 1 for Action Phase, 2 for BuyPhase.
+        /// &lt;/summary&gt;
+        public uint GetPhase
+        {
+            get
+            {
+                if (InActionPhase)
+                {
+                    return 1;
+                }
+
+                if (InBuyPhase)
+                {
+                    return 2;
+                }
+
+                return 0;
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Gets the Supply.
+        /// &lt;/summary&gt;
+        public Dictionary&lt;CardName, uint&gt; Supply { get; private set; }
+
+        /// &lt;summary&gt;
+        /// Gets the Trash pile.
+        /// &lt;/summary&gt;
+        public List&lt;Card&gt; Trash { get; private set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets Number Of Actions the active player has.
+        /// &lt;/summary&gt;
+        public uint NumberOfActions
+        {
+            get
+            {
+                return numberOfActions;
+            }
+
+            set
+            {
+                Contract.Requires(!(NumberOfActions + value &lt; 0));
+                numberOfActions = value;
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Gets or sets Number Of Buys the active player has.
+        /// &lt;/summary&gt;
+        public uint NumberOfBuys
+        {
+            get
+            {
+                return numberOfBuys;
+            }
+
+            set
+            {
+                Contract.Requires(!(NumberOfBuys + value &lt; 0));
+                numberOfBuys = value;
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Gets or sets Number Of Coins the active player has.
+        /// &lt;/summary&gt;
+        public uint NumberOfCoins
+        {
+            get
+            {
+                return numberOfCoins;
+            }
+
+            set
+            {
+                Contract.Requires(!(NumberOfCoins + value &lt; 0));
+                numberOfCoins = value;
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Gets a value indicating whether the game is over.
+        /// &lt;/summary&gt;
+        public bool GameOver { get; private set; }
+
+        #endregion
+
+        /// &lt;summary&gt;
+        /// Starts the action phase for the active player.
+        /// &lt;/summary&gt;
+        public void StartActionPhase()
+        {
+            Contract.Requires(!InActionPhase &amp; !InBuyPhase);
+            Contract.Ensures(InActionPhase &amp; !InBuyPhase);
+
+            InActionPhase = true;
+            NumberOfActions = 1;
+            NumberOfBuys = 1;
+        }
+
+        /// &lt;summary&gt;
+        /// Ends the action phase for the active player.
+        /// &lt;/summary&gt;
+        public void EndActionPhase()
+        {
+            Contract.Requires(InActionPhase &amp; !InBuyPhase);
+            Contract.Ensures(!InActionPhase &amp; !InBuyPhase);
+            Contract.Ensures(NumberOfActions == 0);
+
+            InActionPhase = false;
+            NumberOfActions = 0;
+        }
+
+        /// &lt;summary&gt;
+        /// Starts the buy phase for the active player.
+        /// &lt;/summary&gt;
+        public void StartBuyPhase()
+        {
+            Contract.Requires(!InActionPhase &amp; !InBuyPhase);
+            Contract.Ensures(!InActionPhase &amp; InBuyPhase);
+
+            InBuyPhase = true;
+
+            ICollection&lt;Card&gt; hand = ActivePlayer.Hand;
+            int numCopper = hand.Count(card =&gt; card.Name == CardName.Copper);
+            int numSilver = hand.Count(card =&gt; card.Name == CardName.Silver);
+            int numGold = hand.Count(card =&gt; card.Name == CardName.Gold);
+
+            numberOfCoins += (uint)(numCopper + (2 * numSilver) + (3 * numGold));
+        }
+
+        /// &lt;summary&gt;
+        /// End the buy phase for the active player.
+        /// &lt;/summary&gt;
+        public void EndBuyPhase()
+        {
+            Contract.Requires(!InActionPhase &amp; InBuyPhase);
+            Contract.Ensures(!InActionPhase &amp; !InBuyPhase);
+            Contract.Ensures(NumberOfBuys == 0 &amp; NumberOfCoins == 0);
+
+            InBuyPhase = false;
+            NumberOfCoins = 0;
+            NumberOfBuys = 0;
+        }
+
+        /// &lt;summary&gt;
+        /// Does the CleanUp phase for the player.
+        /// &lt;/summary&gt;
+        public void DoCleanUp()
+        {
+            Contract.Requires(!InActionPhase &amp; !InBuyPhase);
+            ActivePlayer.CleanUp();
+        }
+
+        /// &lt;summary&gt;
+        /// Player gains a card from the supply.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;player&quot;&gt;
+        /// The player gaining the card.
+        /// &lt;/param&gt;
+        /// &lt;param name=&quot;card&quot;&gt;
+        /// The card the player gains from the supply.
+        /// &lt;/param&gt;
+        public void PlayerGainsCard(Player player, CardName card)
+        {
+            Contract.Requires(Players.Contains(player));
+            Contract.Requires(Supply[card] != 0);
+
+            Contract.Ensures(player.TopOfDiscard.Name == card);
+
+            player.AddCardToZone(CardFactory.CreateCard(card), Zone.Discard);
+            Supply[card]--;
+
+            if (Supply[card] == 0)
+            {
+                if (card == CardName.Province)
+                {
+                    GameOver = true;
+                }
+                else
+                {
+                    numberOfEmptyPiles++;
+                }
+            }
+
+            if (numberOfEmptyPiles == 3)
+            {
+                GameOver = true;
+            }
+
+        }
+
+        /// &lt;summary&gt;
+        /// A list containing the scores of the players.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;
+        /// The scores of all the players.
+        /// &lt;/returns&gt;
+        public List&lt;int&gt; GetScores()
+        {
+            List&lt;int&gt; scores = new List&lt;int&gt;();
+
+            for (int i = 0; i &lt; Players.Count; i++)
+            {
+                ICollection&lt;Card&gt; allCards = Players[i].AllCards.Keys;
+
+                int numEstate = allCards.Count(card =&gt; card.Name == CardName.Estate);
+                int numDuchy = allCards.Count(card =&gt; card.Name == CardName.Duchy);
+                int numProvince = allCards.Count(card =&gt; card.Name == CardName.Province);
+                int numCurse = allCards.Count(card =&gt; card.Name == CardName.Curse);
+                int numGardens = allCards.Count(card =&gt; card.Name == CardName.Gardens);
+
+                int score = numEstate + (3 * numDuchy) + (6 * numProvince) + ((allCards.Count / 10) * numGardens) - numCurse;
+                scores.Add(score);
+            }
+
+            return scores;
+        }
+    }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src36', RANGES_36)
+		</script>
+	</body>
+</html>
