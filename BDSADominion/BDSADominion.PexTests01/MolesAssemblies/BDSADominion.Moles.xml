@@ -320,110 +320,110 @@
             <summary>Sets the mole of <see cref="M:BDSADominion.Gamestate.CardFactory.$InvariantMethod$"/>
             </summary>
         </member>
-        <member name="T:BDSADominion.GUI.Moles.MCardSprite">
-            <summary>Mole type of <see cref="T:BDSADominion.GUI.CardSprite"/>
+        <member name="T:BDSADominion.GUI.Sprites.Moles.MCardSprite">
+            <summary>Mole type of <see cref="T:BDSADominion.GUI.Sprites.CardSprite"/>
             .</summary>
         </member>
-        <member name="M:BDSADominion.GUI.Moles.MCardSprite.#ctor">
+        <member name="M:BDSADominion.GUI.Sprites.Moles.MCardSprite.#ctor">
             <summary>Initializes a new mole</summary>
         </member>
-        <member name="M:BDSADominion.GUI.Moles.MCardSprite.#ctor(BDSADominion.GUI.CardSprite)">
+        <member name="M:BDSADominion.GUI.Sprites.Moles.MCardSprite.#ctor(BDSADominion.GUI.Sprites.CardSprite)">
             <summary>Initializes a new mole for the given instance</summary>
         </member>
-        <member name="M:BDSADominion.GUI.Moles.MCardSprite.BehaveAsCurrent">
+        <member name="M:BDSADominion.GUI.Sprites.Moles.MCardSprite.BehaveAsCurrent">
             <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
         </member>
-        <member name="M:BDSADominion.GUI.Moles.MCardSprite.BehaveAsNotImplemented">
+        <member name="M:BDSADominion.GUI.Sprites.Moles.MCardSprite.BehaveAsNotImplemented">
             <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.Behavior">
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.Behavior">
             <summary>Assigns the behavior for all methods of the moled type</summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.CardRefGet">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.CardRef"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.CardRefGet">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.CardRef"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.CardRefSetCardName">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.CardRef"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.CardRefSetCardName">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.CardRef"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.ClickedGet">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.Clicked"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.ClickedGet">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.Clicked"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.ClickedSetBoolean">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.Clicked"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.ClickedSetBoolean">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.Clicked"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.ConstructorCardNameInt32">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.CardSprite.#ctor(BDSADominion.Gamestate.CardName,System.Int32)"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.ConstructorCardNameInt32">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.Sprites.CardSprite.#ctor(BDSADominion.Gamestate.CardName,System.Int32)"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.DrawSpriteBatchVector2">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.CardSprite.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.DrawSpriteBatchVector2">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.Sprites.CardSprite.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.EqualsCardSprite">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.CardSprite.Equals(BDSADominion.GUI.CardSprite)"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.EqualsCardSprite">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.Sprites.CardSprite.Equals(BDSADominion.GUI.Sprites.CardSprite)"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.EqualsObject">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.CardSprite.Equals(System.Object)"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.EqualsObject">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.Sprites.CardSprite.Equals(System.Object)"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.GetHashCode">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.CardSprite.GetHashCode"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.GetHashCode">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.Sprites.CardSprite.GetHashCode"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.IndexGet">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.Index"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.IndexGet">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.Index"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.IndexSetInt32">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.Index"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.IndexSetInt32">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.Index"/>
             </summary>
         </member>
-        <member name="T:BDSADominion.GUI.Moles.MCardSprite.AllInstances">
+        <member name="T:BDSADominion.GUI.Sprites.Moles.MCardSprite.AllInstances">
             <summary>Define moles for all instances members</summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.AllInstances.CardRefGet">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.CardRef"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.AllInstances.CardRefGet">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.CardRef"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.AllInstances.CardRefSetCardName">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.CardRef"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.AllInstances.CardRefSetCardName">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.CardRef"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.AllInstances.ClickedGet">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.Clicked"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.AllInstances.ClickedGet">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.Clicked"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.AllInstances.ClickedSetBoolean">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.Clicked"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.AllInstances.ClickedSetBoolean">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.Clicked"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.AllInstances.DrawSpriteBatchVector2">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.CardSprite.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.AllInstances.DrawSpriteBatchVector2">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.Sprites.CardSprite.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2)"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.AllInstances.EqualsCardSprite">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.CardSprite.Equals(BDSADominion.GUI.CardSprite)"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.AllInstances.EqualsCardSprite">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.Sprites.CardSprite.Equals(BDSADominion.GUI.Sprites.CardSprite)"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.AllInstances.EqualsObject">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.CardSprite.Equals(System.Object)"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.AllInstances.EqualsObject">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.Sprites.CardSprite.Equals(System.Object)"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.AllInstances.GetHashCode01">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.CardSprite.GetHashCode"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.AllInstances.GetHashCode01">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.Sprites.CardSprite.GetHashCode"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.AllInstances.IndexGet">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.Index"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.AllInstances.IndexGet">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.Index"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MCardSprite.AllInstances.IndexSetInt32">
-            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.CardSprite.Index"/>
+        <member name="P:BDSADominion.GUI.Sprites.Moles.MCardSprite.AllInstances.IndexSetInt32">
+            <summary>Sets the mole of <see cref="P:BDSADominion.GUI.Sprites.CardSprite.Index"/>
             </summary>
         </member>
         <member name="T:BDSADominion.Gamestate.Card_Types.Cards.Action_Cards.Moles.MCellar">
@@ -874,32 +874,6 @@
         <member name="T:BDSADominion.Gamestate.Card_Types.Cards.Action_Cards.Moles.MFestival.AllInstances">
             <summary>Define moles for all instances members</summary>
         </member>
-        <member name="T:BDSADominion.GUI.Moles.MGUIConstants">
-            <summary>Mole type of <see cref="T:BDSADominion.GUI.GUIConstants"/>
-            .</summary>
-        </member>
-        <member name="M:BDSADominion.GUI.Moles.MGUIConstants.#ctor">
-            <summary>Initializes a new mole</summary>
-        </member>
-        <member name="M:BDSADominion.GUI.Moles.MGUIConstants.#ctor(BDSADominion.GUI.GUIConstants)">
-            <summary>Initializes a new mole for the given instance</summary>
-        </member>
-        <member name="M:BDSADominion.GUI.Moles.MGUIConstants.BehaveAsCurrent">
-            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
-        </member>
-        <member name="M:BDSADominion.GUI.Moles.MGUIConstants.BehaveAsNotImplemented">
-            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
-        </member>
-        <member name="P:BDSADominion.GUI.Moles.MGUIConstants.Behavior">
-            <summary>Assigns the behavior for all methods of the moled type</summary>
-        </member>
-        <member name="P:BDSADominion.GUI.Moles.MGUIConstants.Constructor">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIConstants.#ctor"/>
-            </summary>
-        </member>
-        <member name="T:BDSADominion.GUI.Moles.MGUIConstants.AllInstances">
-            <summary>Define moles for all instances members</summary>
-        </member>
         <member name="T:BDSADominion.GUI.Moles.MGUIInterface">
             <summary>Mole type of <see cref="T:BDSADominion.GUI.GUIInterface"/>
             .</summary>
@@ -972,7 +946,7 @@
             </summary>
         </member>
         <member name="P:BDSADominion.GUI.Moles.MGUIInterface.HandCardToControlCardSprite">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.HandCardToControl(BDSADominion.GUI.CardSprite)"/>
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.HandCardToControl(BDSADominion.GUI.Sprites.CardSprite)"/>
             </summary>
         </member>
         <member name="P:BDSADominion.GUI.Moles.MGUIInterface.HandPressedInt32">
@@ -1039,6 +1013,14 @@
             <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.YourTurn(System.Boolean)"/>
             </summary>
         </member>
+        <member name="P:BDSADominion.GUI.Moles.MGUIInterface._DrawActionb__2CardInt32">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.&lt;DrawAction&gt;b__2(BDSADominion.Gamestate.Card_Types.Card,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:BDSADominion.GUI.Moles.MGUIInterface._DrawHandb__0CardInt32">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.&lt;DrawHand&gt;b__0(BDSADominion.Gamestate.Card_Types.Card,System.Int32)"/>
+            </summary>
+        </member>
         <member name="T:BDSADominion.GUI.Moles.MGUIInterface.AllInstances">
             <summary>Define moles for all instances members</summary>
         </member>
@@ -1091,7 +1073,7 @@
             </summary>
         </member>
         <member name="P:BDSADominion.GUI.Moles.MGUIInterface.AllInstances.HandCardToControlCardSprite">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.HandCardToControl(BDSADominion.GUI.CardSprite)"/>
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.HandCardToControl(BDSADominion.GUI.Sprites.CardSprite)"/>
             </summary>
         </member>
         <member name="P:BDSADominion.GUI.Moles.MGUIInterface.AllInstances.HandPressedInt32">
@@ -1204,10 +1186,6 @@
             <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GameClass.remove_HandCardClicked(BDSADominion.GUI.CardSpriteHandler)"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MGameClass.Initialize">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GameClass.Initialize"/>
-            </summary>
-        </member>
         <member name="P:BDSADominion.GUI.Moles.MGameClass.LoadContent">
             <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GameClass.LoadContent"/>
             </summary>
@@ -1257,10 +1235,6 @@
         </member>
         <member name="P:BDSADominion.GUI.Moles.MGameClass.AllInstances.HandCardClickedRemoveCardSpriteHandler">
             <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GameClass.remove_HandCardClicked(BDSADominion.GUI.CardSpriteHandler)"/>
-            </summary>
-        </member>
-        <member name="P:BDSADominion.GUI.Moles.MGameClass.AllInstances.Initialize">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GameClass.Initialize"/>
             </summary>
         </member>
         <member name="P:BDSADominion.GUI.Moles.MGameClass.AllInstances.LoadContent">
@@ -3279,22 +3253,6 @@
         <member name="P:BDSADominion.Gamestate.Card_Types.Cards.Action_Cards.Moles.SFestival.InstanceBehavior">
             <summary>Gets or sets the instance behavior.</summary>
         </member>
-        <member name="T:BDSADominion.GUI.Moles.SGUIConstants">
-            <summary>Stub type of <see cref="T:BDSADominion.GUI.GUIConstants"/>
-            .</summary>
-        </member>
-        <member name="M:BDSADominion.GUI.Moles.SGUIConstants.#ctor">
-            <summary>Initializes a new instance</summary>
-        </member>
-        <member name="M:BDSADominion.GUI.Moles.SGUIConstants.InitializeStub">
-            <summary>Initializes a new instance of type SGUIConstants</summary>
-        </member>
-        <member name="P:BDSADominion.GUI.Moles.SGUIConstants.CallBase">
-            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
-        </member>
-        <member name="P:BDSADominion.GUI.Moles.SGUIConstants.InstanceBehavior">
-            <summary>Gets or sets the instance behavior.</summary>
-        </member>
         <member name="T:BDSADominion.GUI.Moles.SGUIInterface">
             <summary>Stub type of <see cref="T:BDSADominion.GUI.GUIInterface"/>
             .</summary>
@@ -3324,14 +3282,6 @@
         </member>
         <member name="F:BDSADominion.GUI.Moles.SGameClass.DrawGameTime">
             <summary>Sets the stub of <see cref="M:BDSADominion.GUI.GameClass.Draw(Microsoft.Xna.Framework.GameTime)"/>
-            </summary>
-        </member>
-        <member name="M:BDSADominion.GUI.Moles.SGameClass.Initialize">
-            <summary>Sets the stub of <see cref="M:BDSADominion.GUI.GameClass.Initialize"/>
-            </summary>
-        </member>
-        <member name="F:BDSADominion.GUI.Moles.SGameClass.Initialize01">
-            <summary>Sets the stub of <see cref="M:BDSADominion.GUI.GameClass.Initialize"/>
             </summary>
         </member>
         <member name="M:BDSADominion.GUI.Moles.SGameClass.InitializeStub">
