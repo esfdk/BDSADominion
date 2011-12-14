@@ -1,5 +1,7 @@
 ﻿﻿namespace BDSADominion.GUI.Zones
  {
+     using BDSADominion.GUI.Sprites;
+
      using Microsoft.Xna.Framework;
      using Microsoft.Xna.Framework.Graphics;
 
@@ -19,18 +21,7 @@
          /// <summary>
          /// The starting position of the discardzone.
          /// </summary>
-         private Vector2 drawPosition = new Vector2(10, 375); //This would be an interesting candidate for GUIConstants
-
-         /// <summary>
-         /// Initializes a new instance of the <see cref="HandZone"/> class.
-         /// </summary>
-         /// <param name="topmostleftlocation">
-         /// The topmostleftlocation.
-         /// </param>
-         internal DiscardZone()
-         {
-
-         }
+         private readonly Vector2 drawPosition = new Vector2(10, 375); //This would be an interesting candidate for GUIConstants
 
          /// <summary>
          /// Add one card to the discardzone.

@@ -1,6 +1,7 @@
-﻿namespace BDSADominion.GUI
+﻿namespace BDSADominion.GUI.Sprites
 {
-    using Gamestate;
+    using BDSADominion.Gamestate;
+
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
@@ -12,29 +13,26 @@
     /// </author>
     internal class ButtonSprite
     {
-        internal CardName Card { get; private set; }
-
         ////public int Id { get; private set; }
 
         /// <summary>
         /// The texture for the front of the button.
         /// </summary>
-        private Texture2D buttonFront;
+        private readonly Texture2D buttonFront;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CardSprite"/> class.
+        /// Initializes a new instance of the <see cref="ButtonSprite"/> class. 
         /// </summary>
-        /// <param name="buttonenum">
-        /// The cardenum.
+        /// <param name="card">
+        /// The card.
         /// </param>
         internal ButtonSprite(CardName card)
         {
             Clicked = false;
             Card = card;
-            //Id = id;
-            if (GameClass.buttonImages.ContainsKey(card))
+            if (GameClass.ButtonImages.ContainsKey(card))
             {
-                this.buttonFront = GameClass.buttonImages[Card];
+                this.buttonFront = GameClass.ButtonImages[Card];
             }
         }
 
@@ -61,9 +59,14 @@
         }
 
         /// <summary>
-        /// Gets or sets isclicked
+        /// Gets or sets a value indicating whether Clicked.
         /// </summary>
         public bool Clicked { get; set; }
+
+        /// <summary>
+        /// Gets Card.
+        /// </summary>
+        internal CardName Card { get; private set; }
 
         /// <summary>
         /// Draws the button.
@@ -83,7 +86,6 @@
             {
                 spriteBatch.Draw(buttonFront, position, Color.White);
             }
-            
         }
     }
 }

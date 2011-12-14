@@ -1,10 +1,11 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace BDSADominion.GUI.Zones
+﻿namespace BDSADominion.GUI.Zones
 {
-    using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
+
+    using BDSADominion.GUI.Sprites;
+
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
@@ -19,17 +20,17 @@ namespace BDSADominion.GUI.Zones
         /// <summary>
         /// The list of cards in the actionzone.
         /// </summary>
-        internal List<CardSprite> ActionCards = new List<CardSprite>();
+        private readonly List<CardSprite> actionCards = new List<CardSprite>();
 
         /// <summary>
         /// next card x-coor.
         /// </summary>
-        private Vector2 offset = new Vector2(135, 0); //This would be an interesting candidate for GUIConstants
+        private readonly Vector2 offset = new Vector2(135, 0); // This would be an interesting candidate for GUIConstants 
 
         /// <summary>
         /// The starting position of the actionzone.
         /// </summary>
-        private Vector2 actionStartPosition = new Vector2(10, 50); //This would be an interesting candidate for GUIConstants
+        private readonly Vector2 actionStartPosition = new Vector2(10, 50); // This would be an interesting candidate for GUIConstants
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ActionZone"/> class.
@@ -52,21 +53,26 @@ namespace BDSADominion.GUI.Zones
         /// The card.
         /// </param>
         /// <returns>
+        /// returns true if card indicated is removed from actionzone.
         /// </returns>
         internal bool RemoveCard(CardSprite card)
         {
-            if (ActionCards.Any(card.Equals))
+            if (this.actionCards.Any(card.Equals))
             {
-                return ActionCards.Remove(card);
+                return this.actionCards.Remove(card);
             }
+
             return false;
         }
 
+        /// <summary>
+        /// Clear actions.
+        /// </summary>
         internal void ClearAction()
         {
-            Contract.Ensures(ActionCards.Count == 0);
+            Contract.Ensures(this.actionCards.Count == 0);
 
-            CardSprite[] list = ActionCards.ToArray();
+            CardSprite[] list = this.actionCards.ToArray();
             foreach (CardSprite card in list)
             {
                 RemoveCard(card);
@@ -81,7 +87,7 @@ namespace BDSADominion.GUI.Zones
         /// </param>
         internal void AddCard(CardSprite newCardSprite)
         {
-            ActionCards.Add(newCardSprite);
+            this.actionCards.Add(newCardSprite);
         }
 
         /// <summary>
@@ -107,11 +113,11 @@ namespace BDSADominion.GUI.Zones
         /// </param>
         internal void Draw(SpriteBatch spriteBatch)
         {
-            if (ActionCards.Count > 0)
+            if (this.actionCards.Count > 0)
             {
                 Vector2 currentPosition = actionStartPosition;
 
-                foreach (CardSprite card in ActionCards)
+                foreach (CardSprite card in this.actionCards)
                 {
                     if (card != null)
                     {
