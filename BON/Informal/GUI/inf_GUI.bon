@@ -1,22 +1,16 @@
-system_chart BDSADominion
- explanation "solution for the third semester end project at the/
- software development line of IT University of Copenhagen"
- cluster GUI description""
-end
-
 cluster_chart GUI
  indexing
 	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " The graphical representation part of the project"
- class GameClass description " The game class"
- class DeckZone description " The deck class"
- class ActionZone description " The card class"
- class DiscardZone description " The discardzone class"
- class HandZone description " The handzone class"
- class SupplyZone description " The supplyzone class"
- class ButtonSprite description " The buttonsprite class"
- class CardSprite description " The cardsprite class"
- class Program description " The program class"
+ class GAMECLASS description " The game class"
+ class DECKZONE description " The deck class"
+ class ACTIONZONE description " The card class"
+ class DISCARDZONE description " The discardzone class"
+ class HANDZONE description " The handzone class"
+ class SUPPLYZONE description " The supplyzone class"
+ class BUTTONSPRITE description " The buttonsprite class"
+ class CARDSPRITE description " The cardsprite class"
+ class PROGRAM description " The program class"
  class GUICONSTANTS description " The constant class"
  class GUIINTERFACE description " The interface class for the gui"
 end
@@ -52,9 +46,9 @@ class_chart PROGRAM
 	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " responsible for executing the game"
  command
-	" Run a clinet!"
-	" Run a Host!"
-	" Start the GUI!"
+	" Run a clinet!",
+	" Run a Host!",
+	" Start the GUI!",
 end
 
 class_chart GAMECLASS
@@ -62,11 +56,11 @@ class_chart GAMECLASS
 	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " responsible for creating the initial GUI with the components from the other classes"
  command
-	" Initialize the content!"
-	" Load the content!"
-	" Unload the content!"
-	" Update the game!"
-	" Draw the content!"
+	" Initialize the content!",
+	" Load the content!",
+	" Unload the content!",
+	" Update the game!",
+	" Draw the content!",
 end
 
 class_chart GUICONSTANTS
@@ -80,17 +74,17 @@ class_chart GUIINTERFACE
 	author: "Frederik Lysgaard (frly@itu.dk)";
  explanation " responsible for the interface between the GUI and the Controller"
  command
-	"Run the game!"
-	"Draw the hand!"
-	"Draw the actionzone!"
-	"Draw the discardzone!"
-	"Draw the deck!"
-	"Set actions!"
-	"Set buys!"
-	"Set coins!"
-	"Set endgame!"
-	"Set the turn!"
-	"Set the phase!"
-	"Set the playernumber!"
-	"Make the supplyzone!"
+	"Run the game!",
+	"Draw the hand!",
+	"Draw the actionzone!",
+	"Draw the discardzone!",
+	"Draw the deck!",
+	"Set actions!",
+	"Set buys!",
+	"Set coins!",
+	"Set endgame!",
+	"Set the turn!",
+	"Set the phase!",
+	"Set the playernumber!",
+	"Make the supplyzone!",
 end
