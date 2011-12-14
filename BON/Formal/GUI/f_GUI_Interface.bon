@@ -12,6 +12,8 @@ component
 				-> cards : SEQUENCE[CARD]
 			DrawDiscard
 				-> card : CARD
+			DrawDeck
+				-> filled : bool --Whether there are any cards in the deck
 			SetAction
 				-> number : INTEGER
 			SetBuys

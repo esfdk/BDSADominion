@@ -3,10 +3,10 @@ namespace BDSADominion.GUI
     using System;
     using System.Collections.Generic;
     using Gamestate;
-    using Zones;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+    using Zones;
 
     /// <summary>
     /// This is the main type for your game.
@@ -106,7 +106,7 @@ namespace BDSADominion.GUI
         /// <summary>
         /// The playing table.
         /// </summary>
-        ////private Texture2D table;
+        private Texture2D table;
 
         /// <summary>
         /// indicate the players number.
@@ -193,12 +193,6 @@ namespace BDSADominion.GUI
 
         internal event ClickHandler StartUpdate;
 
-        private void Trololo() //TODO Remove
-        {
-            Console.WriteLine("Trololo");
-        }
-
-
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -222,7 +216,7 @@ namespace BDSADominion.GUI
 
             font = Content.Load<SpriteFont>("Fonts\\Arial");
             fontWin = Content.Load<SpriteFont>("Fonts\\Winfont");
-            ////table = Content.Load<Texture2D>("Dominiontable");
+            table = Content.Load<Texture2D>("Pics\\Dominiontable");
             cursor = Content.Load<Texture2D>("Pics\\Cursor");
             endphasebutton = Content.Load<Texture2D>("Pics\\EndButton");
             actions = 0;
@@ -262,7 +256,6 @@ namespace BDSADominion.GUI
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
         /// <summary>
@@ -277,7 +270,7 @@ namespace BDSADominion.GUI
                 StartUp = true;
                 StartUpdate();
             }
-            
+
             lastMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
 
@@ -286,14 +279,14 @@ namespace BDSADominion.GUI
 
             if (currentMouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
             {
-                if (handZone.isClickWithin(mouseX, mouseY))
+                if (handZone.IsClickWithin(mouseX, mouseY))
                 {
-                    HandCardClicked(handZone.FindCardByMouseClick(mouseX));
+                    HandCardClicked(handZone.FindCardByMouseClick(mouseX, mouseY));
                 }
 
                 if (supplyZone.IsClickWithin(mouseX, mouseY))
                 {
-                    SupplyCardClicked(supplyZone.FindCardByMouseClick(mouseY));
+                    SupplyCardClicked(supplyZone.FindCardByMouseClick(mouseX, mouseY));
                 }
 
                 if ((mouseX < 285 && mouseX > 185) && (mouseY < 370 && mouseY > 340))
@@ -319,20 +312,20 @@ namespace BDSADominion.GUI
         {
             graphics.GraphicsDevice.Clear(Color.BlanchedAlmond);
             spriteBatch.Begin();
-            //spriteBatch.Draw(table, Vector2.Zero, Color.White);
+            spriteBatch.Draw(table, Vector2.Zero, Color.White);
 
             handZone.Draw(spriteBatch);
             actionZone.Draw(spriteBatch);
             discardZone.Draw(spriteBatch);
             deckZone.Draw(spriteBatch);
             supplyZone.Draw(spriteBatch);
-            spriteBatch.Draw(endphasebutton, new Vector2(185, 340), Color.White);
+            spriteBatch.Draw(endphasebutton, new Vector2(165, 340), Color.White);
             spriteBatch.Draw(cursor, new Vector2(mouseX, mouseY), Color.White);
             spriteBatch.DrawString(font, "Actions: " + actions.ToString(), new Vector2(400, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Buys: " + buys.ToString(), new Vector2(600, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Coins: " + coins.ToString(), new Vector2(800, 15), Color.RoyalBlue);
             spriteBatch.DrawString(font, "Player" + playernum.ToString(), new Vector2(10, 32), Color.RoyalBlue);
-            spriteBatch.DrawString(font, turn ? "Your turn   -" : "Not your turn", new Vector2(10, 10), Color.RoyalBlue);
+            spriteBatch.DrawString(font, turn ? "Your turn   -" : "Not your turn  -", new Vector2(10, 10), Color.RoyalBlue);
             if (phase == 0)
             {
                 spriteBatch.DrawString(font, "Action phase", new Vector2(163, 10), Color.RoyalBlue);
@@ -344,12 +337,12 @@ namespace BDSADominion.GUI
 
             if (endOfGame && playernum == winnerNum)
             {
-                spriteBatch.DrawString(fontWin, "YOU ARE THE WINNER \n CONGRATULATIONS", new Vector2(200, 220), Color.Indigo);
+                spriteBatch.DrawString(fontWin, "YOU ARE THE WINNER \n CONGRATULATIONS", new Vector2(200, 220), Color.Red);
             }
 
             if (endOfGame && playernum != winnerNum)
             {
-                spriteBatch.DrawString(fontWin, "YOU LOSE\n NOW TAKE YOUR\n CURSED SOUL AND GO AWAY", new Vector2(200, 220), Color.Indigo);
+                spriteBatch.DrawString(fontWin, "YOU LOSE\n NOW TAKE YOUR\n CRUSHED SOUL AND GO AWAY", new Vector2(200, 220), Color.Red);
             }
 
             spriteBatch.End();

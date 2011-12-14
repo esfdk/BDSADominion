@@ -1,0 +1,55 @@
+System Design of Network
+author: Christian 'Troy' Jensen, chrj@itu.dk
+
+When we set out to make Dominion, we knew that network should not be a 
+mandatory requirement, yet here we are with it.
+There are several reasons for this, such as that even to be moderately 
+able to play the game, multiple computers should be involved.
+However, on a more practical level, I lacked an area of responsibility
+after we decided to couple the Control and GameState tighter, and network
+seemed an obvious idea.
+
+I had one problem however: I had little to no idea about how to build a 
+network system that would be appropriate for the project, 
+both in terms of C# and networks in general. This is the primary reason
+why I could not sit down and design a network off my head. I needed to 
+study the options first.
+
+I did what any respectable coder would do; I searched the internet to see 
+if somebody already had coded a solution. I came by several solutions
+but they were either not doing what we needed or was too complex.
+A solution presented itself. I knew of a guy who is in a group doing 
+a seperate project and who is a wiz at networks (Simon Henriksen, shen@itu.dk)
+and the network part for their project (Descent) was quite similar to what we
+needed. We had several inter-group meetings during the project period with
+his group and a third (Magic the Gathering) and I asked him to help me 
+understand several concept related to networks and how C# could use them.
+
+He often referenced to his own implementation and just like using an Internet
+example to provide the basis for an implementation, he graciously allowed me
+to use his implementation as the basis for mine.
+I am not peticularly proud of this point, but my options was either use
+some structure I didn't really understand or use this, which I will claim
+to have mastered quite well.
+
+This did however only provide the basics. 
+We had talked about networks and it was clear that we didn't want communicate
+directly with clients and server. An interface was needed.
+Dominion has several cards that require a player to respond to how they 
+want to react to a card another player plays. This means that we need to
+ensure that the other players has a chance to make a choice if such a card
+is played. The way that this works is though the TurnMessage method, 
+through which all communication takes place. 
+
+In TurnMessage a arbitrary string is passed to the NetworkInterface.
+This is then wrapped in 2 pieces of information: a MessageType, which
+tells to the server and the other clients what kind of message this is, 
+and also added is an piece of text that signifies the end of the message.
+
+This is then sent to the server. The server communicates with the clients
+through a number of Connection objects, one for each client. These also 
+contains the Socket objects on the server side. The Socket listens to 
+incoming messages thanks to the BeginRecieve method, which then calls
+
+
+

@@ -104,11 +104,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Kingdom\EMPTY.png">
-      <Name>EMPTY</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Kingdom\ESTATE.jpg">
       <Name>ESTATE</Name>
       <Importer>TextureImporter</Importer>
@@ -229,16 +224,20 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Pics\Dominiontable.jpg">
-      <Name>Dominiontable</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Pics\EndButton.png">
       <Name>EndButton</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Pics\Dominiontable.jpg">
+      <Name>Dominiontable</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Supply\Adventurer.jpg">
       <Name>Adventurer</Name>
       <Importer>TextureImporter</Importer>
@@ -399,13 +398,22 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Supply\workshop.png">
+      <Name>workshop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Supply\Woodcutter.jpg">
       <Name>Woodcutter</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Supply\workshop.png">
-      <Name>workshop</Name>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Kingdom\EMPTY.png">
+      <Name>EMPTY</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

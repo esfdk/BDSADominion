@@ -1,4 +1,7 @@
-﻿namespace BDSADominion.Networking
+﻿using System.Diagnostics.Contracts;
+using System.Net.Sockets;
+
+namespace BDSADominion.Networking
 {
     using System;
     using System.Linq;
@@ -19,15 +22,31 @@
 
         private string[] responseMessages;
 
-        public NetworkingInterface() //If host
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NetworkingInterface"/> class.
+        /// This should be called if the <see cref="NetworkingInterface"/> is to represent a server
+        /// </summary>
+        public NetworkingInterface()
         {
             server = new Server();
             server.Start();
+            IsServer = true;
             AlwaysDo(server.Ip);
         }
 
-        public NetworkingInterface(IPAddress ip) //If joining a game
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NetworkingInterface"/> class.
+        /// This should be called if the <see cref="NetworkingInterface"/> is to represent a client
+        /// that is joining a host of a session
+        /// </summary>
+        /// <param name="ip">
+        /// The IP if the server that the client should connect to.
+        /// </param>
+        public NetworkingInterface(IPAddress ip)
         {
+            Contract.Ensures(ip != null);
+            Contract.Ensures(ip.AddressFamily == AddressFamily.InterNetwork);
+            IsServer = false;
             AlwaysDo(ip);
         }
 
@@ -38,9 +57,10 @@
             ////SetNumberOfClients(2); //TODO hardcoded number of total clients. Must be updated with each serverMessage
         }
 
-        //May only be called if this is server //TODO contract
         public string GetServerIp()
         {
+            Contract.Requires(IsServer);
+
             return server.Ip.ToString();
         }
 
@@ -106,7 +126,7 @@
                         MessageReceived(messageParts[2], fromPlayer);
                         break;
                     case MessageType.Action:
-                        MessageReceived(messageParts[2], fromPlayer); // TODO ResponseWait, how to know?
+                        MessageReceived(messageParts[2], fromPlayer);
                         client.Comm.Send(NetworkConst.ENCODER.GetBytes(ResponseMessage()));
                         break;
                     case MessageType.Response:
@@ -118,11 +138,11 @@
                         
                         break;
                     case MessageType.WaitResponse:
-                        //TODO ResponseWait Message
+                        //MessageWait is not implemented and not needed by any cards.
                         break;
                     default:
-                    //TODO Error
-                    break;
+                        Console.WriteLine("NetworkInterface.ReceivedNewMessage: Unrecognized MessageType");
+                        break;
                 }
             }
 
