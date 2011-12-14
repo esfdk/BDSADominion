@@ -318,7 +318,7 @@
         {
             List<int> scores = new List<int>();
 
-            for (int i = 0; i < Players.Count - 1; i++)
+            for (int i = 0; i < Players.Count; i++)
             {
                 ICollection<Card> allCards = Players[i].AllCards.Keys;
 
