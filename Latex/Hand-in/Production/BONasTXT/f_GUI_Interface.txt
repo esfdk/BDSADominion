@@ -1,0 +1,34 @@
+static_diagram GUI
+component
+	class GuiInterface
+		indexing
+			author: "Christian 'Troy' Jensen, chrj@itu.dk";
+		feature
+			--Commands
+			Run
+			DrawHand
+				-> cards : SEQUENCE[CARD]
+			DrawAction
+				-> cards : SEQUENCE[CARD]
+			DrawDiscard
+				-> card : CARD
+			DrawDeck
+				-> filled : bool --Whether there are any cards in the deck
+			SetAction
+				-> number : INTEGER
+			SetBuys
+				-> number : INTEGER
+			SetCoins
+				-> number : INTEGER
+			EndGame
+				-> playerId : INTEGER
+			YourTurn
+				-> yourTurn : BOOLEAN
+			SetPhase
+				-> phase : INTEGER
+			UsedCards
+				-> cards : SEQUENCE[CARD]
+			SetPlayerNumber
+				-> id : INTEGER
+	end
+end 

@@ -1,0 +1,65 @@
+static_diagram CARD_CLUSTER
+component
+	class CARD
+		indexing
+			author: "Jakob Melnyk (jmel@itu.dk)";
+		feature
+		--Queries
+		EqualsOtherObj : BOOLEAN
+			-> obj : VALUE -- Object in C#.
+		EqualsOtherCard : BOOLEAN
+			-> other : CARD
+		GetName : CARD_NAME
+		GetNumber : NATURAL
+		SetUp : BOOLEAN
+		--Commands
+		Initialize 
+			-> name : CARD
+			-> number : NATURAL
+			require SetUp = false
+			ensure  SetUp = true
+		end
+	end
+	
+	class CARD_FACTORY
+		indexing
+			author: "Jakob Melnyk (jmel@itu.dk)";
+		feature
+		--Queries
+		SetUp : BOOLEAN
+		CreatedCards : SET[CARD]
+		CardsMade : TABLE[CARD_NAME, NATURAL] --private
+		
+		--Commands
+		CreateCard : CARD
+			-> Card : CARD_NAME
+			ensure Result.GetName = CARD_NAME
+		end
+		SetUpCards
+			-> cards : COLLECTION[CARD_NAME]
+			require SetUp = false and cards /= void
+			ensure SetUp = true
+		end
+		--Invariant commented because I could not get it to compile, but below is a rough idea of what I wanted to express.
+		--for_all c member_of CreatedCards it_holds c.GetNumber < CardsMade.get(c.GetName)
+	end
+	
+	class CARD_NAME
+		indexing
+			author: "Jakob Melnyk (jmel@itu.dk)";
+		feature
+		--Queries
+		value : STRING --This looks very akward, but we felt it best described what we wanted to express.
+			ensure Result = "COPPER" or Result = "GOLD" or Result = "SILVER" or 
+			Result = "CURSE" or Result = "ESTATE" or Result = "DUCHY" or Result = "PROVINCE" or 
+			Result = "CELLAR" or Result = "CHAPEL" or Result = "MOAT" or Result = "CHANCELLOR" or
+			Result = "VILLAGE" or Result = "WOODCUTTER" or Result = "WORKSHOP" or 
+			Result = "BUREAUCRAT" or Result = "FEAST" or Result = "GARDENS" or Result = "MILITIA" or 
+			Result = "MONEYLENDER" or Result = "REMODEL" or Result = "SMITHY" or Result = "SPY" or
+			Result = "THIEF" or Result = "THRONE_ROOM" or Result = "COUNCIL_ROOM" or Result = "FESTIVAL" or 
+			Result = "LABORATORY" or Result = "LIBRARY" or Result = "MARKET" or Result = "MINE" or Result = "WITCH" or
+			Result = "EMPTY" or Result = "BACKSIDE"
+		end
+		--Commands
+	end
+end 

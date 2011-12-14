@@ -1,0 +1,193 @@
+static_diagram CARDS_CLUSTER
+	component 
+		class COPPER
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit TREASURE
+		end
+
+		class SILVER
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit TREASURE
+		end
+
+		class GOLD
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit TREASURE
+		end
+
+		class CURSE
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+		end
+
+		class ESTATE
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit VICTORY
+		end
+
+		class DUCHY
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit VICTORY
+		end
+
+		class PROVINCE
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit VICTORY
+		end
+
+		class GARDENS
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit KINGDOM_VICTORY
+		end
+
+		class CELLAR
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class CHAPEL
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class CHANCELLOR
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class VILLAGE
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class WOODCUTTER
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class WORKSHOP
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class FEAST
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class MONEYLENDER
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class REMODEL
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class SMITHY
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class THRONE_ROOM
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class COUNCIL_ROOM
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class FESTIVAL
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class LABORATORY
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class LIBRARY
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class MARKET
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class MINE
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class ADVENTURER
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION
+		end
+
+		class BUREAUCRAT
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION_ATTACK
+		end 
+
+		class MILITIA
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION_ATTACK
+		end 
+
+		class SPY
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION_ATTACK
+		end 
+
+		class THIEF
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION_ATTACK
+		end 
+
+		class WITCH
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION_ATTACK
+		end 
+
+		class MOAT
+			indexing
+				author: "Jakob Melnyk (jmel@itu.dk)";
+			inherit ACTION_REACTION
+		end 
+end

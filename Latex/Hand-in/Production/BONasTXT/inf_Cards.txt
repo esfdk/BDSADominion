@@ -1,0 +1,305 @@
+cluster_chart CARDS
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Contains all the cards from a standard Dominion game."
+	class COPPER
+		description "The Copper card."
+	class SILVER
+		description "The Silver card."
+	class GOLD
+		description "The Gold card."
+	class CURSE
+		description "The Curse card."
+	class ESTATE
+		description "The Estate card."
+	class DUCHY
+		description "The Duchy card."
+	class PROVINCE
+		description "The Province card."
+	class CELLAR
+		description "The Cellar card."
+	class CHAPEL
+		description "The Chapel card."
+	class MOAT
+		description "The Moat card."
+	class CHANCELLOR
+		description "The Chancellor card."
+	class VILLAGE
+		description "The Village card."
+	class WOODCUTTER
+		description "The Woodcutter card."
+	class WORKSHOP
+		description "The Workshop card."
+	class BUREAUCRAT
+		description "The Bureaucrat card."
+	class FEAST
+		description "The Feast card."
+	class GARDENS
+		description "The Gardens card."
+	class MILITIA
+		description "The Militia card."
+	class MONEYLENDER
+		description "The Moneylender card."
+	class REMODEL
+		description "The Remodel card."
+	class SMITHY
+		description "The Smithy card."
+	class SPY
+		description "The Spy card."
+	class THIEF
+		description "The Thief card."
+	class THRONE_ROOM
+		description "The Throne Room card."
+	class COUNCIL_ROOM
+		description "The Council Room card."
+	class FESTIVAL
+		description "The Festival card."
+	class LABORATORY
+		description "The Laboratory card."
+	class LIBRARY
+		description "The Library card."
+	class MARKET
+		description "The Market card."
+	class MINE
+		description "The Mine card."
+	class WITCH
+		description "The Witch card."
+	class ADVENTURER
+		description "The Adventurer card."
+end 
+
+class_chart COPPER
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Worth one coin. Costs no coins."
+	inherit TREASURE
+end
+
+class_chart SILVER
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Worth two coins. Costs three coins."
+	inherit TREASURE
+end
+
+class_chart GOLD
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Worth three coins. Costs six coins."
+	inherit TREASURE
+end
+
+class_chart CURSE
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Worth minus one victory point. Costs no coins."
+end
+
+class_chart ESTATE
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Worth one victory point. Costs two coins."
+	inherit VICTORY
+end
+
+class_chart DUCHY
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Worth three victory points. Costs five coins."
+	inherit VICTORY
+end
+
+class_chart PROVINCE
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Worth six victory points. Costs eight coins."
+	inherit VICTORY
+end
+
+class_chart GARDENS
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Worth one victory point for every ten cards in your deck (rounded down) at the end of the game. Costs four coins."
+	inherit KINGDOM_VICTORY
+end
+
+class_chart CELLAR
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants one action. \
+		\Discard any number of cards - draw one card for each card discarded. \ 
+		\Costs two coins."
+	inherit ACTION
+end
+
+class_chart CHAPEL
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Trash up to four cards from your hand. Costs two coins."
+	inherit ACTION
+end
+
+class_chart CHANCELLOR
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants two coins. The player may immediately put your deck into your discard pile. \
+				 \Costs three coins."
+	inherit ACTION
+end
+
+class_chart VILLAGE
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants one card. Grants two actions. Costs three coins."
+	inherit ACTION
+end
+
+class_chart WOODCUTTER
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants one buy. Grants two coins. Costs three coins."
+	inherit ACTION
+end
+
+class_chart WORKSHOP
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Player gains a card costing up to four coins. Costs three coins."
+	inherit ACTION
+end
+
+class_chart FEAST
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Player trashes this card. Gain a card costing up to five coins. Costs 4 coins."
+	inherit ACTION
+end
+
+class_chart MONEYLENDER
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Player trashes a Copper card from his/her hand. \
+	             \If the player does so, he is granted three coins. Costs four coins."
+	inherit ACTION
+end
+
+class_chart REMODEL
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Player trashes a card from his/her hand. Player gains a card costing up to two coins more \
+				\than the trashed card. Costs 4 coins."
+	inherit ACTION
+end
+
+class_chart SMITHY
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants three cards. Costs four coins."
+	inherit ACTION
+end
+
+class_chart THRONE_ROOM
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Player chooses an Action card in his/her hand. That card is played twice. Costs four coins."
+	inherit ACTION
+end
+
+class_chart COUNCIL_ROOM
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants four cards. Grants one buy. All other players are granted one card. Costs five coins."
+	inherit ACTION
+end
+
+class_chart FESTIVAL
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants two actions. Grants one buy. Grants two coins. Costs five coins."
+	inherit ACTION
+end
+
+class_chart LABORATORY
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants two cards. Grants one action. Costs five coins."
+	inherit ACTION
+end
+
+class_chart LIBRARY
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Player draws until he/she has seven cards in hand. Player may set aside any action cards\
+				\ drawn this way; discard the set aside cards after the Player is finished drawing."
+	inherit ACTION
+end
+
+class_chart MARKET
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants one card. Grants one action. Grants one buy. Grants one coin. Costs five coins."
+	inherit ACTION
+end
+
+class_chart MINE
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Player trashes a Treasure card from his/her hand. Player gains a treasure card costing \
+				\up to three coins more. Costs five coins."
+	inherit ACTION
+end
+
+class_chart ADVENTURER
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Player reveals cards from his/her deck until two Treasure have been revealed. \
+				\Player puts the two Treasure cards into hand and discard the other revealed cards. Costs six coins."
+	inherit ACTION
+end
+
+class_chart BUREAUCRAT
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Player gains a silver card on top of deck. Each other Player reveals a Victory card from his hand \
+				 \and puts it on top of his deck (or reveals a hand with no Victory cards). Costs four coins."
+	inherit ACTION_ATTACK
+end 
+
+class_chart MILITIA
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants two coins. Each other player discards down to three cards in his/her hand. Costs four coins."
+	inherit ACTION_ATTACK
+end 
+
+class_chart SPY
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants one card. Grants one action. Each Player (including the active Player) reveals the top card of deck \
+				\and the active Player decides to either put the card back or discard it. Costs four coins."
+	inherit ACTION_ATTACK
+end 
+
+class_chart THIEF
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Each other Player reveals the top two cards of his/her deck. If any Treasure cards are revealed, \
+				\ the active Player can choose to trash one of them. The active player may gain any or all of the trashed cards. \
+				\ The other revealed cards are discarded. Costs four coins."
+	inherit ACTION_ATTACK
+end 
+
+class_chart WITCH
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants two cards. Each other player gains a Curse card. Costs five coins."
+	inherit ACTION_ATTACK
+end 
+
+class_chart MOAT
+	indexing
+		author: "Jakob Melnyk (jmel@itu.dk)";
+	explanation "Grants two cards. When another Player plays an Attack card and this card is in your hand, you reveal this card. Revealing \ 
+				\ this card makes you unaffected by that Attack. Costs two coins."
+	inherit ACTION_REACTION
+end 

@@ -1,0 +1,82 @@
+--NOTICE: This network design is based heavily on code I got
+--from Simon Henriksen (shen@itu.dk) and where there are similarities
+--between our code, he deserves the full credit for its design.
+
+--Receiving 
+
+static_diagram NETWORK_CLUSTER
+component
+	class CONNECTION
+		indexing
+			author: "Christian 'Troy' Jensen, chrj@itu.dk";
+		feature
+			--Queries
+			GetClientIp : IPADDRESS --C# object
+			GetId : INTEGER
+			--Commands
+			Send
+				-> message : STRING
+			BeginRecieve
+		
+	end
+	
+	class SERVER
+		indexing
+			author: "Christian 'Troy' Jensen, chrj@itu.dk";
+		feature
+			--Queries
+			GetIp : IPADDRESS
+			GetClientList : SEQUENCE[CONNECTION]
+			
+			--Commands
+			Start
+			SystemMessageToClient --Sent to a particular client
+				-> message : STRING
+				-> CONNECTION : CONNECTION --C# object
+			SystemMessageToAll --Sent to all clients
+				-> message : STRING
+			ForwardMessage 
+				-> message : STRING
+				-> clientId : INTEGER
+				-> type : MESSAGETYPE
+		
+	end
+	
+	class CLIENT
+		indexing
+			author: "Christian 'Troy' Jensen, chrj@itu.dk";
+		feature
+			--Queries
+			GetComm : SOCKET --C# object
+			
+			--Commands
+			BeginReceive
+		
+	end
+	
+	class NETWORKCONST
+		indexing
+			author: "Christian 'Troy' Jensen, chrj@itu.dk";
+		feature
+			--All these are constants
+			GetEncoder : UTF8ENCODING --C# object
+			GetPort : INTEGER
+			GetBuffersize : INTEGER
+	end
+	
+	class NETWORKINGINTERFACE
+		indexing
+			author: "Christian 'Troy' Jensen, chrj@itu.dk";
+		feature
+			--Queries
+				IsServer : BOOLEAN
+				GetServerIP : STRING
+				SetNumberOfClients
+					-> TotalClients : INTEGER
+			--Commands
+				SendTurnMessage : SEQUENCE[STRING] --Responses from the other players
+					-> Message : STRING
+				SendPreGameMessage
+					-> Message : STRING
+	end
+end
