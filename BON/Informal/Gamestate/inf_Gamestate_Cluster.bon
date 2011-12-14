@@ -6,7 +6,7 @@ cluster_chart GAMESTATE_CLUSTER
 		description "The overall 'state' of the current game."
 	class PLAYER
 		description "Represents a player and everything a player owns."
-	class ZONES
+	class ZONE
 		description "List of zones that can be targets of events."
 	cluster CARD_CLUSTER
 		description "The different kinds of cards."
@@ -28,7 +28,7 @@ class_chart GAMESTATE
 		"Number of actions left?",
 		"Number of buys left?",
 		"Number of coins left?",
-		"Number of empty supply piles?",
+		"How many points does each player have?",
 	command
 		"Make this player the active player!",
 		"Begin Action Phase",
@@ -59,14 +59,19 @@ class_chart PLAYER
 		"How many cards do you have in your deck?",
 		"How many cards do you have in your discard pile?",
 		"What card is on top of your discard pile?",
+		"What card is on top of your deck?",
 		"What cards do you have in your hand?",
 		"What number are you?",
+		"What cards have you played?",
+		"What have you put in your temporary zone?",
 	command
 		"Move this card from that zone to the temporary zone!",
 		"Move this card from the temporary zone to that zone!",
+		"Move this card from the hand to the temporary zone!",
 		"Add this card to that zone!",
 		"Remove this card from that zone!",
-		"Draw a card."
+		"Draw a card!",
+		"Draw this many cards!",
 	constraint
 		"A player cannot have a card in his deck, discard pile, hand, or 'played field' that is not in his total set of cards."
 end 

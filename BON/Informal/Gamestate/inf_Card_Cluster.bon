@@ -21,6 +21,11 @@ class_chart CARD
 	query
 		"What is your card name?",
 		"What is your card number?",
+		"Have you been initialized yet?",
+		"Are you equal to this object?",
+		"Are you and this other card the same?"
+	command
+		"Initialize yourself like this!"
 end
 
 cluster_chart CARD_TYPES
@@ -86,7 +91,7 @@ end
 class_chart CARD_NAME
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Represents the values used to refer to the card names.";
+	explanation "Represents the values used to refer to the card names."
 	query
 		"May I have the value 'v'?"
 	constraint
@@ -103,5 +108,11 @@ class_chart CARD_FACTORY
 		author: "Jakob Melnyk (jmel@itu.dk)";
 	explanation "Factory for producing cards with the correct values."
 	query
-		"May I have a card with this name?",
+		"Has the factory been set up?",
+		"What cards have been made already?",
+	command
+		"Set up the factory with these cards!",
+		"Give me a card with this name!",
+	constraint
+		"A card that has already been made cannot be made again.",
 end 

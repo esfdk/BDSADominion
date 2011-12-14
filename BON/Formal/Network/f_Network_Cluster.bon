@@ -17,7 +17,7 @@ component
 			Send
 				-> message : STRING
 			BeginRecieve
-		end
+		
 	end
 	
 	class SERVER
@@ -30,16 +30,16 @@ component
 			
 			--Commands
 			Start
-			SystemMessage --Sent to a particular client
+			SystemMessageToClient --Sent to a particular client
 				-> message : STRING
 				-> CONNECTION : CONNECTION --C# object
-			SystemMessage --Sent to all clients
+			SystemMessageToAll --Sent to all clients
 				-> message : STRING
 			ForwardMessage 
 				-> message : STRING
 				-> clientId : INTEGER
 				-> type : MESSAGETYPE
-		end
+		
 	end
 	
 	class CLIENT
@@ -51,7 +51,7 @@ component
 			
 			--Commands
 			BeginReceive
-		end
+		
 	end
 	
 	class NETWORKCONST
@@ -62,7 +62,6 @@ component
 			GetEncoder : UTF8ENCODING --C# object
 			GetPort : INTEGER
 			GetBuffersize : INTEGER
-		end
 	end
 	
 	class NETWORKINGINTERFACE
@@ -79,6 +78,5 @@ component
 					-> Message : STRING
 				SendPreGameMessage
 					-> Message : STRING
-		end
 	end
 end

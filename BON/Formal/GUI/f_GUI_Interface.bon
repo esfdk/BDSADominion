@@ -30,6 +30,5 @@ component
 				-> cards : SEQUENCE[CARD]
 			SetPlayerNumber
 				-> id : INTEGER
-		end
 	end
-end
+end 

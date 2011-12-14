@@ -28,7 +28,7 @@ component
 		--Queries
 		SetUp : BOOLEAN
 		CreatedCards : SET[CARD]
-		CardsMade : TABLE[CARD_NAME, NATURAL]
+		CardsMade : TABLE[CARD_NAME, NATURAL] --private
 		
 		--Commands
 		CreateCard : CARD
