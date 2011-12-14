@@ -83,9 +83,9 @@ namespace BDSADominion.Networking
 
         public string[] TurnMessage(string message)
         {
-            Contract.Requires(message.Contains("|"));
-            Contract.Requires(message.Contains("<"));
-            Contract.Requires(message.Contains(">"));
+            Contract.Requires(!message.Contains("|"));
+            Contract.Requires(!message.Contains("<"));
+            Contract.Requires(!message.Contains(">"));
 
             EmptyResponses();
             string typeMessage = string.Format("{0}|{1}<EOF>", MessageType.Action, message);
