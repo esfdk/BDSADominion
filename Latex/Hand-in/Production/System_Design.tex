@@ -1,6 +1,6 @@
 \subsection{System design}
 \subsubsection{General}
-We decided to use an MVC pattern for our overall structure, because we felt we could seperate the model (the Gamestate), the View (GUI) and Control (Game Logic and more). We also use a Client-Server architecture to do the network communcation.
+We decided to use an MVC pattern for our overall structure, because we felt we could seperate the model (the Gamestate), the View (GUI) and Control (Game Logic and more). We also use a Client-Server architecture to do the network communcation. We have all used BON to describe most of our architecture.
 
 \subsubsection{GUI}
 \subparagraph{Frederik Lysgaard}
@@ -29,8 +29,15 @@ I am not peticularly proud of this point, but my options was either use some str
 
 \subsubsection{Gamestate and Control (Game Logic)}
 \subparagraph{Jakob Melnyk}
+At first we decided to split Control, the static game logic and the dynamic game model into three different pieces of the architecture, but after a lot of thought and effort went into how to create the Game Logic (or more specifically, the card rules) as a seperate entity, we could not come up with way to do it that did not seem very akward. Instead we decided to let the Control class handle what happens when, for example, a specific card is played in the game.
 
+So instead of both a dynamic and a static model as two seperate entities, we now had the dynamic model and the Control class making the magic happen. Whilst Control seems a little akward and cluttered at the moment, we feel we have really achieved what we wanted to with the Model-View-Control.
 
+Most of the BON I made for the Gamestate was done in a way so that it would be easy for an outside source to access what he needed to know to make the dynamic model change. However, instead of making a very vast interface for all the different collections, I instead made them public. This does not seem like a particularly good idea, but I chose to show some of the private stuff instead of making a huge interface(in terms of method count). I could have considered using a (richer) invariant to better make sure that my privates were shielded from harm.
+
+I made no BON-specification for the Control class and how it works, because it has no public interface except for its constructor.
+
+Considering how our architecture and our system works, the way I have designed the cards both as Enums and as Card objects can seem a bit overkill, especially the very large inheritance hierachy on the Cards. It worked out well in the end, because even though it is clunky and akward, it makes much of the implementation easier - especially with a Factory such as CardFactory.
 
 \subsubsection{BON specification}
-We have included all of our BON in section \ref{sec:BON} on page \pageref{sec:BON}.
+We have included all of our BON in section \ref{sec:BON} on page \pageref{sec:BON}. Most of our BON was started before we started coding, but a lot of the classes have since been expanded with more contracts and more queries.
