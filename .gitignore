@@ -33,5 +33,4 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 BDSADominion/BDSADominion/publish/
-*.pfx
 *.release.cachefile

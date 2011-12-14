@@ -305,7 +305,7 @@
             gui.DrawAction(gs.ActivePlayer.Played.ToArray());
             gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null);
             gui.DrawHand(gs.Players[(int)clientPlayerNumber - 1].Hand.ToArray());
-            //TODO: Call this method after pull! gui.DrawDeck(gs.Players[(int)clientPlayerNumber - 1].DeckSize != 0);
+            gui.DrawDeck(gs.Players[(int)clientPlayerNumber - 1].DeckSize != 0);
             gui.UsedCards(startSupply.Keys.ToArray());
             gui.SetAction((int)gs.NumberOfActions);
             gui.SetBuys((int)gs.NumberOfBuys);
