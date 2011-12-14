@@ -11,14 +11,7 @@
   <mySelectedTest i:nil="true" />
   <myStatefulNodeDescriptors xmlns:d2p1="http://schemas.datacontract.org/2004/07/JetBrains.dotCover.ViewingServices.Impl">
     <d2p1:NodeDescriptor>
-      <d2p1:myChildren>
-        <d2p1:NodeDescriptor>
-          <d2p1:myChildren />
-          <d2p1:myExpanded>true</d2p1:myExpanded>
-          <d2p1:myId>BDSADominion.Networking</d2p1:myId>
-          <d2p1:mySelected>false</d2p1:mySelected>
-        </d2p1:NodeDescriptor>
-      </d2p1:myChildren>
+      <d2p1:myChildren />
       <d2p1:myExpanded>true</d2p1:myExpanded>
       <d2p1:myId>BDSADominion</d2p1:myId>
       <d2p1:mySelected>true</d2p1:mySelected>

@@ -1,0 +1,282 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_18 = [
+   [37,9,37,37,'dccv']
+, [39,13,39,35,'dccv']
+, [40,13,40,28,'dccv']
+, [41,13,41,29,'dccv']
+, [42,13,42,33,'dccv']
+, [43,9,43,10,'dccv']
+, [81,13,81,41,'dccv']
+, [92,13,92,61,'dccv']
+, [93,13,93,30,'dccv']
+, [94,9,94,10,'dccv']
+, [111,13,111,30,'dccv']
+, [112,13,112,93,'dccv']
+, [113,13,113,74,'dccv']
+, [118,13,118,70,'dccv']
+, [119,13,119,51,'dccv']
+, [120,13,120,30,'dccv']
+, [131,13,131,93,'dccv']
+, [132,13,132,74,'dccv']
+, [133,9,133,10,'dccv']
+, [143,13,143,37,'dccv']
+, [144,13,144,58,'dccv']
+, [145,9,145,10,'dccv']
+, [153,18,153,28,'dccv']
+, [155,17,155,52,'dccv']
+, [153,58,153,61,'dccv']
+, [153,29,153,56,'dccv']
+, [158,13,158,35,'dccv']
+, [159,9,159,10,'dccv']
+, [169,13,169,94,'dccv']
+, [170,13,170,32,'dccv']
+, [181,13,181,71,'dccv']
+, [185,13,185,78,'dccv']
+, [186,13,186,81,'dccv']
+, [187,13,187,44,'dccv']
+, [189,17,189,30,'dccv']
+, [192,25,192,70,'dccv']
+, [195,25,195,70,'dccv']
+, [196,25,196,92,'dccv']
+, [197,25,197,31,'dccv']
+, [199,25,199,71,'dccv']
+, [200,25,200,64,'dccv']
+, [216,9,216,10,'dccv']
+, [53,9,53,49,'dcuc']
+, [57,13,57,30,'dcuc']
+, [58,13,58,26,'dcuc']
+, [59,9,59,10,'dcuc']
+, [193,25,193,31,'dcuc']
+, [202,29,202,74,'dcuc']
+, [205,25,205,31,'dcuc']
+, [210,25,210,108,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src18" class="dotCoverSource"><pre>using System.Diagnostics.Contracts;
+using System.Net.Sockets;
+
+namespace BDSADominion.Networking
+{
+    using System;
+    using System.Linq;
+    using System.Net;
+
+    /// &lt;summary&gt;
+    /// TODO: Update summary.
+    /// &lt;/summary&gt;
+    /// &lt;author&gt;
+    /// Christian &#39;Troy&#39; Jensen (chrj@itu.dk)
+    /// &lt;/author&gt;
+    public class NetworkingInterface
+    {
+        /// &lt;summary&gt;
+        /// The server (if used)
+        /// &lt;/summary&gt;
+        private Server server;
+
+        /// &lt;summary&gt;
+        /// The client
+        /// &lt;/summary&gt;
+        private Client client;
+
+        /// &lt;summary&gt;
+        /// Holds the ResponseMessages recieved from other player
+        /// &lt;/summary&gt;
+        private string[] responseMessages;
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;NetworkingInterface&quot;/&gt; class.
+        /// This should be called if the &lt;see cref=&quot;NetworkingInterface&quot;/&gt; is to represent a server
+        /// &lt;/summary&gt;
+        public NetworkingInterface()
+        {
+            server = new Server();
+            server.Start();
+            IsServer = true;
+            AlwaysDo(server.Ip);
+        }
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;NetworkingInterface&quot;/&gt; class.
+        /// This should be called if the &lt;see cref=&quot;NetworkingInterface&quot;/&gt; is to represent a client
+        /// that is joining a host of a session
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ip&quot;&gt;
+        /// The IP if the server that the client should connect to.
+        /// &lt;/param&gt;
+        public NetworkingInterface(IPAddress ip)
+        {
+            Contract.Ensures(ip != null);
+            Contract.Ensures(ip.AddressFamily == AddressFamily.InterNetwork);
+            IsServer = false;
+            AlwaysDo(ip);
+        }
+
+        /// &lt;summary&gt;
+        /// Tells when a new message is recieved
+        /// &lt;/summary&gt;
+        public event InterfaceMessageHandler MessageReceived;
+
+        /// &lt;summary&gt;
+        /// Gets a value indicating whether this NetworkingInterface runs a Server.
+        /// &lt;/summary&gt;
+        public bool IsServer { get; private set; }
+
+        /// &lt;summary&gt;
+        /// Gets the IP of the server, if this is running a Server
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;
+        /// the IP of the Server
+        /// &lt;/returns&gt;
+        public string GetServerIp()
+        {
+            Contract.Requires(IsServer);
+
+            return server.Ip.ToString();
+        }
+
+        /// &lt;summary&gt;
+        /// This sets the Response List to a new value
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;totalClients&quot;&gt;
+        /// The total number of people in the game
+        /// &lt;/param&gt;
+        public void SetResponseList(int totalClients)
+        {
+            responseMessages = new string[totalClients - 1];
+            EmptyResponses();
+        }
+
+        /// &lt;summary&gt;
+        /// This is called when a message should be sent to the other clients
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;message&quot;&gt;
+        /// The message to be sent
+        /// &lt;/param&gt;
+        /// &lt;returns&gt;
+        /// The list of Messages of responses
+        /// &lt;/returns&gt;
+        public string[] TurnMessage(string message)
+        {
+            Contract.Requires(!message.Contains(&quot;|&quot;));
+            Contract.Requires(!message.Contains(&quot;&lt;&quot;));
+            Contract.Requires(!message.Contains(&quot;&gt;&quot;));
+
+            EmptyResponses();
+            string typeMessage = string.Format(&quot;{0}|{1}&lt;EOF&gt;&quot;, MessageType.Action, message);
+            client.Comm.Send(NetworkConst.ENCODER.GetBytes(typeMessage));
+            ////while (responseMessages.Any(mes =&gt; mes.Equals(string.Empty)))
+            {
+
+            }
+            string[] responses = new string[responseMessages.Length];
+            responseMessages.CopyTo(responses, 0);
+            return responses;
+        }
+
+        /// &lt;summary&gt;
+        /// this should be called for pregame messages
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;message&quot;&gt;
+        /// The message.
+        /// &lt;/param&gt;
+        public void PreGameMessage(string message)
+        {
+            string typeMessage = string.Format(&quot;{0}|{1}&lt;EOF&gt;&quot;, MessageType.System, message);
+            client.Comm.Send(NetworkConst.ENCODER.GetBytes(typeMessage));
+        }
+
+        /// &lt;summary&gt;
+        /// This should always be done by the constructor
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ip&quot;&gt;
+        /// The IP if the server
+        /// &lt;/param&gt;
+        private void AlwaysDo(IPAddress ip)
+        {
+            client = new Client(ip);
+            client.NewMessageEvent += ReceivedNewMessage;
+        }
+
+        /// &lt;summary&gt;
+        /// Empty the ResponseList
+        /// &lt;/summary&gt;
+        private void EmptyResponses()
+        {
+            ////Console.WriteLine(&quot;Emptying messages&quot;);
+            for (int i = 0; i &lt; responseMessages.Length; i++)
+            {
+                responseMessages[i] = string.Empty;
+            }
+            ////client.stringBuilder.Clear();
+            client.BeginReceive();
+        }
+
+        /// &lt;summary&gt;
+        /// This creates the response message
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;
+        /// The message of Response
+        /// &lt;/returns&gt;
+        private string ResponseMessage()
+        {
+            string typeMessage = string.Format(&quot;{0}|{1}&lt;EOF&gt;&quot;, MessageType.Response, &quot;&lt;MR&gt;&quot;);
+            return typeMessage;
+        }
+
+        /// &lt;summary&gt;
+        /// This is called whenever a message comes in through the Client
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;message&quot;&gt;
+        /// The message received
+        /// &lt;/param&gt;
+        private void ReceivedNewMessage(string message)
+        {
+            string[] messageParts = message.Split(new char[] { &#39;|&#39; });
+            ////Console.WriteLine(&quot;NetworkingInterface.ReceivedNewMessage: Client received &#39;{0}&#39; from player {1}&quot;, messageParts[2], messageParts[0]);
+            int fromPlayer;
+            MessageType type;
+            bool playerParse = int.TryParse(messageParts[0], out fromPlayer);
+            bool messageParse = MessageType.TryParse(messageParts[1], out type);
+            if (playerParse &amp; messageParse)
+            {
+                switch (type)
+                {
+                    case MessageType.System:
+                        MessageReceived(messageParts[2], fromPlayer);
+                        break;
+                    case MessageType.Action:
+                        MessageReceived(messageParts[2], fromPlayer);
+                        client.Comm.Send(NetworkConst.ENCODER.GetBytes(ResponseMessage()));
+                        break;
+                    case MessageType.Response:
+                        int playerId = int.Parse(messageParts[0]) - 1;
+                        if (playerId &lt; responseMessages.Length)
+                        {
+                            responseMessages[playerId] = messageParts[2];
+                        }
+                        
+                        break;
+                    case MessageType.WaitResponse:
+                        //MessageWait is not implemented and not needed by any cards.
+                        break;
+                    default:
+                        Console.WriteLine(&quot;NetworkInterface.ReceivedNewMessage: Unrecognized MessageType&quot;);
+                        break;
+                }
+            }
+
+            ////MessageReceived
+        }
+    }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src18', RANGES_18)
+		</script>
+	</body>
+</html>

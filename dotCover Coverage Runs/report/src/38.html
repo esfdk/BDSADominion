@@ -1,0 +1,231 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_38 = [
+  ];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src38" class="dotCoverSource"><pre>namespace BDSADominion.Gamestate
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Linq;
+
+    using BDSADominion.Gamestate.Card_Types;
+    using BDSADominion.Gamestate.Card_Types.Cards;
+    using BDSADominion.Gamestate.Card_Types.Cards.Action_Cards;
+    using BDSADominion.Gamestate.Card_Types.Cards.Action_Cards.Attack_Cards;
+    using BDSADominion.Gamestate.Card_Types.Cards.Action_Cards.Reaction_Cards;
+    using BDSADominion.Gamestate.Card_Types.Cards.Treasure_Cards;
+    using BDSADominion.Gamestate.Card_Types.Cards.Victory_Cards;
+
+    /// &lt;summary&gt;
+    /// Used to produce cards for the Dominion game.
+    /// &lt;/summary&gt;
+    /// &lt;author&gt;
+    /// Jakob Melnyk (jmel@itu.dk)
+    /// &lt;/author&gt;
+    public class CardFactory
+    {
+        /// &lt;summary&gt;
+        /// Keeps track of how many of the different cards have been made.
+        /// &lt;/summary&gt;
+        private static readonly Dictionary&lt;CardName, uint&gt; CardsMade = new Dictionary&lt;CardName, uint&gt;();
+
+        /// &lt;summary&gt;
+        /// All the cards created by the factory.
+        /// &lt;/summary&gt;
+        private static Dictionary&lt;Card, bool&gt; createdCards = new Dictionary&lt;Card, bool&gt;();
+
+        /// &lt;summary&gt;
+        /// Gets a value indicating whether set-up has already been performed.
+        /// &lt;/summary&gt;
+        public static bool SetUp { get; private set; }
+
+        /// &lt;summary&gt;
+        /// Gets CreatedCards.
+        /// &lt;/summary&gt;
+        public static Dictionary&lt;Card, bool&gt; CreatedCards
+        {
+            get { return createdCards; }
+        }
+
+        /// &lt;summary&gt;
+        /// Set up the factory for a game of Dominion.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;cards&quot;&gt;
+        /// The cards used in this game of Dominion.
+        /// &lt;/param&gt;
+        public static void SetUpCards(ICollection&lt;CardName&gt; cards)
+        {
+            Contract.Requires(!SetUp);
+            Contract.Requires(cards != null);
+
+            Contract.Ensures(SetUp);
+
+            foreach (CardName c in cards)
+            {
+                CardsMade.Add(c, 1);
+            }
+
+            SetUp = true;
+        }
+
+        /// &lt;summary&gt;
+        /// Creates a new card based on how many cards have already been made.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;card&quot;&gt;
+        /// The name of the card to be created.
+        /// &lt;/param&gt;
+        /// &lt;returns&gt;
+        /// The new created card.
+        /// &lt;/returns&gt;
+        public static Card CreateCard(CardName card)
+        {
+            Contract.Requires(card != CardName.Backside &amp; card != CardName.Empty);
+
+            Contract.Ensures(Contract.Result&lt;Card&gt;().Name == card);
+
+            Card c;
+            switch (card)
+            {
+                case CardName.Copper:
+                    c = new Copper();
+                    break;
+                case CardName.Silver:
+                    c = new Silver();
+                    break;
+                case CardName.Gold:
+                    c = new Gold();
+                    break;
+                case CardName.Curse:
+                    c = new Curse();
+                    break;
+                case CardName.Estate:
+                    c = new Estate();
+                    break;
+                case CardName.Duchy:
+                    c = new Duchy();
+                    break;
+                case CardName.Province:
+                    c = new Province();
+                    break;
+                case CardName.Gardens:
+                    c = new Gardens();
+                    break;
+                case CardName.Cellar:
+                    c = new Cellar();
+                    break;
+                case CardName.Chapel:
+                    c = new Chapel();
+                    break;
+                case CardName.Chancellor:
+                    c = new Chancellor();
+                    break;
+                case CardName.Village:
+                    c = new Village();
+                    break;
+                case CardName.Woodcutter:
+                    c = new Woodcutter();
+                    break;
+                case CardName.Workshop:
+                    c = new Workshop();
+                    break;
+                case CardName.Feast:
+                    c = new Feast();
+                    break;
+                case CardName.Moneylender:
+                    c = new Moneylender();
+                    break;
+                case CardName.Remodel:
+                    c = new Remodel();
+                    break;
+                case CardName.Smithy:
+                    c = new Smithy();
+                    break;
+                case CardName.ThroneRoom:
+                    c = new ThroneRoom();
+                    break;
+                case CardName.CouncilRoom:
+                    c = new CouncilRoom();
+                    break;
+                case CardName.Festival:
+                    c = new Festival();
+                    break;
+                case CardName.Laboratory:
+                    c = new Laboratory();
+                    break;
+                case CardName.Library:
+                    c = new Library();
+                    break;
+                case CardName.Market:
+                    c = new Market();
+                    break;
+                case CardName.Mine:
+                    c = new Mine();
+                    break;
+                case CardName.Adventurer:
+                    c = new Adventurer();
+                    break;
+                case CardName.Bureaucrat:
+                    c = new Bureaucrat();
+                    break;
+                case CardName.Militia:
+                    c = new Militia();
+                    break;
+                case CardName.Spy:
+                    c = new Spy();
+                    break;
+                case CardName.Thief:
+                    c = new Thief();
+                    break;
+                case CardName.Witch:
+                    c = new Witch();
+                    break;
+                case CardName.Moat:
+                    c = new Moat();
+                    break;
+                default:
+                    throw new NotImplementedException(&quot;Tried to create a card that was not implemented when CardFactory was last updated.&quot;);
+            }
+
+            c.Initialize(card, CardsMade[card]);
+            CardsMade[card] += 1;
+            createdCards.Add(c, true);
+            return c;
+        }
+
+        /// &lt;summary&gt;
+        /// Makes sure a card cannot exist 
+        /// &lt;/summary&gt;
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(InvariantHelper());
+        }
+
+        /// &lt;summary&gt;
+        /// Helper method for the object invariant.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;
+        /// True, if invariant holds. False, if not.
+        /// &lt;/returns&gt;
+        private static bool InvariantHelper()
+        {
+            if (CreatedCards.Keys.Any(card =&gt; CardsMade[card.Name] &lt; card.Number))
+            {
+                return false;
+            }
+
+            // LINQ helped reduce this.
+            return !CardsMade.Keys.Any(cn =&gt; CreatedCards.Keys.Count(card =&gt; card.Name == cn) != CardsMade[cn]);
+        }
+    }
+}</pre></code><script type="text/javascript">
+			applyranges('src38', RANGES_38)
+		</script>
+	</body>
+</html>

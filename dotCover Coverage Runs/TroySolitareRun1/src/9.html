@@ -1,0 +1,116 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_9 = [
+   [29,9,29,45,'dccv']
+, [31,13,31,29,'dccv']
+, [32,13,32,25,'dccv']
+, [33,13,33,58,'dccv']
+, [35,17,35,65,'dccv']
+, [37,9,37,10,'dccv']
+, [85,13,85,37,'dccv']
+, [87,17,87,70,'dccv']
+, [89,9,89,10,'dccv']
+, [46,17,46,48,'dcuc']
+, [57,17,57,47,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src9" class="dotCoverSource"><pre>namespace BDSADominion.GUI.Sprites
+{
+    using BDSADominion.Gamestate;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+
+    /// &lt;summary&gt;
+    /// This class holds the information for the representation of buttons.
+    /// &lt;/summary&gt;
+    /// &lt;author&gt;
+    /// Frederik Lysgaard (frly@itu.dk)
+    /// &lt;/author&gt;
+    internal class ButtonSprite
+    {
+        ////public int Id { get; private set; }
+
+        /// &lt;summary&gt;
+        /// The texture for the front of the button.
+        /// &lt;/summary&gt;
+        private readonly Texture2D buttonFront;
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;ButtonSprite&quot;/&gt; class. 
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;card&quot;&gt;
+        /// The card.
+        /// &lt;/param&gt;
+        internal ButtonSprite(CardName card)
+        {
+            Clicked = false;
+            Card = card;
+            if (GameClass.ButtonImages.ContainsKey(card))
+            {
+                this.buttonFront = GameClass.ButtonImages[Card];
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Gets ImageHeight.
+        /// &lt;/summary&gt;
+        public int ImageHeight
+        {
+            get
+            {
+                return this.buttonFront.Height;
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Gets ImageWidth.
+        /// &lt;/summary&gt;
+        public int ImageWidth
+        {
+            get
+            {
+                return this.buttonFront.Width;
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Gets or sets a value indicating whether Clicked.
+        /// &lt;/summary&gt;
+        public bool Clicked { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets Card.
+        /// &lt;/summary&gt;
+        internal CardName Card { get; private set; }
+
+        /// &lt;summary&gt;
+        /// Draws the button.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;spriteBatch&quot;&gt;
+        /// The sprite Batch.
+        /// &lt;/param&gt;
+        /// &lt;param name=&quot;position&quot;&gt;
+        /// The position.
+        /// &lt;/param&gt;
+        /// &lt;summary&gt;
+        /// the draw method of card
+        /// &lt;/summary&gt;
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        {
+            if (buttonFront != null)
+            {
+                spriteBatch.Draw(buttonFront, position, Color.White);
+            }
+        }
+    }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src9', RANGES_9)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,143 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_1 = [
+   [20,9,20,67,'dccv']
+, [28,9,28,43,'dccv']
+, [30,13,30,73,'dccv']
+, [32,13,32,96,'dccv']
+, [33,13,33,31,'dccv']
+, [35,13,35,48,'dccv']
+, [37,13,37,28,'dccv']
+, [38,9,38,10,'dccv']
+, [55,13,55,98,'dccv']
+, [56,9,56,10,'dccv']
+, [66,13,66,71,'dccv']
+, [67,13,67,159,'dccv']
+, [68,9,68,10,'dccv']
+, [78,13,78,53,'dccv']
+, [79,13,79,26,'dccv']
+, [81,17,81,67,'dccv']
+, [82,17,82,87,'dccv']
+, [84,17,84,59,'dccv']
+, [86,17,86,51,'dccv']
+, [88,21,88,79,'dccv']
+, [90,21,90,49,'dccv']
+, [92,25,92,50,'dccv']
+, [93,25,93,97,'dccv']
+, [96,21,96,43,'dccv']
+, [99,17,99,32,'dccv']
+, [101,9,101,10,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src1" class="dotCoverSource"><pre>namespace BDSADominion.Networking
+{
+    using System;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Text;
+
+    /// &lt;summary&gt;
+    /// This class is a client that can be used to connect to a server,
+    /// to facilitate communication over a network. The communication must be strings.
+    /// &lt;/summary&gt;
+    /// &lt;author&gt;
+    /// Christian &#39;Troy&#39; Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// &lt;/author&gt;
+    internal class Client
+    {
+        /// &lt;summary&gt;
+        /// The buffer of the Client
+        /// &lt;/summary&gt;
+        private byte[] buffer = new byte[NetworkConst.BUFFERSIZE];
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;Client&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;address&quot;&gt;
+        /// The IPAddress to connect to
+        /// &lt;/param&gt;
+        internal Client(IPAddress address)
+        {
+            IPEndPoint end = new IPEndPoint(address, NetworkConst.PORT);
+
+            Comm = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Comm.Connect(end);
+
+            NewMessageEvent += RecievedMessage;
+
+            BeginReceive();
+        }
+
+        /// &lt;summary&gt;
+        /// This event tells when the Client receives a new message
+        /// &lt;/summary&gt;
+        internal event ClientMessageHandler NewMessageEvent;
+
+        /// &lt;summary&gt;
+        /// Gets the Socket through which communication takes place.
+        /// &lt;/summary&gt;
+        internal Socket Comm { get; private set; }
+
+        /// &lt;summary&gt;
+        /// Call this to make the client listen for new messages
+        /// &lt;/summary&gt;
+        internal void BeginReceive()
+        {
+            Comm.BeginReceive(buffer, 0, NetworkConst.BUFFERSIZE, 0, BeginReceiveCallback, this);
+        }
+
+        /// &lt;summary&gt;
+        /// This method should be called whenever the client recieves a message from the server.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;message&quot;&gt;
+        /// The recieved message
+        /// &lt;/param&gt;
+        private void RecievedMessage(string message)
+        {
+            string[] messageParts = message.Split(new char[] { &#39;|&#39; });
+            Console.WriteLine(&quot;Client.RecievedMessage: Client received &#39;{0}&#39; of type {1} from player {2}&quot;, messageParts[2], messageParts[1], messageParts[0]);
+        }
+
+        /// &lt;summary&gt;
+        /// This is called when the client receives a message
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;asyncResult&quot;&gt;
+        /// The async result.
+        /// &lt;/param&gt;
+        private void BeginReceiveCallback(IAsyncResult asyncResult)
+        {
+            int read = Comm.EndReceive(asyncResult);
+            if (read &gt; 0)
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.Append(NetworkConst.ENCODER.GetString(buffer, 0, read));
+
+                string content = stringBuilder.ToString();
+
+                if (content.IndexOf(&quot;&lt;EOF&gt;&quot;) &gt;= 0)
+                {
+                    string message = content.Substring(0, content.Length - 5);
+
+                    if (NewMessageEvent != null)
+                    {
+                        NewMessageEvent(message);
+                        Console.WriteLine(&quot;Client.BeginReceiveCallback: Begin Receive reached&quot;);
+                    }
+
+                    stringBuilder.Clear();
+                }
+
+                BeginReceive();
+            }
+        }
+    }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src1', RANGES_1)
+		</script>
+	</body>
+</html>

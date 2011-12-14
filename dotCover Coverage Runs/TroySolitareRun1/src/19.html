@@ -1,0 +1,177 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_19 = [
+   [23,9,23,80,'dccv']
+, [28,9,28,63,'dccv']
+, [33,9,33,76,'dccv']
+, [38,9,38,30,'dccv']
+, [40,13,41,100,'dccv']
+, [42,9,42,10,'dccv']
+, [60,13,60,51,'dccv']
+, [62,17,62,54,'dccv']
+, [75,13,75,60,'dccv']
+, [76,41,76,45,'dccv']
+, [76,22,76,37,'dccv']
+, [78,17,78,34,'dccv']
+, [76,38,76,40,'dccv']
+, [80,9,80,10,'dccv']
+, [90,13,90,49,'dccv']
+, [91,9,91,10,'dccv']
+, [101,13,101,27,'dccv']
+, [102,41,102,46,'dccv']
+, [102,22,102,37,'dccv']
+, [104,17,104,31,'dccv']
+, [102,38,102,40,'dccv']
+, [106,9,106,10,'dccv']
+, [116,13,116,44,'dccv']
+, [118,17,118,63,'dccv']
+, [120,45,120,61,'dccv']
+, [120,26,120,41,'dccv']
+, [122,21,122,38,'dccv']
+, [124,25,124,65,'dccv']
+, [125,25,125,51,'dccv']
+, [120,42,120,44,'dccv']
+, [129,9,129,10,'dccv']
+, [65,13,65,26,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src19" class="dotCoverSource"><pre>namespace BDSADominion.GUI.Zones
+{
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Linq;
+
+    using BDSADominion.GUI.Sprites;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+
+    /// &lt;summary&gt;
+    /// The class for the Actionzone.
+    /// &lt;/summary&gt;
+    /// &lt;author&gt;
+    /// Frederik Lysgaard (frly@itu.dk)
+    /// &lt;/author&gt;
+    internal class ActionZone
+    {
+        /// &lt;summary&gt;
+        /// The list of cards in the actionzone.
+        /// &lt;/summary&gt;
+        private readonly List&lt;CardSprite&gt; actionCards = new List&lt;CardSprite&gt;();
+
+        /// &lt;summary&gt;
+        /// next card x-coor.
+        /// &lt;/summary&gt;
+        private readonly Vector2 offset = new Vector2(135, 0); // This would be an interesting candidate for GUIConstants 
+
+        /// &lt;summary&gt;
+        /// The starting position of the actionzone.
+        /// &lt;/summary&gt;
+        private readonly Vector2 actionStartPosition = new Vector2(10, 50); // This would be an interesting candidate for GUIConstants
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;ActionZone&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        internal ActionZone()
+        {
+            TouchRect = new Rectangle(
+                (int)actionStartPosition.X, (int)actionStartPosition.Y, (int)(offset.X * 10), 218);
+        }
+
+        /// &lt;summary&gt;
+        /// Gets TouchRect.
+        /// &lt;/summary&gt;
+        internal Rectangle TouchRect { get; private set; }
+
+        /// &lt;summary&gt;
+        /// Removes a card from actionzone.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;card&quot;&gt;
+        /// The card.
+        /// &lt;/param&gt;
+        /// &lt;returns&gt;
+        /// returns true if card indicated is removed from actionzone.
+        /// &lt;/returns&gt;
+        internal bool RemoveCard(CardSprite card)
+        {
+            if (this.actionCards.Any(card.Equals))
+            {
+                return this.actionCards.Remove(card);
+            }
+
+            return false;
+        }
+
+        /// &lt;summary&gt;
+        /// Clear actions.
+        /// &lt;/summary&gt;
+        internal void ClearAction()
+        {
+            Contract.Ensures(this.actionCards.Count == 0);
+
+            CardSprite[] list = this.actionCards.ToArray();
+            foreach (CardSprite card in list)
+            {
+                RemoveCard(card);
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Add one card to the actionzone.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;newCardSprite&quot;&gt;
+        /// The new Card.
+        /// &lt;/param&gt;
+        internal void AddCard(CardSprite newCardSprite)
+        {
+            this.actionCards.Add(newCardSprite);
+        }
+
+        /// &lt;summary&gt;
+        /// Adds a list of cards to the actionzone.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;cards&quot;&gt;
+        /// The cards.
+        /// &lt;/param&gt;
+        internal void NewCards(List&lt;CardSprite&gt; cards)
+        {
+            ClearAction();
+            foreach (CardSprite card in cards)
+            {
+                AddCard(card);
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Draw the actionzone spritbatch.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;spriteBatch&quot;&gt;
+        /// The sprite Batch.
+        /// &lt;/param&gt;
+        internal void Draw(SpriteBatch spriteBatch)
+        {
+            if (this.actionCards.Count &gt; 0)
+            {
+                Vector2 currentPosition = actionStartPosition;
+
+                foreach (CardSprite card in this.actionCards)
+                {
+                    if (card != null)
+                    {
+                        card.Draw(spriteBatch, currentPosition);
+                        currentPosition += offset;
+                    }
+                }
+            }
+        }
+    }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src19', RANGES_19)
+		</script>
+	</body>
+</html>
