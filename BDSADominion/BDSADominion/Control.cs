@@ -211,7 +211,7 @@
                 string[] messageParts = message.Split(new[] { ',' });
                 serverStarted = true;
                 clientPlayerNumber = uint.Parse(messageParts[2]);
-                network.SetNumberOfClients(int.Parse(messageParts[1]));
+                network.SetResponseList(int.Parse(messageParts[1]));
                 numberOfPlayers = int.Parse(messageParts[1]);
                 Console.WriteLine(
                     "SYSTEM: GAME STARTED. There are {1} players and you are player {0}",
