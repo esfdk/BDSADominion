@@ -1,6 +1,5 @@
 ﻿namespace BDSADominion.Gamestate
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
@@ -457,6 +456,67 @@
             Contract.Requires(DeckSize == 0);
             Contract.Requires(DiscardSize != 0);
 
+            Contract.Ensures(DeckSize != 0);
+            Contract.Ensures(DiscardSize == 0);
+
+            Stack<Card> a = new Stack<Card>();
+            Stack<Card> b = new Stack<Card>();
+            Stack<Card> c = new Stack<Card>();
+            Stack<Card> d = new Stack<Card>();
+
+            while (DiscardSize >= 4)
+            {
+                a.Push(discard.Pop());
+                b.Push(discard.Pop());
+                c.Push(discard.Pop());
+                d.Push(discard.Pop());
+            }
+
+            if (DiscardSize >= 1)
+            {
+                if (DiscardSize >= 2)
+                {
+                    if (DiscardSize >= 3)
+                    {
+                        c.Push(discard.Pop());
+                    }
+
+                    b.Push(discard.Pop());
+                }
+
+                a.Push(discard.Pop());
+            }
+
+            Stack<Card> temp = new Stack<Card>();
+
+            while (a.Count != 0)
+            {
+                temp.Push(a.Pop());
+            }
+
+            while (b.Count != 0)
+            {
+                temp.Push(b.Pop());
+            }
+
+            while (c.Count != 0)
+            {
+                temp.Push(c.Pop());
+            }
+
+            while (d.Count != 0)
+            {
+                temp.Push(d.Pop());
+            }
+
+            while (temp.Count != 0)
+            {
+                deck.Push(temp.Pop());
+            }
+
+
+            // Following code makes the pseudo-shuffling random, but would force us to send the deck each time it is shuffled, due to its pseudo-random nature.
+            /*
             Random r = new Random();
             List<Card> cards = discard.ToList();
 
@@ -473,7 +533,7 @@
             foreach (Card card in cards)
             {
                 deck.Push(card);
-            }
+            }*/
         }
     }
 }
