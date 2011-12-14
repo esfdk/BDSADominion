@@ -8,23 +8,21 @@ In terms of system design, there isn't really much to say to the GUI part since 
 This led to a very ad hoc way of designing the GUI system, for the first draft I used my exstensive knowledge of the game to try and get a overview of the components needed to properly display and play a game of Dominion. 
 This resulted in the basic design for the GUI, but since I was still a newbeginner to XNA, this led to a design with almost all the right classes but with some strange inheritance, all in all it felt weird which made me study XNA some more, and after having used some days getting familiar with the framework I came up with the second and final draft.
 
-Even though this was the final draft, it was far from perfect, I would for example if had, had more time with XNA before the project suggested some inheritance between the zones since they all is made from the same sprite "template". So to summarize there wasn't really any general battle plan for the GUI system design at the start of the project, which was a challenge, that taught me one thing,
-if you know you're going to work in a new framework, learn it beforehand.
+Even though this was the final draft, it was far from perfect, I would for example if had, had more time with XNA before the project suggested some inheritance between the zones since they all is made from the same sprite "template". So to summarize there wasn't really any general battle plan for the GUI system design at the start of the project, which was a challenge, that taught me one thing, if you know you're going to work in a new framework, learn it beforehand.
 
 \subsubsection{Client \& Server and Control (Server and start-up parts)}
 \subparagraph{Christian Jensen}
 When we set out to make Dominion, we knew that network should not be a mandatory requirement, yet here we are with it.
 There are several reasons for this, such as that even to be moderately able to play the game, multiple computers should be involved.
-However, on a more practical level, I lacked an area of responsibility after we decided to couple the Control and GameState tighter, and network
-seemed an obvious idea.
+However, on a more practical level, I lacked an area of responsibility after we decided to couple the Control and GameState tighter, and network seemed an obvious idea.
 
-I had one problem however: I had little to no idea about how to build a network system that would be appropriate for the project (nor did any of my teammates), both in terms of C# and networks in general. 
+I had one problem however: I had little to no idea about how to build a network system that would be appropriate for the project (nor did any of my teammates), both in terms of C\# and networks in general. 
 This is the primary reason why I could not sit down and design a network off my head. I needed to study the options first.
 
 I did what any respectable coder would do; I searched the internet to see if somebody already had coded a solution. 
 I came by several solutions but they were either not doing what we needed or was too complex.
 An answer presented itself. I knew of a guy who is in a group doing a seperate project and who is a wiz at networks in general (Simon Henriksen, shen@itu.dk) and the network part for their project (Descent) was quite similar to what we needed. 
-We had several inter-group meetings during the project period with his group and a third (Magic the Gathering) and I asked him to help me understand several concept related to networks and how C# could use them.
+We had several inter-group meetings during the project period with his group and a third (Magic the Gathering) and I asked him to help me understand several concept related to networks and how C\# could use them.
 
 He often referenced to his own implementation and just like using an Internet example to provide the basis for an implementation, he graciously allowed me to use his implementation as the basis for mine.
 I am not peticularly proud of this point, but my options was either use some structure I didn't really understand or use this, which I will claim to have grasped quite well.
@@ -32,17 +30,7 @@ I am not peticularly proud of this point, but my options was either use some str
 \subsubsection{Gamestate and Control (Game Logic)}
 \subparagraph{Jakob Melnyk}
 
+
+
 \subsubsection{BON specification}
-In this sub section, we have included all of our BON. If we had had more time, we would have focused on doing scenarioes - especially in a context that could give us more code coverage.
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/inf_Control.txt}
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/inf_Gamestate_Cluster.txt}
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/inf_Card_Cluster.txt}
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/inf_Cards.txt}
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/inf_GUI.txt}
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/inf_Network.txt}
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/f_Gamestate_Cluster.txt}
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/f_Card_Types_Cluster.txt}
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/f_Card_Cluster.txt}
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/f_Cards_Cluster.txt}
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/f_GUI_Interface.txt}
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{Production/BONasTXT/f_Network_Cluster.txt}
+We have included all of our BON in section \ref{sec:BON} on page \pageref{sec:BON}.
