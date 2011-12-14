@@ -1909,8 +1909,8 @@
             <summary>Sets the mole of <see cref="M:BDSADominion.Networking.NetworkingInterface.ResponseMessage"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.Networking.Moles.MNetworkingInterface.SetNumberOfClientsInt32">
-            <summary>Sets the mole of <see cref="M:BDSADominion.Networking.NetworkingInterface.SetNumberOfClients(System.Int32)"/>
+        <member name="P:BDSADominion.Networking.Moles.MNetworkingInterface.SetResponseListInt32">
+            <summary>Sets the mole of <see cref="M:BDSADominion.Networking.NetworkingInterface.SetResponseList(System.Int32)"/>
             </summary>
         </member>
         <member name="P:BDSADominion.Networking.Moles.MNetworkingInterface.TurnMessageString">
@@ -1960,8 +1960,8 @@
             <summary>Sets the mole of <see cref="M:BDSADominion.Networking.NetworkingInterface.ResponseMessage"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.Networking.Moles.MNetworkingInterface.AllInstances.SetNumberOfClientsInt32">
-            <summary>Sets the mole of <see cref="M:BDSADominion.Networking.NetworkingInterface.SetNumberOfClients(System.Int32)"/>
+        <member name="P:BDSADominion.Networking.Moles.MNetworkingInterface.AllInstances.SetResponseListInt32">
+            <summary>Sets the mole of <see cref="M:BDSADominion.Networking.NetworkingInterface.SetResponseList(System.Int32)"/>
             </summary>
         </member>
         <member name="P:BDSADominion.Networking.Moles.MNetworkingInterface.AllInstances.TurnMessageString">

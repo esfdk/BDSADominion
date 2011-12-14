@@ -19,11 +19,11 @@
 
 \pagestyle{fancy}
 \fancyhead{}
-\cfoot{\thepage\ of ??}
+\cfoot{\thepage\ of 53}
 \renewcommand{\headrulewidth}{0.0pt}
 \fancypagestyle{plain}{
 \fancyhf{}
-\cfoot{\thepage\ of ??}
+\cfoot{\thepage\ of 53}
 }
 
 \setlength{\parindent}{0pt}
@@ -145,6 +145,8 @@ The most code coverage we got in any single run using this way of covering code 
 Another report merged from a solo player running the game "BDSADominion/dotCover Coverage Runs/Merge\textunderscore Report.html", the Pex results and the game being run as a client on another computer, did not really do so well in covering the network area, but covered the other parts of the application better than "TroyServerRun1" did. We should be able to reach at least 85\% code coverage by our calculations.
 
 \subsection{Code Metrics}
+We did Visual Studio's code metrics on our project and the exported CodeMetrics.xlsx (Excel file) can be found in "Related Documents".
+Of note in the code metrics is our Player class with the three methods with the highest cyclomatic complexity in the project (53, 48, 43).  These are methods for adding and removing cards from a Player, which in turn make them heavy on contracts, which could explain the cyclomatic complexity.
 
 \subsection{Notes}
 \begin{itemize}
