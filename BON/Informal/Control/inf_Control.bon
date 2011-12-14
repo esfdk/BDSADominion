@@ -13,5 +13,5 @@ class Control
 cluster GUI
 	description ""
 cluster Gamestate_cluster
-	description "The 'model' of the project. Remembers information about most of the states and the "
+	description "The 'model' of the project. Remembers information about most of the states and the other "
 end

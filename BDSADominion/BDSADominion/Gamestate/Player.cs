@@ -166,10 +166,10 @@
             Contract.Ensures(TempZone.Count == Contract.OldValue(TempZone.Count) + 1);
 
             Contract.Ensures(zone == Zone.Deck ? DeckSize == Contract.OldValue(DeckSize) - 1 : true);
-            Contract.Ensures(TopOfDeck != Contract.OldValue(TopOfDeck));
+            Contract.Ensures(DeckSize != 0 ? TopOfDeck != Contract.OldValue(TopOfDeck) : true);
 
             Contract.Ensures(zone == Zone.Discard ? DiscardSize == Contract.OldValue(DiscardSize) - 1 : true);
-            Contract.Ensures(TopOfDiscard != Contract.OldValue(TopOfDiscard));
+            Contract.Ensures(DiscardSize != 0 ? TopOfDiscard != Contract.OldValue(TopOfDiscard) : true);
 
             switch (zone)
             {
@@ -365,10 +365,8 @@
             Contract.Requires(DeckSize + DiscardSize != 0);
 
             Contract.Ensures(Hand.Count == Contract.OldValue(Hand.Count) + 1);
-
             if (DeckSize == 0)
             {
-                Console.WriteLine("Buggy decksize!"); // TODO: Remove this
                 ShuffleDiscard();
             }
 
@@ -456,12 +454,25 @@
         /// </summary>
         private void ShuffleDiscard()
         {
-            Contract.Requires(DeckSize == 0 & DiscardSize != 0);
+            Contract.Requires(DeckSize == 0);
+            Contract.Requires(DiscardSize != 0);
 
-            // TODO: Do better shuffling
-            while (discard.Count != 0)
+            Random r = new Random();
+            List<Card> cards = discard.ToList();
+
+            for (int i = 0; i < cards.Count; i++)
             {
-                deck.Push(discard.Pop());
+                int index = r.Next(cards.Count);
+                Card c = cards[i];
+                cards[i] = cards[index];
+                cards[index] = c;
+            }
+
+            discard.Clear();
+
+            foreach (Card card in cards)
+            {
+                deck.Push(card);
             }
         }
     }

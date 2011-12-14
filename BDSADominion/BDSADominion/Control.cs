@@ -241,7 +241,6 @@
                     { CardName.Gold, 30 },
 
                     // The victory cards.
-                    { CardName.Curse, 15 },
                     { CardName.Estate, 19 },
                     { CardName.Duchy, 10 },
                     { CardName.Province, 10 },
@@ -256,7 +255,10 @@
                     { CardName.Market, 10 },
                     { CardName.Smithy, 10 },
                     { CardName.Village, 10 },
-                    { CardName.Woodcutter, 10 }
+                    { CardName.Woodcutter, 10 },
+
+                    // The curse card
+                    { CardName.Curse, 15 }
                 };
 
             CardFactory.SetUpCards(startSupply.Keys);
@@ -267,12 +269,12 @@
 
             foreach (Player player in gs.Players)
             {
-                for (int i = 1; i < 7; i++)
+                for (int i = 1; i <= 7; i++)
                 {
                     gs.PlayerGainsCard(player, CardName.Copper);
                 }
 
-                for (int i = 1; i < 3; i++)
+                for (int i = 1; i <= 3; i++)
                 {
                     gs.PlayerGainsCard(player, CardName.Estate);
                 }
@@ -303,6 +305,7 @@
             gui.DrawAction(gs.ActivePlayer.Played.ToArray());
             gui.DrawDiscard(gs.ActivePlayer.DiscardSize != 0 ? gs.ActivePlayer.TopOfDiscard : null);
             gui.DrawHand(gs.Players[(int)clientPlayerNumber - 1].Hand.ToArray());
+            //TODO: Call this method after pull! gui.DrawDeck(gs.Players[(int)clientPlayerNumber - 1].DeckSize != 0);
             gui.UsedCards(startSupply.Keys.ToArray());
             gui.SetAction((int)gs.NumberOfActions);
             gui.SetBuys((int)gs.NumberOfBuys);
