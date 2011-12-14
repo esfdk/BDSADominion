@@ -72,5 +72,8 @@ Obviously a console start-menu is not optimal, but the primary reason for not ha
 
 While the grand design might not have been there from the start, thought has gone into how the network should run, as this text should show.
 
-\subsection{Gamestate and Control (Game Logic)}
+\subsubsection{Gamestate and Control (Game Logic)}
 \subparagraph{Jakob Melnyk}
+Coding my original specification I made in BON was pretty simple, but once I got the code written for it, a lot of contract possiblities came to mind, so I implemented these as well, and then later updated my BON to reflect on this.
+
+I was really glad when I finally got to code Control, because then I would get to see the fruits of my architectural labour. Implementing how each card worked was a breeze, considering the interface I had to work with in Gamestate. It got a bit more tricky once I had to communicate with the GUI and Server, but they have a pretty simple interface as well, so it did not take long for us to get started on testing the system.
