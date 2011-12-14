@@ -81,9 +81,12 @@ namespace BDSADominion.Networking
             client.BeginReceive();
         }
 
-        //May only be called with a string not containing '|', '<' and '>' //TODO Contract
         public string[] TurnMessage(string message)
         {
+            Contract.Requires(message.Contains("|"));
+            Contract.Requires(message.Contains("<"));
+            Contract.Requires(message.Contains(">"));
+
             EmptyResponses();
             string typeMessage = string.Format("{0}|{1}<EOF>", MessageType.Action, message);
             client.Comm.Send(NetworkConst.ENCODER.GetBytes(typeMessage));
