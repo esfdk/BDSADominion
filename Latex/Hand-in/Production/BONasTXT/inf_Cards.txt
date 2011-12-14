@@ -119,7 +119,8 @@ end
 class_chart GARDENS
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Worth one victory point for every ten cards in your deck (rounded down) at the end of the game. Costs four coins."
+	explanation "Worth one victory point for every ten cards in your deck
+	(rounded down) at the end of the game. Costs four coins."
 	inherit KINGDOM_VICTORY
 end
 
@@ -142,7 +143,8 @@ end
 class_chart CHANCELLOR
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Grants two coins. The player may immediately put your deck into your discard pile. \
+	explanation "Grants two coins. The player may immediately
+	put your deck into your discard pile. \
 				 \Costs three coins."
 	inherit ACTION
 end
@@ -171,7 +173,8 @@ end
 class_chart FEAST
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Player trashes this card. Gain a card costing up to five coins. Costs 4 coins."
+	explanation "Player trashes this card.
+	Gain a card costing up to five coins. Costs 4 coins."
 	inherit ACTION
 end
 
@@ -186,7 +189,8 @@ end
 class_chart REMODEL
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Player trashes a card from his/her hand. Player gains a card costing up to two coins more \
+	explanation "Player trashes a card from his/her hand. 
+	Player gains a card costing up to two coins more \
 				\than the trashed card. Costs 4 coins."
 	inherit ACTION
 end
@@ -201,14 +205,16 @@ end
 class_chart THRONE_ROOM
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Player chooses an Action card in his/her hand. That card is played twice. Costs four coins."
+	explanation "Player chooses an Action card in his/her hand.
+	That card is played twice. Costs four coins."
 	inherit ACTION
 end
 
 class_chart COUNCIL_ROOM
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Grants four cards. Grants one buy. All other players are granted one card. Costs five coins."
+	explanation "Grants four cards. Grants one buy. 
+	All other players are granted one card. Costs five coins."
 	inherit ACTION
 end
 
@@ -229,22 +235,26 @@ end
 class_chart LIBRARY
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Player draws until he/she has seven cards in hand. Player may set aside any action cards\
-				\ drawn this way; discard the set aside cards after the Player is finished drawing."
+	explanation "Player draws until he/she has seven cards in hand.
+	Player may set aside any action cards\
+				\ drawn this way; discard the set aside 
+				cards after the Player is finished drawing."
 	inherit ACTION
 end
 
 class_chart MARKET
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Grants one card. Grants one action. Grants one buy. Grants one coin. Costs five coins."
+	explanation "Grants one card. Grants one action.
+	Grants one buy. Grants one coin. Costs five coins."
 	inherit ACTION
 end
 
 class_chart MINE
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Player trashes a Treasure card from his/her hand. Player gains a treasure card costing \
+	explanation "Player trashes a Treasure card from his/her hand.
+	Player gains a treasure card costing \
 				\up to three coins more. Costs five coins."
 	inherit ACTION
 end
@@ -252,23 +262,28 @@ end
 class_chart ADVENTURER
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Player reveals cards from his/her deck until two Treasure have been revealed. \
-				\Player puts the two Treasure cards into hand and discard the other revealed cards. Costs six coins."
+	explanation "Player reveals cards from his/her deck until
+	two Treasure have been revealed. \
+				\Player puts the two Treasure cards into hand
+				and discard the other revealed cards. Costs six coins."
 	inherit ACTION
 end
 
 class_chart BUREAUCRAT
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Player gains a silver card on top of deck. Each other Player reveals a Victory card from his hand \
-				 \and puts it on top of his deck (or reveals a hand with no Victory cards). Costs four coins."
+	explanation "Player gains a silver card on top of deck.
+	Each other Player reveals a Victory card from his hand \
+				 \and puts it on top of his deck 
+				 (or reveals a hand with no Victory cards). Costs four coins."
 	inherit ACTION_ATTACK
 end 
 
 class_chart MILITIA
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Grants two coins. Each other player discards down to three cards in his/her hand. Costs four coins."
+	explanation "Grants two coins. 
+	Each other player discards down to three cards in his/her hand. Costs four coins."
 	inherit ACTION_ATTACK
 end 
 
@@ -283,8 +298,10 @@ end
 class_chart THIEF
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Each other Player reveals the top two cards of his/her deck. If any Treasure cards are revealed, \
-				\ the active Player can choose to trash one of them. The active player may gain any or all of the trashed cards. \
+	explanation "Each other Player reveals the top two cards of his/her deck.
+				If any Treasure cards are revealed, \
+				\ the active Player can choose to trash one of them.
+				The active player may gain any or all of the trashed cards. \
 				\ The other revealed cards are discarded. Costs four coins."
 	inherit ACTION_ATTACK
 end 
@@ -299,7 +316,8 @@ end
 class_chart MOAT
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Grants two cards. When another Player plays an Attack card and this card is in your hand, you reveal this card. Revealing \ 
+	explanation "Grants two cards. When another Player plays an Attack card and
+	this card is in your hand, you reveal this card. Revealing \ 
 				\ this card makes you unaffected by that Attack. Costs two coins."
 	inherit ACTION_REACTION
 end 
