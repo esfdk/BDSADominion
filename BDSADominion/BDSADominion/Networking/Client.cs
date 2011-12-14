@@ -15,22 +15,31 @@
     internal class Client
     {
         /// <summary>
+        /// The buffer of the Client
+        /// </summary>
+        private byte[] buffer = new byte[NetworkConst.BUFFERSIZE];
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
         /// </summary>
-        internal Client(IPAddress ipAddress)
+        /// <param name="address">
+        /// The IPAddress to connect to
+        /// </param>
+        internal Client(IPAddress address)
         {
-            IPEndPoint ipEnd = new IPEndPoint(ipAddress, NetworkConst.PORT);
+            IPEndPoint end = new IPEndPoint(address, NetworkConst.PORT);
 
             Comm = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            Comm.Connect(ipEnd);
+            Comm.Connect(end);
 
             NewMessageEvent += RecievedMessage;
 
             BeginReceive();
-
-            ////Comm.BeginReceive(buffer, 0, buffer.length, 0, new AsyncCallback(AcceptReceive), Comm);
         }
 
+        /// <summary>
+        /// This event tells when the Client receives a new message
+        /// </summary>
         internal event ClientMessageHandler NewMessageEvent;
 
         /// <summary>
@@ -38,9 +47,13 @@
         /// </summary>
         internal Socket Comm { get; private set; }
 
-        private byte[] buffer = new byte[NetworkConst.BUFFERSIZE];
-
-        ////internal StringBuilder stringBuilder = new StringBuilder();
+        /// <summary>
+        /// Call this to make the client listen for new messages
+        /// </summary>
+        internal void BeginReceive()
+        {
+            Comm.BeginReceive(buffer, 0, NetworkConst.BUFFERSIZE, 0, BeginReceiveCallback, this);
+        }
 
         /// <summary>
         /// This method should be called whenever the client recieves a message from the server.
@@ -52,20 +65,16 @@
         {
             string[] messageParts = message.Split(new char[] { '|' });
             Console.WriteLine("Client.RecievedMessage: Client received '{0}' of type {1} from player {2}", messageParts[2], messageParts[1], messageParts[0]);
-            //stringBuilder.Clear();
-            //BeginReceive();
         }
 
-        public void BeginReceive()
-        {
-            ////Console.WriteLine("Client.BeginRecieve: Client BeginRecieve began");
-            Comm.BeginReceive(buffer, 0, NetworkConst.BUFFERSIZE, 0, BeginReceiveCallback, this);
-        }
-
-        //TODO: Contract: may only be called if end is <EOF>
+        /// <summary>
+        /// This is called when the client receives a message
+        /// </summary>
+        /// <param name="asyncResult">
+        /// The async result.
+        /// </param>
         private void BeginReceiveCallback(IAsyncResult asyncResult)
         {
-            ////Console.WriteLine("Client.BeginRecieveCallback: Client recieve begun");
             int read = Comm.EndReceive(asyncResult);
             if (read > 0)
             {
@@ -86,6 +95,7 @@
 
                     stringBuilder.Clear();
                 }
+
                 BeginReceive();
             }
         }

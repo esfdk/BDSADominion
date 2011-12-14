@@ -14,42 +14,39 @@
     /// </author>
     internal class Server
     {
-        ////private byte[] messageBuffer = new byte[NetworkConst.BUFFERSIZE];
+        /// <summary>
+        /// The Socket that handles communication
+        /// </summary>
+        private readonly Socket socket;
 
-        private Socket socket;
+        /// <summary>
+        /// The clients that are connected keyed by their id
+        /// </summary>
+        private readonly Dictionary<int, Connection> connectedClients = new Dictionary<int, Connection>();
 
-        private Dictionary<int, Connection> connectedClients = new Dictionary<int, Connection>();
-
+        /// <summary>
+        /// the current highest Id
+        /// </summary>
         private int id = 0;
 
-        private int NextIdAssign
-        {
-            get
-            {
-                id += 1;
-                return id;
-            }
-        }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Server"/> class.
+        /// </summary>
         internal Server()
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             ClientConnectedEvent += ClientConnected;
-            //ClientConnectedEvent += ServerPreGameMessage;
         }
 
-        /*private bool ServerPreGameMessage(Connection connection)
-        {
-            int currentNumberOfPlayers = GetClientList().Count;
-            SystemMessage(string.Format("<YPN{0}>", connection.Id), connection);
-            SystemMessage(string.Format("<CP{0}>", currentNumberOfPlayers));
-
-            return true; // TODO What?
-        }*/
-
+        /// <summary>
+        /// event tells when a client connects
+        /// </summary>
         internal event ConnectedClientHandler ClientConnectedEvent;
 
+        /// <summary>
+        /// Gets Ip of this computer, that clients can connect to
+        /// </summary>
         internal IPAddress Ip
         {
             get
@@ -60,6 +57,21 @@
             }
         }
 
+        /// <summary>
+        /// Gets an incrementing values, which is the next assignment of Id
+        /// </summary>
+        private int NextIdAssign
+        {
+            get
+            {
+                id += 1;
+                return id;
+            }
+        }
+
+        /// <summary>
+        /// This starts the Server. Must be called before the Server is used
+        /// </summary>
         internal void Start()
         {
             socket.Bind(new IPEndPoint(IPAddress.Any, NetworkConst.PORT));
@@ -68,6 +80,26 @@
             socket.BeginAccept(AcceptCallback, socket);
         }
 
+        /// <summary>
+        /// Returns a list of all clients connected to the server
+        /// </summary>
+        /// <returns>
+        /// The list
+        /// </returns>
+        internal List<Connection> GetClientList()
+        {
+            return connectedClients.Values.ToList();
+        }
+
+        /// <summary>
+        /// This sends a system message to all clients exept the specified
+        /// </summary>
+        /// <param name="message">
+        /// The message to be sent
+        /// </param>
+        /// <param name="client">
+        /// The client that originally sent the message, who it will not be sent back to
+        /// </param>
         internal void SystemMessage(string message, Connection client)
         {
             string compoundMessage = string.Format("{0}|{1}|{2}<EOF>", 0, MessageType.System, message);
@@ -75,6 +107,12 @@
             client.Send(compoundMessage);
         }
 
+        /// <summary>
+        /// Send a system message to all clients
+        /// </summary>
+        /// <param name="message">
+        /// The message to be sent
+        /// </param>
         internal void SystemMessage(string message)
         {
             GetClientList().ForEach(cli => SystemMessage(message, cli));
@@ -84,10 +122,13 @@
         /// Use this to send a message recieved from one client to all clients except the sender.
         /// </summary>
         /// <param name="message">
-        /// The clean message
+        /// The message, must be clean
         /// </param>
         /// <param name="clientId">
         /// The Id of the sender.
+        /// </param>
+        /// <param name="type">
+        /// The type of message being sent
         /// </param>
         internal void ForwardMessage(string message, int clientId, MessageType type)
         {
@@ -100,6 +141,12 @@
             }
         }
 
+        /// <summary>
+        /// Called when a client connects to the server.
+        /// </summary>
+        /// <param name="asyncResult">
+        /// The async result.
+        /// </param>
         private void AcceptCallback(IAsyncResult asyncResult)
         {
             Socket server = (Socket)asyncResult.AsyncState;
@@ -122,14 +169,29 @@
             conn.BeginReceive();
         }
 
+        /// <summary>
+        /// Called when a client disconnect
+        /// </summary>
+        /// <param name="connect">
+        /// The Connection
+        /// </param>
         private void ClientConnectionDisconnected(Connection connect)
         {
             connectedClients.Remove(connect.Id);
         }
 
+        /// <summary>
+        /// Called when the server receives a message
+        /// </summary>
+        /// <param name="conn">
+        /// The connection
+        /// </param>
+        /// <param name="message">
+        /// The message to be sent
+        /// </param>
         private void ServerRecievedMessage(Connection conn, string message)
         {
-            string[] messageParts = message.Split(new char[] {'|'});
+            string[] messageParts = message.Split(new char[] { '|' });
             ////Console.WriteLine("Server.ServerReceivedMessage: Server received '{0}' of type {1} from player {2}", messageParts[1], messageParts[0], conn.Id);
             if (messageParts[1].StartsWith("<STGM>") && conn.Id == 1)
             {
@@ -147,17 +209,21 @@
             }
         }
 
+        /// <summary>
+        /// Called when a client connects
+        /// </summary>
+        /// <param name="conn">
+        /// The Connection
+        /// </param>
+        /// <returns>
+        /// If a client connected
+        /// </returns>
         private bool ClientConnected(Connection conn)
         {
             Console.WriteLine("Server.ClientConnected: Client {0} connected", conn.Id);
             conn.ReceivedMessageEvent += ServerRecievedMessage;
 
             return true;
-        }
-
-        public List<Connection> GetClientList()
-        {
-            return connectedClients.Values.ToList();
         }
     }
 }
