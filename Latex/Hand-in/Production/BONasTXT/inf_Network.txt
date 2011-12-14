@@ -36,7 +36,8 @@ end
 class_chart CONNECTION
 indexing
 	author: "Christian 'Troy' Jensen, chrj@itu.dk";
-explanation "Responsible for holding all the information on a client that a server has, one for each client"
+explanation "Responsible for holding all the information
+			on a client that a server has, one for each client"
 query
 	"Can I have the IP of the client",
 	"Can I have  the Id of the Client",

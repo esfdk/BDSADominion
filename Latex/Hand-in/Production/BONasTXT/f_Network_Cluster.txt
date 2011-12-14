@@ -74,7 +74,8 @@ component
 				SetNumberOfClients
 					-> TotalClients : INTEGER
 			--Commands
-				SendTurnMessage : SEQUENCE[STRING] --Responses from the other players
+				SendTurnMessage : SEQUENCE[STRING]
+				--Responses from the other players
 					-> Message : STRING
 				SendPreGameMessage
 					-> Message : STRING

@@ -21,14 +21,16 @@ component
 		NewGamestate : GAMESTATE 
 			-> numberOfPlayers : NATURAL 
 			-> startSupply : TABLE[CARD_NAME, NATURAL]
-			require numberOfPlayers >= 2 and numberOfPlayers <= 4 and startSupply /= void
+			require numberOfPlayers >= 2 and numberOfPlayers 
+			<= 4 and startSupply /= void
 		end
 		GetScores : SEQUENCE[INTEGER]
 		
 		--Ccmmands
 		SetActivePlayer 
 			-> player : PLAYER
-			require playerNumber >= 1 and playerNumber <= NumberOfPlayers and player /= void
+			require playerNumber >= 1 and playerNumber <=
+			NumberOfPlayers and player /= void
 		end
 		StartActionPhase
 			require InActionPhase = false and InBuyPhase = false
@@ -36,7 +38,8 @@ component
 		end
 		EndActionPhase
 			require InActionPhase = true and InBuyPhase = false
-			ensure InActionPhase = false and InBuyPhase = false and NumberOfActionsLeft = 0
+			ensure InActionPhase = false and InBuyPhase 
+			= false and NumberOfActionsLeft = 0
 		end
 		StartBuyPhase
 			require InActionPhase = false and InBuyPhase = false
@@ -89,11 +92,14 @@ component
 		--Commands
 		MoveFromZoneToTemporary
 			-> zone : ZONE
-			require (zone = DECK or zone = DISCARD) and (zone = DECK -> (GetDeckSize = 0 and GetDiscardSize = 0) /= true)
+			require (zone = DECK or zone = DISCARD) and (zone = DECK -> 
+			(GetDeckSize = 0 and GetDiscardSize = 0) /= true)
 					and (zone = DISCARD -> (GetDiscardSize /= 0))
 			
-			ensure GetTemporaryZone.Count = old GetTemporaryZone.Count + 1	and (zone = DECK -> GetDeckSize = old GetDeckSize - 1) and (GetTopOfDeck /= old GetTopOfDeck)
-					and (zone = DISCARD -> GetDiscardSize = old GetDiscardSize - 1) and (GetTopOfDiscard /= old GetTopOfDiscard)
+			ensure GetTemporaryZone.Count = old GetTemporaryZone.Count + 1
+			and (zone = DECK -> GetDeckSize = old GetDeckSize - 1) and (GetTopOfDeck /= old GetTopOfDeck)
+					and (zone = DISCARD -> GetDiscardSize = old GetDiscardSize - 1)
+					and (GetTopOfDiscard /= old GetTopOfDiscard)
 		end
 		MoveFromHandToTemporary
 			->card : CARD
@@ -103,27 +109,38 @@ component
 		MoveFromTemporary
 			-> card : CARD
 			-> zone : ZONE
-			require (zone = DECK or zone = DISCARD or zone = HAND or zone = PLAYED) and GetTemporaryZone.Contains(card) and card /= void
+			require (zone = DECK or zone = DISCARD or zone = HAND or zone = PLAYED) 
+			and GetTemporaryZone.Contains(card) and card /= void
 			ensure (GetTemporaryZone.Count = old GetTemporaryZone.Count - 1) and 
 					(zone = DECK -> GetDeckSize = old GetDeckSize +1 ) and
-					(zone = DECK -> GetTopOfDeck = old GetTemporaryZone.Get(old GetTemporaryZone.Count - 1)) and
-					(zone = DISCARD -> GetDiscardSize = old GetDiscardSize + 1) and
-					(zone = DISCARD -> GetTopOfDiscard = old GetTemporaryZone.Get(old GetTemporaryZone.Count - 1)) and
-					(zone = HAND -> GetHand.Count = old GetHand.Count + 1) and GetHand.Contains(card) and
-					(zone = HAND -> GetHand.Get(GetHand.Count - 1) = old GetTemporaryZone.Get(old GetTemporaryZone.Count - 1)) and 
+					(zone = DECK -> GetTopOfDeck = old GetTemporaryZone.Get(old 
+					GetTemporaryZone.Count - 1)) and
+					(zone = DISCARD -> GetDiscardSize = old GetDiscardSize + 1) 
+					and
+					(zone = DISCARD -> GetTopOfDiscard = 
+					old GetTemporaryZone.Get(old GetTemporaryZone.Count - 1)) and
+					(zone = HAND -> GetHand.Count = old GetHand.Count + 1) 
+					and GetHand.Contains(card) and
+					(zone = HAND -> GetHand.Get(GetHand.Count - 1) = 
+					old GetTemporaryZone.Get(old GetTemporaryZone.Count - 1)) and 
 					(zone = PLAYED -> GetPlayed.Count = old Played.Count + 1) and
-					(zone = PLAYED -> GetPlayed.Get(Played.Count - 1) = old GetTemporaryZone.Get(old GetTemporaryZone.Count - 1))
+					(zone = PLAYED -> GetPlayed.Get(Played.Count - 1) = 
+					old GetTemporaryZone.Get(old GetTemporaryZone.Count - 1))
 		end
 		AddCardToZone
 			-> card : CARD
 			-> zone : ZONE
-			require (zone = DECK or zone = DISCARD or zone = HAND or zone = PLAYED) and card /= void
+			require (zone = DECK or zone = DISCARD or zone = HAND or zone = PLAYED)
+			and card /= void
 			ensure GetAllCards.Contains(card) and 
 					(zone = HAND -> GetHand.Get(GetHand.Count - 1) = card) and
 					(zone = HAND -> GetHand.Count = old GetHand.Count + 1) and
-					(zone = PLAYED -> GetPlayed.Get(GetPlayed.Count - 1) = card) and
-					(zone = PLAYED -> GetPlayed.Count = old GetPlayed.Count + 1) and
-					(zone = DISCARD -> GetDiscardSize = old GetDiscardSize + 1) and
+					(zone = PLAYED -> GetPlayed.Get(GetPlayed.Count - 1) = card) 
+					and
+					(zone = PLAYED -> GetPlayed.Count = old GetPlayed.Count + 1) 
+					and
+					(zone = DISCARD -> GetDiscardSize = old GetDiscardSize + 1) 
+					and
 					(zone = DISCARD -> GetTopOfDiscard = card) and
 					(zone = DECK -> GetDeckSize = old GetDeckSize +1 ) and
 					(zone = Deck -> GetTopOfDeck = card)
@@ -131,17 +148,21 @@ component
 		RemoveCardFromZone
 			-> card : CARD
 			-> zone : ZONE
-			require (zone = DECK or zone = DISCARD or zone = HAND or zone = PLAYED) and GetAllCards.Contains(card) and card /= void
+			require (zone = DECK or zone = DISCARD or zone = HAND or zone = PLAYED)
+			and GetAllCards.Contains(card) and card /= void
 					and	(zone = HAND -> GetHand.Contains(card))
 					and (zone = PLAYED -> GetPlayed.Contains(card))
-					and (zone = DECK -> (GetDeckSize = 0 and GetDiscardSize = 0) = false)
+					and (zone = DECK -> (GetDeckSize = 0 and GetDiscardSize = 0)
+					= false)
 					and (zone = DISCARD -> GetDiscardSize /= 0)
 			ensure GetAllCards.Contains(card) = false and 
 					(zone = HAND -> GetHand.Contains(card) = false) and
 					(zone = HAND -> GetHand.Count = old GetHand.Count - 1) and
 					(zone = PLAYED -> GetPlayed.Contains(card) = false) and
-					(zone = PLAYED -> GetPlayed.Count = old GetPlayed.Count - 1) and
-					(zone = DISCARD -> GetDiscardSize = old GetDiscardSize - 1) and
+					(zone = PLAYED -> GetPlayed.Count = old GetPlayed.Count - 1)
+					and
+					(zone = DISCARD -> GetDiscardSize = old GetDiscardSize - 1)
+					and
 					(zone = DECK -> GetDeckSize = old GetDeckSize - 1)
 		end
 		DrawCards
@@ -151,7 +172,8 @@ component
 			ensure GetHand.Count = old GetHand.Count + 1
 		end
 		
-		--Invariant: A card cannot be in the DECK, DISCARD, HAND or PLAYED zones of a player 
+		--Invariant: A card cannot be in the DECK, DISCARD, 
+		HAND or PLAYED zones of a player 
 		--           if it is not in the 'ALL CARDS'.
 	end
 	class ZONE
@@ -160,7 +182,8 @@ component
 		feature
 		--Queries
 		value : STRING 
-			ensure Result = "DECK" or Result = "DISCARD" or Result = "HAND" or Result = "SUPPLY" or Result = "TRASH" or Result = "PLAYED"
+			ensure Result = "DECK" or Result = "DISCARD" or Result = "HAND" or 
+			Result = "SUPPLY" or Result = "TRASH" or Result = "PLAYED"
 		end
 		--Commands
 	end

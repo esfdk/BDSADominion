@@ -1,7 +1,8 @@
 cluster_chart GAMESTATE_CLUSTER
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "The classes making up the 'dynamic' state of the game. This includes decks, hands, discard piles, etc."
+	explanation "The classes making up the 'dynamic' state of the game. This includes decks,
+	hands, discard piles, etc."
 	class GAMESTATE
 		description "The overall 'state' of the current game."
 	class PLAYER
@@ -15,7 +16,8 @@ end
 class_chart GAMESTATE
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Keeps track of the players and everything the players share, such as the trash pile and the supply."
+	explanation "Keeps track of the players and everything the players share,
+	such as the trash pile and the supply."
 	query
 		"May I have a new gamestate with this set-up?",
 		"Who is the active player?",
@@ -52,7 +54,8 @@ end
 class_chart PLAYER
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Each player is represented by a player object that keeps track of their decks, hands, discard piles, etc."
+	explanation "Each player is represented by a player object that keeps track of their
+	decks, hands, discard piles, etc."
 	query
 		"May I have a new Player?",
 		"What cards do you have?",
@@ -73,15 +76,18 @@ class_chart PLAYER
 		"Draw a card!",
 		"Draw this many cards!",
 	constraint
-		"A player cannot have a card in his deck, discard pile, hand, or 'played field' that is not in his total set of cards."
+		"A player cannot have a card in his deck, discard pile, hand, or 'played field'
+		that is not in his total set of cards."
 end 
 
 class_chart ZONE
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Represents the values used to refer to the zones in the player class and gamestate class."
+	explanation "Represents the values used to refer to the zones in the player class
+	and gamestate class."
 	query
 		"May I have the value 'v'?",
 	constraint
-		"The values allowed for this class are exactly one of 'DECK', 'DISCARD', 'HAND', 'SUPPLY', 'PLAYED', 'TRASH'."
+		"The values allowed for this class are exactly one of 'DECK',
+		'DISCARD', 'HAND', 'SUPPLY', 'PLAYED', 'TRASH'."
 end 
