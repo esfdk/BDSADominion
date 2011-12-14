@@ -231,13 +231,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pics\Dominiontable.jpg">
-      <Name>Dominiontable</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Supply\Adventurer.jpg">
       <Name>Adventurer</Name>
       <Importer>TextureImporter</Importer>
@@ -414,6 +407,13 @@
   <ItemGroup>
     <Compile Include="Kingdom\EMPTY.png">
       <Name>EMPTY</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Pics\Dominiontable.jpg">
+      <Name>Dominiontable</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
