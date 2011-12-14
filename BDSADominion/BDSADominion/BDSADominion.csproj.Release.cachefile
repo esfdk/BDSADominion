@@ -10,7 +10,6 @@ Content\Kingdom\COPPER.xnb
 Content\Kingdom\COUNCILROOM.xnb
 Content\Kingdom\CURSE.xnb
 Content\Kingdom\DUCHY.xnb
-Content\Kingdom\EMPTY.xnb
 Content\Kingdom\ESTATE.xnb
 Content\Kingdom\FEAST.xnb
 Content\Kingdom\FESTIVAL.xnb
@@ -36,7 +35,6 @@ Content\Kingdom\WOODCUTTER.xnb
 Content\Kingdom\WORKSHOP.xnb
 Content\Pics\Cursor.xnb
 Content\Pics\EndButton.xnb
-Content\Pics\Dominiontable.xnb
 Content\Supply\Adventurer.xnb
 Content\Supply\backside.xnb
 Content\Supply\bureaucrat.xnb
@@ -69,5 +67,7 @@ Content\Supply\thief.xnb
 Content\Supply\throneroom.xnb
 Content\Supply\Village.xnb
 Content\Supply\witch.xnb
-Content\Supply\Woodcutter.xnb
 Content\Supply\workshop.xnb
+Content\Supply\Woodcutter.xnb
+Content\Kingdom\EMPTY.xnb
+Content\Pics\Dominiontable.xnb
