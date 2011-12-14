@@ -943,6 +943,10 @@
             <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.DrawAction(BDSADominion.Gamestate.Card_Types.Card[])"/>
             </summary>
         </member>
+        <member name="P:BDSADominion.GUI.Moles.MGUIInterface.DrawDeckBoolean">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.DrawDeck(System.Boolean)"/>
+            </summary>
+        </member>
         <member name="P:BDSADominion.GUI.Moles.MGUIInterface.DrawDiscardCard">
             <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.DrawDiscard(BDSADominion.Gamestate.Card_Types.Card)"/>
             </summary>
@@ -1056,6 +1060,10 @@
         </member>
         <member name="P:BDSADominion.GUI.Moles.MGUIInterface.AllInstances.DrawActionCardArray">
             <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.DrawAction(BDSADominion.Gamestate.Card_Types.Card[])"/>
+            </summary>
+        </member>
+        <member name="P:BDSADominion.GUI.Moles.MGUIInterface.AllInstances.DrawDeckBoolean">
+            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GUIInterface.DrawDeck(System.Boolean)"/>
             </summary>
         </member>
         <member name="P:BDSADominion.GUI.Moles.MGUIInterface.AllInstances.DrawDiscardCard">
@@ -1220,10 +1228,6 @@
             <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GameClass.remove_SupplyCardClicked(BDSADominion.GUI.CardNameHandler)"/>
             </summary>
         </member>
-        <member name="P:BDSADominion.GUI.Moles.MGameClass.Trololo">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GameClass.Trololo"/>
-            </summary>
-        </member>
         <member name="P:BDSADominion.GUI.Moles.MGameClass.UnloadContent">
             <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GameClass.UnloadContent"/>
             </summary>
@@ -1277,10 +1281,6 @@
         </member>
         <member name="P:BDSADominion.GUI.Moles.MGameClass.AllInstances.SupplyCardClickedRemoveCardNameHandler">
             <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GameClass.remove_SupplyCardClicked(BDSADominion.GUI.CardNameHandler)"/>
-            </summary>
-        </member>
-        <member name="P:BDSADominion.GUI.Moles.MGameClass.AllInstances.Trololo">
-            <summary>Sets the mole of <see cref="M:BDSADominion.GUI.GameClass.Trololo"/>
             </summary>
         </member>
         <member name="P:BDSADominion.GUI.Moles.MGameClass.AllInstances.UnloadContent">
