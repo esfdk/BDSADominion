@@ -5,10 +5,10 @@ We decided to use an MVC pattern for our overall structure, because we felt we c
 \subsubsection{GUI}
 \subparagraph{Frederik Lysgaard}
 In terms of system design, there isn't really much to say to the GUI part since none of us knew the XNA framework, and therefore didn't have any knowledge of the limitations and benefits.
-This led to a very ad hoc way of designing the GUI system, for the first draft I used my exstensive knowledge of the game to try and get a overview of the components needed to properly display and play a game of Dominion. 
-This resulted in the basic design for the GUI, but since I was still a newbeginner to XNA, this led to a design with almost all the right classes but with some strange inheritance, all in all it felt weird which made me study XNA some more, and after having used some days getting familiar with the framework I came up with the second and final draft.
+This led to a very ad hoc way of designing the GUI system, for the first draft I used my extensive knowledge of the game to try and get a overview of the components needed to properly display and play a game of Dominion. 
+This resulted in the basic design for the GUI, but since I was still a beginner to XNA, this led to a design with almost all the right classes but with some strange inheritance, all in all it felt weird which made me study XNA some more, and after having used some days getting familiar with the framework I came up with the second and final draft.
 
-Even though this was the final draft, it was far from perfect, I would for example if had, had more time with XNA before the project suggested some inheritance between the zones since they all is made from the same sprite "template". So to summarize there wasn't really any general battle plan for the GUI system design at the start of the project, which was a challenge, that taught me one thing, if you know you're going to work in a new framework, learn it beforehand.
+Even though this was the final draft, it was far from perfect. I would for example, if I had had more time with XNA before the project, suggested some inheritance between the zones since they all is made from the same sprite "template". So to summarize there wasn't really any general battle plan for the GUI system design at the start of the project, which was a challenge, that taught me one thing, if you know you're going to work in a new framework, learn it before hand.
 
 \subsubsection{Client \& Server and Control (Server and start-up parts)}
 \subparagraph{Christian Jensen}
@@ -20,7 +20,7 @@ I had one problem however: I had little to no idea about how to build a network 
 This is the primary reason why I could not sit down and design a network off my head. I needed to study the options first.
 
 I did what any respectable coder would do; I searched the internet to see if somebody already had coded a solution. 
-I came by several solutions but they were either not doing what we needed or was too complex.
+I came by several solutions but they were either not doing what we needed or were too complex.
 An answer presented itself. I knew of a guy who is in a group doing a seperate project and who is a wiz at networks in general (Simon Henriksen, shen@itu.dk) and the network part for their project (Descent) was quite similar to what we needed. 
 We had several inter-group meetings during the project period with his group and a third (Magic the Gathering) and I asked him to help me understand several concept related to networks and how C\# could use them.
 
@@ -33,7 +33,7 @@ At first we decided to split Control, the static game logic and the dynamic game
 
 So instead of both a dynamic and a static model as two seperate entities, we now had the dynamic model and the Control class making the magic happen. Whilst Control seems a little akward and cluttered at the moment, we feel we have really achieved what we wanted to with the Model-View-Control.
 
-Most of the BON I made for the Gamestate was done in a way so that it would be easy for an outside source to access what he needed to know to make the dynamic model change. However, instead of making a very vast interface for all the different collections, I instead made them public. This does not seem like a particularly good idea, but I chose to show some of the private stuff instead of making a huge interface(in terms of method count). I could have considered using a (richer) invariant to better make sure that my privates were shielded from harm.
+Most of the BON I made for the Gamestate was done in a way so that it would be easy for an outside source to access what he needed to know to make the dynamic model change. However, instead of making a very vast interface for all the different collections, I instead made them public. This does not seem like a particularly good idea, but I chose to show some of the private stuff instead of making a huge interface(in terms of method count). I could have considered using a (richer) invariant to make sure that my privates were better shielded from harm.
 
 I made no BON-specification for the Control class and how it works, because it has no public interface except for its constructor.
 

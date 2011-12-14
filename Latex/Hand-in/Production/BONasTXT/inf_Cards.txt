@@ -290,8 +290,10 @@ end
 class_chart SPY
 	indexing
 		author: "Jakob Melnyk (jmel@itu.dk)";
-	explanation "Grants one card. Grants one action. Each Player (including the active Player) reveals the top card of deck \
-				\and the active Player decides to either put the card back or discard it. Costs four coins."
+	explanation "Grants one card. Grants one action. \
+		\Each Player (including the active Player) reveals the top card of deck \
+		\and the active Player decides to either put the card back or discard it.\
+		\Costs four coins."
 	inherit ACTION_ATTACK
 end 
 

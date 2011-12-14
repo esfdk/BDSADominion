@@ -4,8 +4,8 @@ We started by having a look at how a game of Dominion would flow. We realised th
 
 So we sat down and modeled a turn of a Dominion game, which came out as the subsection below describes. Further in we have a quick glance at what architectures we thought of using at the start.
 \subsubsection{Dominion}
-We used a tool to draw up a BPMN model of the flow of turn in a game of Dominion. It does not completely follow the syntx for BPMN, but the flow chart should be sort of clear. Any path with a cross in it is an exclusive OR and any path in it with a plus is a split in two branches or two branches are joined together after having been split. 
+We used a tool to draw up a BPMN model of the flow of a turn in a game of Dominion. It does not completely follow the syntax for BPMN, but the flow chart should be sort of clear. Any path with a cross in it is an exclusive OR and any path in it with a plus is a split in two branches or two branches are joined together after having been split. 
 
 We include it mainly to show how we think a game of Dominion flows and we have set up our system to follow this pattern. The images of the BPMN model can be found in Related Documents.
 \subsubsection{Architecture}
-We did not really consider that many different architectures at this time other than Model-Viev-Control, so that is pretty much what we sort of stuck with all the way through. We did add the server-client architecture to our network communication later on, but those are the two primary architectures we have in our system.
+We did not really consider that many different architectures at this time other than Model-View-Control, so that is pretty much what we sort of stuck with all the way through. We did add the server-client architecture to our network communication later on, but those are the two primary architectures we have in our system.

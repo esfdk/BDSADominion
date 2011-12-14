@@ -1,6 +1,6 @@
 \subsection{System production}
 \subsubsection{General}
-Our split into the different, very seperate parts of the code, made it somewhat cumbersome to combine at the end, but once it actually combined, it was quite an easy ride home in terms of getting the game to play. The different parts of the architecture should be quite replaceable, especially considering the GUIInterface and NetworkingInterface concepts and the way Gamestate works.
+Our split into the different, very separate parts of the code, made it somewhat cumbersome to combine at the end, but once it actually combined, it was quite an easy ride home in terms of getting the game to play. The different parts of the architecture should be quite replaceable, especially considering the GUIInterface and NetworkingInterface concepts and the way Gamestate works.
 \subsubsection{GUI}
 \subparagraph{Frederik Lysgaard}
 The production of the GUI can be split into three parts:
@@ -9,7 +9,7 @@ The production of the GUI can be split into three parts:
 \item The attempt to write it.
 \item  And at last the rewrite of it all.
 \end{itemize}
-So let's start at the begining. The initial idea of how to produce the gui was that all drawn classes should inherit from a super Sprite class but as I began coding I realized that the idea wouldn't be so optimal, since we had different objects with different positions which at that point, in my XNA traning, semmed to make it all very hard to draw, atleast with different positions.
+So let's start at the begining. The initial idea of how to produce the GUI was that all drawn classes should inherit from a super Sprite class but as I began coding I realized that the idea wouldn't be so optimal, since we had different objects with different positions which at that point, in my XNA traning, semmed to make it all very hard to draw, atleast with different positions.
 
 So after realizing that my first attempt of code was not going to work, I set to rewriting what I already had and try and reform it with my new knowledge of XNA.
 I then ended up with what is our end GUI which consist of a lot of zones where you can either draw buttons or cards sprites to, this seemed like a extremly easy straight forward solution, even though if I had had more time, I would have loved to code in some inheritance, espcially a super zoneclass that would act as template for the other zoneclasses.
@@ -22,11 +22,11 @@ This means that we needed to ensure that the other players has a chance to make 
 The way that this works is though the TurnMessage method, through which all communication takes place. 
 
 In TurnMessage a arbitrary string is passed to the NetworkInterface.
-The only requirement is that it does not contain '|', '<' and '>', as these characters are used by the system.
-This is then wrapped in 2 pieces of information: a MessageType, which tells the server and the other clients what kind of message it is, and also added, is an piece of text that signifies the end of the message.
+The only requirement is that it does not contain '\textbar', '\textless' and '\textgreater', as these characters are used by the system.
+This is then wrapped in 2 pieces of information: a MessageType, which tells the server and the other clients what kind of message it is, and also added, is a piece of text that signifies the end of the message.
 
 This is then sent to the server. The server communicates with the clients through a number of Connection objects, one for each client. 
-These also contains the Socket objects on the server side. The Socket listens to incoming messages thanks to the BeginRecieve method, which then calls BeginRecieveCallback when a message is received. 
+These also contain the Socket objects on the server side. The Socket listens to incoming messages thanks to the BeginRecieve method, which then calls BeginRecieveCallback when a message is received. 
 This method and the asyncResult it takes as a parameter, along with BeginRecieve, is the basis of the entire network.
 
 The message is then passed to the server itself through an event.
@@ -34,16 +34,16 @@ This ensures that the server can take any messages it receives at the "same" tim
 The message passed to the server no longer contains the End of File textpiece, but still contains the message type.
 The Server can then use the message type to determine how to act with it. In most cases, the server will simply forward the message.
 
-The server keep all its Connections (which basically is is its clients) in a Dictionary, with the Id of the player as the key. 
+The server keep all its Connections (which basically is its clients) in a Dictionary, with the Id of the player as the key. 
 As keys are created incrementally as clients join before the game, 1 is defined by us as the Host, since the Host joins almost instantly after creating the server.
 The server can then use this Dictionary to forward the message, by excluding the Connection with the Id matching the Connection that the message was received from.
 
 The message gets reattached with its message type and also joining it is the Id of the player that sent the message. 
 The Client recieves it in almost the same way that the Connection does; through a BeginRecieve and a BeginRecieveCallback.
-The Client then passes the message to GuiInterface, after removing the End of File text.
+The Client then passes the message to NetworkInterface, after removing the End of File text.
 
-Then we are back at the GuiInterface, this is where things gets interesting. 
-Depending on the message type, the GuiInterface reacts differently.
+Then we are back at the NetworkInterface, this is where things gets interesting. 
+Depending on the message type, the NetworkInterface reacts differently.
 System messages are passed on through the event MessageReceived.
 Action messages are also passed on, but they also flings a message of the third type back through the system, the Response.
 Response messages are stored in an array, where they await something to pick them up.
@@ -60,11 +60,11 @@ Basically we prioritized our mandatory requirement, that the game should be able
 
 PreGame:
 The server need to set up the group of people playing. 
-This is accomplished through these step: first a person creates a server though the console at the beginning of the game. 
+This is accomplished through these steps: first a person creates a server though the console at the beginning of the game. 
 This command creates a server and a client object, the last of which instantly connects to the first. 
 He is then shown his IP, which other people can connect to, by creating a client instead of a server and typing the IP address of the host.
 To begin the game, a special command is required. All players can type messages, which are sent with PreGameMessage, which uses System message type instead of action. 
-They are sent to all players and shown in the Console. The server is hardcoded to wait for the command '<STGM>' from client 1 (the host). 
+They are sent to all players and shown in the Console. The server is hardcoded to wait for the command '\textless STGM\textgreater' from client 1 (the host). 
 This will cause the server to send a system message to all players, who are in turn hardcoded to wait for it, because it contains 2 key pieces of information: The total number of players and the id of the player. 
 After this is recieved, the game will begin.
 

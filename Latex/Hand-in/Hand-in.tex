@@ -93,6 +93,8 @@ Low priority
 \subsection{About}
 This project is about our virtual representation of the card game Dominion. Dominion is a turn-based, deck-building game. The objective of the game is to use Action cards to improve your chances or damage the opponent players and using Treasure cards to buy more powerful Action/Treasure/Victory cards to gain the upper hand. 
 
+Our version control repository is at \url{https://github.com/esfdk/BDSADominion} and is public.
+
 Requirements that are fulfilled:
 \begin{itemize}
 \item All three mandatory requirements.
@@ -126,7 +128,7 @@ In the "Related Documents/Dependency Graphs" we have included dependency graphs 
 
 \subsection{Validation}
 \subsubsection{Code Contracts and Pex}
-We have been debugging with Code Contracts enabled, but we do not have them enabled for the released version. We used to not only to have contracts on our classes, but also so that we could use Pex to generate some unit tests for us. The main amount of the contracts are in the Gamestate namespace, but there are a few contracts elsewhere in our project.
+We have been debugging with Code Contracts enabled, but we do not have them enabled for the released version. We used contracts to not only have contracts on our classes, but also so that we could use Pex to generate some unit tests for us. The main amount of the contracts are in the Gamestate namespace, but there are a few contracts elsewhere in our project.
 
 Pex could not generate as many unit tests as we would have liked within the time we had, but it covers about 8\% of our code on its own. dotCover html report file of only the Pex tests can be found in "BDSADominion/dotCover Coverage Runs/Pex solitaire snap.html".
 
@@ -154,16 +156,26 @@ Of note in the code metrics is our Player class with the three methods with the 
 \item We could have added more and better contracts, given more time. Especially invariants could have been done in more classes.
 \item We could probably have done without the inheritance as it looks now, because we never use the fact that something is a specific card, only ever its type (Action, Treasure, etc.)
 \end{itemize}
-
 \pagebreak
 \include{Subfiles/Dictionary}
 \pagebreak
 \include{Subfiles/Example}
 \pagebreak
 \include{Subfiles/Revision_History}
+\section{Related Documents}
+\begin{itemize}
+\item BPMN Model of a Dominion turn
+\item Dependency Graphs
+\item DominionScreenCasts
+\item CodeMetrics
+\item Originally Submitted Project Overview
+\item System Analysis (in this document)
+\item System Design (in this document)
+\item System Production (in this document)
+\end{itemize}
 \include{Production/System_Analysis}
 \include{Production/System_Design}
-\include{Production/System_Production}
+\input{Production/System_Production}
 \include{Production/BON}
 \begin{thebibliography}{9}
 \bibitem{dominionRio} http://www.riograndegames.com/games.html?id=278
