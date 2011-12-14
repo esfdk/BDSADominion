@@ -10,20 +10,22 @@
 \BOOKMARK [3][-]{subsubsection.4.1.1}{LAN}{subsection.4.1}% 10
 \BOOKMARK [3][-]{subsubsection.4.1.2}{Hot-Seat}{subsection.4.1}% 11
 \BOOKMARK [2][-]{subsection.4.2}{Getting started, what is Dominion really about?}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.3}{T}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.4}{e}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.3}{The user interface}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.4}{End of game}{section.4}% 14
 \BOOKMARK [1][-]{section.5}{Revision History}{}% 15
 \BOOKMARK [1][-]{section.6}{Milestones}{}% 16
 \BOOKMARK [2][-]{subsection.6.1}{System analysis}{section.6}% 17
-\BOOKMARK [2][-]{subsection.6.2}{System design}{section.6}% 18
-\BOOKMARK [3][-]{subsubsection.6.2.1}{General}{subsection.6.2}% 19
-\BOOKMARK [3][-]{subsubsection.6.2.2}{GUI}{subsection.6.2}% 20
-\BOOKMARK [3][-]{subsubsection.6.2.3}{Client \046 Server and Control \(Server and start-up parts\)}{subsection.6.2}% 21
-\BOOKMARK [3][-]{subsubsection.6.2.4}{Gamestate and Control \(Game Logic\)}{subsection.6.2}% 22
-\BOOKMARK [3][-]{subsubsection.6.2.5}{BON specification}{subsection.6.2}% 23
-\BOOKMARK [2][-]{subsection.6.3}{System production}{section.6}% 24
-\BOOKMARK [3][-]{subsubsection.6.3.1}{General}{subsection.6.3}% 25
-\BOOKMARK [3][-]{subsubsection.6.3.2}{GUI}{subsection.6.3}% 26
-\BOOKMARK [3][-]{subsubsection.6.3.3}{Server and Control \(Server and start-up parts\)}{subsection.6.3}% 27
-\BOOKMARK [3][-]{subsubsection.6.3.4}{Gamestate and Control \(Game Logic\)}{subsection.6.3}% 28
-\BOOKMARK [1][-]{section.7}{BON-specification}{}% 29
+\BOOKMARK [3][-]{subsubsection.6.1.1}{Dominion}{subsection.6.1}% 18
+\BOOKMARK [3][-]{subsubsection.6.1.2}{Architecture}{subsection.6.1}% 19
+\BOOKMARK [2][-]{subsection.6.2}{System design}{section.6}% 20
+\BOOKMARK [3][-]{subsubsection.6.2.1}{General}{subsection.6.2}% 21
+\BOOKMARK [3][-]{subsubsection.6.2.2}{GUI}{subsection.6.2}% 22
+\BOOKMARK [3][-]{subsubsection.6.2.3}{Client \046 Server and Control \(Server and start-up parts\)}{subsection.6.2}% 23
+\BOOKMARK [3][-]{subsubsection.6.2.4}{Gamestate and Control \(Game Logic\)}{subsection.6.2}% 24
+\BOOKMARK [3][-]{subsubsection.6.2.5}{BON specification}{subsection.6.2}% 25
+\BOOKMARK [2][-]{subsection.6.3}{System production}{section.6}% 26
+\BOOKMARK [3][-]{subsubsection.6.3.1}{General}{subsection.6.3}% 27
+\BOOKMARK [3][-]{subsubsection.6.3.2}{GUI}{subsection.6.3}% 28
+\BOOKMARK [3][-]{subsubsection.6.3.3}{Server and Control \(Server and start-up parts\)}{subsection.6.3}% 29
+\BOOKMARK [3][-]{subsubsection.6.3.4}{Gamestate and Control \(Game Logic\)}{subsection.6.3}% 30
+\BOOKMARK [1][-]{section.7}{BON-specification}{}% 31
