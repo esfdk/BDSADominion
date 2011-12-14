@@ -1,0 +1,119 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_10 = [
+   [92,9,92,74,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src10" class="dotCoverSource"><pre>namespace BDSADominion.Networking
+{
+    using System.Text;
+
+    /// &lt;summary&gt;
+    /// This is the delegate that should be used to receive messages from the server
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;message&quot;&gt;
+    /// The message being received
+    /// &lt;/param&gt;
+    /// &lt;param name=&quot;sender&quot;&gt;
+    /// The id of the sender of the message, with 0 being the Server
+    /// &lt;/param&gt;
+    /// &lt;author&gt;
+    /// Christian &#39;Troy&#39; Jensen (chrj@itu.dk)
+    /// &lt;/author&gt;
+    public delegate void InterfaceMessageHandler(string message, int sender);
+
+    /// &lt;summary&gt;
+    /// This is the delegate used when a client connects to the server
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;connection&quot;&gt;
+    /// The Connection through which the client is connected to the server
+    /// &lt;/param&gt;
+    /// &lt;returns&gt;
+    /// //TODO Why return anything?
+    /// &lt;/returns&gt;
+    /// &lt;author&gt;
+    /// Christian &#39;Troy&#39; Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// &lt;/author&gt;
+    internal delegate bool ConnectedClientHandler(Connection connection);
+
+    /// &lt;summary&gt;
+    /// This is the delegate used when a Connection is closed.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;connection&quot;&gt;
+    /// The Connection through which the client was connected to the server
+    /// &lt;/param&gt;
+    /// &lt;author&gt;
+    /// Christian &#39;Troy&#39; Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// &lt;/author&gt;
+    internal delegate void ClosedConnectionHandler(Connection connection);
+
+    /// &lt;summary&gt;
+    /// This is the delegate used when the server receives a message
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;connection&quot;&gt;
+    /// The Connection through which the client is connected to the server
+    /// &lt;/param&gt;
+    /// &lt;param name=&quot;message&quot;&gt;
+    /// The message that has been received
+    /// &lt;/param&gt;
+    /// &lt;author&gt;
+    /// Christian &#39;Troy&#39; Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// &lt;/author&gt;
+    internal delegate void ServerMessageHandler(Connection connection, string message);
+
+    /// &lt;summary&gt;
+    /// This is the delegate used when a client recieves a message
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;message&quot;&gt;
+    /// The message that has been recieved
+    /// &lt;/param&gt;
+    /// &lt;author&gt;
+    /// Christian &#39;Troy&#39; Jensen (chrj@itu.dk) based heavily on code from Simon Henriksen (shen@itu.dk)
+    /// &lt;/author&gt;
+    internal delegate void ClientMessageHandler(string message);
+
+    /// &lt;summary&gt;
+    /// This describes the types of communication that can happen over the network
+    /// &lt;/summary&gt;
+    /// &lt;author&gt;
+    /// Christian &#39;Troy&#39; Jensen (chrj@itu.dk)
+    /// &lt;/author&gt;
+    internal enum MessageType
+    {
+        System = 0, Action = 1, Response = 2, WaitResponse = 3
+    }
+
+    /// &lt;summary&gt;
+    /// Contains various System Constants.
+    /// &lt;/summary&gt;
+    /// &lt;author&gt;
+    /// Christian &#39;Troy&#39; Jensen (chrj@itu.dk)
+    /// &lt;/author&gt;
+    internal class NetworkConst
+    {
+        /// &lt;summary&gt;
+        /// The encoder used for encrypting and decrypting between strings
+        /// and the byte arrays sent over the network.
+        /// &lt;/summary&gt;
+        public static readonly UTF8Encoding ENCODER = new UTF8Encoding();
+
+        /// &lt;summary&gt;
+        /// The standard port used by communications for this network system.
+        /// &lt;/summary&gt;
+        public const int PORT = 1337; // Obviously
+
+        /// &lt;summary&gt;
+        /// The standard buffer size for this network system.
+        /// &lt;/summary&gt;
+        public const int BUFFERSIZE = 1024;
+    }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src10', RANGES_10)
+		</script>
+	</body>
+</html>

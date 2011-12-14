@@ -1,0 +1,213 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_2 = [
+   [24,9,24,73,'dccv']
+, [29,9,29,54,'dccv']
+, [34,9,34,63,'dccv']
+, [39,9,39,28,'dccv']
+, [41,13,42,103,'dccv']
+, [43,9,43,10,'dccv']
+, [54,13,54,48,'dccv']
+, [56,41,56,45,'dccv']
+, [56,22,56,37,'dccv']
+, [58,17,58,35,'dccv']
+, [56,38,56,40,'dccv']
+, [60,9,60,10,'dccv']
+, [70,13,70,37,'dccv']
+, [71,9,71,10,'dccv']
+, [81,13,81,25,'dccv']
+, [83,41,83,46,'dccv']
+, [83,22,83,37,'dccv']
+, [85,17,85,31,'dccv']
+, [83,38,83,40,'dccv']
+, [87,9,87,10,'dccv']
+, [97,13,97,32,'dccv']
+, [99,17,99,57,'dccv']
+, [101,45,101,49,'dccv']
+, [101,26,101,41,'dccv']
+, [103,21,103,38,'dccv']
+, [105,25,105,65,'dccv']
+, [106,25,106,51,'dccv']
+, [101,42,101,44,'dccv']
+, [110,9,110,10,'dccv']
+, [114,13,114,55,'dccv']
+, [131,13,131,53,'dccv']
+, [132,13,132,27,'dccv']
+, [133,41,133,45,'dccv']
+, [133,22,133,37,'dccv']
+, [135,17,135,43,'dccv']
+, [137,21,137,33,'dccv']
+, [139,17,139,25,'dccv']
+, [133,38,133,40,'dccv']
+, [142,13,142,25,'dccv']
+, [143,9,143,10,'dccv']
+, [147,13,147,60,'dccv']
+, [148,13,148,56,'dccv']
+, [149,13,149,68,'dccv']
+, [151,13,151,76,'dccv']
+, [152,13,152,33,'dccv']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src2" class="dotCoverSource"><pre>﻿using System.Diagnostics.Contracts;
+
+namespace BDSADominion.GUI.Zones
+{
+    using System;
+    using System.Collections.Generic;
+
+    using BDSADominion.GUI.Sprites;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+
+    /// &lt;summary&gt;
+    /// The class for the Handzone.
+    /// &lt;/summary&gt;
+    /// &lt;author&gt;
+    /// Frederik Lysgaard (frly@itu.dk)
+    /// &lt;/author&gt;
+    internal class HandZone
+    {
+        /// &lt;summary&gt;
+        /// The list of cards in the hand.
+        /// &lt;/summary&gt;
+        private readonly List&lt;CardSprite&gt; hand = new List&lt;CardSprite&gt;();
+
+        /// &lt;summary&gt;
+        /// next card x-coor
+        /// &lt;/summary&gt;
+        private Vector2 offset = new Vector2(135, 0); //This would be an interesting candidate for GUIConstants
+
+        /// &lt;summary&gt;
+        /// The starting position of the hand.
+        /// &lt;/summary&gt;
+        private Vector2 startPosition = new Vector2(290, 375); //This would be an interesting candidate for GUIConstants
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;HandZone&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        internal HandZone()
+        {
+            TouchRect = new Rectangle(
+                (int)this.startPosition.X, (int)this.startPosition.Y, (int)(this.offset.X * 10), 218);
+        }
+
+        /// &lt;summary&gt;
+        /// Gets or sets TouchRect.
+        /// &lt;/summary&gt;
+        internal Rectangle TouchRect { get; private set; }
+
+        public void ClearHand()
+        {
+            Contract.Ensures(hand.Count == 0);
+
+            CardSprite[] list = hand.ToArray();
+
+            foreach (CardSprite card in list)
+            {
+                hand.Remove(card);
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Add one card to the hand.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;newCardSprite&quot;&gt;
+        /// The new Card.
+        /// &lt;/param&gt;
+        internal void AddCard(CardSprite newCardSprite)
+        {
+            hand.Add(newCardSprite);
+        }
+
+        /// &lt;summary&gt;
+        /// Sets a list of cards as the hand.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;cards&quot;&gt;
+        /// The cards.
+        /// &lt;/param&gt;
+        internal void NewCards(List&lt;CardSprite&gt; cards)
+        {
+            ClearHand();
+
+            foreach (CardSprite card in cards)
+            {
+                AddCard(card);
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Draw the handzone spritbatch.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;spriteBatch&quot;&gt;
+        /// The sprite Batch.
+        /// &lt;/param&gt;
+        internal void Draw(SpriteBatch spriteBatch)
+        {
+            if (hand.Count &gt; 0)
+            {
+                Vector2 currentPosition = startPosition;
+
+                foreach (CardSprite card in hand)
+                {
+                    if (card != null)
+                    {
+                        card.Draw(spriteBatch, currentPosition);
+                        currentPosition += offset;
+                    }
+                }
+            }
+        }
+
+        internal bool IsClickWithin(int mouseX, int mouseY)
+        {
+            return TouchRect.Contains(mouseX, mouseY);
+        }
+
+        /// &lt;summary&gt;
+        /// Returns the actual card clicked on.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;mouseX&quot;&gt;
+        /// The mouse X.
+        /// &lt;/param&gt;
+        /// &lt;param name=&quot;mouseY&quot;&gt;mouse Y&lt;/param&gt;
+        /// &lt;returns&gt;
+        /// The find card by mouse click.
+        /// &lt;/returns&gt;
+        internal CardSprite FindCardByMouseClick(int mouseX, int mouseY)
+        {
+            Contract.Requires(IsClickWithin(mouseX, mouseY));
+
+            int clickedIndex = ClickedIndex(mouseX);
+            int count = 0;
+            foreach (CardSprite card in hand)
+            {
+                if (clickedIndex == count)
+                {
+                    return card;
+                }
+                count++;
+            }
+
+            return null;
+        }
+
+        private int ClickedIndex(int mouseX)
+        {
+            int mouseCardX = mouseX - (int)startPosition.X;
+            float clickedValue = mouseCardX / offset.X;
+            float clickedInto = (mouseCardX % offset.X) / offset.X;
+
+            int clickedIndex = (int)Math.Round(clickedValue - clickedInto);
+            return clickedIndex;
+        }
+    }
+}</pre></code><script type="text/javascript">
+			applyranges('src2', RANGES_2)
+		</script>
+	</body>
+</html>

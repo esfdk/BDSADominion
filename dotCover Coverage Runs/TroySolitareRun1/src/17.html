@@ -1,0 +1,320 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_17 = [
+   [60,36,60,41,'dccv']
+, [60,22,60,32,'dccv']
+, [62,17,62,37,'dccv']
+, [60,33,60,35,'dccv']
+, [65,13,65,26,'dccv']
+, [66,9,66,10,'dccv']
+, [84,13,84,26,'dccv']
+, [87,21,87,38,'dccv']
+, [88,21,88,27,'dccv']
+, [90,21,90,38,'dccv']
+, [91,21,91,27,'dccv']
+, [93,21,93,36,'dccv']
+, [94,21,94,27,'dccv']
+, [99,21,99,38,'dccv']
+, [100,21,100,27,'dccv']
+, [105,21,105,40,'dccv']
+, [106,21,106,27,'dccv']
+, [120,21,120,39,'dccv']
+, [121,21,121,27,'dccv']
+, [123,21,123,42,'dccv']
+, [124,21,124,27,'dccv']
+, [138,21,138,38,'dccv']
+, [139,21,139,27,'dccv']
+, [144,21,144,43,'dccv']
+, [145,21,145,27,'dccv']
+, [147,21,147,40,'dccv']
+, [148,21,148,27,'dccv']
+, [150,21,150,42,'dccv']
+, [151,21,151,27,'dccv']
+, [162,21,162,42,'dccv']
+, [163,21,163,27,'dccv']
+, [180,21,180,36,'dccv']
+, [181,21,181,27,'dccv']
+, [186,13,186,49,'dccv']
+, [187,13,187,34,'dccv']
+, [188,13,188,39,'dccv']
+, [189,13,189,22,'dccv']
+, [27,9,27,105,'dccv']
+, [32,9,32,91,'dccv']
+, [44,19,44,39,'dcuc']
+, [96,21,96,37,'dcuc']
+, [97,21,97,27,'dcuc']
+, [102,21,102,37,'dcuc']
+, [103,21,103,27,'dcuc']
+, [108,21,108,39,'dcuc']
+, [109,21,109,27,'dcuc']
+, [111,21,111,38,'dcuc']
+, [112,21,112,27,'dcuc']
+, [114,21,114,38,'dcuc']
+, [115,21,115,27,'dcuc']
+, [117,21,117,42,'dcuc']
+, [118,21,118,27,'dcuc']
+, [126,21,126,40,'dcuc']
+, [127,21,127,27,'dcuc']
+, [129,21,129,37,'dcuc']
+, [130,21,130,27,'dcuc']
+, [132,21,132,43,'dcuc']
+, [133,21,133,27,'dcuc']
+, [135,21,135,39,'dcuc']
+, [136,21,136,27,'dcuc']
+, [141,21,141,42,'dcuc']
+, [142,21,142,27,'dcuc']
+, [153,21,153,39,'dcuc']
+, [154,21,154,27,'dcuc']
+, [156,21,156,38,'dcuc']
+, [157,21,157,27,'dcuc']
+, [159,21,159,36,'dcuc']
+, [160,21,160,27,'dcuc']
+, [165,21,165,42,'dcuc']
+, [166,21,166,27,'dcuc']
+, [168,21,168,39,'dcuc']
+, [169,21,169,27,'dcuc']
+, [171,21,171,35,'dcuc']
+, [172,21,172,27,'dcuc']
+, [174,21,174,37,'dcuc']
+, [175,21,175,27,'dcuc']
+, [177,21,177,37,'dcuc']
+, [178,21,178,27,'dcuc']
+, [183,21,183,141,'dcuc']
+, [199,9,199,10,'dcuc']
+, [209,13,209,47,'dcuc']
+, [209,81,209,83,'dcuc']
+, [211,17,211,30,'dcuc']
+, [215,13,215,46,'dcuc']
+, [215,93,215,113,'dcuc']
+, [209,47,209,81,'dcuc']
+, [215,46,215,78,'dcuc']
+, [215,93,215,111,'dcuc']
+, [215,78,215,93,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src17" class="dotCoverSource"><pre>namespace BDSADominion.Gamestate
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Linq;
+
+    using BDSADominion.Gamestate.Card_Types;
+    using BDSADominion.Gamestate.Card_Types.Cards;
+    using BDSADominion.Gamestate.Card_Types.Cards.Action_Cards;
+    using BDSADominion.Gamestate.Card_Types.Cards.Action_Cards.Attack_Cards;
+    using BDSADominion.Gamestate.Card_Types.Cards.Action_Cards.Reaction_Cards;
+    using BDSADominion.Gamestate.Card_Types.Cards.Treasure_Cards;
+    using BDSADominion.Gamestate.Card_Types.Cards.Victory_Cards;
+
+    /// &lt;summary&gt;
+    /// Used to produce cards for the Dominion game.
+    /// &lt;/summary&gt;
+    /// &lt;author&gt;
+    /// Jakob Melnyk (jmel@itu.dk)
+    /// &lt;/author&gt;
+    public class CardFactory
+    {
+        /// &lt;summary&gt;
+        /// Keeps track of how many of the different cards have been made.
+        /// &lt;/summary&gt;
+        private static readonly Dictionary&lt;CardName, uint&gt; CardsMade = new Dictionary&lt;CardName, uint&gt;();
+
+        /// &lt;summary&gt;
+        /// All the cards created by the factory.
+        /// &lt;/summary&gt;
+        private static Dictionary&lt;Card, bool&gt; createdCards = new Dictionary&lt;Card, bool&gt;();
+
+        /// &lt;summary&gt;
+        /// Gets a value indicating whether set-up has already been performed.
+        /// &lt;/summary&gt;
+        public static bool SetUp { get; private set; }
+
+        /// &lt;summary&gt;
+        /// Gets CreatedCards.
+        /// &lt;/summary&gt;
+        public static Dictionary&lt;Card, bool&gt; CreatedCards
+        {
+            get { return createdCards; }
+        }
+
+        /// &lt;summary&gt;
+        /// Set up the factory for a game of Dominion.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;cards&quot;&gt;
+        /// The cards used in this game of Dominion.
+        /// &lt;/param&gt;
+        public static void SetUpCards(ICollection&lt;CardName&gt; cards)
+        {
+            Contract.Requires(!SetUp);
+            Contract.Requires(cards != null);
+
+            Contract.Ensures(SetUp);
+
+            foreach (CardName c in cards)
+            {
+                CardsMade.Add(c, 1);
+            }
+
+            SetUp = true;
+        }
+
+        /// &lt;summary&gt;
+        /// Creates a new card based on how many cards have already been made.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;card&quot;&gt;
+        /// The name of the card to be created.
+        /// &lt;/param&gt;
+        /// &lt;returns&gt;
+        /// The new created card.
+        /// &lt;/returns&gt;
+        public static Card CreateCard(CardName card)
+        {
+            Contract.Requires(card != CardName.Backside &amp; card != CardName.Empty);
+
+            Contract.Ensures(Contract.Result&lt;Card&gt;().Name == card);
+
+            Card c;
+            switch (card)
+            {
+                case CardName.Copper:
+                    c = new Copper();
+                    break;
+                case CardName.Silver:
+                    c = new Silver();
+                    break;
+                case CardName.Gold:
+                    c = new Gold();
+                    break;
+                case CardName.Curse:
+                    c = new Curse();
+                    break;
+                case CardName.Estate:
+                    c = new Estate();
+                    break;
+                case CardName.Duchy:
+                    c = new Duchy();
+                    break;
+                case CardName.Province:
+                    c = new Province();
+                    break;
+                case CardName.Gardens:
+                    c = new Gardens();
+                    break;
+                case CardName.Cellar:
+                    c = new Cellar();
+                    break;
+                case CardName.Chapel:
+                    c = new Chapel();
+                    break;
+                case CardName.Chancellor:
+                    c = new Chancellor();
+                    break;
+                case CardName.Village:
+                    c = new Village();
+                    break;
+                case CardName.Woodcutter:
+                    c = new Woodcutter();
+                    break;
+                case CardName.Workshop:
+                    c = new Workshop();
+                    break;
+                case CardName.Feast:
+                    c = new Feast();
+                    break;
+                case CardName.Moneylender:
+                    c = new Moneylender();
+                    break;
+                case CardName.Remodel:
+                    c = new Remodel();
+                    break;
+                case CardName.Smithy:
+                    c = new Smithy();
+                    break;
+                case CardName.ThroneRoom:
+                    c = new ThroneRoom();
+                    break;
+                case CardName.CouncilRoom:
+                    c = new CouncilRoom();
+                    break;
+                case CardName.Festival:
+                    c = new Festival();
+                    break;
+                case CardName.Laboratory:
+                    c = new Laboratory();
+                    break;
+                case CardName.Library:
+                    c = new Library();
+                    break;
+                case CardName.Market:
+                    c = new Market();
+                    break;
+                case CardName.Mine:
+                    c = new Mine();
+                    break;
+                case CardName.Adventurer:
+                    c = new Adventurer();
+                    break;
+                case CardName.Bureaucrat:
+                    c = new Bureaucrat();
+                    break;
+                case CardName.Militia:
+                    c = new Militia();
+                    break;
+                case CardName.Spy:
+                    c = new Spy();
+                    break;
+                case CardName.Thief:
+                    c = new Thief();
+                    break;
+                case CardName.Witch:
+                    c = new Witch();
+                    break;
+                case CardName.Moat:
+                    c = new Moat();
+                    break;
+                default:
+                    throw new NotImplementedException(&quot;Tried to create a card that was not implemented when CardFactory was last updated.&quot;);
+            }
+
+            c.Initialize(card, CardsMade[card]);
+            CardsMade[card] += 1;
+            createdCards.Add(c, true);
+            return c;
+        }
+
+        /// &lt;summary&gt;
+        /// Makes sure a card cannot exist 
+        /// &lt;/summary&gt;
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(InvariantHelper());
+        }
+
+        /// &lt;summary&gt;
+        /// Helper method for the object invariant.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;
+        /// True, if invariant holds. False, if not.
+        /// &lt;/returns&gt;
+        private static bool InvariantHelper()
+        {
+            if (CreatedCards.Keys.Any(card =&gt; CardsMade[card.Name] &lt; card.Number))
+            {
+                return false;
+            }
+
+            // LINQ helped reduce this.
+            return !CardsMade.Keys.Any(cn =&gt; CreatedCards.Keys.Count(card =&gt; card.Name == cn) != CardsMade[cn]);
+        }
+    }
+}</pre></code><script type="text/javascript">
+			applyranges('src17', RANGES_17)
+		</script>
+	</body>
+</html>
